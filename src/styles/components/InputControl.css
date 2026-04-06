@@ -1,0 +1,127 @@
+.inputControl,
+.checkControl,
+.textareaControl  {
+    color: white;
+    display: flex;
+    font-size: 1.2rem;
+}
+
+.inputControl {
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+    cursor: text;
+    margin: 10% 0 0 0;
+}
+
+.checkControl {
+    width: 95%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 4% 0 0 0;
+}
+
+.textareaControl {
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2vh;
+    position: relative;
+    cursor: text;
+    margin-top: 4%;
+    height: 250px;
+}
+
+.inputControl label, .textareaControl label {
+    position: absolute;
+    color: #6f2c7e;
+    width: 90%;
+    margin-left: 10%;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    transition: all .5s ease;
+    pointer-events: none;
+}
+
+.inputControl:has(input:focus) label,
+.inputControl:has(input:not(:placeholder-shown)) label {
+    transform: translateY(-95%) translateX(-10%);
+    color: white;
+}
+
+.textareaControl:has(textarea:focus) label,
+.textareaControl:has(textarea:not(:placeholder-shown)) label {
+    transform: translateY(-58%) translateX(-10%);
+    color: white;
+}
+
+.checkControl label {
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.inputControl.number label {
+    position: initial;
+    color: white;
+}
+
+.inputControl.number:has(input:focus) label,
+.inputControl.number:has(input:not(:placeholder-shown)) label {
+    transform: none;
+}
+
+.inputControl div, .textareaControl div {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    flex-wrap: nowrap;
+    border-radius: 5vh;
+}
+
+.inputControl div input, .textareaControl textarea {
+    background-color: transparent;
+    border: none;
+    width: 97%;
+    margin: 0 3% 0 0;
+    padding: 0;
+    font-size: 1.3rem;
+    color: #6f2c7e;
+    resize: none;
+}
+
+.textareaControl textarea {
+    margin-top: 1%;
+    padding: 1.5%;
+    height: 230px;
+}
+
+.inputControl div input:focus, .textareaControl textarea:focus {
+    outline: none;
+}
+
+.inputControl div span, .textareaControl div span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f2c7e;
+    font-size: 1.6rem;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 100%;
+}
+
+.checkControl span {
+    font-size: 1.6rem;
+}
+
+.errorInputMsg {
+    padding: 0;
+    margin: 0;
+    text-decoration: underline;
+}
+
+.inputControl.errorInput {
+    border: 3px solid red; 
+    border-radius: 7vh;
+}

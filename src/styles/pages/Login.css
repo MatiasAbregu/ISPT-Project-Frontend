@@ -1,0 +1,44 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.upForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.loginForm .logoLogin {
+    height: 400px;
+    object-fit: contain;
+}
+
+.inputContainer {
+   width: 60%;
+}
+
+.loginForm button {
+    width: 60%;
+    padding: 1.2% 0;
+    border-radius: 5vh;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #6f2c7e;
+    background-color: white;
+    transition: color .4s ease, background-color .4s ease;
+}
+
+.loginForm button:hover {
+    color: white;
+    background-color: #6f2c7e;
+}
+
+.loginForm p {
+    color: white;
+    text-align: center;
+}
