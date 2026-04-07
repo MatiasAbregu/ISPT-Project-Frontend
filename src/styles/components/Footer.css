@@ -2,7 +2,9 @@ footer {
     display: flex;
     width: 100%;
     justify-content: center;
+    align-items: center;
     color: white;
+    margin-top: auto;
 }
 
 footer img {

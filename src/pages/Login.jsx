@@ -19,24 +19,26 @@ export const Login = () => {
 
     const onHandle = (e) => {
         console.log(e);
-        navigate("/menu");
+        navigate("/inicio");
     }
 
     return (
-        <form className="loginForm" onSubmit={handleSubmit(onHandle)}>
-            <div className="upForm">
-                <img src="logo.png" className="logoLogin" />
-                <div className="inputContainer">
-                    <InputControl type={"text"} icon={"account_circle"}
-                        register={register} data={"username"} error={errors["username"]}>Nombre de usuario</InputControl>
-                    <InputControl type={"password"} icon={"key_vertical"}
-                        register={register} data={"password"} error={errors["password"]} >Contraseña</InputControl>
-                    <InputControl type={"checkbox"} register={register}
-                        setValue={setValue} data={"sessiontype"} watch={watch} >Mantener sesión iniciada</InputControl>
+        <>
+            <form className="loginForm" onSubmit={handleSubmit(onHandle)}>
+                <div className="upForm">
+                    <img src="logo.png" className="logoLogin" />
+                    <div className="inputContainer">
+                        <InputControl type={"text"} icon={"account_circle"}
+                            register={register} data={"username"} error={errors["username"]}>Nombre de usuario</InputControl>
+                        <InputControl type={"password"} icon={"key_vertical"}
+                            register={register} data={"password"} error={errors["password"]} >Contraseña</InputControl>
+                        <InputControl type={"checkbox"} register={register}
+                            setValue={setValue} data={"sessiontype"} watch={watch} >Mantener sesión iniciada</InputControl>
+                    </div>
                 </div>
-            </div>
-            <button type="submit">Iniciar Sesión</button>
+                <button type="submit">Iniciar Sesión</button>
+            </form>
             <Footer />
-        </form>
+        </>
     );
 }
