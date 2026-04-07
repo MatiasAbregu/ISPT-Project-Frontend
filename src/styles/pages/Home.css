@@ -1,11 +1,19 @@
 .homePage {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    width: 100%;
 }
 
-.homePage h2 {
+.homePageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.homePage .homePageContainer h2 {
     color: white;
     margin: 0;
     margin-top: 2%;

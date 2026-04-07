@@ -5,16 +5,14 @@
 body {
     background: linear-gradient(160deg, #6f2c7e, #d32abc 60%);
     margin: 0;
-    display: flex;
-    min-height: 100vh;
+    
 }
 
 #root {
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .material-symbols-outlined {
