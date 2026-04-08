@@ -1,10 +1,8 @@
 .homePage {
     display: flex;
     flex-direction: row;
-    align-items: center;
     width: 100%;
 }
-
 
 .homePageContainer {
     display: flex;
@@ -52,16 +50,5 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 3%;
-}
-
-.pieWrapper {
-    max-width: 300px;
-    max-height: 300px;
-}
-
-footer {
-    bottom: 0;
-    position: fixed;
-    width: 100%;
+    margin-top: auto;
 }
