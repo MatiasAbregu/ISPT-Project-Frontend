@@ -1,0 +1,117 @@
+.dateControl {
+    display: flex;
+    width: 100%;
+    margin: 8% 0 0 0;
+    background-color: white;
+    color: white;
+    border-radius: 6vh;
+    cursor: pointer;
+    position: relative;
+}
+
+.dateControl label {
+    display: flex;
+    align-items: center;
+    transition: all .5s ease;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #6f2c7e;
+}
+
+.dateControl span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f2c7e;
+    font-size: 1.6rem;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 100%;
+}
+
+.dateControl .calendar {
+    position: absolute;
+    background-color: white;
+    color: #6f2c7e;
+    transition: transform .2s ease;
+    right: 0;
+}
+
+
+.dateControl .calendarPicker {
+    position: absolute;
+    top: 110%;
+    width: 93%;
+    right: 0;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 2vh;
+    z-index: 5;
+    box-shadow: 0 0 8px gray;
+    cursor: default;
+}
+
+.dateControl .calendarPicker .calendarPickerHeader {
+    display: flex;
+    color: #6f2c7e;
+    width: 100%;
+    justify-content: space-around;
+    background-color: #f0cfff;
+    font-size: 1.1rem;
+}
+
+.dateControl .calendarPicker .calendarPickerHeader button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform .4s ease;
+    padding: 0 4%;
+}
+
+.dateControl .calendarPicker .calendarPickerHeader button:hover {
+    transform: scale(1.3);
+}
+
+.dateControl .calendarPicker .calendarPickerContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.dateControl .calendarPicker .calendarPickerContainer .datesName {
+    background-color: #f0cfff;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+.dateControl .calendarPicker .calendarPickerContainer .datesName span {
+    background-color: transparent;
+    color: #6f2c7e;
+    font-size: 1.1rem;
+}
+
+.dateControl .calendarPicker .calendarPickerContainer .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 1%;
+}
+
+.dateControl .calendarPicker .calendarPickerContainer .dates button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 1vh;
+    padding: 4% 0;
+    color: #6f2c7e;
+}
+
+.dateControl .calendarPicker .calendarPickerContainer .dates button.active {
+    background-color: #6f2c7e;
+    color: white;
+} 
+
+.dateControl .calendarPicker .calendarPickerContainer .dates button:hover {
+    background-color: #6f2c7e;
+    color: white;
+}

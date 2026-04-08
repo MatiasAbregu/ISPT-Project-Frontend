@@ -1,0 +1,215 @@
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
+import '../styles/components/Table.css';
+
+export const Table = ({ columns, data, options }) => {
+
+    const [columnsWidth, setColumnsWidth] = useState([]);
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizingColumn, setResizingColumn] = useState(null);
+
+    const startX = useRef(0);
+    const startWidth = useRef(0);
+
+    useEffect(() => {
+        setColumnsWidth(columns.map((c, i) => c.width));
+        setColumnsWidth(prev => [...prev, 120]);
+    }, [columns]);
+
+    const handleMouseDown = (e, columnIndex) => {
+        setIsResizing(true);
+        setResizingColumn(columnIndex);
+        startX.current = e.clientX;
+        startWidth.current = columnsWidth[columnIndex];
+
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+        e.preventDefault();
+    }
+
+    const handleMouseMove = (e) => {
+        if (!isResizing || resizingColumn == null) return;
+
+        const diff = e.clientX - startX.current;
+        const newW = Math.max(100, startWidth.current + diff);
+
+        setColumnsWidth(prev => {
+            const newWidths = [...prev];
+            newWidths[resizingColumn] = newW;
+            return newWidths;
+        });
+    }
+
+    const handleMouseUp = () => {
+        setIsResizing(false);
+        setResizingColumn(null);
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    };
+
+    useEffect(() => {
+        if (isResizing) {
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        }
+    }, [isResizing, resizingColumn]);
+
+    return (
+        <table className="table">
+            <thead>
+                <tr>
+                    {
+                        columns ?
+                            options ?
+                                columns.map((c, i) => (
+                                    <th style={{
+                                        width: `${columnsWidth[i]}px`
+                                    }} key={i}>
+                                        {c.name}
+                                        {
+                                            i < columns.length && (
+                                                <div
+                                                    className="column-resize"
+                                                    onMouseDown={(e) => handleMouseDown(e, i)}
+                                                />
+                                            )
+                                        }
+                                    </th>
+                                ))
+                                :
+                                columns.map((c, i) => (
+                                    <th style={{
+                                        width: `${columnsWidth[i]}px`
+                                    }} key={i}>
+                                        {c.name}
+                                        {
+                                            i < columns.length - 1 && (
+                                                <div
+                                                    className="column-resize"
+                                                    onMouseDown={(e) => handleMouseDown(e, i)}
+                                                />
+                                            )
+                                        }
+                                    </th>
+                                ))
+                            : undefined
+                    }
+                    {
+                        options ?
+                            <th className="columnOptions" style={{ width: `${columnsWidth[columnsWidth.length - 1]}px` }}>
+                                Opciones
+                            </th> : undefined
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    data ?
+                        data.map((obj, i) =>
+                            <tr key={i}>
+                                {
+                                    Object.entries(obj).map(([key, value], i2) => <td key={i2}>{value}</td>)
+                                }{
+                                    options ?
+                                        <td>
+                                            {
+                                                options.map((v, i) => {
+                                                    if (v == "eye")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnVisibility">visibility</span>);
+                                                    else if (v == "edit")
+                                                        return (
+                                                            <NavLink to={"/users/add"}>
+                                                                <span key={i} className="material-symbols-outlined tableBtnEdit">edit</span>
+                                                            </NavLink>
+                                                        );
+                                                    else if (v == "delete" || v == "remove")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnDelete">delete</span>);
+                                                    else if (v == "switch")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnDisturb">do_not_disturb_on</span>);
+                                                    else if (v == "ubication")
+                                                        return (
+                                                            <NavLink to={"/users/add/ubication"}>
+                                                                <span key={i} className="material-symbols-outlined tableBtnUbication">location_on</span>
+                                                            </NavLink>
+                                                        );
+                                                    else if (v == "contact")
+                                                        return (
+                                                            <NavLink to={"/users/add/contact"}>
+                                                                <span key={i} className="material-symbols-outlined tableBtnContact">phone</span>
+                                                            </NavLink>
+                                                        );
+                                                    else if (v == "curriculum")
+                                                        return (<NavLink to={"/careers/curriculum"}>
+                                                            <span key={i} className="material-symbols-outlined tableBtnCurriculum">
+                                                                two_pager
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "documentation")
+                                                        return (<NavLink to={"/administrative/documentation"}>
+                                                            <span className="material-symbols-outlined tableBtnDocumentation">
+                                                                docs
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "cooperative")
+                                                        return (<NavLink to={"/administrative/cooperative"}>
+                                                            <span className="material-symbols-outlined tableBtnCooperative">
+                                                                handshake
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "subjects")
+                                                        return (<NavLink to={"/careers/curriculum/subjects"}>
+                                                            <span className="material-symbols-outlined tableBtnSubjects">
+                                                                home_storage
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "correlatives")
+                                                        return (<NavLink to={"/careers/curriculum/correlatives"}>
+                                                            <span className="material-symbols-outlined tableBtnCorrelatives">
+                                                                sync_alt
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "teacher")
+                                                        return (<span className="material-symbols-outlined tableBtnTeacher">
+                                                            co_present
+                                                        </span>)
+                                                    else if (v == "correlatives2")
+                                                        return (<NavLink to={"/careers/curriculum/correlatives/select"}>
+                                                            <span className="material-symbols-outlined tableBtnCorrelatives">
+                                                                sync_alt
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "studentSubjects")
+                                                        return (<NavLink to={"/inscriptions/student-subjects"}>
+                                                            <span className="material-symbols-outlined tableBtnStudentSubjects">
+                                                                home_storage
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "finalExam")
+                                                        return (<NavLink to={"/inscriptions/student-subjects/finalExam"}>
+                                                            <span className="material-symbols-outlined tableBtnFinalExams">
+                                                                workspace_premium
+                                                            </span>
+                                                        </NavLink>)
+                                                    else if (v == "grades")
+                                                        return (<NavLink to={"/inscriptions/student-subjects/grades"}>
+                                                            <span className="material-symbols-outlined tableBtnGrades">
+                                                                exposure_plus_1
+                                                            </span>
+                                                        </NavLink>)
+                                                })
+                                            }
+                                        </td>
+                                        : undefined
+                                }
+                            </tr>)
+                        : undefined
+                }
+            </tbody>
+        </table>
+    );
+}

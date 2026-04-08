@@ -2,18 +2,18 @@ import React, { useRef } from "react";
 import '../styles/components/InputControl.css';
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, setChangeCheckbox2 }) => {
+    data, error, setValue, watch, typeCheckbox, setChangeCheckbox2, className }) => {
 
     if (type == "search") {
         const input = useRef();
 
         return (
             <>
-                <div className={`inputControl`} onClick={() => input.current?.focus()}>
+                <div className={`inputControl ${className}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
-                        <input type={"text"} placeholder="Buscar por filtro" ref={input} {...typeof register == "function" ? register(data) : {}} />
+                        <input type={"text"} placeholder="Buscar..." ref={input} {...typeof register == "function" ? register(data) : {}} />
                     </div>
                 </div>
             </>
@@ -21,7 +21,7 @@ export const InputControl = ({ children, type, icon, register,
     } else if (type == "textarea") {
         return (
             <>
-                <div className={`textareaControl ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
+                <div className={`textareaControl ${className} ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
@@ -37,7 +37,7 @@ export const InputControl = ({ children, type, icon, register,
 
         if (type == "number") {
             return (
-                <div className={`inputControl number ${error?.message ? "errorInput" : ""}`}>
+                <div className={`inputControl number ${className} ${error?.message ? "errorInput" : ""}`}>
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>

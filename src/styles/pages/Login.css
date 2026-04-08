@@ -9,6 +9,7 @@
 
 .upForm {
     display: flex;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
@@ -19,12 +20,13 @@
 }
 
 .inputContainer {
-   width: 60%;
+   width: 40%;
 }
 
 .loginForm button {
-    width: 60%;
-    padding: 1.2% 0;
+    min-width: 250px;
+    width: 30%;
+    padding: 15px 0;
     border-radius: 5vh;
     border: none;
     font-size: 1rem;

@@ -1,0 +1,96 @@
+.table {
+    margin: 2% 1%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    width: max-content;
+    min-width: 98%;
+    border-radius: 15px;
+    text-align: center;
+    table-layout: fixed;
+}
+
+.table th,
+.table td {
+    border-right: .5px solid #a3a3a3;
+    border-bottom: .5px solid #a3a3a3;
+    padding: 2% 0;
+    overflow: hidden;
+}
+
+
+.table th {
+    color: white;
+    background: linear-gradient(90deg, #8e44b0, #8034a3);
+    position: relative;
+}
+
+.table td {
+    background-color: white;
+}
+
+.table th:last-child,
+.table td:last-child {
+    border-right: none;
+}
+
+.column-resize {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    width: 4px;
+    height: 100%;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 1;
+}
+
+.columnOptions {
+    overflow: auto;
+
+}
+
+[class*="tableBtn"] {
+    transition: all .4s ease;
+    cursor: pointer;
+    padding: 1.5%;
+    border: 1px solid rgb(61, 61, 61);
+    border-radius: 1vh;
+    margin: 0 1%;
+    color: black;
+    text-decoration: none;
+}
+
+[class*="tableBtn"]:hover {
+    color: white;
+}
+
+.tableBtnVisibility:hover, .tableBtnDocumentation:hover {
+    background-color: #6382ff;
+}
+
+.tableBtnContact:hover, .tableBtnTeacher:hover {
+    background-color: #66ba51;
+}
+
+.tableBtnEdit:hover {
+    background-color: #10b723;
+}
+
+.tableBtnDelete:hover, .tableBtnDisturb:hover {
+    background-color: #bb2525;
+}
+
+.tableBtnCurriculum:hover, .tableBtnGrades:hover {
+    background-color: #c831ac;
+}
+
+.tableBtnSubjects:hover, .tableBtnCooperative:hover, 
+.tableBtnStudentSubjects:hover {
+    background-color: #8e44b0;
+}
+
+.tableBtnCorrelatives:hover, .tableBtnFinalExams:hover, 
+.tableBtnUbication:hover {
+    background-color: #e29613;
+}

@@ -1,0 +1,28 @@
+.studentAddModal {
+    width: 100%;
+    position: relative;
+}
+
+.studentAddModal h4 {
+    color: white;
+}
+
+.studentAddModal span.close {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
+
+.studentAddModal span.close:hover {
+
+}
+
+.studentAddModal form {
+    width: 60%;
+}
+
+.studentAddModal .inputControl {
+    margin: 10px 0;
+}

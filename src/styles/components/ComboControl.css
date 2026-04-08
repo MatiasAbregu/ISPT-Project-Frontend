@@ -1,0 +1,124 @@
+.comboControl {
+    color: white;
+    display: flex;
+    width: 100%;
+    margin: 8% 0 0 0;
+    background-color: white;
+    border-radius: 6vh;
+    cursor: pointer;
+}
+
+.comboControl .optionsContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.comboControl label {
+    display: flex;
+    align-items: center;
+    transition: all .5s ease;
+    font-size: 1.2rem;
+    color: #6f2c7e;
+    cursor: pointer;
+}
+
+.comboControl span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f2c7e;
+    font-size: 1.6rem;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 100%;
+}
+
+.comboControl .optionsContainer .dropdown {
+    position: absolute;
+    background-color: white;
+    color: #6f2c7e;
+    transition: transform .2s ease;
+    right: 0;
+}
+
+.comboControl .optionsContainer .dropdown.open {
+    transform: rotateZ(180deg);
+}
+
+.comboControl .optionsContainer .optionsOverflow {
+    position: absolute;
+    top: 110%;
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 2vh;
+    z-index: 5;
+    box-shadow: 0 0 5px gray;
+}
+
+.comboControl .optionsContainer .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 30vh;
+}
+
+.comboControl .optionsContainer .options p {
+    width: 100%;
+    margin: 0;
+    padding: 2% 0 2% 3%;
+    color: #6f2c7e;
+    font-size: 1.1rem;
+}
+
+.comboControl .optionsContainer .options p:hover {
+    background-color: #6f2c7e;
+    color: white;
+}
+
+/* MULTIPLE CHOICE COMBO */
+.multipleComboControl {
+    border-radius: 4vh !important;
+}
+
+.multipleComboControl .iconCombo {
+    height: 25px;
+}
+
+.comboControl .optionCombo {
+    display: flex;
+    width: 100%;
+}
+
+.comboControl .optionCombo .selected {
+    background-color: #b200da;
+    color: white !important;
+    display: flex;
+    align-items: center;
+}
+
+.comboControl .optionCombo .selected .checkIcon {
+    background-color: white;
+    font-size: 1.2rem;
+    color: #b200da;
+    margin-right: 2%;
+}
+
+.comboControl .optionsLabelContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 90%;
+}
+
+.comboControl .optionsLabelContainer label {
+    background-color: #6f2c7e;
+    color: white;
+    border-radius: 3vw;
+    padding: 1% 4%;
+    margin: 1% 0;
+}

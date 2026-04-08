@@ -21,7 +21,7 @@ export const Sidebar = () => {
                 <a href="/inicio" className={url.pathname == "/inicio" ? "activated" : ""}>
                     <span class="material-symbols-outlined">home</span><li>Inicio</li>
                 </a>
-                <a href="" className={``}>
+                <a href="/estudiantes" className={url.pathname == "/estudiantes" ? "activated" : ""}>
                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
                 </a>
                 <a href="" className={``}>
