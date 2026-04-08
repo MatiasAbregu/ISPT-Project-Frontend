@@ -5,6 +5,7 @@
     width: 100%;
 }
 
+
 .homePageContainer {
     display: flex;
     flex-direction: column;
@@ -23,5 +24,44 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+}
+
+.chartsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.enrollmentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(63, 13, 83, 0.7); 
+    padding: 15px;
+    border-radius: 15px;
+    margin-left: 3%;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.pieWrapper {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+footer {
+    bottom: 0;
+    position: fixed;
     width: 100%;
 }
