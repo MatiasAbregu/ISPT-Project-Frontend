@@ -13,10 +13,12 @@
     right: 30px;
     top: 30px;
     cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
 }
 
 .studentAddModal span.close:hover {
-
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
 }
 
 .studentAddModal form {
