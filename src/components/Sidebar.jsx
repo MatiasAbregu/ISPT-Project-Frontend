@@ -27,7 +27,7 @@ export const Sidebar = () => {
                 <a href="" className={``}>
                     <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
                 </a>
-                <a href="" className={``}>
+                <a href="/usuarios" className={url.pathname == "/usuarios" ? "activated" : ""}>
                     <span class="material-symbols-outlined">supervised_user_circle</span><li>Usuarios</li>
                 </a>
                 <a href="" className={``}>
