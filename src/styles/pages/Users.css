@@ -1,0 +1,23 @@
+.usersPage{
+    width: 100%;
+    display: flex;
+}
+
+.usersPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.usersPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usersPage .controls .inputControl {
+    margin: 0;
+    width: 50%;
+}

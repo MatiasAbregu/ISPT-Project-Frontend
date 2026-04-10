@@ -1,0 +1,25 @@
+.userAddModal {
+    width: 100%;
+    position: relative;
+}
+
+.userAddModal h4 {
+    color: white;
+}
+
+.userAddModal span.close {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
+
+
+.userAddModal form {
+    width: 60%;
+}
+
+.userAddModal .inputControl {
+    margin: 10px 0;
+}
