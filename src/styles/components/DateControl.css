@@ -1,7 +1,6 @@
 .dateControl {
     display: flex;
     width: 100%;
-    margin: 8% 0 0 0;
     background-color: white;
     color: white;
     border-radius: 6vh;
@@ -40,8 +39,8 @@
 
 .dateControl .calendarPicker {
     position: absolute;
-    top: 110%;
-    width: 93%;
+    bottom: 90%;
+    width: 400px;
     right: 0;
     overflow: hidden;
     background-color: white;

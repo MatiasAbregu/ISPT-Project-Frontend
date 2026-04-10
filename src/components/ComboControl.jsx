@@ -6,6 +6,7 @@ export const ComboControl = ({ icon, children, options }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
     const selectRef = useRef(null);
+    const optionsRef = useRef(null);
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -27,7 +28,7 @@ export const ComboControl = ({ icon, children, options }) => {
                 <span className={`material-symbols-outlined dropdown ${isOpen ? "open" : ""}`}>expand_circle_down</span>
                 {
                     isOpen ?
-                        <div className="optionsOverflow">
+                        <div className="optionsOverflow" ref={optionsRef}>
                             <div className="options">
                                 {
                                     options ?

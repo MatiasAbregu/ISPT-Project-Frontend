@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../../styles/pages/modals/students/StudentAddModal.css'
 import { InputControl } from '../../../components/InputControl'
 import { DateControl } from '../../../components/DateControl'
+import { ComboControl } from '../../../components/ComboControl'
 import { StepsControl } from '../../../components/StepsControl'
 
 export const StudentAddModal = ({ setModal }) => {
-    
+
     const [step, setStep] = useState(0);
 
     return (
-        <article className="userForm">
-            <p className="btn-close" onClick={() => setModal(false)}>X</p>
-            <h3>Rellene los campos del nuevo usuario:</h3>
-            <div className="userFormContainer">
+        <article className="studentAddModal">
+            <span class="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
+            <h4>Agregar nuevo estudiante</h4>
+            <div className="studentFormContainer">
                 <p className="arrow" onClick={() => {
                     if (step > 0) setStep(prev => prev - 1);
                 }}>&lt;</p>
@@ -25,26 +26,22 @@ export const StudentAddModal = ({ setModal }) => {
                                 <DateControl icon={"cake"}>Seleccione la fecha de nacimiento</DateControl>
                                 <ComboControl icon={"person"} children={"Seleccione un género"}
                                     options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]} />
-                                <ComboControl icon={"add_moderator"} children={"Selecciona un rol"} type={"special"}
-                                    options={[
-                                        { key: "1", value: "Administrador" },
-                                        { key: "2", value: "Docente" },
-                                        { key: "3", value: "Estudiante" },
-                                        { key: "4", value: "Estudiante" },
-                                        { key: "5", value: "Estudiante" }]} />
                             </> :
                             step == 1 ?
                                 <>
                                     <ComboControl icon={"id_card"} children={"Seleccione el tipo de documento"}
                                         options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]} />
                                     <InputControl type={"text"} icon={"id_card"}>Ingrese el N° de documento</InputControl>
-                                    <ButtonControl icon={"location_on"} url={`${URL}/users/add/ubication`}>Ubicación</ButtonControl>
-                                    <ButtonControl icon={"contact_phone"} url={`${URL}/users/add/contact`}>Contacto</ButtonControl>
+                                   {/*  <ButtonControl icon={"location_on"} url={`${URL}/users/add/ubication`}>Ubicación</ButtonControl>
+                                    <ButtonControl icon={"contact_phone"} url={`${URL}/users/add/contact`}>Contacto</ButtonControl> */}
                                 </> :
                                 step == 2 ?
                                     <>
                                         <InputControl type={"textarea"} icon={"visibility"}>Observaciones</InputControl>
-                                        <ButtonControl icon={"save"} setModal={setModal} type={"submit"}>Crear usuario</ButtonControl>
+                                        <button type="button" className="add-button"
+                                            onClick={() => setModal(false)}>
+                                            <span className="material-symbols-outlined">save</span>Crear estudiante
+                                        </button>
                                     </>
                                     : undefined
                     }
