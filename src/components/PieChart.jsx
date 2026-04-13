@@ -13,7 +13,7 @@ ArcElement,
   Legend
 )
 
-export const PieChart = ({values, labels, text, colors}) => {
+export const PieChart = ({values, labels, text, colors, isPercentage}) => {
     const data = {
         labels: labels,
         datasets: [
@@ -26,6 +26,9 @@ export const PieChart = ({values, labels, text, colors}) => {
             },
         ],
     }
+
+    const total = values.reduce((acc,val) =>
+        acc + val, 0);
 
     const options = {
         responsive: true,
@@ -40,6 +43,19 @@ export const PieChart = ({values, labels, text, colors}) => {
                 text: 'Estado de las materias',
                 color: 'white',
             },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const value = context.raw;
+
+                        if(isPercentage) {
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${percentage}%`;
+                        }
+                        return `${context.label}: ${value}`;
+                    }
+                }
+            }
         },
     }
 
