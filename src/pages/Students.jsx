@@ -50,7 +50,7 @@ export const Students = () => {
                                 name: "N° de documento",
                                 width: 80
                             }
-                        ]} options={["eye", "ubication", "contact", "edit", "delete"]}
+                        ]} options={["eye", "edit", "delete"]}
                         data={[
                             {
                                 legajo: "TR-2025",

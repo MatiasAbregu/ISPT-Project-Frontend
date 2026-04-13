@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
-export const ComboControl = ({ icon, children, options }) => {
+export const ComboControl = ({ icon, children, options, setOption }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -36,6 +36,7 @@ export const ComboControl = ({ icon, children, options }) => {
                                             return (<p key={i} onClick={() => {
                                                 setSelectedOption(
                                                     { key: v.key, value: v.value });
+                                                if(setOption != null) setOption(v.value);
                                             }}>{v.value}</p>)
                                         }) : undefined
                                 }

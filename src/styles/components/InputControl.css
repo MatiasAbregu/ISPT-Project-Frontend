@@ -96,6 +96,7 @@
 .textareaControl textarea {
     align-self: flex-start;
     margin: .8% 0;
+    padding-right: 10px;
     height: 90%;
 }
 

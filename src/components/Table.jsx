@@ -131,7 +131,7 @@ export const Table = ({ columns, data, options }) => {
                                                         return (<span key={i} className="material-symbols-outlined tableBtnDelete">delete</span>);
                                                     else if (v == "switch")
                                                         return (<span key={i} className="material-symbols-outlined tableBtnDisturb">do_not_disturb_on</span>);
-                                                    else if (v == "ubication")
+                                                    /* else if (v == "ubication")
                                                         return (
                                                             <NavLink to={"/users/add/ubication"}>
                                                                 <span key={i} className="material-symbols-outlined tableBtnUbication">location_on</span>
@@ -142,7 +142,7 @@ export const Table = ({ columns, data, options }) => {
                                                             <NavLink to={"/users/add/contact"}>
                                                                 <span key={i} className="material-symbols-outlined tableBtnContact">phone</span>
                                                             </NavLink>
-                                                        );
+                                                        ); */
                                                     else if (v == "curriculum")
                                                         return (<NavLink to={"/carreras/curriculum"}>
                                                             <span key={i} className="material-symbols-outlined tableBtnCurriculum">
