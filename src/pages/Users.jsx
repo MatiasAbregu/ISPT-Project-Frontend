@@ -14,11 +14,6 @@ export const Users = () => {
 
     useEffect(() => {
         document.title = "ISPT - Gestión de usuarios";
-        document.getElementById("root").classList.add("users");
-
-        return () => {
-            document.getElementById("root").classList.remove("users");
-        }
     }, []);
 
     return (

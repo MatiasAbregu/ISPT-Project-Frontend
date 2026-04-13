@@ -12,7 +12,7 @@
 .usersPage .controls {
     display: flex;
     width: 98%;
-    margin: 0 1%;
+    margin: 1% 1% 0 1%;
     justify-content: space-between;
     align-items: center;
 }
@@ -20,4 +20,20 @@
 .usersPage .controls .inputControl {
     margin: 0;
     width: 50%;
+}
+
+
+.usersPage .arrow {
+    cursor: pointer;
+    padding: 10px;
+    max-height: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 3px solid #8e44b0;
+    border-radius: 10px;
+}
+
+.usersPage .arrow:hover {
+    background-color: #8e44b0;
+    color: white;
 }

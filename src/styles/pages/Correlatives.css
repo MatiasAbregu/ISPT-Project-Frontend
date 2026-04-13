@@ -1,0 +1,37 @@
+.correlativesPage{
+    width: 100%;
+    display: flex;
+}
+
+.correlativesPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.correlativesPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.correlativesPage .controls .inputControl {
+    margin: 0;
+    width: 50%;
+}
+
+.correlativesPage h4,
+.correlativesPage .legend {
+    color: white;
+    font-weight: 400;
+    margin: 3% 0 0 0;
+    margin-left: 1.5%;
+}
+
+.correlativesPage .legend {
+    font-size: .9rem;
+    margin: 1% 0 0 0;
+    margin-left: 1.5%;
+}

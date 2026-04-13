@@ -144,7 +144,7 @@ export const Table = ({ columns, data, options }) => {
                                                             </NavLink>
                                                         );
                                                     else if (v == "curriculum")
-                                                        return (<NavLink to={"/careers/curriculum"}>
+                                                        return (<NavLink to={"/carreras/curriculum"}>
                                                             <span key={i} className="material-symbols-outlined tableBtnCurriculum">
                                                                 two_pager
                                                             </span>
@@ -162,13 +162,13 @@ export const Table = ({ columns, data, options }) => {
                                                             </span>
                                                         </NavLink>)
                                                     else if (v == "subjects")
-                                                        return (<NavLink to={"/careers/curriculum/subjects"}>
+                                                        return (<NavLink to={"/carreras/curriculum/materias"}>
                                                             <span className="material-symbols-outlined tableBtnSubjects">
                                                                 home_storage
                                                             </span>
                                                         </NavLink>)
                                                     else if (v == "correlatives")
-                                                        return (<NavLink to={"/careers/curriculum/correlatives"}>
+                                                        return (<NavLink to={"/carreras/curriculum/materias/correlativas"}>
                                                             <span className="material-symbols-outlined tableBtnCorrelatives">
                                                                 sync_alt
                                                             </span>

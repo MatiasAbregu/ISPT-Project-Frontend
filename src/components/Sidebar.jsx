@@ -24,14 +24,14 @@ export const Sidebar = () => {
                 <a href="/estudiantes" className={url.pathname == "/estudiantes" ? "activated" : ""}>
                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
                 </a>
-                <a href="" className={``}>
+                <a href="/docentes" className={url.pathname == "/docentes" ? "activated" : ""}>
                     <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
                 </a>
                 <a href="/usuarios" className={url.pathname == "/usuarios" ? "activated" : ""}>
                     <span class="material-symbols-outlined">supervised_user_circle</span><li>Usuarios</li>
                 </a>
-                <a href="" className={``}>
-                    <span class="material-symbols-outlined">history_edu</span><li>Carrreras</li>
+                <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
+                    <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
                 </a>
             </ul>
         </div>

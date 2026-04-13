@@ -1,0 +1,23 @@
+.careersPage{
+    width: 100%;
+    display: flex;
+}
+
+.careersPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.careersPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.careersPage .controls .inputControl {
+    margin: 0;
+    width: 50%;
+}
