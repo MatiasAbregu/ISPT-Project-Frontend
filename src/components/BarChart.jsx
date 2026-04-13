@@ -19,14 +19,14 @@ ChartJS.register(
   Legend
 )
 
-export const AverageGradesChart = ({materias, notas}) => {
+export const BarChart = ({fields, values, label, text, stepSize, minY, maxY }) => {
 
     const data = {
-        labels: materias,
+        labels: fields,
         datasets: [
             {
-                label: 'Notas',
-                data: notas,
+                label: label,
+                data: values,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'white',
                 borderWidth: 1,
@@ -43,7 +43,7 @@ export const AverageGradesChart = ({materias, notas}) => {
             },
             title: {
                 display: true,
-                text: 'Notas promedio de las materias',
+                text: text,
                 color: 'white',
             },
         },
@@ -56,10 +56,10 @@ export const AverageGradesChart = ({materias, notas}) => {
             y: {
                 ticks: {
                     color: 'white',
-                    stepSize: 1,
+                    stepSize: stepSize,
                 },
-                min: 1,
-                max: 10,
+                min: minY,
+                max: maxY,
             },
         },
     }

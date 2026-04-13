@@ -13,17 +13,14 @@ ArcElement,
   Legend
 )
 
-export const SubjectsChart = ({aprobadas, pendientes}) => {
+export const PieChart = ({values, labels, text, colors}) => {
     const data = {
-        labels: ['Aprobadas', 'Pendientes'],
+        labels: labels,
         datasets: [
             {
-                label: 'Materias',
-                data: [aprobadas, pendientes],
-                backgroundColor: [
-                    'rgba(0, 230, 118, 0.5)',
-                    'rgba(255, 82, 82, 0.5)'
-                ], 
+                label: text,
+                data: values,
+                backgroundColor: colors, 
                 borderColor: 'white',
                 borderWidth: 1,
             },
