@@ -23,7 +23,7 @@ export const InputControl = ({ children, type, icon, register,
             <>
                 <div className={`textareaControl ${className} ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
-                    <div>
+                    <div className="textareaContainer">
                         <span className="material-symbols-outlined">{icon}</span>
                         <textarea placeholder=" "></textarea>
                     </div>

@@ -32,25 +32,34 @@ export const StudentAddModal = ({ setModal }) => {
                                     <ComboControl icon={"id_card"} children={"Seleccione el tipo de documento"}
                                         options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]} />
                                     <InputControl type={"text"} icon={"id_card"}>Ingrese el N° de documento</InputControl>
-                                   {/*  <ButtonControl icon={"location_on"} url={`${URL}/users/add/ubication`}>Ubicación</ButtonControl>
-                                    <ButtonControl icon={"contact_phone"} url={`${URL}/users/add/contact`}>Contacto</ButtonControl> */}
+                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} children={"Seleccione país de origen:"} />
+                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} children={"Seleccione país donde reside actualmente"} />
                                 </> :
                                 step == 2 ?
                                     <>
-                                        <InputControl type={"textarea"} icon={"visibility"}>Observaciones</InputControl>
-                                        <button type="button" className="add-button"
-                                            onClick={() => setModal(false)}>
-                                            <span className="material-symbols-outlined">save</span>Crear estudiante
-                                        </button>
+                                        <ComboControl icon={"flag_2"} options={[{ key: 1, value: "Córdoba" }]} children={"Seleccione provincia de origen"} />
+                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} children={"Seleccione departamento de Córdoba donde reside"} />
+                                        <InputControl type={"text"} icon={"pin_drop"}>Domicilio donde reside:</InputControl>
+                                        <InputControl type={"tel"} icon={"phone"}>Ingrese el número de celular:</InputControl>
                                     </>
-                                    : undefined
+                                    : step == 3 ?
+                                        <>
+                                            <InputControl type={"email"} icon={"email"}>Ingrese el email:</InputControl>
+                                            <InputControl type={"textarea"} icon={"visibility"}>Observaciones</InputControl>
+                                            <button type="button" className="add-button"
+                                                onClick={() => setModal(false)}>
+                                                <span className="material-symbols-outlined">save</span>Crear estudiante
+                                            </button>
+                                        </> : undefined
                     }
                 </form>
                 <p className="arrow" onClick={() => {
-                    if (step < 2) setStep(prev => prev + 1);
+                    if (step < 3) setStep(prev => prev + 1);
                 }}>&gt;</p>
             </div>
-            <StepsControl stepsQuantity={3} setStep={setStep} step={step} />
+            <StepsControl stepsQuantity={4} setStep={setStep} step={step} />
         </article>
     )
 }
+// Ubicacion
+// Contacto

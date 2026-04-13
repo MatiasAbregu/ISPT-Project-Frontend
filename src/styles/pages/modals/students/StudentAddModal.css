@@ -10,6 +10,13 @@
     color: white;
 }
 
+.studentAddModal form {
+    display: flex;
+    flex-direction: column;
+    min-height: 580px;
+    width: 80%;
+}
+
 .studentAddModal span.close {
     position: absolute;
     color: white;
@@ -30,18 +37,70 @@
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
+    padding: 10px 0 60px 0;
+    margin-bottom: 30px;
 }
 
-.studentFormContainer form {
-    width: 80%;
-}
-
-.studentFormContainer .inputControl {
+.studentFormContainer .inputControl,
+.studentFormContainer .dateControl,
+.studentFormContainer .comboControl,
+.studentFormContainer .textareaControl {
     margin-top: 50px;
     border: 3px solid #6f2c7e;
     border-radius: 5vh;
 }
 
-.studentFormContainer .inputControl label {
-    color: #6f2c7e !important; 
+.studentFormContainer .textareaControl {
+    max-height: 230px;
+}
+
+.studentFormContainer .inputControl label,
+.studentFormContainer .textareaControl label {
+    color: #6f2c7e !important;
+    margin-left: 90px;
+}
+
+.studentFormContainer .inputControl:has(input:focus) label,
+.studentFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
+    transform: translateY(-85%) translateX(-5%);
+}
+
+.studentFormContainer .textareaControl:has(textarea:focus) label,
+.studentFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
+    transform: translateY(-63%) translateX(-5%);
+    color: white;
+}
+
+.studentFormContainer .add-button {
+    background-color: white;
+    margin-top: 10px;
+    color: #6f2c7e;
+    border: 2px solid #6f2c7e;
+    align-self: flex-end;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease, border .1s ease;
+}
+
+.studentFormContainer .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.1);
+    border: 0px solid transparent;
+}
+
+.studentFormContainer .add-button:hover span {
+    transform: rotateZ(360deg);
+}
+
+.studentFormContainer .arrow {
+    align-self: center;
+    background-color: #6f2c7e;
+    color: white;
+    margin: 0 10px;
+    padding: 8px 15px 12px 15px;
+    border-radius: calc(100% / 2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }

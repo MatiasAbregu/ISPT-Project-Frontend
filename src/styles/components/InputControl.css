@@ -89,10 +89,14 @@
     resize: none;
 }
 
+.textareaContainer {
+    height: 100%;
+}
+
 .textareaControl textarea {
-    margin-top: 1%;
-    padding: 1.5%;
-    height: 230px;
+    align-self: flex-start;
+    margin: .8% 0;
+    height: 90%;
 }
 
 .inputControl div input:focus, .textareaControl textarea:focus {
