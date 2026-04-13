@@ -13,22 +13,22 @@ ArcElement,
   Legend
 )
 
-export const SubjectsChart = ({aprobadas, pendientes}) => {
+export const PieChart = ({values, labels, text, colors, isPercentage}) => {
     const data = {
-        labels: ['Aprobadas', 'Pendientes'],
+        labels: labels,
         datasets: [
             {
-                label: 'Materias',
-                data: [aprobadas, pendientes],
-                backgroundColor: [
-                    'rgba(0, 230, 118, 0.5)',
-                    'rgba(255, 82, 82, 0.5)'
-                ], 
+                label: text,
+                data: values,
+                backgroundColor: colors, 
                 borderColor: 'white',
                 borderWidth: 1,
             },
         ],
     }
+
+    const total = values.reduce((acc,val) =>
+        acc + val, 0);
 
     const options = {
         responsive: true,
@@ -43,6 +43,19 @@ export const SubjectsChart = ({aprobadas, pendientes}) => {
                 text: 'Estado de las materias',
                 color: 'white',
             },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const value = context.raw;
+
+                        if(isPercentage) {
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `${context.label}: ${percentage}%`;
+                        }
+                        return `${context.label}: ${value}`;
+                    }
+                }
+            }
         },
     }
 
