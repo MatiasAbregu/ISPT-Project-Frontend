@@ -4,7 +4,7 @@ import { Table } from "../components/Table";
 import { InputControl } from "../components/InputControl";
 import { Sidebar } from "../components/Sidebar";
 import "../styles/pages/Students.css";
-import { StudentAddModal } from "./modals/students/StudentAddModal";
+import { StudentModal } from "./modals/students/StudentModal";
 
 export const Students = () => {
 
@@ -23,7 +23,7 @@ export const Students = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => { setTypeModal(<StudentAddModal setModal={setModal} />); setModal(true); }}>
+                        onClick={() => { setTypeModal(<StudentModal setModal={setModal} typeModal={1} />); setModal(true); }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir estudiante
                     </button>
                 </div>
@@ -50,7 +50,9 @@ export const Students = () => {
                                 name: "N° de documento",
                                 width: 80
                             }
-                        ]} options={["eye", "edit", "delete"]}
+                        ]}
+                        options={[{ value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
+                        { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } }, "delete"]}
                         data={[
                             {
                                 legajo: "TR-2025",

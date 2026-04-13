@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../../../styles/pages/modals/students/StudentAddModal.css'
+import '../../../styles/pages/modals/students/StudentModal.css'
 import { InputControl } from '../../../components/InputControl'
 import { DateControl } from '../../../components/DateControl'
 import { ComboControl } from '../../../components/ComboControl'
@@ -18,15 +18,15 @@ const provinces = {
     "Venezuela": [{ key: 1, value: "Caracas" }, { key: 2, value: "Maracaibo" }, { key: 3, value: "Cumaná" }]
 };
 
-export const StudentAddModal = ({ setModal }) => {
+export const StudentModal = ({ setModal, typeModal }) => {
 
     const [step, setStep] = useState(0);
     const [provinceName, setProvinceName] = useState("");
 
     return (
-        <article className="studentAddModal">
+        <article className="studentModal">
             <span class="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
-            <h4>Agregar nuevo estudiante</h4>
+            <h4>{typeModal == 1 ? "Agregar nuevo estudiante" : typeModal == 2 ? "Ver estudiante" : "Actualizar estudiante"}</h4>
             <div className="studentFormContainer">
                 <p className="arrow" onClick={() => {
                     if (step > 0) setStep(prev => prev - 1);
@@ -74,5 +74,3 @@ export const StudentAddModal = ({ setModal }) => {
         </article>
     )
 }
-// Ubicacion
-// Contacto

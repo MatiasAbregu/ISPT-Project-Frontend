@@ -119,13 +119,11 @@ export const Table = ({ columns, data, options }) => {
                                         <td>
                                             {
                                                 options.map((v, i) => {
-                                                    if (v == "eye")
-                                                        return (<span key={i} className="material-symbols-outlined tableBtnVisibility">visibility</span>);
-                                                    else if (v == "edit")
-                                                        return (
-                                                            <NavLink to={"/users/add"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnEdit">edit</span>
-                                                            </NavLink>
+                                                    if (v.value == "eye")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnVisibility" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
+                                                    else if (v.value == "edit")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnEdit"
+                                                        onClick={v.onclick ? v.onclick : undefined}>edit</span>
                                                         );
                                                     else if (v == "delete" || v == "remove")
                                                         return (<span key={i} className="material-symbols-outlined tableBtnDelete">delete</span>);
