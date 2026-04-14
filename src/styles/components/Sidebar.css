@@ -48,7 +48,3 @@
 .sidebar a:hover span {
     transform: scale(1.4);
 }
-
-.sidebar .logOut:hover{
-    color: red;
-}

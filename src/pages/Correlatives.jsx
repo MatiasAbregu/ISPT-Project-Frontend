@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Table } from '../components/Table'
 import { Footer } from '../components/Footer'
 import '../styles/pages/Correlatives.css';

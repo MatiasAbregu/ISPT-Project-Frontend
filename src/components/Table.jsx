@@ -199,12 +199,6 @@ export const Table = ({ columns, data, options }) => {
                                                                 exposure_plus_1
                                                             </span>
                                                         </NavLink>)
-                                                    else if (v.value == "docs")
-                                                        return (<span className="material-symbols-outlined tableBtnDocs"
-                                                                      onClick={v.onclick ? v.onclick : undefined}>
-                                                            docs
-                                                        </span>
-                                                    );
                                                 })
                                             }
                                         </td>
