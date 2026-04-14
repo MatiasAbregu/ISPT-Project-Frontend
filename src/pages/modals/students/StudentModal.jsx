@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../styles/pages/modals/students/StudentModal.css'
 import { InputControl } from '../../../components/InputControl'
 import { DateControl } from '../../../components/DateControl'
 import { ComboControl } from '../../../components/ComboControl'
 import { StepsControl } from '../../../components/StepsControl'
+import StudentYUP from '../../../schemas/StudentYUP'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const provinces = {
     "Argentina": [{ key: 1, value: "Córdoba" }, { key: 2, value: "Buenos Aires" }, { key: 3, value: "Mendoza" }],
@@ -23,6 +26,14 @@ export const StudentModal = ({ setModal, typeModal }) => {
     const [step, setStep] = useState(0);
     const [provinceName, setProvinceName] = useState("");
 
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+        resolver: yupResolver(StudentYUP),
+        defaultValues: typeModal != 1 ? {
+            firstname: "Felipe",
+            lastname: "Ferreya"
+        } : {}
+    });
+
     return (
         <article className="studentModal">
             <span class="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
@@ -35,8 +46,12 @@ export const StudentModal = ({ setModal, typeModal }) => {
                     {
                         step == 0 ?
                             <>
-                                <InputControl type={"text"} icon={"id_card"}>Ingrese el nombre</InputControl>
-                                <InputControl type={"text"} icon={"id_card"}>Ingrese el apellido</InputControl>
+                                <InputControl type={"text"} icon={"id_card"} register={register} data={"firstname"}>
+                                    Ingrese el nombre
+                                </InputControl>
+                                <InputControl type={"text"} icon={"id_card"} register={register} data={"lastname"}>
+                                    Ingrese el apellido
+                                </InputControl>
                                 <DateControl icon={"cake"}>Seleccione la fecha de nacimiento</DateControl>
                                 <ComboControl icon={"person"} children={"Seleccione un género"}
                                     options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]} />
@@ -46,7 +61,7 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                     <ComboControl icon={"id_card"} children={"Seleccione el tipo de documento"}
                                         options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]} />
                                     <InputControl type={"text"} icon={"id_card"}>Ingrese el N° de documento</InputControl>
-                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} children={"Seleccione país de origen"} setOption={setProvinceName}  />
+                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} children={"Seleccione país de origen"} setOption={setProvinceName} />
                                     <ComboControl icon={"flag_2"} options={provinces[provinceName]} children={"Seleccione provincia de origen"} />
                                 </> :
                                 step == 2 ?
@@ -54,14 +69,15 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                         <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} children={"Seleccione departamento de Córdoba donde reside"} />
                                         <InputControl type={"text"} icon={"pin_drop"}>Domicilio donde reside:</InputControl>
                                         <InputControl type={"tel"} icon={"phone"}>Ingrese el número de celular:</InputControl>
+                                        <InputControl type={"email"} icon={"email"}>Ingrese el email:</InputControl>
                                     </>
                                     : step == 3 ?
                                         <>
-                                            <InputControl type={"email"} icon={"email"}>Ingrese el email:</InputControl>
                                             <InputControl type={"textarea"} icon={"visibility"}>Observaciones</InputControl>
                                             <button type="button" className="add-button"
                                                 onClick={() => setModal(false)}>
-                                                <span className="material-symbols-outlined">save</span>Crear estudiante
+                                                <span className="material-symbols-outlined">save</span>
+                                                {typeModal != 1 ? "Actualizar estudiante" : "Crear estudiante"}
                                             </button>
                                         </> : undefined
                     }

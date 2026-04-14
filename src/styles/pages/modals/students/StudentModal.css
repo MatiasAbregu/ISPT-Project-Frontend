@@ -51,7 +51,7 @@
 }
 
 .studentFormContainer .textareaControl {
-    max-height: 230px;
+    height: 300px;
 }
 
 .studentFormContainer .textareaControl div {
