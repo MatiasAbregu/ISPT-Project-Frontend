@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
-export const ComboControl = ({ icon, children, options, setOption }) => {
+export const ComboControl = ({ icon, children, options, setOption, setValue, data, getValues }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -14,9 +14,19 @@ export const ComboControl = ({ icon, children, options, setOption }) => {
                 setIsOpen(false);
         }
 
+        if (typeof getValues == "function" && getValues(data) != null || getValues(data) != undefined)
+            setSelectedOption(options.find(x => x.value == getValues(data)));
+
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        if (typeof setValue == "function" && selectedOption != null && selectedOption != undefined)
+            setValue(data, selectedOption.value);
+        if (typeof setOption == "function" && selectedOption != null && selectedOption != undefined)
+            setOption(selectedOption.value != undefined && selectedOption.value != null ? selectedOption.value : selectedOption)
+    }, [selectedOption]);
 
     return (
         <div className="comboControl" ref={selectRef} onClick={() => setIsOpen(prev => !prev)}>
@@ -36,7 +46,6 @@ export const ComboControl = ({ icon, children, options, setOption }) => {
                                             return (<p key={i} onClick={() => {
                                                 setSelectedOption(
                                                     { key: v.key, value: v.value });
-                                                if(setOption != null) setOption(v.value);
                                             }}>{v.value}</p>)
                                         }) : undefined
                                 }

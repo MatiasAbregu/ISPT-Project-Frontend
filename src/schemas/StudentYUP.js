@@ -9,7 +9,7 @@ export default Yup.object().shape({
     firstname: Yup.string().required("Complete este campo antes de continuar"),
     lastname: Yup.string().required("Complete este campo antes de continuar"),
     birthdate: Yup.date().required("Seleccione una fecha de nacimiento"),
-    genre: Yup.string().oneOf(["Hombre", "Mujer", "Otro"], "Seleccione una opción válida")
+    genre: Yup.string().oneOf(["Masculino", "Femenino", "Otro"], "Seleccione una opción válida")
         .required("Seleccione un género"),
     typeDocument: Yup.string().oneOf(["DNI", "Pasaporte"], "Seleccione una opción válida")
         .required("Seleccione un tipo de documento"),
@@ -20,6 +20,7 @@ export default Yup.object().shape({
     actualDeparment: Yup.string().oneOf(departments, "Seleccione un departamento válido")
         .required("Complete este campo antes de continuar."),
     address: Yup.string().required("Complete este campo antes de continuar"),
+    phoneNumber: Yup.string().matches(/^[0-9]+$/, "El documento solo debe contener números"),
     email: Yup.string().email("Ingrese un formato de correo válido").required("Complete este campo antes de continuar"),
     observations: Yup.string()
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/components/DateControl.css';
 
-export const DateControl = ({ icon, children }) => {
+export const DateControl = ({ icon, children, setValue, data, getValues }) => {
 
     const [daySelected, setDaySelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +20,9 @@ export const DateControl = ({ icon, children }) => {
             if (dateRef.current && !dateRef.current.contains(e.target))
                 setIsOpen(false);
         }
+
+        if (typeof getValues == "function" && getValues(data) != null || getValues(data) != undefined)
+            setDaySelected(new Date(getValues(data)));
 
         document.addEventListener("mousedown", handleCursorOut);
         return () => document.removeEventListener("mousedown", handleCursorOut);
@@ -75,6 +78,11 @@ export const DateControl = ({ icon, children }) => {
 
         return days;
     }
+
+    useEffect(() => {
+        if (typeof setValue == "function" && daySelected != null && daySelected != undefined) 
+            setValue(data, daySelected);
+    }, [daySelected]);
 
     const daysArray = getDaysOfCalendar(currentDate);
 

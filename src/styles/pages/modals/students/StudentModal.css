@@ -20,6 +20,8 @@
 .studentModal span.close {
     position: absolute;
     color: white;
+    font-size: 2rem;
+    z-index: 10;
     right: 30px;
     top: 30px;
     cursor: pointer;
