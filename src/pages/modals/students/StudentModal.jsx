@@ -121,7 +121,7 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                                     <button type="button" className="add-button"
                                                         onClick={() => setModal(false)}>
                                                         <span className="material-symbols-outlined">save</span>
-                                                        {typeModal != 1 ? "Actualizar estudiante" : "Crear estudiante"}
+                                                        {typeModal != 1 ? "Actualizar usuario" : "Crear usuario"}
                                                     </button>
                                             }
                                         </> : undefined

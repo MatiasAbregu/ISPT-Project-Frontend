@@ -4,8 +4,12 @@ import { InputControl } from '../components/InputControl';
 import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
+import { CurriculumModal } from './modals/careers/CurriculumModal';
 
 export const Curriculum = () => {
+
+  const [modal, setModal] = useState(false);
+  const [typeModal, setTypeModal] = useState();
 
   useEffect(() => {
     document.title = "ISPT - Gestión de plan de estudio";
@@ -14,9 +18,14 @@ export const Curriculum = () => {
   return (
     <article className='curriculumPage'>
       <Sidebar />
+      {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
       <div className="curriculumPageContainer">
       <div className="controls">
         <InputControl icon={"search"} type={"search"}></InputControl>
+        <button type="button" className="add-button"
+            onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); }}>
+            <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
+        </button>
       </div>
       <Table
         columns={[{

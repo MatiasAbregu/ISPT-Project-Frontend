@@ -25,7 +25,7 @@ export const Users = () => {
             <div className="controls">
                 <InputControl icon={"search"} type={"search"}></InputControl>
                 <button type="button" className="add-button"
-                    onClick={() => { setTypeModal(<UserAddModal setModal={setModal} />); setModal(true); }}>
+                    onClick={() => { setTypeModal(<UserAddModal setModal={setModal} typeModal={1}/>); setModal(true); }}>
                     <span className="material-symbols-outlined">add_circle</span>Añadir usuario
                 </button>
             </div>
