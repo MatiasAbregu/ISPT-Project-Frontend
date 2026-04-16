@@ -31,6 +31,8 @@ export const ComboControl = ({ icon, children, options, setOption, setValue, dat
     return (
         <div className="comboControl" ref={selectRef} onClick={() => setIsOpen(prev => !prev)}>
             <span className="material-symbols-outlined">{icon}</span>
+            {selectedOption != null && (selectedOption.value != undefined || selectedOption.value != null) ?
+                <label className="labelInformative">{children}</label> : undefined}
             <div className="optionsContainer">
                 {
                     selectedOption ? <label>{selectedOption.value}</label> : <label>{children}</label>

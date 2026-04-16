@@ -6,6 +6,7 @@
     background-color: white;
     border-radius: 6vh;
     cursor: pointer;
+    position: relative;
 }
 
 .comboControl .optionsContainer {
@@ -121,4 +122,10 @@
     border-radius: 3vw;
     padding: 1% 4%;
     margin: 1% 0;
+}
+
+.labelInformative {
+    position: absolute;
+    top: -40px;
+    left: 40px;
 }

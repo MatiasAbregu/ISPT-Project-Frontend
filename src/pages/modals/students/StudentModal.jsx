@@ -102,15 +102,15 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                         </ComboControl>
                                         <InputControl type={"text"} icon={"pin_drop"} key={10} register={register}
                                             data={"address"}>
-                                            Domicilio donde reside:
+                                            Domicilio donde reside
                                         </InputControl>
                                         <InputControl type={"tel"} icon={"phone"} key={11} register={register}
                                             data={"phoneNumber"}>
-                                            Ingrese el número de celular:
+                                            Ingrese el número de celular
                                         </InputControl>
                                         <InputControl type={"email"} icon={"email"} key={12} register={register}
                                             data={"email"}>
-                                            Ingrese el email:
+                                            Ingrese el email
                                         </InputControl>
                                     </>
                                     : step == 3 ?

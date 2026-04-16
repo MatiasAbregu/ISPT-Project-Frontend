@@ -89,6 +89,8 @@ export const DateControl = ({ icon, children, setValue, data, getValues }) => {
     return (
         <div className='dateControl' ref={dateRef} onClick={() => setIsOpen(prev => !prev)}>
             <span className="material-symbols-outlined">{icon}</span>
+            {daySelected != null && (daySelected != undefined || daySelected != null) ?
+                <label className="labelInformative">{children}</label> : undefined}
             {daySelected ? <label>{formatDate(daySelected)}</label> : <label>{children}</label>}
             <span className={`material-symbols-outlined calendar`}>calendar_month</span>
             {
