@@ -19,5 +19,34 @@
 
 .teachersPage .controls .inputControl {
     margin: 0;
-    width: 50%;
+    min-width: 250px;
+    width: 30%;
+}
+
+.teachersPage .add-button {
+    background-color: white;
+    display: flex;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.teachersPage .add-button span {
+    margin-right: 8px;
+    transition: transform .6s ease;
+}
+
+.teachersPage .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.05);
+}
+
+.teachersPage .add-button:hover span {
+    transform: rotateZ(180deg);
 }

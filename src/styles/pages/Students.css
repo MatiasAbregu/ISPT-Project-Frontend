@@ -23,7 +23,7 @@
     width: 30%;
 }
 
-.add-button {
+.studentsPage .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.add-button span {
+.studentsPage .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.add-button:hover {
+.studentsPage .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.add-button:hover span {
+.studentsPage .add-button:hover span {
     transform: rotateZ(180deg);
 }

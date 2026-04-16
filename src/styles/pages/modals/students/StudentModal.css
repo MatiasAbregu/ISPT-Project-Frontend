@@ -13,6 +13,7 @@
 .studentModal form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     min-height: 540px;
     width: 80%;
 }

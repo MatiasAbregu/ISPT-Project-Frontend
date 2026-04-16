@@ -59,21 +59,21 @@ export const Students = () => {
                                 firstname: "Felipe",
                                 lastname: "Ferreyra",
                                 documentType: "DNI",
-                                documentNumber: 12345678
+                                documentNumber: 12345671
                             },
                             {
                                 legajo: "TR-2026",
                                 firstname: "Juan",
                                 lastname: "Lopez",
                                 documentType: "DNI",
-                                documentNumber: 12345678
+                                documentNumber: 12345672
                             },
                             {
                                 legajo: "PT-2023",
                                 firstname: "María",
                                 lastname: "Sanchez",
                                 documentType: "DNI",
-                                documentNumber: 12345678
+                                documentNumber: 12345673
                             },
                         ]} />
                 </div>
