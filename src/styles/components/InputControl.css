@@ -129,3 +129,20 @@
     border: 3px solid red; 
     border-radius: 7vh;
 }
+
+.inputControl .add_text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: white;
+    border: #6f2c7e 3px solid;
+    color: #6f2c7e;
+    cursor: pointer;
+    transition: background-color .3s ease, color .3s ease, border .3s ease;
+}
+
+.inputControl .add_text:hover {
+    background-color: #2dca2d;
+    color: white;
+    border: 3px solid #2dca2d
+}

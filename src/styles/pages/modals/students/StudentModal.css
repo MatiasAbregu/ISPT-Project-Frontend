@@ -97,7 +97,7 @@
     background-color: #2dca2d;
     color: white;
     transform: scale(1.1);
-    border: 0px solid transparent;
+    border: 2px solid #2dca2d;
 }
 
 .studentFormContainer .add-button:hover span {

@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import '../styles/components/InputControl.css';
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, setChangeCheckbox2, className }) => {
+    data, error, setValue, watch, typeCheckbox, setChangeCheckbox2, className, onclick }) => {
 
     if (type == "search") {
         const input = useRef();
@@ -31,6 +31,24 @@ export const InputControl = ({ children, type, icon, register,
                 {error ? <p className="errorInputMsg">{error.message}</p> : undefined}
             </>
         )
+    }
+    else if (type == "add_text") {
+        const [value, setValue] = useState("");
+        const input = useRef();
+
+        return (
+            <>
+                <div className={`inputControl ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
+                    <label>{children}</label>
+                    <div>
+                        <span className="material-symbols-outlined">{icon}</span>
+                        <input type={type} placeholder=" " ref={input} onChange={e => setValue(e.target.value)} />
+                        <span class="material-symbols-outlined add_text" onClick={typeof onclick == "function" ?
+                            () => onclick(value) : undefined}>add_circle</span>
+                    </div>
+                </div>
+            </>
+        );
     }
     else if (type !== "checkbox") {
         const input = useRef();
