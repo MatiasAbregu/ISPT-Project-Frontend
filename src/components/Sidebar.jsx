@@ -34,6 +34,9 @@ export const Sidebar = () => {
                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
                 </a>
             </ul>
+            <a href="/" className={"logOut"}>
+                    <span class="material-symbols-outlined">power_settings_circle</span><li>Cerrar Sesión</li>
+                </a>
         </div>
     )
 }

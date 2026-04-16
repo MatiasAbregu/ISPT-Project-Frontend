@@ -45,7 +45,7 @@ export const Home = () => {
                                 colors={['rgba(0, 230, 118, 0.5)',
                                 'rgba(255, 82, 82, 0.5)']}/>
                                 <div className="riskCard">
-                                    Alumnos en riesgo = 1
+                                    <p>Alumnos en riesgo = 1</p>
                                     <button>Ver más</button>
                                 </div>
                                 </div>

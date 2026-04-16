@@ -138,8 +138,8 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                                     data={"email"}>
                                                     Ingrese el email
                                                 </InputControl>
-                                                <InputControl type={"text"} icon={"person"} register={register} data={"practicePlace"} 
-                                                key={17}>
+                                                <InputControl type={"text"} icon={"person"} register={register} data={"practicePlace"}
+                                                    key={17}>
                                                     Ingrese el lugar de práctica (solo para alumnos de 3° y 4° año)
                                                 </InputControl>
                                             </> : step == 5 ?
