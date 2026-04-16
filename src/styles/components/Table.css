@@ -53,7 +53,7 @@
 [class*="tableBtn"] {
     transition: all .4s ease;
     cursor: pointer;
-    padding: 1.5%;
+    padding: 6px;
     border: 1px solid rgb(61, 61, 61);
     border-radius: 1vh;
     margin: 0 1%;
@@ -65,7 +65,7 @@
     color: white;
 }
 
-.tableBtnVisibility:hover, .tableBtnDocumentation:hover {
+.tableBtnVisibility:hover, .tableBtnDocs:hover {
     background-color: #6382ff;
 }
 
@@ -91,6 +91,6 @@
 }
 
 .tableBtnCorrelatives:hover, .tableBtnFinalExams:hover, 
-.tableBtnUbication:hover {
+.tableBtnUbication:hover, .tableBtnDegrees:hover {
     background-color: #e29613;
 }

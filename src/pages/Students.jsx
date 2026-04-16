@@ -53,8 +53,9 @@ export const Students = () => {
                             }
                         ]}
                         options={[{ value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
-                            {value: "docs", onclick: () => {setTypeModal(<DocsModal setModal={setModal}/>); setModal(true); } },
-                            { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } }, "delete"]}
+                        { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} />); setModal(true); } },
+                        { value: "degrees", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                        { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } }, "delete"]}
                         data={[
                             {
                                 legajo: "TR-2025",

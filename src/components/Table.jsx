@@ -123,34 +123,25 @@ export const Table = ({ columns, data, options }) => {
                                                         return (<span key={i} className="material-symbols-outlined tableBtnVisibility" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
                                                     else if (v.value == "edit")
                                                         return (<span key={i} className="material-symbols-outlined tableBtnEdit"
-                                                        onClick={v.onclick ? v.onclick : undefined}>edit</span>
+                                                            onClick={v.onclick ? v.onclick : undefined}>edit</span>
                                                         );
                                                     else if (v == "delete" || v == "remove")
                                                         return (<span key={i} className="material-symbols-outlined tableBtnDelete">delete</span>);
                                                     else if (v == "switch")
                                                         return (<span key={i} className="material-symbols-outlined tableBtnDisturb">do_not_disturb_on</span>);
-                                                    /* else if (v == "ubication")
-                                                        return (
-                                                            <NavLink to={"/users/add/ubication"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnUbication">location_on</span>
-                                                            </NavLink>
+                                                    else if (v.value == "degrees")
+                                                        return (<span key={i} className="material-symbols-outlined tableBtnDegrees"
+                                                            onClick={v.onclick ? v.onclick : undefined}>license</span>
                                                         );
-                                                    else if (v == "contact")
-                                                        return (
-                                                            <NavLink to={"/users/add/contact"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnContact">phone</span>
-                                                            </NavLink>
-                                                        ); */
+                                                    else if (v.value == "docs")
+                                                        return (<span className="material-symbols-outlined tableBtnDocs"
+                                                            onClick={v.onclick ? v.onclick : undefined}>
+                                                            docs
+                                                        </span>);
                                                     else if (v == "curriculum")
                                                         return (<NavLink to={"/carreras/curriculum"}>
                                                             <span key={i} className="material-symbols-outlined tableBtnCurriculum">
                                                                 two_pager
-                                                            </span>
-                                                        </NavLink>)
-                                                    else if (v == "documentation")
-                                                        return (<NavLink to={"/administrative/documentation"}>
-                                                            <span className="material-symbols-outlined tableBtnDocumentation">
-                                                                docs
                                                             </span>
                                                         </NavLink>)
                                                     else if (v == "cooperative")
@@ -199,12 +190,6 @@ export const Table = ({ columns, data, options }) => {
                                                                 exposure_plus_1
                                                             </span>
                                                         </NavLink>)
-                                                    else if (v.value == "docs")
-                                                        return (<span className="material-symbols-outlined tableBtnDocs"
-                                                                      onClick={v.onclick ? v.onclick : undefined}>
-                                                            docs
-                                                        </span>
-                                                    );
                                                 })
                                             }
                                         </td>
