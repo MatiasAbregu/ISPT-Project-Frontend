@@ -24,5 +24,6 @@ export default Yup.object().shape({
     address: Yup.string().required("Complete este campo antes de continuar"),
     phoneNumber: Yup.string().matches(/^[0-9]+$/, "El documento solo debe contener números"),
     email: Yup.string().email("Ingrese un formato de correo válido").required("Complete este campo antes de continuar"),
+    password: Yup.string().required("Complete este campo antes de continuar"),
     observations: Yup.string()
 });

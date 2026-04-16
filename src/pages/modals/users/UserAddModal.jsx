@@ -51,7 +51,7 @@ export const UserAddModal = ({ setModal, typeModal }) => {
     return (
         <article className="userAddModal">
             <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
-            <h4>Agregar nuevo usuario</h4>
+            <h4>{typeModal == 1 ? "Agregar nuevo usuario" : typeModal == 2 ? "Ver usuario" : "Actualizar usuario"}</h4>
             <div className="userFormContainer">
                 <p className="arrow" onClick={() => {
                     if (step > 0) setStep(prev => prev - 1);
@@ -115,6 +115,10 @@ export const UserAddModal = ({ setModal, typeModal }) => {
                                         <InputControl type={"email"} icon={"email"} key={12} register={register}
                                             data={"email"}>
                                             Ingrese el email:
+                                        </InputControl>
+                                        <InputControl type={"password"} icon={"password"} key={12} register={register}
+                                            data={"password"}>
+                                            Ingrese la contraseña:
                                         </InputControl>
                                         <InputControl type={"textarea"} icon={"visibility"} key={13}>Observaciones</InputControl>
                                         {
