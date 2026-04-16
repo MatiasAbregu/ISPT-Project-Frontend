@@ -37,3 +37,33 @@
     background-color: #8e44b0;
     color: white;
 }
+
+
+
+.usersPage .add-button {
+    background-color: white;
+    display: flex;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.usersPage .add-button span {
+    margin-right: 8px;
+    transition: transform .6s ease;
+}
+
+.usersPage .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.05);
+}
+
+.usersPage .add-button:hover span {
+    transform: rotateZ(180deg);
+}

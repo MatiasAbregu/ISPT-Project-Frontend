@@ -47,7 +47,9 @@ export const Users = () => {
                         name: "Estado",
                         width: 100
                     }
-                ]} options={["person", "edit", "delete", "switch"]}
+                ]} options={[{ value: "eye", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={2} />); setModal(true); } },
+                    { value: "edit", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                     "delete",]}
                 data={[
                     {
                         dni: 12345678,
