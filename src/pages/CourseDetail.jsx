@@ -1,11 +1,16 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputControl } from '../components/InputControl';
 import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import '../styles/pages/CourseDetail.css';
+import { ObservationsModal } from './modals/courses/ObservationsModal';
 
 export const CourseDetail = () => {
+
+    const [modal, setModal] = useState(false);
+    const [typeModal, setTypeModal] = useState();
+
     useEffect(() => {
         document.title = "ISPT - Detalle de Curso";
     }, []);
@@ -13,6 +18,7 @@ export const CourseDetail = () => {
     return (
         
         <article className="courseDetailPage">
+            {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
             <div className="courseDetailPageContainer">
             <div className="controls">
@@ -44,7 +50,7 @@ export const CourseDetail = () => {
                         name: "Promedio",
                         width: 120
                     }
-                ]} options={[{ value: "docs", onclick: () => {  } }]}
+                ]} options={[{ value: "docs", onclick: () => { setTypeModal(<ObservationsModal setModal={setModal} />); setModal(true); } }]}
                 data={[
                     {
                         legajo: "123456",

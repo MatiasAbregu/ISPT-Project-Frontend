@@ -21,7 +21,7 @@ export const PathInfo = ({}) => {
             {segments.map((s, i) => {
 
                 const isId = !isNaN(s);
-                if (isId) return <span> (id:{s})</span>;
+                if (isId) return;
 
                 const label = translations[s] || s;
 
