@@ -3,7 +3,7 @@ import '../styles/pages/Users.css';
 import { InputControl } from "../components/InputControl";
 import { Table } from "../components/Table";
 import { Footer } from "../components/Footer";
-import {Sidebar} from "../components/Sidebar";
+import { Sidebar } from "../components/Sidebar";
 import { UserAddModal } from "./modals/users/UserAddModal";
 
 export const Users = () => {
@@ -17,59 +17,61 @@ export const Users = () => {
     }, []);
 
     return (
-        
+
         <article className="usersPage">
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
             <div className="usersPageContainer">
-            <div className="controls">
-                <InputControl icon={"search"} type={"search"}></InputControl>
-                <button type="button" className="add-button"
-                    onClick={() => { setTypeModal(<UserAddModal setModal={setModal} typeModal={1}/>); setModal(true); }}>
-                    <span className="material-symbols-outlined">add_circle</span>Añadir usuario
-                </button>
-            </div>
-            <Table
-                columns={[
-                    {
-                        name: "DNI",
-                        width: 120
-                    },
-                    {
-                        name: "Nombre de usuario",
-                        width: 160
-                    },
-                    {
-                        name: "Rol",
-                        width: 120
-                    },
-                    {
-                        name: "Estado",
-                        width: 100
-                    }
-                ]} options={["person", {value: "edit"}, "switch"]}
-                data={[
-                    {
-                        dni: 12345678,
-                        username: "Matias",
-                        rol: "Admin",
-                        estado: "Activo",
-                    },
-                    {
-                        dni: 12345678,
-                        username: "Maria",
-                        rol: "Admin",
-                        estado: "Activo",
-                    },
-                    {
-                        dni: 12345678,
-                        username: "Carlos",
-                        rol: "Docente",
-                        estado: "Inactivo"
-                    }
-                ]} />
-                 <Footer />
+                <div className="controls">
+                    <InputControl icon={"search"} type={"search"}></InputControl>
+                    <button type="button" className="add-button"
+                        onClick={() => { setTypeModal(<UserAddModal setModal={setModal} typeModal={1} />); setModal(true); }}>
+                        <span className="material-symbols-outlined">add_circle</span>Añadir usuario
+                    </button>
                 </div>
+                <Table
+                    columns={[
+                        {
+                            name: "DNI",
+                            width: 120
+                        },
+                        {
+                            name: "Nombre de usuario",
+                            width: 160
+                        },
+                        {
+                            name: "Rol",
+                            width: 120
+                        },
+                        {
+                            name: "Estado",
+                            width: 100
+                        }
+                    ]} options={[{ value: "eye", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={2} />); setModal(true); } },
+                    { value: "edit", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                        "delete",]}
+                    data={[
+                        {
+                            dni: 12345678,
+                            username: "Matias",
+                            rol: "Admin",
+                            estado: "Activo",
+                        },
+                        {
+                            dni: 12345678,
+                            username: "Maria",
+                            rol: "Admin",
+                            estado: "Activo",
+                        },
+                        {
+                            dni: 12345678,
+                            username: "Carlos",
+                            rol: "Docente",
+                            estado: "Inactivo"
+                        }
+                    ]} />
+                <Footer />
+            </div>
         </article>
     );
 }

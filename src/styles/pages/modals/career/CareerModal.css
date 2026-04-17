@@ -13,7 +13,6 @@
 .careerModal form {
     display: flex;
     flex-direction: column;
-    min-height: 540px;
     width: 80%;
 }
 
@@ -51,4 +50,21 @@
 
 .careerContainer form {
     width: 80%;
+}
+
+.careerContainer .inputControl label,
+.careerContainer .textareaControl label {
+    color: #6f2c7e !important;
+    margin-left: 90px;
+}
+
+.careerContainer .inputControl:has(input:focus) label,
+.careerContainer .inputControl:has(input:not(:placeholder-shown)) label {
+    transform: translateY(-85%) translateX(-5%);
+}
+
+.careerContainer .textareaControl:has(textarea:focus) label,
+.careerContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
+    transform: translateY(-63%) translateX(-5%);
+    color: white;
 }

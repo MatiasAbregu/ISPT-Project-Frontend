@@ -1,15 +1,15 @@
-.careersPage{
+.coursesPage{
     width: 100%;
     display: flex;
 }
 
-.careersPageContainer {
+.coursesPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.careersPage .controls {
+.coursesPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,12 +17,30 @@
     align-items: center;
 }
 
-.careersPage .controls .inputControl {
+.coursesPage .controls .inputControl {
     margin: 0;
     width: 50%;
 }
 
-.careersPage .add-button {
+
+.coursesPage .arrow {
+    cursor: pointer;
+    padding: 10px;
+    max-height: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border: 3px solid #8e44b0;
+    border-radius: 10px;
+}
+
+.coursesPage .arrow:hover {
+    background-color: #8e44b0;
+    color: white;
+}
+
+
+
+.coursesPage .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -35,17 +53,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.careersPage .add-button span {
+.coursesPage .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.careersPage .add-button:hover {
+.coursesPage .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.careersPage .add-button:hover span {
+.coursesPage .add-button:hover span {
     transform: rotateZ(180deg);
 }

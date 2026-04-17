@@ -69,3 +69,31 @@
     justify-self: center;
     justify-content: center;
 }
+
+.subjectsPage .btnSaveChanges {
+    background-color: white;
+    display: flex;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+    margin-bottom: 3%;
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.subjectsPage .btnSaveChanges span {
+    margin-right: 8px;
+    transition: transform .6s ease;
+}
+
+.subjectsPage .btnSaveChanges:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.05);
+}
+
+.subjectsPage .btnSaveChanges:hover span {
+    transform: rotateZ(180deg);
+}

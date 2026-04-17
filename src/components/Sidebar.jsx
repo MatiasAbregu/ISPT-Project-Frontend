@@ -33,10 +33,13 @@ export const Sidebar = () => {
                 <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
                 </a>
-            </ul>
-            <a href="/" className={"logOut"}>
+                <a href="/cursos" className={url.pathname == "/cursos" ? "activated" : ""}>
+                    <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
+                </a>
+                <a href="/" className={"logOut"}>
                     <span class="material-symbols-outlined">power_settings_circle</span><li>Cerrar Sesión</li>
                 </a>
+            </ul>
         </div>
     )
 }

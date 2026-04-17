@@ -50,8 +50,8 @@ export const Subjects = () => {
                             { code: 1, name: "Matématicas III", year: "3 año", turn: "Mañana", format: "Asignatura" },
                             { code: 2, name: "Lengua I", year: "1 año", turn: "Mañana", format: "Asignatura" }]} />
                 </div>
+                <button className='btnSaveChanges'>Guardar cambios</button>
             </div>
-            <button className='btnSaveChanges'>Guardar cambios</button>
             <Footer />
         </div>
         </article >
