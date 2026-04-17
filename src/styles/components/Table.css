@@ -94,3 +94,12 @@
 .tableBtnUbication:hover, .tableBtnDegrees:hover {
     background-color: #e29613;
 }
+
+.tableBtnPresent:hover{
+    background-color: #10b723;
+}
+
+.tableBtnAbsent:hover{
+    background-color: #bb2525;
+}
+

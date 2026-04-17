@@ -192,13 +192,18 @@ export const Table = ({ columns, data, options }) => {
                                                         </NavLink>)
                                                     else if (v.value == "present")
                                                         return (<span className="material-symbols-outlined tableBtnPresent"
-                                                                      onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                            onClick={() => v.onclick && v.onclick(obj, i)}>
                                                             check
                                                         </span>)
                                                     else if (v.value == "absent")
                                                         return (<span className="material-symbols-outlined tableBtnAbsent"
-                                                                      onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                            onClick={() => v.onclick && v.onclick(obj, i)}>
                                                             close
+                                                        </span>)
+                                                    else if (v.value == "tables")
+                                                        return (<span className="material-symbols-outlined tableBtnTables"
+                                                            onClick={v.onclick ? v.onclick : undefined}>
+                                                            table_restaurant
                                                         </span>)
                                                 })
                                             }

@@ -1,15 +1,15 @@
-.courseDetailPage{
+.examDatesPage{
     width: 100%;
     display: flex;
 }
 
-.courseDetailPageContainer {
+.examDatesPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.courseDetailPage .controls {
+.examDatesPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,10 +17,8 @@
     align-items: center;
 }
 
-.courseDetailPage .controls .inputControl {
+.examDatesPage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
-
-

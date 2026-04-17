@@ -15,6 +15,8 @@ import { CourseGrades } from './pages/CourseGrades'
 import { CourseEvaluations } from './pages/CourseEvaluations'
 import { CourseAttendance } from './pages/CourseAttendance'
 import { Positions } from './pages/Positions'
+import { ExamDates } from './pages/ExamDates'
+import { ExamGrades } from './pages/ExamGrades'
 
 function App() {
   return (
@@ -33,8 +35,10 @@ function App() {
         <Route path='/cursos' element={<Courses />} />
         <Route path='/cursos/:id' element={<CourseDetail />} />
         <Route path='/cursos/:id/evaluaciones' element={<CourseEvaluations />} />
-        <Route path='/cursos/:id/evaluaciones/:id' element={<CourseGrades />} />
+        <Route path='/cursos/:id/evaluaciones/:id/notas' element={<CourseGrades />} />
         <Route path='/cursos/:id/asistencia' element={<CourseAttendance />} />
+        <Route path='/cursos/:id/mesas-examenes' element={<ExamDates />} />
+        <Route path='/cursos/:id/mesas-examenes/:id/notas' element={<ExamGrades />} />
       </Routes>
     </BrowserRouter>
   )

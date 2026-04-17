@@ -5,6 +5,7 @@ import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import '../styles/pages/Courses.css';
 import { useNavigate } from 'react-router-dom';
+import { PathInfo } from '../components/PathInfo';
 
 export const Courses = () => {
     useEffect(() => {
@@ -35,7 +36,10 @@ export const Courses = () => {
                         name: "Comisión",
                         width: 120
                     }
-                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1`) } }, { value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones`) } }, , { value: "docs", onclick: () => { navigate(`/cursos/1/asistencia`) } }]}
+                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1`) } }, 
+                    { value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones`) } }, 
+                    { value: "docs", onclick: () => { navigate(`/cursos/1/asistencia`) } },
+                    { value: "tables", onclick: () => { navigate(`/cursos/1/mesas-examenes`) } }]}
                 data={[
                     {
                         materia: "Materia 1",
