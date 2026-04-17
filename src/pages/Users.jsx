@@ -8,7 +8,6 @@ import { UserAddModal } from "./modals/users/UserAddModal";
 
 export const Users = () => {
 
-
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
 
@@ -17,7 +16,6 @@ export const Users = () => {
     }, []);
 
     return (
-
         <article className="usersPage">
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
