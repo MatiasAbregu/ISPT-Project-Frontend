@@ -86,11 +86,16 @@
 .studentFormContainer .add-button {
     background-color: white;
     margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
     color: #6f2c7e;
+    cursor: pointer;
     border: 2px solid #6f2c7e;
     align-self: flex-end;
+    display: flex;
 
-    transition: transform .3s ease, color .3s ease, background-color .3s ease, border .1s ease;
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
 .studentFormContainer .add-button:hover {

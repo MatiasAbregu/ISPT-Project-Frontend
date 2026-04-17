@@ -4,6 +4,8 @@ import { Table } from "../components/Table";
 import { InputControl } from "../components/InputControl";
 import "../styles/pages/Teachers.css";
 import { Sidebar } from "../components/Sidebar";
+import { DegreesModal } from "./modals/teach-stud/DegreesModal";
+import { TeacherModal } from "./modals/teachers/TeacherModal";
 
 export const Teachers = () => {
 
@@ -21,8 +23,8 @@ export const Teachers = () => {
       <div className="teachersPageContainer">
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
-          <button type="button" className="add-button"
-            onClick={() => { setTypeModal(<StudentModal setModal={setModal} typeModal={1} />); setModal(true); }}>
+          <button type="button" className="add-button-teacher"
+            onClick={() => { setTypeModal(<TeacherModal setModal={setModal} typeModal={1} />); setModal(true); }}>
             <span className="material-symbols-outlined">add_circle</span>Añadir docente
           </button>
         </div>
@@ -49,7 +51,9 @@ export const Teachers = () => {
                 name: "Edad",
                 width: 80
               },
-            ]} options={[{value: "eye"}, {value: "edit"}, "delete"]}
+            ]} options={[{ value: "eye", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={2} />); setModal(true); } },
+            { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
+            { value: "edit", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={3} />); setModal(true); } }, "delete"]}
             data={[
               {
                 dni: 12345679,

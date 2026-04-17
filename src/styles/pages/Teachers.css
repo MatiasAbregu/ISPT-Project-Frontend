@@ -23,7 +23,7 @@
     width: 30%;
 }
 
-.teachersPage .add-button {
+.teachersPage .add-button-teacher {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.teachersPage .add-button span {
+.teachersPage .add-button-teacher span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.teachersPage .add-button:hover {
+.teachersPage .add-button-teacher:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.teachersPage .add-button:hover span {
+.teachersPage .add-button-teacher:hover span {
     transform: rotateZ(180deg);
 }

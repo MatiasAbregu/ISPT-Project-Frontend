@@ -3,7 +3,7 @@ import PersonYUP from './PersonYUP';
 
 const TeacherYUP = PersonYUP.concat(
     Yup.object({
-        cupof: Yup.string().required(),
+   
     })
 );
 

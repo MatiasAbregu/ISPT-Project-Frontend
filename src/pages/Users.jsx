@@ -47,7 +47,7 @@ export const Users = () => {
                         name: "Estado",
                         width: 100
                     }
-                ]} options={["person", "edit", "delete", "switch"]}
+                ]} options={["person", {value: "edit"}, "switch"]}
                 data={[
                     {
                         dni: 12345678,
