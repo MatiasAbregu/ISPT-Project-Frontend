@@ -144,7 +144,7 @@ export const Table = ({ columns, data, options }) => {
                                                                 two_pager
                                                             </span>
                                                         </NavLink>)
-                                                    else if (v == "cooperative")
+                                                    else if (v.value == "cooperative")
                                                         return (<NavLink to={"/administrative/cooperative"}>
                                                             <span className="material-symbols-outlined tableBtnCooperative">
                                                                 handshake
@@ -156,7 +156,7 @@ export const Table = ({ columns, data, options }) => {
                                                                 home_storage
                                                             </span>
                                                         </NavLink>)
-                                                    else if (v == "correlatives")
+                                                    else if (v.value == "correlatives")
                                                         return (<NavLink to={"/carreras/curriculum/materias/correlativas"}>
                                                             <span className="material-symbols-outlined tableBtnCorrelatives">
                                                                 sync_alt

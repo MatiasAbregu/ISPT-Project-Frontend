@@ -1,5 +1,5 @@
-import React, { useEffect,useState } from 'react'
-import '../../../styles/pages/modals/users/UserAddModal.css'
+import React, { useEffect, useState } from 'react'
+import '../../../styles/pages/modals/users/UserModal.css'
 import { InputControl } from '../../../components/InputControl'
 import { ComboControl } from '../../../components/ComboControl'
 import { DateControl } from '../../../components/DateControl'
@@ -21,7 +21,7 @@ const provinces = {
     "Venezuela": [{ key: 1, value: "Caracas" }, { key: 2, value: "Maracaibo" }, { key: 3, value: "Cumaná" }]
 };
 
-export const UserAddModal = ({ setModal, typeModal }) => {
+export const UserModal = ({ setModal, typeModal }) => {
 
     const [step, setStep] = useState(0);
     const [countrySelected, setCountrySelected] = useState("");
@@ -89,13 +89,13 @@ export const UserAddModal = ({ setModal, typeModal }) => {
                                     <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={6}>
                                         Ingrese el N° de documento
                                     </InputControl>
+                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={7}
+                                        register={register} data={"nativeCountry"} getValues={getValues}>
+                                        Seleccione país de origen
+                                    </ComboControl>
                                 </> :
                                 step == 2 ?
                                     <>
-                                        <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={7}
-                                            register={register} data={"nativeCountry"} getValues={getValues}>
-                                            Seleccione país de origen
-                                        </ComboControl>
                                         <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={8}
                                             register={register} data={"nativeProvince"} getValues={getValues}>
                                             Seleccione provincia de origen
@@ -112,32 +112,34 @@ export const UserAddModal = ({ setModal, typeModal }) => {
                                             data={"phoneNumber"}>
                                             Ingrese el número de celular:
                                         </InputControl>
-                                        <InputControl type={"email"} icon={"email"} key={12} register={register}
-                                            data={"email"}>
-                                            Ingrese el email:
-                                        </InputControl>
-                                        <InputControl type={"password"} icon={"password"} key={12} register={register}
-                                            data={"password"}>
-                                            Ingrese la contraseña:
-                                        </InputControl>
-                                        <InputControl type={"textarea"} icon={"visibility"} key={13}>Observaciones</InputControl>
-                                        {
-                                            typeModal == 2 ? <></> :
-                                                <button type="button" className="add-button"
-                                                    onClick={() => setModal(false)}>
-                                                    <span className="material-symbols-outlined">save</span>
-                                                    {typeModal != 1 ? "Actualizar usuario" : "Crear usuario"}
-                                                </button>
-                                        }
-                                    </>
-                                    : undefined
+                                    </> :
+                                    step == 3 ?
+                                        <>
+                                            <InputControl type={"email"} icon={"email"} key={12} register={register}
+                                                data={"email"}>
+                                                Ingrese el email:
+                                            </InputControl>
+                                            <InputControl type={"password"} icon={"password"} key={13} register={register}
+                                                data={"password"}>
+                                                Ingrese la contraseña:
+                                            </InputControl>
+                                            <InputControl type={"textarea"} icon={"visibility"} key={14}>Observaciones</InputControl>
+                                            {
+                                                typeModal == 2 ? <></> :
+                                                    <button type="button" className="add-button"
+                                                        onClick={() => setModal(false)}>
+                                                        <span className="material-symbols-outlined">save</span>
+                                                        {typeModal != 1 ? "Actualizar usuario" : "Crear usuario"}
+                                                    </button>
+                                            }
+                                        </> : undefined
                     }
                 </form>
                 <p className="arrow" onClick={() => {
-                    if (step < 2) setStep(prev => prev + 1);
+                    if (step < 3) setStep(prev => prev + 1);
                 }}>&gt;</p>
             </div>
-            <StepsControl stepsQuantity={3} setStep={setStep} step={step} />
+            <StepsControl stepsQuantity={4} setStep={setStep} step={step} />
         </article>
     )
 }

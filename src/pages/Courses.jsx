@@ -1,93 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { InputControl } from '../components/InputControl';
 import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import '../styles/pages/Courses.css';
+import { useNavigate } from 'react-router-dom';
 
 export const Courses = () => {
-
-
-    const [modal, setModal] = useState(false);
-    const [typeModal, setTypeModal] = useState();
-
     useEffect(() => {
         document.title = "ISPT - Gestión de Cursos";
     }, []);
 
+    const navigate = useNavigate();
+
     return (
         
         <article className="coursesPage">
-            {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
             <div className="coursesPageContainer">
             <div className="controls">
                 <InputControl icon={"search"} type={"search"}></InputControl>
-                <button type="button" className="add-button"
-                    onClick={() => { setTypeModal(<UserAddModal setModal={setModal} typeModal={1}/>); setModal(true); }}>
-                    <span className="material-symbols-outlined">add_circle</span>Añadir usuario
-                </button>
             </div>
             <Table
                 columns={[
-                    {
-                        name: "Legajo",
-                        width: 120
-                    },
-                    {
-                        name: "Alumno",
-                        width: 160
-                    },
                     {
                         name: "Materia",
                         width: 120
                     },
                     {
                         name: "Año",
-                        width: 100
+                        width: 160
                     },
                     {
-                        name: "Condición",
-                        width: 120
-                    },
-                    {
-                        name: "Estado",
-                        width: 120
-                    },
-                    {
-                        name: "Riesgo",
+                        name: "Comisión",
                         width: 120
                     }
-                ]} options={[{ value: "eye", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={2} />); setModal(true); } },
-                    { value: "edit", onclick: () => { setTypeModal(<UserAddModal setModal={setModal} typeModal={3} />); setModal(true); } },
-                     "delete",]}
+                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1`) } }, { value: "degrees", onclick: () => { navigate(`/cursos/1/notas`) } }, , { value: "docs", onclick: () => { } }]}
                 data={[
                     {
-                        legajo: 12345678,
-                        alumno: "Matias",
-                        materia: "Matematica",
+                        materia: "Materia 1",
                         anio: 2025,
-                        condicion: "Aprobado",
-                        estado: "Activo",
-                        riesgo: "Bajo"
+                        comision: "A"
                     },
                     {
-                        legajo: 12345678,
-                        alumno: "Maria",
-                        materia: "Matematica",
+                        materia: "Materia 2",
                         anio: 2025,
-                        condicion: "Aprobado",
-                        estado: "Activo",
-                        riesgo: "Bajo"
+                        comision: "B"
                     },
                     {
-                        legajo: 12345678,
-                        alumno: "Carlos",
-                        materia: "Matematica",
+                        materia: "Materia 3",
                         anio: 2025,
-                        condicion: "Aprobado",
-                        estado: "Activo",
-                        riesgo: "Bajo"
+                        comision: "C"
                     }
                 ]} />
                  <Footer />

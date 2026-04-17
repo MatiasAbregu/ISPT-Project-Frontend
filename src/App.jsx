@@ -11,6 +11,8 @@ import { Curriculum } from './pages/Curriculum'
 import { Subjects } from './pages/Subjects'
 import { Correlatives } from './pages/Correlatives'
 import { Courses } from './pages/Courses'
+import { CourseDetail } from './pages/CourseDetail'
+import { CourseGrades } from './pages/CourseGrades'
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path='/carreras/curriculum/materias/correlativas' element={<Correlatives />} />
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />
+        <Route path='/cursos/:id' element={<CourseDetail />} />
+        <Route path='/cursos/:id/notas' element={<CourseGrades />} />
       </Routes>
     </BrowserRouter>
   )
