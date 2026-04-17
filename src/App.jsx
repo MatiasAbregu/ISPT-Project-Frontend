@@ -13,6 +13,8 @@ import { Correlatives } from './pages/Correlatives'
 import { Courses } from './pages/Courses'
 import { CourseDetail } from './pages/CourseDetail'
 import { CourseGrades } from './pages/CourseGrades'
+import { CourseEvaluations } from './pages/CourseEvaluations'
+import { CourseAttendance } from './pages/CourseAttendance'
 
 function App() {
   return (
@@ -30,7 +32,9 @@ function App() {
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />
         <Route path='/cursos/:id' element={<CourseDetail />} />
-        <Route path='/cursos/:id/notas' element={<CourseGrades />} />
+        <Route path='/cursos/:id/evaluaciones' element={<CourseEvaluations />} />
+        <Route path='/cursos/:id/evaluaciones/:id' element={<CourseGrades />} />
+        <Route path='/cursos/:id/asistencia' element={<CourseAttendance />} />
       </Routes>
     </BrowserRouter>
   )

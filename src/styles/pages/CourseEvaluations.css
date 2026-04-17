@@ -1,15 +1,15 @@
-.courseGradesPage{
+.courseEvaluationsPage{
     width: 100%;
     display: flex;
 }
 
-.courseGradesPageContainer {
+.courseEvaluationsPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.courseGradesPage .controls {
+.courseEvaluationsPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,12 +17,12 @@
     align-items: center;
 }
 
-.courseGradesPage .controls .inputControl {
+.courseEvaluationsPage .controls .inputControl {
     margin: 0;
     width: 50%;
 }
 
-.courseGradesPage .add-button {
+.courseEvaluationsPage .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -35,17 +35,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.courseGradesPage .add-button span {
+.courseEvaluationsPage .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.courseGradesPage .add-button:hover {
+.courseEvaluationsPage .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.courseGradesPage .add-button:hover span {
+.courseEvaluationsPage .add-button:hover span {
     transform: rotateZ(180deg);
 }

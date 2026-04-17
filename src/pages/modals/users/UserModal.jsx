@@ -33,6 +33,7 @@ export const UserModal = ({ setModal, typeModal }) => {
             lastname: "Ferreya",
             birthdate: new Date("2025-03-28"),
             genre: "Masculino",
+            role: "Administrador",
             typeDocument: "DNI",
             documentNumber: "12345678",
             nativeCountry: "Argentina",
@@ -78,52 +79,52 @@ export const UserModal = ({ setModal, typeModal }) => {
                             step == 1 ?
                                 <>
                                     <ComboControl icon={"person"}
-                                        options={[{ key: 1, value: "Administrador" }, { key: 2, value: "Preceptor" }, { key: 3, value: "Preceptor Auxiliar" }]} setValue={setValue} data={"role"} getValues={getValues} key={4}>
+                                        options={[{ key: 1, value: "Administrador" }, { key: 2, value: "Preceptor" }, { key: 3, value: "Preceptor Auxiliar" }]} setValue={setValue} data={"role"} getValues={getValues} key={5}>
                                         Seleccione un rol
                                     </ComboControl>
                                     <ComboControl icon={"id_card"} options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]}
                                         register={register} data={"typeDocument"} getValues={getValues}
-                                        key={5}>
+                                        key={6}>
                                         Seleccione el tipo de documento
                                     </ComboControl>
-                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={6}>
+                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={7}>
                                         Ingrese el N° de documento
                                     </InputControl>
-                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={7}
+                                    <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={8}
                                         register={register} data={"nativeCountry"} getValues={getValues}>
                                         Seleccione país de origen
                                     </ComboControl>
                                 </> :
                                 step == 2 ?
                                     <>
-                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={8}
+                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={9}
                                             register={register} data={"nativeProvince"} getValues={getValues}>
                                             Seleccione provincia de origen
                                         </ComboControl>
-                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={9}
+                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={10}
                                             register={register} data={"actualDeparment"} getValues={getValues}>
                                             Seleccione departamento de Córdoba donde reside
                                         </ComboControl>
-                                        <InputControl type={"text"} icon={"pin_drop"} key={10} register={register}
+                                        <InputControl type={"text"} icon={"pin_drop"} key={11} register={register}
                                             data={"address"}>
                                             Domicilio donde reside:
                                         </InputControl>
-                                        <InputControl type={"tel"} icon={"phone"} key={11} register={register}
+                                        <InputControl type={"tel"} icon={"phone"} key={12} register={register}
                                             data={"phoneNumber"}>
                                             Ingrese el número de celular:
                                         </InputControl>
                                     </> :
                                     step == 3 ?
                                         <>
-                                            <InputControl type={"email"} icon={"email"} key={12} register={register}
+                                            <InputControl type={"email"} icon={"email"} key={13} register={register}
                                                 data={"email"}>
                                                 Ingrese el email:
                                             </InputControl>
-                                            <InputControl type={"password"} icon={"password"} key={13} register={register}
+                                            <InputControl type={"password"} icon={"password"} key={14} register={register}
                                                 data={"password"}>
                                                 Ingrese la contraseña:
                                             </InputControl>
-                                            <InputControl type={"textarea"} icon={"visibility"} key={14}>Observaciones</InputControl>
+                                            <InputControl type={"textarea"} icon={"visibility"} key={15}>Observaciones</InputControl>
                                             {
                                                 typeModal == 2 ? <></> :
                                                     <button type="button" className="add-button"

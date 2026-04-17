@@ -35,7 +35,7 @@ export const Courses = () => {
                         name: "Comisión",
                         width: 120
                     }
-                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1`) } }, { value: "degrees", onclick: () => { navigate(`/cursos/1/notas`) } }, , { value: "docs", onclick: () => { } }]}
+                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1`) } }, { value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones`) } }, , { value: "docs", onclick: () => { navigate(`/cursos/1/asistencia`) } }]}
                 data={[
                     {
                         materia: "Materia 1",
@@ -50,7 +50,7 @@ export const Courses = () => {
                     {
                         materia: "Materia 3",
                         anio: 2025,
-                        comision: "C"
+                        comision: "A"
                     }
                 ]} />
                  <Footer />

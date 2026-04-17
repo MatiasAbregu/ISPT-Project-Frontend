@@ -21,7 +21,7 @@ export const DateControl = ({ icon, children, setValue, data, getValues }) => {
                 setIsOpen(false);
         }
 
-        if (typeof getValues == "function" && getValues(data) != null || getValues(data) != undefined)
+        if (typeof getValues == "function" && (getValues(data) != null || getValues(data) != undefined))
             setDaySelected(new Date(getValues(data)));
 
         document.addEventListener("mousedown", handleCursorOut);

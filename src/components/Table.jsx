@@ -190,6 +190,16 @@ export const Table = ({ columns, data, options }) => {
                                                                 exposure_plus_1
                                                             </span>
                                                         </NavLink>)
+                                                    else if (v.value == "present")
+                                                        return (<span className="material-symbols-outlined tableBtnPresent"
+                                                                      onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                            check
+                                                        </span>)
+                                                    else if (v.value == "absent")
+                                                        return (<span className="material-symbols-outlined tableBtnAbsent"
+                                                                      onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                            close
+                                                        </span>)
                                                 })
                                             }
                                         </td>

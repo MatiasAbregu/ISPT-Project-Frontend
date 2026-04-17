@@ -17,7 +17,7 @@ export const DocsModal = ({ setModal }) => {
                 <InputControl type={"checkbox"} setValue={setValue} data={"photo"} register={register} watch={watch}>Foto</InputControl>
                 <InputControl type={"checkbox"} setValue={setValue} data={"birth"} register={register} watch={watch}>Acta de nacimiento</InputControl>
                 <InputControl type={"checkbox"} setValue={setValue} data={"cus"} register={register} watch={watch}>Certificado Único de Salud</InputControl>
-                <InputControl type={"checkbox"} setValue={setValue} data={"cds"} register={register} watch={watch}>Certificado de delitos sexuales</InputControl>
+                <InputControl type={"checkbox"} setValue={setValue} data={"cds"} register={register} watch={watch}>Certifificado de no inscripción en el registro de delitos sexuales</InputControl>
                 <InputControl type={"checkbox"} setValue={setValue} data={"cbc"} register={register} watch={watch}>Certificado de buena conducta</InputControl>
             </div>
         </article>

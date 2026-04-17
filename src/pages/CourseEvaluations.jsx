@@ -3,60 +3,62 @@ import { InputControl } from '../components/InputControl';
 import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
-import '../styles/pages/CourseGrades.css';
+import '../styles/pages/CourseEvaluations.css';
+import { useNavigate } from 'react-router-dom';
 
-export const CourseGrades = () => {
+export const CourseEvaluations = () => {
+    const navigate = useNavigate();
     useEffect(() => {
         document.title = "ISPT - Detalle de Curso";
     }, []);
 
     return (
 
-        <article className="courseGradesPage">
+        <article className="courseEvaluationsPage">
             <Sidebar />
-            <div className="courseGradesPageContainer">
+            <div className="courseEvaluationsPageContainer">
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => { setTypeModal(<CareerModal setModal={setModal} />); setModal(true); }}>
-                        <span className="material-symbols-outlined">add_circle</span>Cargar nota
+                        onClick={() => {  }}>
+                        <span className="material-symbols-outlined">add_circle</span>Añadir instancia evaluativa
                     </button>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "Legajo",
+                            name: "Fecha",
                             width: 120
                         },
                         {
-                            name: "Alumno",
+                            name: "Tipo",
                             width: 160
                         },
                         {
-                            name: "Nota",
+                            name: "Número",
                             width: 40
                         }
-                    ]} options={[{ value: "edit", onclick: () => { } }]}
+                    ]} options={[{ value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones/1`) } }]}
                     data={[
                         {
-                            legajo: "12345",
-                            alumno: "Juan Pérez",
-                            nota: 8
+                            fecha: "2025-10-15",
+                            tipo: "Parcial",
+                            numero: 1
                         },
                         {
-                            legajo: "12346",
-                            alumno: "María García",
-                            nota: 9
+                            fecha: "2025-10-16",
+                            tipo: "Parcial",
+                            numero: 2
                         },
                         {
-                            legajo: "12347",
-                            alumno: "Pedro López",
-                            nota: 7
+                            fecha: "2025-10-17",
+                            tipo: "Recuperatorio",
+                            numero: 1
                         },
                         {
-                            legajo: "12348",
-                            alumno: "Ana Martínez",
-                            nota: 10
+                            fecha: "2025-10-18",
+                            tipo: "Recuperatorio",
+                            numero: 2
                         }
                     ]} />
                 <Footer />
