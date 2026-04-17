@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/components/Sidebar.css'
 import { useLocation } from 'react-router'
+import { UserContext } from '../context/UserProvider';
 
 export const Sidebar = () => {
 
     const url = useLocation();
+    const { user } = useContext(UserContext);
 
     return (
         /*
@@ -24,18 +26,38 @@ export const Sidebar = () => {
                 <a href="/estudiantes" className={url.pathname == "/estudiantes" ? "activated" : ""}>
                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
                 </a>
-                <a href="/docentes" className={url.pathname == "/docentes" ? "activated" : ""}>
-                    <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
-                </a>
-                <a href="/usuarios" className={url.pathname == "/usuarios" ? "activated" : ""}>
-                    <span class="material-symbols-outlined">supervised_user_circle</span><li>Usuarios</li>
-                </a>
-                <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
-                    <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
-                </a>
-                <a href="/cursos" className={url.pathname == "/cursos" ? "activated" : ""}>
-                    <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
-                </a>
+                {
+                    user ?
+                        user.role == "Directivo" || user.role == "Precepetor" ?
+                            <>
+                                <a href="/docentes" className={url.pathname == "/docentes" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
+                                </a>
+                            </> : undefined
+                        : undefined
+                }
+                {
+                    user ?
+                        user.role == "Directivo" ?
+                            <>
+                                <a href="/cargos" className={url.pathname == "/cargos" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">supervised_user_circle</span><li>Cargos</li>
+                                </a>
+                                <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
+                                </a>
+                            </> : undefined
+                        : undefined
+                }
+                {
+                    user ?
+                        user.role == "Docente" ?
+                            <>
+                                <a href="/cursos" className={url.pathname == "/cursos" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
+                                </a></> : undefined
+                        : undefined
+                }
                 <a href="/" className={"logOut"}>
                     <span class="material-symbols-outlined">power_settings_circle</span><li>Cerrar Sesión</li>
                 </a>

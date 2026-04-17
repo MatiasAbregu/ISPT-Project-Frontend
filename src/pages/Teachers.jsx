@@ -4,7 +4,7 @@ import { Table } from "../components/Table";
 import { InputControl } from "../components/InputControl";
 import "../styles/pages/Teachers.css";
 import { Sidebar } from "../components/Sidebar";
-import { DegreesModal } from "./modals/teach-stud/DegreesModal";
+import { DegreesModal } from "./modals/general/DegreesModal";
 import { TeacherModal } from "./modals/teachers/TeacherModal";
 
 export const Teachers = () => {

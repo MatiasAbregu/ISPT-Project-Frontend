@@ -5,8 +5,8 @@ import { InputControl } from "../components/InputControl";
 import { Sidebar } from "../components/Sidebar";
 import "../styles/pages/Students.css";
 import { StudentModal } from "./modals/students/StudentModal";
-import { DocsModal } from "./modals/students/DocsModal";
-import { DegreesModal } from "./modals/teach-stud/DegreesModal";
+import { DocsModal } from "./modals/general/DocsModal";
+import { DegreesModal } from "./modals/general/DegreesModal";
 
 export const Students = () => {
 

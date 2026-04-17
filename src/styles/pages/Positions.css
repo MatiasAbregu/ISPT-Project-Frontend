@@ -1,15 +1,15 @@
-.usersPage {
+.positionsPage {
     width: 100%;
     display: flex;
 }
 
-.usersPageContainer {
+.positionsPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.usersPage .controls {
+.positionsPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,13 +17,13 @@
     align-items: center;
 }
 
-.usersPage .controls .inputControl {
+.positionsPage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
 
-.usersPage .add-button-user {
+.positionsPage .add-button-position {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.usersPage .add-button-user span {
+.positionsPage .add-button-position span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.usersPage .add-button-user:hover {
+.positionsPage .add-button-position:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.usersPage .add-button-user:hover span {
+.positionsPage .add-button-position:hover span {
     transform: rotateZ(180deg);
 }
