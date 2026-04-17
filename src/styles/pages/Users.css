@@ -1,4 +1,4 @@
-.usersPage{
+.usersPage {
     width: 100%;
     display: flex;
 }
@@ -19,28 +19,11 @@
 
 .usersPage .controls .inputControl {
     margin: 0;
-    width: 50%;
+    min-width: 250px;
+    width: 30%;
 }
 
-
-.usersPage .arrow {
-    cursor: pointer;
-    padding: 10px;
-    max-height: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
-    border: 3px solid #8e44b0;
-    border-radius: 10px;
-}
-
-.usersPage .arrow:hover {
-    background-color: #8e44b0;
-    color: white;
-}
-
-
-
-.usersPage .add-button {
+.usersPage .add-button-user {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -53,17 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.usersPage .add-button span {
+.usersPage .add-button-user span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.usersPage .add-button:hover {
+.usersPage .add-button-user:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.usersPage .add-button:hover span {
+.usersPage .add-button-user:hover span {
     transform: rotateZ(180deg);
 }
