@@ -211,6 +211,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 close
                                                             </span>)
+                                                        else if (v.value == "tables")
+                                                            return (<span className="material-symbols-outlined tableBtnTables"
+                                                                onClick={v.onclick ? v.onclick : undefined}>
+                                                                table_restaurant
+                                                            </span>)
                                                         else if (v.value == "contact")
                                                             return (<span className="material-symbols-outlined tableBtnContact"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>

@@ -19,7 +19,8 @@
 
 .courseEvaluationsPage .controls .inputControl {
     margin: 0;
-    width: 50%;
+    min-width: 250px;
+    width: 30%;
 }
 
 .courseEvaluationsPage .add-button {

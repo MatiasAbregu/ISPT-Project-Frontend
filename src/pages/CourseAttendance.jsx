@@ -42,6 +42,17 @@ export const CourseAttendance = () => {
         );
     };
 
+    const getAsistencia = (estado) => (
+        <span className={estado.toLowerCase()}>
+            {estado}
+        </span>
+    );
+
+    const dataRender = data.map(row => ({
+        ...row,
+        asistencia: getAsistencia(row.asistencia)
+    }));
+
     return (
 
         <article className="courseAttendancePage">
@@ -74,7 +85,7 @@ export const CourseAttendance = () => {
                         { value: "present", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Presente") },
                         { value: "absent", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Ausente") }
                     ]}
-                    data={data} />
+                    data={dataRender} />
                 <Footer />
             </div>
         </article>

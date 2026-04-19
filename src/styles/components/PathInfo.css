@@ -1,0 +1,15 @@
+.pathInfo {
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    
+}
+
+.pathInfo a{
+    color: #6f2c7e;
+    text-decoration: none;
+}
+
+.pathInfo a:hover{
+    text-decoration: underline;
+}
