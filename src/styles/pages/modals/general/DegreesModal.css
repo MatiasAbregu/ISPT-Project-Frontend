@@ -85,10 +85,6 @@
     transition: transform .3s ease;
 }
 
-.degreesFormContainer .add-button:hover span {
-    transform: rotateZ(360deg);
-}
-
 .degreesFormContainer .badge-container {
     display: flex;
     flex-wrap: wrap;

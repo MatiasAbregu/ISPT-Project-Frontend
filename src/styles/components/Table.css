@@ -18,7 +18,6 @@
     overflow: hidden;
 }
 
-
 .table th {
     color: white;
     background: linear-gradient(90deg, #8e44b0, #8034a3);
@@ -27,6 +26,17 @@
 
 .table td {
     background-color: white;
+}
+
+.table .tdCheck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table .tdCheck .checkControl {
+    margin: 0;
+    width: 50px;
 }
 
 .table th:last-child,
@@ -47,7 +57,14 @@
 
 .columnOptions {
     overflow: auto;
+}
 
+.optionsContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px 5px;
 }
 
 [class*="tableBtn"] {
@@ -86,7 +103,7 @@
 }
 
 .tableBtnSubjects:hover, .tableBtnCooperative:hover, 
-.tableBtnStudentSubjects:hover {
+.tableBtnStudentSubjects:hover, .tableBtnObservation:hover {
     background-color: #8e44b0;
 }
 

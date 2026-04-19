@@ -44,6 +44,7 @@ export const StudentModal = ({ setModal, typeModal }) => {
             actualDeparment: "Capital",
             address: "Spilimbergo 4524",
             phoneNumber: "3515543671",
+            emergencyNumber: "3517775555",
             email: "felipe@gmail.com",
             practicePlace: "",
             observations: ""
@@ -134,17 +135,21 @@ export const StudentModal = ({ setModal, typeModal }) => {
                                                     data={"phoneNumber"}>
                                                     Ingrese el número de celular
                                                 </InputControl>
-                                                <InputControl type={"email"} icon={"email"} key={16} register={register}
+                                                <InputControl type={"tel"} icon={"local_hospital"} key={16} register={register}
+                                                    data={"emergencyNumber"}>
+                                                    Ingrese el número de emergencias
+                                                </InputControl>
+                                                <InputControl type={"email"} icon={"email"} key={17} register={register}
                                                     data={"email"}>
-                                                    Ingrese el email
+                                                    Ingrese el correo electrónico
                                                 </InputControl>
                                                 <InputControl type={"text"} icon={"person"} register={register} data={"practicePlace"}
-                                                    key={17}>
+                                                    key={18}>
                                                     Ingrese el lugar de práctica (solo para alumnos de 3° y 4° año)
                                                 </InputControl>
                                             </> : step == 5 ?
                                                 <>
-                                                    <InputControl type={"textarea"} icon={"visibility"} key={18}>Observaciones</InputControl>
+                                                    <InputControl type={"textarea"} icon={"visibility"} key={19}>Observaciones</InputControl>
                                                     {
                                                         typeModal == 2 ? <></> :
                                                             <button type="button" className="add-button"

@@ -14,8 +14,9 @@ export const ComboControl = ({ icon, children, options, setOption, setValue, dat
                 setIsOpen(false);
         }
 
-        if (typeof getValues == "function" && getValues(data) != null || getValues(data) != undefined)
-            setSelectedOption(options.find(x => x.value == getValues(data)));
+        if (getValues != undefined && typeof getValues === "function")
+            if (getValues(data) != null || getValues(data) != undefined)
+                setSelectedOption(options.find(x => x.value == getValues(data)));
 
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);

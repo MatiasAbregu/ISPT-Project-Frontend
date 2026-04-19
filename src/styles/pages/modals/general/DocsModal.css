@@ -45,3 +45,27 @@
 .docsModal .checkControl{
     color: #6f2c7e;
 }
+
+.docsModal .docsOnlyOnce, .docsModal .docsPerYear {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.docsModal .docsOnlyOnce .docs {
+    display: flex;
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.docsModal .docsPerYear .docs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.docsModal .titleDocs {
+    font-size: 1.18rem;
+    text-decoration: underline #6f2c7e;
+}

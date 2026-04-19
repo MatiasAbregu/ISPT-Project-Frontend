@@ -7,6 +7,9 @@ import "../styles/pages/Students.css";
 import { StudentModal } from "./modals/students/StudentModal";
 import { DocsModal } from "./modals/general/DocsModal";
 import { DegreesModal } from "./modals/general/DegreesModal";
+import { ContactModal } from "./modals/general/ContactModal";
+import { UbicationModal } from "./modals/general/UbicationModal";
+import { ObservationModal } from "./modals/general/ObservationModal";
 
 export const Students = () => {
 
@@ -53,10 +56,15 @@ export const Students = () => {
                                 width: 80
                             }
                         ]}
-                        options={[{ value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
-                        { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} />); setModal(true); } },
-                        { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
-                        { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } }, "delete"]}
+                        options={[
+                            { value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
+                            { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} />); setModal(true); } },
+                            { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
+                            { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
+                            { value: "ubication", onclick: () => { setTypeModal(<UbicationModal setModal={setModal} />); setModal(true); } },
+                            { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
+                            { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                            "delete"]}
                         data={[
                             {
                                 legajo: "TR-2025",

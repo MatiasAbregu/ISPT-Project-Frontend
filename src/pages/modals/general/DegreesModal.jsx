@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../../../styles/pages/modals/teach-stud/DegreesModal.css'
+import '../../../styles/pages/modals/general/DegreesModal.css'
 import { InputControl } from '../../../components/InputControl'
 
 export const DegreesModal = ({ setModal }) => {
