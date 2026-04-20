@@ -20,36 +20,37 @@ export const Curriculum = () => {
       <Sidebar />
       {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
       <div className="curriculumPageContainer">
-      <div className="controls">
-        <InputControl icon={"search"} type={"search"}></InputControl>
-        <button type="button" className="add-button"
+        <div className="controls">
+          <InputControl icon={"search"} type={"search"}></InputControl>
+          <button type="button" className="add-button"
             onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); }}>
             <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
-        </button>
-      </div>
-      <Table
-        columns={[{
-          name: "Resolución",
-          width: 100
-        },
-        {
-          name: "Duración",
-          width: 100
-        }
-        ]}
-        options={["subjects", "correlatives", "edit"]}
-        data={[
-          {
-            resolucion: "EE/11",
-            duracion: "3 años"
+          </button>
+        </div>
+        <Table
+          columns={[{
+            name: "Resolución",
+            width: 100
           },
           {
-            resolucion: "EE/2025",
-            duracion: "2 años"
+            name: "Duración",
+            width: 100
           }
-        ]}
-      />
-      <Footer />
+          ]}
+          options={["subjects",
+            { value: "edit", onclick: () => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); } }]}
+          data={[
+            {
+              resolucion: "EE/11",
+              duracion: "3 años"
+            },
+            {
+              resolucion: "EE/2025",
+              duracion: "2 años"
+            }
+          ]}
+        />
+        <Footer />
       </div>
     </article>
   )

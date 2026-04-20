@@ -48,10 +48,6 @@ export const Teachers = () => {
                 width: 130
               },
               {
-                name: "Género",
-                width: 100
-              },
-              {
                 name: "Edad",
                 width: 80
               },
@@ -69,7 +65,6 @@ export const Teachers = () => {
                 dni: 12345679,
                 nombre: "Enrique",
                 apellido: "Álvarez",
-                genero: "Masculino",
                 edad: 34,
               }
             ]} />

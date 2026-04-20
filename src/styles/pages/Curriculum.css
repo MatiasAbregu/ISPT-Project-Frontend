@@ -22,7 +22,7 @@
     width: 50%;
 }
 
-.curriculumPage .add-button {
+.curriculumPage .curriculumPageContainer .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -35,17 +35,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.curriculumPage .add-button span {
+.curriculumPage .curriculumPageContainer .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.curriculumPage .add-button:hover {
+.curriculumPage .curriculumPageContainer .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.curriculumPage .add-button:hover span {
+.curriculumPage .curriculumPageContainer .add-button:hover span {
     transform: rotateZ(180deg);
 }

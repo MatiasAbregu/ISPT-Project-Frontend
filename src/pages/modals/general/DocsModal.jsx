@@ -13,7 +13,7 @@ export const DocsModal = ({ setModal, typeDoc }) => {
         <article className="docsModal">
             <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
             <h4>Documentación {typeDoc == "teacher" ? " del docente" : "del alumno"}</h4>
-            <div className="docsContainer">
+            <div className="docsFormContainer">
                 {
                     typeDoc != "teacher" ?
                         <>
@@ -28,19 +28,34 @@ export const DocsModal = ({ setModal, typeDoc }) => {
                         </> : <></>
                 }
                 <div className='docsPerYear'>
-                    <label className='titleDocs'>Entregables anualmente:</label>
-                    <div className='docs'>
+                    <label className='titleDocs'>Entregables anualmente</label>
+                    <div className='docs'></div>
+                    {typeDoc == "teacher" ?
                         <Table columns={[
                             { name: "Año", width: 100 },
-                            { name: "CUS", width: 150 },
+                            { name: "Certificado de no inscripción en el registro de delitos sexuales", width: 150 },
+                            { name: "Certificado de Antecedentes Penales", width: 150 },
+                            { name: "Certificado de no inscripción en el registro de deudores alimentarios morosos", width: 125 },
+                            { name: "Constancia de servicios", width: 125 }]}
+                            checkboxs={true}
+                            data={[
+                                { year: "2025", cus: { cus: "¿Entregado?", check: true }, cds: { cds: "¿Entregado?", check: true }, cda: { cda: "¿Entregado?", check: true }, cs: { cs: "¿Entregado?", check: true } },
+                                { year: "2026", cus: { cus: "¿Entregado?", check: true }, cds: { cds: "¿Entregado?", check: true }, cda: { cda: "¿Entregado?", check: true }, cs: { cs: "¿Entregado?", check: true } }]} />
+                        :
+                        <Table columns={[
+                            { name: "Año", width: 100 },
+                            { name: "Certificado Único de Salud", width: 150 },
                             { name: "Certificado de no inscripción en el registro de delitos sexuales", width: 150 },
                             { name: "Certificado de Antecedentes", width: 125 },]}
                             checkboxs={true}
                             data={[
                                 { year: "2025", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true } },
-                                { year: "2026", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true } }]} />
-                    </div>
+                                { year: "2026", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true } }]} />}
                 </div>
+                <button type="button" className="add-button"
+                    onClick={() => setModal(false)}>
+                    <span className="material-symbols-outlined">save</span> Guardar cambios
+                </button>
             </div>
         </article>
     )

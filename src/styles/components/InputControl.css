@@ -61,7 +61,7 @@
 }
 
 .inputControl.number label {
-    position: initial;
+    position: absolute;
     color: white;
 }
 

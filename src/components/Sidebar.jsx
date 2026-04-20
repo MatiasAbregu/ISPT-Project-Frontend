@@ -26,10 +26,10 @@ export const Sidebar = () => {
                 {
                     user ?
                         user.role == "Estudiante" ?
-                            <>                            
-                            <a href="/inscripciones" className={url.pathname == "/inscripciones" ? "activated" : ""}>
-                                <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
-                            </a>
+                            <>
+                                <a href="/inscripciones" className={url.pathname == "/inscripciones" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
+                                </a>
                                 <a href="/mis-materias" className={url.pathname == "/mis-materias" ? "activated" : ""}>
                                     <span class="material-symbols-outlined">topic</span><li>Mis Materias</li>
                                 </a>
@@ -58,6 +58,9 @@ export const Sidebar = () => {
                                 </a>
                                 <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
+                                </a>
+                                <a href="/alumnos-riesgo" className={url.pathname == "/alumnos-riesgo" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">person_alert</span><li>Alumnos en <br /> riesgo</li>
                                 </a>
                             </> : undefined
                         : undefined

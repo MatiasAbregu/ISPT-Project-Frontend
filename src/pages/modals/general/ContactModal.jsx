@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { InputControl } from '../../../components/InputControl'
 import '../../../styles/pages/modals/general/ContactModal.css'
+import { UserContext } from '../../../context/UserProvider';
 
 export const ContactModal = ({ setModal }) => {
 
   const [showEdit, setShowEdit] = useState(false);
+  const { user } = useContext(UserContext);
 
   return (
     <article className="contactModal">
@@ -22,7 +24,13 @@ export const ContactModal = ({ setModal }) => {
             Correo electrónico
           </InputControl>
           <div className='buttonContainer'>
-            <span class="material-symbols-outlined edit" onClick={() => setShowEdit(prev => !prev)}>edit</span>
+            {
+              user ?
+                user.role == "Directivo" && user.role == "Preceptor" ?
+                  <span class="material-symbols-outlined edit" onClick={() => setShowEdit(prev => !prev)}>edit</span>
+                  : undefined
+                : undefined
+            }
             {
               showEdit ?
                 <button type="button" className="add-button"
