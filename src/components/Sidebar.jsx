@@ -28,6 +28,19 @@ export const Sidebar = () => {
                 </a>
                 {
                     user ?
+                        user.role == "Estudiante" ?
+                            <>                            
+                            <a href="/inscripciones" className={url.pathname == "/inscripciones" ? "activated" : ""}>
+                                <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
+                            </a>
+                                <a href="/mis-materias" className={url.pathname == "/mis-materias" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">topic</span><li>Mis Materias</li>
+                                </a>
+                            </> : undefined
+                        : undefined
+                }
+                {
+                    user ?
                         user.role == "Directivo" || user.role == "Precepetor" ?
                             <>
                                 <a href="/docentes" className={url.pathname == "/docentes" ? "activated" : ""}>

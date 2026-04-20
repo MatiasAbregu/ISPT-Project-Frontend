@@ -3,22 +3,21 @@ import { InputControl } from '../components/InputControl';
 import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
-import '../styles/pages/Courses.css';
+import '../styles/pages/StudentSubjects.css';
 import { useNavigate } from 'react-router-dom';
-import { PathInfo } from '../components/PathInfo';
 
-export const Courses = () => {
+export const StudentSubjects = () => {
     useEffect(() => {
-        document.title = "ISPT - Gestión de Cursos";
+        document.title = "ISPT - Mis Materias";
     }, []);
 
     const navigate = useNavigate();
 
     return (
         
-        <article className="coursesPage">
+        <article className="studentSubjectsPage">
             <Sidebar />
-            <div className="coursesPageContainer">
+            <div className="studentSubjectsPageContainer">
             <div className="controls">
                 <InputControl icon={"search"} type={"search"}></InputControl>
             </div>
@@ -35,26 +34,37 @@ export const Courses = () => {
                     {
                         name: "Comisión",
                         width: 120
+                    },
+                    {
+                        name: "Promedio",
+                        width: 120
+                    },
+                    {
+                        name: "Estado",
+                        width: 120
                     }
-                ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1/alumnos`) } }, 
-                    { value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones`) } }, 
-                    { value: "docs", onclick: () => { navigate(`/cursos/1/asistencia`) } },
-                    { value: "tables", onclick: () => { navigate(`/cursos/1/mesas-examenes`) } }]}
+                ]} options={[{ value: "degrees", onclick: () => { navigate("/mis-materias/1/evaluaciones") } }]}
                 data={[
                     {
                         materia: "Materia 1",
                         anio: 2025,
-                        comision: "A"
+                        comision: "A",
+                        promedio: 8,
+                        estado: "Aprobada"
                     },
                     {
                         materia: "Materia 2",
                         anio: 2025,
-                        comision: "B"
+                        comision: "B",
+                        promedio: 5,
+                        estado: "Libre"
                     },
                     {
                         materia: "Materia 3",
                         anio: 2025,
-                        comision: "A"
+                        comision: "A",
+                        promedio: 9,
+                        estado: "Aprobada"
                     }
                 ]} />
                  <Footer />

@@ -216,6 +216,18 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 table_restaurant
                                                             </span>)
+                                                    else if (v.value == "newGrade")
+                                                        return (
+                                                            <input className="tableInputNewGrade " type="text"
+                                                            onChange={(e) => v.onchange && v.onchange(obj, e.target.value)}/>
+                                                        )
+                                                    else if (v.value == "save")
+                                                        return (
+                                                            <button className="material-symbols-outlined tableBtnSave" 
+                                                            onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                save
+                                                            </button>
+                                                        )
                                                         else if (v.value == "contact")
                                                             return (<span className="material-symbols-outlined tableBtnContact"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
