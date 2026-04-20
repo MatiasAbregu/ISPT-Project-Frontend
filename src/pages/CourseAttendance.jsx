@@ -5,6 +5,7 @@ import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import '../styles/pages/CourseAttendance.css';
+import { PathInfo } from '../components/PathInfo';  
 
 export const CourseAttendance = () => {
     useEffect(() => {
@@ -62,6 +63,7 @@ export const CourseAttendance = () => {
                     <DateControl icon={"edit_calendar"}>
                         Seleccione la fecha
                     </DateControl>
+                    <PathInfo />
                 </div>
                 <Table
                     columns={[

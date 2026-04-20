@@ -1,15 +1,15 @@
-.courseDetailPage{
+.studentSubjectsPage{
     width: 100%;
     display: flex;
 }
 
-.courseDetailPageContainer {
+.studentSubjectsPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.courseDetailPage .controls {
+.studentSubjectsPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,14 +17,8 @@
     align-items: center;
 }
 
-.courseDetailPage .controls .inputControl {
+.studentSubjectsPage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
-
-.pathInfo {
-    position: absolute;
-    left: 50%;
-}
-

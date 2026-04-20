@@ -4,7 +4,9 @@ import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import '../styles/pages/CourseDetail.css';
-import { ObservationsModal } from './modals/courses/ObservationsModal';
+import { PathInfo } from '../components/PathInfo';
+import { ContactModal } from './modals/general/ContactModal';
+import { ObservationModal } from './modals/general/ObservationModal';
 
 export const CourseDetail = () => {
 
@@ -23,6 +25,7 @@ export const CourseDetail = () => {
             <div className="courseDetailPageContainer">
             <div className="controls">
                 <InputControl icon={"search"} type={"search"}></InputControl>
+                <PathInfo/>
             </div>
             <Table
                 columns={[
@@ -50,7 +53,9 @@ export const CourseDetail = () => {
                         name: "Promedio",
                         width: 120
                     }
-                ]} options={[{ value: "docs", onclick: () => { setTypeModal(<ObservationsModal setModal={setModal} />); setModal(true); } }]}
+                ]} options={[{ value: "docs", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
+                      { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } }
+                ]}
                 data={[
                     {
                         legajo: "123456",

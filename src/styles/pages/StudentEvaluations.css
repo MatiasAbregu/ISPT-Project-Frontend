@@ -1,15 +1,15 @@
-.courseDetailPage{
+.studentEvaluationsPage{
     width: 100%;
     display: flex;
 }
 
-.courseDetailPageContainer {
+.studentEvaluationsPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.courseDetailPage .controls {
+.studentEvaluationsPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,14 +17,8 @@
     align-items: center;
 }
 
-.courseDetailPage .controls .inputControl {
+.studentEvaluationsPage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
-
-.pathInfo {
-    position: absolute;
-    left: 50%;
-}
-
