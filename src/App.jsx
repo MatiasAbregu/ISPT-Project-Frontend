@@ -3,24 +3,25 @@ import './Global.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login'
 import { Home } from './pages/Home'
-import { Students } from './pages/Students'
-import { Careers } from './pages/Careers'
-import { Teachers } from './pages/Teachers'
-import { Curriculum } from './pages/Curriculum'
-import { Subjects } from './pages/Subjects'
-import { Correlatives } from './pages/Correlatives'
-import { Courses } from './pages/Courses'
-import { CourseDetail } from './pages/CourseDetail'
-import { CourseGrades } from './pages/CourseGrades'
-import { CourseEvaluations } from './pages/CourseEvaluations'
-import { CourseAttendance } from './pages/CourseAttendance'
-import { Positions } from './pages/Positions'
-import { ExamDates } from './pages/ExamDates'
-import { ExamGrades } from './pages/ExamGrades'
-import { Enrollments } from './pages/Enrollments'
-import { StudentSubjects } from './pages/StudentSubjects'
-import { StudentEvaluations } from './pages/StudentEvaluations'
-import { AcademicYear } from './pages/AcademicYear'
+import { Students } from './pages/students/Students'
+import { Careers } from './pages/careers/Careers'
+import { Teachers } from './pages/teachers/Teachers'
+import { Curriculum } from './pages/careers/Curriculum'
+import { Subjects } from './pages/careers/Subjects'
+import { Correlatives } from './pages/careers/Correlatives'
+import { Courses } from './pages/courses/Courses'
+import { CourseDetail } from './pages/courses/CourseDetail'
+import { CourseGrades } from './pages/courses/CourseGrades'
+import { CourseEvaluations } from './pages/courses/CourseEvaluations'
+import { CourseAttendance } from './pages/courses/CourseAttendance'
+import { Positions } from './pages/positions/Positions'
+import { ExamDates } from './pages/courses/ExamDates'
+import { ExamGrades } from './pages/courses/ExamGrades'
+import { Enrollments } from './pages/enrollments/Enrollments'
+import { StudentSubjects } from './pages/studentSubjects/StudentSubjects'
+import { StudentEvaluations } from './pages/studentSubjects/StudentEvaluations'
+import { AcademicYear } from './pages/careers/AcademicYear'
+import { Assignations } from './pages/teachers/Assignations'
 
 function App() {
   return (
@@ -40,8 +41,10 @@ function App() {
         <Route path='/carreras' element={<Careers />} />
         <Route path='/carreras/curriculum' element={<Curriculum />} />
         <Route path='/carreras/curriculum/ciclo-academico' element={<AcademicYear />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:id/materias' element={<Subjects />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:idCA/materias/:idM/correlativas' element={<Correlatives />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:id/espacios-curriculares' element={<Subjects />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas' element={<Correlatives />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas/:cupof2/asignaciones' element={<Assignations />} />
 
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />

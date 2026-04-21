@@ -1,0 +1,65 @@
+.assignationsPage {
+    width: 100%;
+    display: flex;
+}
+
+.assignationsPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.assignationsPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.assignationsPage .controls .controlsInputs {
+    display: flex;
+    justify-content: space-around;
+    width: 540px;
+}
+
+.assignationsPage .controls .comboControl {
+    margin: 0;
+    min-width: 250px;
+    width: 20%;
+    align-self: center;
+}
+
+.assignationsPage .controls .inputControl {
+    margin: 0;
+    min-width: 250px;
+    width: 30%;
+}
+
+.assignationsPage .assignationsPageContainer .add-button {
+    background-color: white;
+    display: flex;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.assignationsPage .assignationsPageContainer .add-button span {
+    margin-right: 8px;
+    transition: transform .6s ease;
+}
+
+.assignationsPage .assignationsPageContainer .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.05);
+}
+
+.assignationsPage .assignationsPageContainer .add-button:hover span {
+    transform: rotateZ(180deg);
+}

@@ -37,6 +37,7 @@
 .table .tdCheck .checkControl {
     margin: 0;
     width: 50px;
+    color: #8034a3;
 }
 
 .table th:last-child,

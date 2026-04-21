@@ -36,10 +36,8 @@
     right: 0;
 }
 
-
 .dateControl .calendarPicker {
     position: absolute;
-    bottom: 90%;
     width: 400px;
     right: 0;
     overflow: hidden;

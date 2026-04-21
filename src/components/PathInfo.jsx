@@ -17,7 +17,10 @@ export const PathInfo = ({}) => {
         "mis-materias": "Materias",
         carreras: "Carreras",
         curriculum: "Curriculum",
-        "ciclo-academico": "Ciclo académico"
+        "ciclo-academico": "Ciclo académico",
+        "espacios-curriculares": "Espacios curriculares",
+        asignaciones: "Docentes asignados",
+        correlativas: "Correlatividades"
     };
 
     const segments = url.pathname.split("/").filter(Boolean);

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/components/DateControl.css';
 
-export const DateControl = ({ icon, children, setValue, data, getValues }) => {
+export const DateControl = ({ icon, children, setValue, data, getValues, readOnly }) => {
 
     const [daySelected, setDaySelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -87,7 +87,7 @@ export const DateControl = ({ icon, children, setValue, data, getValues }) => {
     const daysArray = getDaysOfCalendar(currentDate);
 
     return (
-        <div className='dateControl' ref={dateRef} onClick={() => setIsOpen(prev => !prev)}>
+        <div className='dateControl' ref={dateRef} onClick={!readOnly ? () => setIsOpen(prev => !prev) : {}}>
             <span className="material-symbols-outlined">{icon}</span>
             {daySelected != null && (daySelected != undefined || daySelected != null) ?
                 <label className="labelInformative">{children}</label> : undefined}

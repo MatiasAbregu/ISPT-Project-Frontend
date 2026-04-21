@@ -1,0 +1,98 @@
+.timeControl {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    color: white;
+    border-radius: 5vh;
+    cursor: pointer;
+    position: relative;
+    border: 3px solid #6f2c7e;
+    margin-top: 50px;
+}
+
+.timeControl label {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #6f2c7e;
+}
+
+.timeControl span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f2c7e;
+    font-size: 1.6rem;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 100%;
+}
+
+.timeControl .clock {
+    position: absolute;
+    background-color: white;
+    color: #6f2c7e;
+    transition: transform .2s ease;
+    right: 0;
+}
+
+.timeControl .timePicker {
+    position: absolute;
+    width: 400px;
+    min-height: fit-content;
+    top: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 2vh;
+    z-index: 5;
+    box-shadow: 0 0 8px gray;
+    cursor: default;
+}
+
+.timeControl .timePicker .timePickerHeader {
+    display: flex;
+    color: #6f2c7e;
+    width: 100%;
+    justify-content: space-around;
+    background-color: #f0cfff;
+    font-size: 1.1rem;
+}
+
+.timeControl .timePicker .timePickerSelectors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.timeControl .timePicker .timePickerSelectors .selectorColumn,
+.timeControl .timePicker .timePickerSelectors .separator {
+    flex: 1;
+}
+
+.timeControl .timePicker .timePickerSelectors .separator {
+    background-color: white;
+    color: #6f2c7e;
+    flex: 0.2;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl {
+    margin: 0;
+    width: 80%;
+    height: 35px;
+    text-align: center;
+    justify-self: center;
+}
+
+.timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl .optionsContainer {
+    justify-content: center;
+}
+
+.timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl .optionsOverflow {
+    z-index: 10;
+}

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
-export const ComboControl = ({ icon, children, options, setOption, setValue, data, getValues }) => {
+export const ComboControl = ({ icon, children, options, setOption, setValue, data, getValues, readOnly, notShowLabel, value }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState(value ? value : null);
     const selectRef = useRef(null);
     const optionsRef = useRef(null);
 
@@ -30,10 +30,11 @@ export const ComboControl = ({ icon, children, options, setOption, setValue, dat
     }, [selectedOption]);
 
     return (
-        <div className="comboControl" ref={selectRef} onClick={() => setIsOpen(prev => !prev)}>
-            <span className="material-symbols-outlined">{icon}</span>
+        <div className="comboControl" ref={selectRef} onClick={!readOnly ? () => setIsOpen(prev => !prev) : {}}>
+            {icon ? <span className="material-symbols-outlined">{icon}</span> : <></>}
             {selectedOption != null && (selectedOption.value != undefined || selectedOption.value != null) ?
-                <label className="labelInformative">{children}</label> : undefined}
+                notShowLabel ? <></> :
+                    <label className="labelInformative">{children}</label> : undefined}
             <div className="optionsContainer">
                 {
                     selectedOption ? <label>{selectedOption.value}</label> : <label>{children}</label>

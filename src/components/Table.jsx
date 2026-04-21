@@ -162,27 +162,34 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "subjects")
-                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/materias"}>
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares"}>
                                                                 <span className="material-symbols-outlined tableBtnSubjects">
                                                                     home_storage
                                                                 </span>
                                                             </NavLink>)
-                                                        else if (v.value == "correlatives")
-                                                            return (<NavLink to={"/carreras/curriculum/materias/correlativas"}>
-                                                                <span className="material-symbols-outlined tableBtnCorrelatives">
-                                                                    sync_alt
-                                                                </span>
-                                                            </NavLink>)
                                                         else if (v == "teacher")
-                                                            return (<span className="material-symbols-outlined tableBtnTeacher">
-                                                                co_present
-                                                            </span>)
-                                                        else if (v == "correlatives2")
-                                                            return (<NavLink to={"/careers/curriculum/correlatives/select"}>
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/asignaciones"}>
+                                                                <span className="material-symbols-outlined tableBtnSubjects">
+                                                                    co_present
+                                                                </span>
+                                                            </NavLink>)
+                                                        else if (v == "teacher2")
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/correlativas/123456789124/asignaciones"}>
+                                                                <span className="material-symbols-outlined tableBtnSubjects">
+                                                                    co_present
+                                                                </span>
+                                                            </NavLink>)
+                                                        else if (v.value == "correlatives")
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/correlativas"}>
                                                                 <span className="material-symbols-outlined tableBtnCorrelatives">
                                                                     sync_alt
                                                                 </span>
                                                             </NavLink>)
+                                                        else if (v.value == "subjectsTeacher")
+                                                            return (<span className="material-symbols-outlined tableBtnSubjectsTeacher"
+                                                                onClick={v.onclick ? v.onclick : undefined}>
+                                                                co_present
+                                                            </span>);
                                                         else if (v == "studentSubjects")
                                                             return (<NavLink to={"/inscriptions/student-subjects"}>
                                                                 <span className="material-symbols-outlined tableBtnStudentSubjects">
