@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
+import { ComboControl } from "./ComboControl";
 
 export const Table = ({ columns, data, options, checkboxs }) => {
 
@@ -218,6 +219,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 close
                                                             </span>)
+                                                        else if (v.value == "justified")
+                                                            return (<span className="material-symbols-outlined tableBtnJustified"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                rule
+                                                            </span>)
                                                         else if (v.value == "tables")
                                                             return (<span className="material-symbols-outlined tableBtnTables"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
@@ -251,6 +257,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                             return (<span className="material-symbols-outlined tableBtnUbication"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 location_away
+                                                            </span>)
+                                                        else if (v.value == "schedule")
+                                                            return (<span className="material-symbols-outlined tableBtnSchedule"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                nest_clock_farsight_analog
                                                             </span>)
                                                     })
                                                 }

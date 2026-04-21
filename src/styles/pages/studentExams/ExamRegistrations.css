@@ -1,0 +1,24 @@
+.examRegistrationsPage{
+    width: 100%;
+    display: flex;
+}
+
+.examRegistrationsPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.examRegistrationsPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.examRegistrationsPage .controls .inputControl {
+    margin: 0;
+    min-width: 250px;
+    width: 30%;
+}

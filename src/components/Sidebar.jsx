@@ -30,8 +30,11 @@ export const Sidebar = () => {
                                 <a href="/inscripciones" className={url.pathname.startsWith("/inscripciones") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
                                 </a>
-                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias") ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">topic</span><li>Mis Materias</li>
+                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias")  ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br/>Curriculares</li>
+                                </a>
+                                <a href="/inscripciones-examenes" className={url.pathname.startsWith("/inscripciones-examenes") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">history_edu</span><li>Inscripciones a <br/> Exámenes Finales</li>
                                 </a>
                             </> : undefined
                         : undefined

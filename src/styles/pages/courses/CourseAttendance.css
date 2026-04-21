@@ -31,8 +31,13 @@
     background-color: #bb2525;
 }
 
+.justificado{
+    background-color: #f39c12;
+}
+
 .presente,
-.ausente {
+.ausente, 
+.justificado {
     padding: 15px 15px;
     font-weight: 700;
     border-radius: 4px;

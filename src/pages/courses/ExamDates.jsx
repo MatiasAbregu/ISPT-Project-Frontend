@@ -29,42 +29,50 @@ export const ExamDates = () => {
                             width: 160
                         },
                         {
-                            name: "Año",
-                            width: 160
-                        },
-                        {
-                            name: "Llamado",
+                            name: "Fecha",
                             width: 160
                         },
                         {
                             name: "Turno",
+                            width: 160
+                        },
+                        {
+                            name: "Libro",
+                            width: 160
+                        },
+                        {
+                            name: "Folio",
                             width: 160
                         }
                     ]} options={[{ value: "degrees", onclick: () => { navigate("/cursos/1/mesas-examenes/1/notas") } }]}
                     data={[
                         {
                             materia: "Matemática",
-                            año: "2026",
-                            llamado: "Junio",
-                            turno: "Mañana"
+                            fecha: "2026-06-15",
+                            turno: "Mañana",
+                            libro: "1",
+                            folio: "1"
                         },
                         {
                             materia: "Física",
-                            año: "2026",
-                            llamado: "Junio",
-                            turno: "Noche"
+                            fecha: "2026-06-16",
+                            turno: "Noche",
+                            libro: "2",
+                            folio: "2"
                         },
                         {
                             materia: "Química",
-                            año: "2026",
-                            llamado: "Diciembre",
-                            turno: "Noche"
+                            fecha: "2026-12-15",
+                            turno: "Noche",
+                            libro: "3",
+                            folio: "3"
                         },
                         {
                             materia: "Biología",
-                            año: "2026",
-                            llamado: "Diciembre",
-                            turno: "Mañana"
+                            fecha: "2026-12-16",
+                            turno: "Mañana",
+                            libro: "4",
+                            folio: "4"
                         }
                     ]} />
                 <Footer />
