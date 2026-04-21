@@ -20,6 +20,8 @@ import { ExamGrades } from './pages/courses/ExamGrades'
 import { Enrollments } from './pages/enrollments/Enrollments'
 import { StudentSubjects } from './pages/studentSubjects/StudentSubjects'
 import { StudentEvaluations } from './pages/studentSubjects/StudentEvaluations'
+import { EnrollmentSubjects } from './pages/enrollments/EnrollmentSubjects'
+import { ExamRegistrations } from './pages/studentExams/ExamRegistrations'
 
 function App() {
   return (
@@ -30,8 +32,10 @@ function App() {
         <Route path='/inicio' element={<Home />} />
         <Route path='/estudiantes' element={<Students />} />
         <Route path='/inscripciones' element={<Enrollments />} />
+        <Route path='/inscripciones/:id/materias' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
         <Route path='/mis-materias/:id/evaluaciones' element={<StudentEvaluations />} />
+        <Route path='/inscripciones-examenes' element={<ExamRegistrations />} />
         <Route path='/cargos' element={<Positions />} />
         <Route path='/carreras' element={<Careers />} />
         <Route path='/carreras/curriculum' element={<Curriculum />} />

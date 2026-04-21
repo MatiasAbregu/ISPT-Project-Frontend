@@ -49,6 +49,15 @@ export const CourseAttendance = () => {
         </span>
     );
 
+    const marcarFeriado = () => {
+    setData(prev =>
+        prev.map(row => ({
+            ...row,
+            asistencia: "Justificado"
+        }))
+    );
+};
+
     const dataRender = data.map(row => ({
         ...row,
         asistencia: getAsistencia(row.asistencia)
@@ -64,6 +73,9 @@ export const CourseAttendance = () => {
                         Seleccione la fecha
                     </DateControl>
                     <PathInfo />
+                    <button className="add-button" onClick={marcarFeriado}>
+                        Marcar día como feriado
+                    </button>
                 </div>
                 <Table
                     columns={[
@@ -85,7 +97,8 @@ export const CourseAttendance = () => {
                         }
                     ]} options={[
                         { value: "present", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Presente") },
-                        { value: "absent", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Ausente") }
+                        { value: "absent", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Ausente") },
+                        { value: "justified", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Justificado") }
                     ]}
                     data={dataRender} />
                 <Footer />

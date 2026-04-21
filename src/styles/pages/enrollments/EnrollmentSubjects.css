@@ -1,0 +1,84 @@
+.enrollmentSubjectsPage {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.enrollmentSubjectsPageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.enrollmentSubjectsPage .enrollmentSubjectsPageContainer h2 {
+    color: white;
+    margin: 0;
+    margin-top: 2%;
+}
+
+.enrollmentSubjectsPage .mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+.enrollmentSubjectsPage .mainContent h3 {
+    color: white;
+    margin: 0;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+.enrollmentSubjectsPage .mainContent .not-available {
+    background-color: #bb2525;
+}
+
+.enrollmentSubjectsPage .mainContent .available {
+    background-color: #1f55b9;
+}
+
+.enrollmentSubjectsPage .mainContent .approved {
+    background-color: #10b723;
+}
+
+.enrollmentSubjectsPage .mainContent .not-available, .available, .approved {
+    padding: 15px 15px;
+    font-weight: 700;
+    border-radius: 4px;
+    color: white;
+}
+
+.enrollmentSubjectsPage .mainContent .warning {
+    text-decoration: underline;
+}
+   
+.enrollmentSubjectsPage .mainContent .warning:hover {
+    cursor: pointer;
+}
+
+.enrollmentSubjectsPage .modalBackground {
+    position: fixed !important;
+}
+
+.enrollmentSubjectsPage table,
+.enrollmentSubjectsPage td {
+    overflow: visible;
+}
+
+.enrollmentSubjectsPage .comboControl {
+    margin-top: 20px;
+    border: 3px solid #6f2c7e;
+    border-radius: 5vh;
+    width: 95%;
+    margin-left: 2%;
+}
+
+.enrollmentSubjectsPage .add-button {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

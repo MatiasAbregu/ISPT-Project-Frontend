@@ -1,0 +1,38 @@
+.correlativesModal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.correlativesModal h4 {
+    color: white;
+}
+
+
+.correlativesModal span.close {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.correlativesModal span.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+.correlativesContainer {
+    background-color: white;
+    width: 60%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 60px 0;
+    margin-bottom: 30px;
+}

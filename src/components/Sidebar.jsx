@@ -31,7 +31,10 @@ export const Sidebar = () => {
                                     <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
                                 </a>
                                 <a href="/mis-materias" className={url.pathname == "/mis-materias" ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">topic</span><li>Mis Materias</li>
+                                    <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br/>Curriculares</li>
+                                </a>
+                                <a href="/inscripciones-examenes" className={url.pathname == "/inscripciones-examenes" ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">history_edu</span><li>Inscripciones a <br/> Exámenes Finales</li>
                                 </a>
                             </> : undefined
                         : undefined

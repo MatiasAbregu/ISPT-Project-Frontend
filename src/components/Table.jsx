@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
+import { ComboControl } from "./ComboControl";
 
 export const Table = ({ columns, data, options, checkboxs }) => {
 
@@ -211,23 +212,28 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 close
                                                             </span>)
+                                                        else if (v.value == "justified")
+                                                            return (<span className="material-symbols-outlined tableBtnJustified"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                rule
+                                                            </span>)
                                                         else if (v.value == "tables")
                                                             return (<span className="material-symbols-outlined tableBtnTables"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 table_restaurant
                                                             </span>)
-                                                    else if (v.value == "newGrade")
-                                                        return (
-                                                            <input className="tableInputNewGrade " type="text"
-                                                            onChange={(e) => v.onchange && v.onchange(obj, e.target.value)}/>
-                                                        )
-                                                    else if (v.value == "save")
-                                                        return (
-                                                            <button className="material-symbols-outlined tableBtnSave" 
-                                                            onClick={() => v.onclick && v.onclick(obj, i)}>
-                                                                save
-                                                            </button>
-                                                        )
+                                                        else if (v.value == "newGrade") //CORREGIR
+                                                            return (
+                                                                <input className="tableInputNewGrade " type="text"
+                                                                    onChange={(e) => v.onchange && v.onchange(obj, e.target.value)} />
+                                                            )
+                                                        else if (v.value == "save")
+                                                            return (
+                                                                <button className="material-symbols-outlined tableBtnSave"
+                                                                    onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                    save
+                                                                </button>
+                                                            )
                                                         else if (v.value == "contact")
                                                             return (<span className="material-symbols-outlined tableBtnContact"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
@@ -242,6 +248,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                             return (<span className="material-symbols-outlined tableBtnUbication"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 location_away
+                                                            </span>)
+                                                        else if (v.value == "schedule")
+                                                            return (<span className="material-symbols-outlined tableBtnSchedule"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                nest_clock_farsight_analog
                                                             </span>)
                                                     })
                                                 }
