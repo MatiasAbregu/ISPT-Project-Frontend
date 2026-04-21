@@ -14,7 +14,10 @@ export const PathInfo = ({}) => {
         notas: "Notas",
         alumnos: "Alumnos",
         asistencia: "Asistencia",
-        "mis-materias": "Materias"
+        "mis-materias": "Materias",
+        carreras: "Carreras",
+        curriculum: "Curriculum",
+        "ciclo-academico": "Ciclo académico"
     };
 
     const segments = url.pathname.split("/").filter(Boolean);

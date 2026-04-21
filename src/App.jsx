@@ -20,6 +20,7 @@ import { ExamGrades } from './pages/ExamGrades'
 import { Enrollments } from './pages/Enrollments'
 import { StudentSubjects } from './pages/StudentSubjects'
 import { StudentEvaluations } from './pages/StudentEvaluations'
+import { AcademicYear } from './pages/AcademicYear'
 
 function App() {
   return (
@@ -28,15 +29,20 @@ function App() {
 
         <Route path="/" element={<Login />} />
         <Route path='/inicio' element={<Home />} />
+
         <Route path='/estudiantes' element={<Students />} />
         <Route path='/inscripciones' element={<Enrollments />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
         <Route path='/mis-materias/:id/evaluaciones' element={<StudentEvaluations />} />
+
         <Route path='/cargos' element={<Positions />} />
+
         <Route path='/carreras' element={<Careers />} />
         <Route path='/carreras/curriculum' element={<Curriculum />} />
-        <Route path='/carreras/curriculum/materias' element={<Subjects />} />
-        <Route path='/carreras/curriculum/materias/correlativas' element={<Correlatives />} />
+        <Route path='/carreras/curriculum/ciclo-academico' element={<AcademicYear />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:id/materias' element={<Subjects />} />
+        <Route path='/carreras/curriculum/ciclo-academico/:idCA/materias/:idM/correlativas' element={<Correlatives />} />
+
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />
         <Route path='/cursos/:id/alumnos' element={<CourseDetail />} />
@@ -45,6 +51,7 @@ function App() {
         <Route path='/cursos/:id/asistencia' element={<CourseAttendance />} />
         <Route path='/cursos/:id/mesas-examenes' element={<ExamDates />} />
         <Route path='/cursos/:id/mesas-examenes/:id/notas' element={<ExamGrades />} />
+
       </Routes>
     </BrowserRouter>
   )

@@ -20,17 +20,17 @@ export const Sidebar = () => {
         */
         <div className='sidebar'>
             <ul>
-                <a href="/inicio" className={url.pathname == "/inicio" ? "activated" : ""}>
+                <a href="/inicio" className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
                     <span class="material-symbols-outlined">home</span><li>Inicio</li>
                 </a>
                 {
                     user ?
                         user.role == "Estudiante" ?
                             <>
-                                <a href="/inscripciones" className={url.pathname == "/inscripciones" ? "activated" : ""}>
+                                <a href="/inscripciones" className={url.pathname.startsWith("/inscripciones") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
                                 </a>
-                                <a href="/mis-materias" className={url.pathname == "/mis-materias" ? "activated" : ""}>
+                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">topic</span><li>Mis Materias</li>
                                 </a>
                             </> : undefined
@@ -40,10 +40,10 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Directivo" || user.role == "Precepetor" ?
                             <>
-                                <a href="/estudiantes" className={url.pathname == "/estudiantes" ? "activated" : ""}>
+                                <a href="/estudiantes" className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
                                 </a>
-                                <a href="/docentes" className={url.pathname == "/docentes" ? "activated" : ""}>
+                                <a href="/docentes" className={url.pathname.startsWith("/docentes") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
                                 </a>
                             </> : undefined
@@ -53,13 +53,13 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Directivo" ?
                             <>
-                                <a href="/cargos" className={url.pathname == "/cargos" ? "activated" : ""}>
+                                <a href="/cargos" className={url.pathname.startsWith("/cargos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">supervised_user_circle</span><li>Cargos</li>
                                 </a>
-                                <a href="/carreras" className={url.pathname == "/carreras" ? "activated" : ""}>
+                                <a href="/carreras" className={url.pathname.startsWith("/carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
                                 </a>
-                                <a href="/alumnos-riesgo" className={url.pathname == "/alumnos-riesgo" ? "activated" : ""}>
+                                <a href="/alumnos-riesgo" className={url.pathname.startsWith("/alumnos-riesgo") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">person_alert</span><li>Alumnos en <br /> riesgo</li>
                                 </a>
                             </> : undefined
@@ -69,7 +69,7 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Docente" ?
                             <>
-                                <a href="/cursos" className={url.pathname == "/cursos" ? "activated" : ""}>
+                                <a href="/cursos" className={url.pathname.startsWith("/cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
                                 </a></> : undefined
                         : undefined

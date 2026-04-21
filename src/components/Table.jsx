@@ -155,14 +155,14 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                     two_pager
                                                                 </span>
                                                             </NavLink>)
-                                                        else if (v.value == "cooperative")
-                                                            return (<NavLink to={"/administrative/cooperative"}>
-                                                                <span className="material-symbols-outlined tableBtnCooperative">
-                                                                    handshake
+                                                        else if (v == "academicYear")
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico"}>
+                                                                <span key={i} className="material-symbols-outlined tableBtnAcademicYear">
+                                                                    two_pager
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "subjects")
-                                                            return (<NavLink to={"/carreras/curriculum/materias"}>
+                                                            return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/materias"}>
                                                                 <span className="material-symbols-outlined tableBtnSubjects">
                                                                     home_storage
                                                                 </span>
@@ -216,18 +216,20 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 table_restaurant
                                                             </span>)
-                                                    else if (v.value == "newGrade")
-                                                        return (
-                                                            <input className="tableInputNewGrade " type="text"
-                                                            onChange={(e) => v.onchange && v.onchange(obj, e.target.value)}/>
-                                                        )
-                                                    else if (v.value == "save")
-                                                        return (
-                                                            <button className="material-symbols-outlined tableBtnSave" 
-                                                            onClick={() => v.onclick && v.onclick(obj, i)}>
-                                                                save
-                                                            </button>
-                                                        )
+                                                        // MEJORARLO ------------------------------------------------------------
+                                                        else if (v.value == "newGrade")
+                                                            return (
+                                                                <input className="tableInputNewGrade " type="text"
+                                                                    onChange={(e) => v.onchange && v.onchange(obj, e.target.value)} />
+                                                            )
+                                                        else if (v.value == "save")
+                                                            return (
+                                                                <button className="material-symbols-outlined tableBtnSave"
+                                                                    onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                    save
+                                                                </button>
+                                                            )
+                                                        // MEJORARLO ------------------------------------------------------------
                                                         else if (v.value == "contact")
                                                             return (<span className="material-symbols-outlined tableBtnContact"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>

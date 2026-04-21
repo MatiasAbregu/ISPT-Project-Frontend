@@ -1,8 +1,10 @@
 .pathInfo {
     background-color: white;
-    padding: 10px;
+    padding: 7px 10px;
     border-radius: 20px;
-    
+    width: fit-content;
+    margin-left: 15px;
+    margin-top: 10px;
 }
 
 .pathInfo a{

@@ -5,6 +5,7 @@ import { Table } from '../components/Table';
 import { Footer } from '../components/Footer';
 import { Sidebar } from '../components/Sidebar';
 import { CurriculumModal } from './modals/careers/CurriculumModal';
+import { PathInfo } from '../components/PathInfo';
 
 export const Curriculum = () => {
 
@@ -20,6 +21,7 @@ export const Curriculum = () => {
       <Sidebar />
       {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
       <div className="curriculumPageContainer">
+        <PathInfo />
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
           <button type="button" className="add-button"
@@ -37,7 +39,7 @@ export const Curriculum = () => {
             width: 100
           }
           ]}
-          options={["subjects",
+          options={["academicYear",
             { value: "edit", onclick: () => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); } }]}
           data={[
             {
