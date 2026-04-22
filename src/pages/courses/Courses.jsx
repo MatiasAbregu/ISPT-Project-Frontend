@@ -29,11 +29,11 @@ export const Courses = () => {
                         width: 120
                     },
                     {
-                        name: "Año",
-                        width: 160
+                        name: "Año Lectivo",
+                        width: 120
                     },
                     {
-                        name: "Comisión",
+                        name: "División",
                         width: 120
                     }
                 ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1/alumnos`) } }, 
@@ -44,17 +44,17 @@ export const Courses = () => {
                     {
                         materia: "Materia 1",
                         anio: 2025,
-                        comision: "A"
+                        comision: "Mañana - A"
                     },
                     {
                         materia: "Materia 2",
                         anio: 2025,
-                        comision: "B"
+                        comision: "Mañana - B"
                     },
                     {
                         materia: "Materia 3",
                         anio: 2025,
-                        comision: "A"
+                        comision: "Tarde - A"
                     }
                 ]} />
                  <Footer />

@@ -24,6 +24,7 @@ import { AcademicYear } from './pages/careers/AcademicYear'
 import { Assignations } from './pages/teachers/Assignations'
 import { EnrollmentSubjects } from './pages/enrollments/EnrollmentSubjects'
 import { ExamRegistrations } from './pages/studentExams/ExamRegistrations'
+import { StudentExamDate } from './pages/studentExams/StudentExamDate'
 
 function App() {
   return (
@@ -34,12 +35,14 @@ function App() {
         <Route path='/inicio' element={<Home />} />
 
         <Route path='/estudiantes' element={<Students />} />
-        <Route path='/inscripciones' element={<Enrollments />} />
-        <Route path='/inscripciones/:id/materias' element={<EnrollmentSubjects />} />
+        <Route path='/inscripciones-carreras' element={<Enrollments />} />
+        <Route path='/inscripciones-carreras/:id/materias' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
         <Route path='/mis-materias/:id/evaluaciones' element={<StudentEvaluations />} />
 
         <Route path='/inscripciones-examenes' element={<ExamRegistrations />} />
+        <Route path='/inscripciones-examenes/:id/fechas' element={<StudentExamDate />} />
+
         <Route path='/cargos' element={<Positions />} />
 
         <Route path='/carreras' element={<Careers />} />

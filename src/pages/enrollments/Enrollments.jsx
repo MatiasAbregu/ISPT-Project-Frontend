@@ -13,8 +13,8 @@ export const Enrollments = () => {
             <div className='enrollmentsPageContainer'>
                 <h2>Seleccione una carrera para inscribirse</h2>
                 <div className='mainContent'>
-                    <CareerCard name="Carrera 1" duration="3 años" title="Técnico Superior" onClick={() => { navigate('/inscripciones/1/materias') }} />
-                    <CareerCard name="Carrera 2" duration="4 años" title="Técnico Muy Superior" onClick={() => { navigate('/inscripciones/1/materias') }} />
+                    <CareerCard name="Carrera 1" duration="3 años" title="Técnico Superior" onClick={() => { navigate('/inscripciones-carreras/1/materias') }} />
+                    <CareerCard name="Carrera 2" duration="4 años" title="Técnico Muy Superior" onClick={() => { navigate('/inscripciones-carreras/1/materias') }} />
                 </div>
                 <Footer />
             </div>

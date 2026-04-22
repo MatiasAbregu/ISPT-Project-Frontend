@@ -22,3 +22,40 @@
     min-width: 250px;
     width: 30%;
 }
+
+.examRegistrationsPage .tooltip {
+    font-size: 16px;
+    text-decoration: underline;
+}
+.examRegistrationsPage .option {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.examRegistrationsPage .closed {
+    background-color: #bb2525;
+}
+
+.examRegistrationsPage .available {
+    background-color: #1f55b9;
+}
+
+.examRegistrationsPage .registered {
+    background-color: #10b723;
+}
+
+.examRegistrationsPage .closed, .available, .registered, .closedUnder {
+    padding: 15px 15px;
+    font-weight: 700;
+    border-radius: 4px;
+    color: white;
+}
+
+.examRegistrationsPage .closed{
+    padding: 15px 15px 35px 15px;
+}
+

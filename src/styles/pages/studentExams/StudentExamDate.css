@@ -1,0 +1,30 @@
+.studentExamDatePage {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.studentExamDatePageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.studentExamDatePage .studentExamDatePageContainer h2 {
+    color: white;
+    margin: 0;
+    margin-top: 2%;
+}
+
+.studentExamDatePage .studentExamDatePageContainer .mainContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    color: white
+}
+
