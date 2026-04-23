@@ -11,7 +11,7 @@ export const DailyAttendance = () => {
     useEffect(() => {
         document.title = "ISPT - Asistencia Diaria";
     }, []);
-
+    
     const [data, setData] = useState([
         {
             legajo: "12345",

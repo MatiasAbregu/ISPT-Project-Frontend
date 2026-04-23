@@ -241,7 +241,7 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                             )
                                                         else if (v.value == "save")
                                                             return (
-                                                                <button className="material-symbols-outlined tableBtnSave"
+                                                                <button className="material-symbols-outlined tableBtnLightBlue"
                                                                     onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                     save
                                                                 </button>
@@ -263,7 +263,7 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 location_away
                                                             </span>)
                                                         else if (v.value == "schedule")
-                                                            return (<span className="material-symbols-outlined tableBtnSchedule"
+                                                            return (<span className="material-symbols-outlined tableBtnLightBlue"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 nest_clock_farsight_analog
                                                             </span>)

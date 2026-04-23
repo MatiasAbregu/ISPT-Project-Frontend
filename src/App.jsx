@@ -16,8 +16,8 @@ import { CourseEvaluations } from './pages/courses/CourseEvaluations'
 import { CourseAttendance } from './pages/courses/CourseAttendance'
 import { DailyAttendance } from './pages/courses/DailyAttendance'
 import { Positions } from './pages/positions/Positions'
-import { ExamDates } from './pages/courses/ExamDates'
-import { ExamGrades } from './pages/courses/ExamGrades'
+import { ExamDates } from './pages/exams/ExamDates'
+import { ExamGrades } from './pages/exams/ExamGrades'
 import { Enrollments } from './pages/enrollments/Enrollments'
 import { StudentSubjects } from './pages/studentSubjects/StudentSubjects'
 import { StudentEvaluations } from './pages/studentSubjects/StudentEvaluations'
@@ -27,6 +27,7 @@ import { EnrollmentSubjects } from './pages/enrollments/EnrollmentSubjects'
 import { ExamRegistrations } from './pages/studentExams/ExamRegistrations'
 import { StudentExamDate } from './pages/studentExams/StudentExamDate'
 import { StudentsInDanger } from './pages/students-in-danger/StudentsInDanger'
+import { Attendance } from './pages/attendance/Attendance'
 
 function App() {
   return (
@@ -64,8 +65,13 @@ function App() {
         <Route path='/cursos/:id/evaluaciones/:id/notas' element={<CourseGrades />} />
         <Route path='/cursos/:id/asistencia' element={<CourseAttendance />} />
         <Route path='/cursos/:cursoId/asistencia/:fecha' element={<DailyAttendance />} />
-        <Route path='/cursos/:id/mesas-examenes' element={<ExamDates />} />
-        <Route path='/cursos/:cursoId/mesas-examenes/:mesaId/notas' element={<ExamGrades />} />
+
+        <Route path='/mesas-examen' element={<ExamDates />} />
+        <Route path='/mesas-examen/:id/notas' element={<ExamGrades />} />
+        
+        <Route path='/asistencias-cursos' element={<Attendance />} />
+        <Route path='/asistencias-cursos/:id/dias' element={<CourseAttendance />} />
+        <Route path='/asistencias-cursos/:id/dias/:fecha' element={<DailyAttendance />} />
       </Routes>
     </BrowserRouter>
   )

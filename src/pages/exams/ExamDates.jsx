@@ -18,7 +18,6 @@ export const ExamDates = () => {
         <article className="examDatesPage">
             <Sidebar />
             <div className="examDatesPageContainer">
-                <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                 </div>
@@ -44,7 +43,7 @@ export const ExamDates = () => {
                             name: "Folio",
                             width: 160
                         }
-                    ]} options={[{ value: "exams", onclick: () => { navigate("/cursos/1/mesas-examenes/1/notas") } }]}
+                    ]} options={[{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]}
                     data={[
                         {
                             materia: "Matemática",

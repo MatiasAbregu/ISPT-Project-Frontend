@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { InputControl } from '../../components/InputControl';
 import { DateControl } from '../../components/DateControl';
 import { Table } from '../../components/Table';
@@ -7,12 +7,28 @@ import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/CourseAttendance.css';
 import { PathInfo } from '../../components/PathInfo';  
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserProvider';
 
 export const CourseAttendance = () => {
+
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
+
     useEffect(() => {
         document.title = "ISPT - Asistencia de Curso";
     }, []);
+
+    const getPath = () => {
+    if (user?.role === "Docente") {
+        return `/cursos/1/asistencia/03-10-2025`;
+    }
+
+    if (user?.role === "Preceptor_Auxiliar") {
+        return `/asistencias-cursos/1/dias/03-10-2025`;
+    }
+
+    return `/cursos/1/asistencia/${row.fecha}`;
+};
 
     const [data, setData] = useState([
         {
@@ -63,7 +79,7 @@ export const CourseAttendance = () => {
                             width: 120
                         }
                     ]} options={[
-                        { value: "edit", onclick: () => { navigate(`/cursos/1/asistencia/03-10-2025`) } }
+                        { value: "edit", onclick: () => { navigate(getPath()) } }
                     ]}
                     data={dataRender} />
                 <Footer />

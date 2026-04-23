@@ -21,7 +21,10 @@ export const PathInfo = ({}) => {
         "espacios-curriculares": "Espacios curriculares",
         asignaciones: "Docentes asignados",
         correlativas: "Correlatividades",
-        "asistencia-diaria": "Asistencia diaria"
+        "asistencia-diaria": "Asistencia diaria",
+        "asistencias-cursos": "Cursos",
+        "dias": "Días",
+        "mesas-examen": "Mesas de Examen",
     };
 
     const segments = url.pathname.split("/").filter(Boolean);

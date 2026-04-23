@@ -74,6 +74,19 @@ export const Sidebar = () => {
                             <>
                                 <a href="/cursos" className={url.pathname.startsWith("/cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
+                                </a>
+                                <a href="/mesas-examen" className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">table_chart</span><li>Mis Mesas de <br /> Examen</li>
+                                </a>
+                                </> : undefined
+                        : undefined
+                }
+                {
+                    user ?
+                        user.role == "Preceptor_Auxiliar" ?
+                            <>
+                                <a href="/asistencias-cursos" className={url.pathname.startsWith("/asistencias-cursos") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">book_2</span><li>Asistencias</li>
                                 </a></> : undefined
                         : undefined
                 }

@@ -1,0 +1,24 @@
+.attendancePage{
+    width: 100%;
+    display: flex;
+}
+
+.attendancePageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.attendancePage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attendancePage .controls .inputControl {
+    margin: 0;
+    min-width: 250px;
+    width: 30%;
+}

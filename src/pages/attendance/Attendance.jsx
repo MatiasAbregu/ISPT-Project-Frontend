@@ -3,14 +3,13 @@ import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
-import '../../styles/pages/courses/Courses.css';
+import '../../styles/pages/attendance/Attendance.css';
 import { useNavigate } from 'react-router-dom';
-import { PathInfo } from '../../components/PathInfo';
 import { ScheduleModal } from '../modals/ScheduleModal';
 
-export const Courses = () => {
+export const Attendance = () => {
     useEffect(() => {
-        document.title = "ISPT - Gestión de Cursos";
+        document.title = "ISPT - Gestión de Asistencias";
     }, []);
 
     const [modal, setModal] = useState(false);
@@ -30,21 +29,21 @@ export const Courses = () => {
 
     return (
 
-        <article className="coursesPage">
+        <article className="attendancePage">
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
-            <div className="coursesPageContainer">
+            <div className="attendancePageContainer">
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "Carrera",
-                            width: 100
+                            name: "Materia",
+                            width: 120
                         },
                         {
-                            name: "Materia",
+                            name: "Docente",
                             width: 120
                         },
                         {
@@ -55,28 +54,28 @@ export const Courses = () => {
                             name: "División",
                             width: 120
                         }
-                    ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1/alumnos`) } },
-                    { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
-                    { value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones`) } },
-                    { value: "attendance", onclick: () => { navigate(`/cursos/1/asistencia`) } }
+                    ]} options={[{ value: "docs", onclick: () => { navigate(`/asistencias-cursos/1/dias`) } },
+                    { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } }
                     ]}
+
+
                     data={[
                         {
-                            carrera: "Profesorado",
                             materia: "Materia 1",
-                            anio: 2026,
+                            docente: "Juan Pérez",
+                            anio: 2025,
                             comision: "Mañana - A"
                         },
                         {
-                            carrera: "Profesorado",
                             materia: "Materia 2",
-                            anio: 2026,
+                            docente: "María García",
+                            anio: 2025,
                             comision: "Mañana - B"
                         },
                         {
-                            carrera: "Trayecto",
                             materia: "Materia 3",
-                            anio: 2026,
+                            docente: "Carlos López",
+                            anio: 2025,
                             comision: "Tarde - A"
                         }
                     ]} />
