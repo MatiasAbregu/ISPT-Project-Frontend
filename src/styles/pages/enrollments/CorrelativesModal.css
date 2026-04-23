@@ -3,36 +3,70 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
-
 
 .correlativesModal h4 {
     color: white;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-align: center;
 }
-
 
 .correlativesModal span.close {
     position: absolute;
     color: white;
-    right: 30px;
-    top: 30px;
+    right: 25px;
+    top: 25px;
     cursor: pointer;
     transition: color .3s ease, transform .3s ease;
 }
 
 .correlativesModal span.close:hover {
-    color: #cb2b2b;
-    transform: scale(1.3) rotateZ(180deg);
+    color: #ff4d4d;
+    transform: scale(1.2) rotateZ(90deg);
 }
 
 .correlativesContainer {
-    background-color: white;
-    width: 60%;
+    background: linear-gradient(145deg, #ffffff, #f3f3f3);
+    width: 30%;
     border-radius: 20px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 20px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+.correlativesContainer p {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.correlativesContainer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.correlativesContainer li {
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    display: flex;
     align-items: center;
-    padding: 10px 0 60px 0;
-    margin-bottom: 30px;
+
+}
+
+
+.correlativesContainer .missing-item {
+    border-left: 5px solid #e74c3c; 
+}
+
+.correlativesContainer .approved-item {
+    border-left: 5px solid #2ecc71; 
 }

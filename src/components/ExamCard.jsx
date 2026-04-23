@@ -4,7 +4,7 @@ import '../styles/components/ExamCard.css'
 export const ExamCard = ({ fecha, modalidad, cupos, onClick, isRegistered }) => {
     return (
         <div className='examCard'>
-            <h3>[{fecha}]</h3>
+            <h3>{fecha}</h3>
             <p>Modalidad: {modalidad}</p>
             <p>Cupos: 8/{cupos}</p>
             {isRegistered ? (

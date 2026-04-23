@@ -1,15 +1,15 @@
-.courseAttendancePage{
+.dailyAttendancePage{
     width: 100%;
     display: flex;
 }
 
-.courseAttendancePageContainer {
+.dailyAttendancePageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.courseAttendancePage .controls {
+.dailyAttendancePage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,11 +17,12 @@
     align-items: center;
 }
 
-.courseAttendancePage .controls .inputControl {
+.dailyAttendancePage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
+
 
 .presente{
     background-color: #10b723;

@@ -1,0 +1,70 @@
+.scheduleModal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.scheduleModal h4 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.scheduleModal span.close {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.scheduleModal span.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+.scheduleContainer {
+    background-color: white;
+    width: 70%;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scheduleBlock {
+    border: 3px solid #6f2c7e;
+    border-radius: 16px;
+    padding: 0px 20px 15px 20px;
+    max-width: 200px;
+}
+
+
+
+.scheduleBlock h5 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: black;
+    text-decoration: underline;
+}
+
+.scheduleBlock ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scheduleBlock li {
+    margin-bottom: 6px;
+}
+
+.scheduleBlock p {
+    color: #555;
+}

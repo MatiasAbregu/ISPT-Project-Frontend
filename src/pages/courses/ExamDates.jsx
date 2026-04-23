@@ -18,9 +18,9 @@ export const ExamDates = () => {
         <article className="examDatesPage">
             <Sidebar />
             <div className="examDatesPageContainer">
+                <PathInfo />
                 <div className="controls">
-                    <InputControl icon={"search"} type={"search"}></InputControl>
-                    <PathInfo/>
+                    <InputControl icon={"search"} type={"search"}></InputControl>     
                 </div>
                 <Table
                     columns={[
@@ -48,28 +48,28 @@ export const ExamDates = () => {
                     data={[
                         {
                             materia: "Matemática",
-                            fecha: "2026-06-15",
+                            fecha: "15/06/2026",
                             turno: "Mañana",
                             libro: "1",
                             folio: "1"
                         },
                         {
                             materia: "Física",
-                            fecha: "2026-06-16",
+                            fecha: "16/06/2026",
                             turno: "Noche",
                             libro: "2",
                             folio: "2"
                         },
                         {
                             materia: "Química",
-                            fecha: "2026-12-15",
+                            fecha: "15/12/2026",
                             turno: "Noche",
                             libro: "3",
                             folio: "3"
                         },
                         {
                             materia: "Biología",
-                            fecha: "2026-12-16",
+                            fecha: "16/12/2026",
                             turno: "Mañana",
                             libro: "4",
                             folio: "4"

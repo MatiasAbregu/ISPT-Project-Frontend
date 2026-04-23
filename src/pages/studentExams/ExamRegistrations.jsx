@@ -75,7 +75,7 @@ export const ExamRegistrations = () => {
                             {
                                 materia: "Materia 1",
                                 estadoEstudiante: "Regular",
-                                estadoInscripcion: <span className="registered">Inscripto: 2026-06-18 | 09:00</span>,
+                                estadoInscripcion: <span className="registered">Inscripto | 18 Jun - 09:00hs</span>,
                                 opciones: getOption("inscripto")
                             },
                             {

@@ -20,7 +20,8 @@ export const PathInfo = ({}) => {
         "ciclo-academico": "Ciclo académico",
         "espacios-curriculares": "Espacios curriculares",
         asignaciones: "Docentes asignados",
-        correlativas: "Correlatividades"
+        correlativas: "Correlatividades",
+        "asistencia-diaria": "Asistencia diaria"
     };
 
     const segments = url.pathname.split("/").filter(Boolean);

@@ -25,9 +25,9 @@ export const CourseEvaluations = () => {
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <div className="courseEvaluationsPageContainer">
+                <PathInfo/>
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <PathInfo/>
                     <button type="button" className="add-button"
                         onClick={() => { setTypeModal(<EvaluationsModal setModal={setModal} />); setModal(true); }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir instancia evaluativa
