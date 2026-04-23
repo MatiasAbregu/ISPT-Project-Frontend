@@ -13,8 +13,8 @@ export const StudentExamDate = () => {
             <div className='studentExamDatePageContainer'>
                 <h2>Seleccione una fecha para inscribirse</h2>
                 <div className='mainContent'>
-                    <ExamCard fecha="2026-06-18 | 09:00" modalidad="Presencial - Aula 1" cupos={10} isRegistered={true} onClick={() => { navigate('/inscripciones-examenes') }} />
-                    <ExamCard fecha="2026-06-19 | 14:00" modalidad="Presencial - Aula 2" cupos={10} isRegistered={false} onClick={() => { navigate('/inscripciones-examenes') }} />
+                    <ExamCard fecha="Fecha: 06/18/26 | Hora: 09:00hs" modalidad="Presencial - Aula 1" cupos={10} isRegistered={true} onClick={() => { navigate('/inscripciones-examenes') }} />
+                    <ExamCard fecha="Fecha: 06/19/26 | Hora: 14:00hs" modalidad="Presencial - Aula 2" cupos={10} isRegistered={false} onClick={() => { navigate('/inscripciones-examenes') }} />
                 </div>
                 <Footer />
             </div>

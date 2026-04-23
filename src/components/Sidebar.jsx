@@ -28,7 +28,7 @@ export const Sidebar = () => {
                         user.role == "Estudiante" ?
                             <>
                                 <a href="/inscripciones-carreras" className={url.pathname.startsWith("/inscripciones-carreras") ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones</li>
+                                    <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones a <br/> Carreras</li>
                                 </a>
                                 <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias")  ? "activated" : ""}>
                                     <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br/>Curriculares</li>

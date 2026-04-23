@@ -1,0 +1,85 @@
+.studentExamModal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.studentExamModal h4 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.studentExamModal span.close {
+    position: absolute;
+    color: white;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.studentExamModal span.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+
+.studentExamModal .examCard {
+    width: 320px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.studentExamModal .examCard .status {
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: 600;
+}
+
+
+.studentExamModal .examCard .aprobado {
+    border: 3px solid #1e8449;
+    background-color: #e8f8f0;
+    color: #1e8449;
+}
+
+.studentExamModal .examCard .desaprobado {
+    border: 3px solid #c0392b;
+    background-color: #fdecea;
+    color: #c0392b;
+}
+
+.studentExamModal .examCard .ausente {
+    border: 3px solid #666;
+    background-color: #f2f2f2;
+    color: #666;
+}
+
+.studentExamModal .examInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.studentExamModal .examInfo div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+}
+
+.studentExamModal .label {
+    font-weight: 600;
+    margin-right: 10px;
+}

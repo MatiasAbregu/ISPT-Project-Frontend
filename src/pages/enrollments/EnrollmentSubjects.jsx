@@ -4,7 +4,7 @@ import { Sidebar } from '../../components/Sidebar'
 import { Footer } from '../../components/Footer'
 import { Table } from '../../components/Table'
 import { CorrelativesModal } from './CorrelativesModal'
-import { ScheduleModal } from './ScheduleModal'
+import { ScheduleModal } from '../modals/ScheduleModal'
 import { ComboControl } from '../../components/ComboControl'
 
 
@@ -30,10 +30,41 @@ export const EnrollmentSubjects = () => {
             <ComboControl icon={"groups"}
                 options={[{ value: "Turno Mañana A" }, { value: "Turno Mañana B" },
                 { value: "Turno Tarde A" }, { value: "Turno Tarde B" }, { value: "No Inscribirse" }]}>
-                    Seleccione la división a inscribirse
+                Seleccione la división a inscribirse
             </ComboControl>
         );
     };
+
+    const schedules = [
+        {
+            division: "Turno Mañana A",
+            horarios: [
+                { dia: "Lunes", desde: "08:00", hasta: "10:00" },
+                { dia: "Miércoles", desde: "08:00", hasta: "10:00" },
+            ]
+        },
+        {
+            division: "Turno Mañana B",
+            horarios: [
+                { dia: "Martes", desde: "08:00", hasta: "10:00" },
+                { dia: "Jueves", desde: "08:00", hasta: "10:00" },
+            ]
+        },
+        {
+            division: "Turno Tarde A",
+            horarios: [
+                { dia: "Lunes", desde: "18:00", hasta: "20:00" },
+                { dia: "Miércoles", desde: "18:00", hasta: "20:00" }
+            ]
+        },
+        {
+            division: "Turno Tarde B",
+            horarios: [
+                { dia: "Martes", desde: "18:00", hasta: "20:00" },
+                { dia: "Jueves", desde: "18:00", hasta: "20:00" }
+            ]
+        }
+    ];
 
     return (
         <div className='enrollmentSubjectsPage'>
@@ -58,7 +89,7 @@ export const EnrollmentSubjects = () => {
                                 name: "División",
                                 width: 200
                             }
-                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} />); setModal(true); } }]}
+                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } }]}
                         data={[
                             {
                                 materia: "Materia 1",
@@ -91,7 +122,7 @@ export const EnrollmentSubjects = () => {
                                 name: "División",
                                 width: 200
                             }
-                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} />); setModal(true); } }]}
+                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } }]}
                         data={[
                             {
                                 materia: "Materia 4",
@@ -114,7 +145,7 @@ export const EnrollmentSubjects = () => {
                             }
                         ]} />
                     <h3>Tercer Año</h3>
-                     <Table
+                    <Table
                         columns={[
                             {
                                 name: "Espacio Curricular",
@@ -128,7 +159,7 @@ export const EnrollmentSubjects = () => {
                                 name: "División",
                                 width: 200
                             }
-                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} />); setModal(true); } }]}
+                        ]} options={[{ value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } }]}
                         data={[
                             {
                                 materia: "Materia 7",

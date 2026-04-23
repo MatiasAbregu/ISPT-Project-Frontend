@@ -6,61 +6,34 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/CourseAttendance.css';
 import { PathInfo } from '../../components/PathInfo';  
+import { useNavigate } from 'react-router-dom';
 
 export const CourseAttendance = () => {
+    const navigate = useNavigate();
     useEffect(() => {
         document.title = "ISPT - Asistencia de Curso";
     }, []);
 
     const [data, setData] = useState([
         {
-            legajo: "12345",
-            fecha: "2025-10-03",
-            alumno: "Juan Pérez",
-            asistencia: "Pendiente",
+            fecha: "03/10/2025",
+            asistencia: "17/20",
+            estado: "Completa",
         },
         {
-            legajo: "67890",
-            fecha: "2025-10-03",
-            alumno: "María García",
-            asistencia: "Pendiente",
+            fecha: "04/10/2025",
+            asistencia: "15/20",
+            estado: "Completa",
         },
         {
-            legajo: "11111",
-            fecha: "2025-10-03",
-            alumno: "Pedro López",
-            asistencia: "Pendiente",
+            fecha: "05/10/2025",
+            asistencia: "0/20",
+            estado: "Pendiente",
         }
     ]);
 
-    const cambiarAsistencia = (legajo, fecha, nuevoEstado) => {
-        setData(prev =>
-            prev.map(row =>
-                row.legajo === legajo && row.fecha === fecha
-                    ? { ...row, asistencia: nuevoEstado }
-                    : row
-            )
-        );
-    };
-
-    const getAsistencia = (estado) => (
-        <span className={estado.toLowerCase()}>
-            {estado}
-        </span>
-    );
-
-    const marcarFeriado = () => {
-    setData(prev =>
-        prev.map(row => ({
-            ...row,
-            asistencia: "Justificado"
-        }))
-    );
-};
-
     const dataRender = data.map(row => ({
         ...row,
-        asistencia: getAsistencia(row.asistencia)
     }));
 
     return (
@@ -68,37 +41,29 @@ export const CourseAttendance = () => {
         <article className="courseAttendancePage">
             <Sidebar />
             <div className="courseAttendancePageContainer">
+                <PathInfo />
                 <div className="controls">
-                    <DateControl icon={"edit_calendar"}>
-                        Seleccione la fecha
-                    </DateControl>
-                    <PathInfo />
-                    <button className="add-button" onClick={marcarFeriado}>
-                        Marcar día como feriado
+                    <InputControl icon={"search"} type={"search"}></InputControl>
+                    <button className="add-button">
+                        Añadir día actual
                     </button>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "Legajo",
+                            name: "Fecha",
                             width: 100
                         },
                         {
-                            name: "Fecha",
+                            name: "Asistencia Total",
                             width: 120
                         },
                         {
-                            name: "Alumno",
-                            width: 160
-                        },
-                        {
-                            name: "Asistencia",
+                            name: "Estado",
                             width: 120
                         }
                     ]} options={[
-                        { value: "present", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Presente") },
-                        { value: "absent", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Ausente") },
-                        { value: "justified", onclick: (row) => cambiarAsistencia(row.legajo, row.fecha, "Justificado") }
+                        { value: "edit", onclick: () => { navigate(`/cursos/1/asistencia/03-10-2025`) } }
                     ]}
                     data={dataRender} />
                 <Footer />

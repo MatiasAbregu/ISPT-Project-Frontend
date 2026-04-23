@@ -23,9 +23,9 @@ export const CourseDetail = () => {
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
             <div className="courseDetailPageContainer">
+                <PathInfo/>
             <div className="controls">
                 <InputControl icon={"search"} type={"search"}></InputControl>
-                <PathInfo/>
             </div>
             <Table
                 columns={[

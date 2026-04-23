@@ -16,9 +16,9 @@ export const ExamGrades = () => {
         <article className="examGradesPage">
             <Sidebar />
             <div className="examGradesPageContainer">
+                <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <PathInfo/>
                 </div>
                 <Table
                                        columns={[
