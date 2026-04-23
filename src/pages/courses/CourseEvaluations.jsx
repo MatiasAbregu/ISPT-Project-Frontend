@@ -25,7 +25,7 @@ export const CourseEvaluations = () => {
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <div className="courseEvaluationsPageContainer">
-                <PathInfo/>
+                <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
@@ -44,28 +44,28 @@ export const CourseEvaluations = () => {
                             width: 160
                         },
                         {
-                            name: "Número",
+                            name: "Número de instancia evaluativa",
                             width: 40
                         }
-                    ]} options={[{ value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones/1/notas`) } }]}
+                    ]} options={[{ value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones/1/notas`) } }]}
                     data={[
                         {
-                            fecha: "2025-10-15",
+                            fecha: "15/10/2026",
                             tipo: "Parcial",
                             numero: 1
                         },
                         {
-                            fecha: "2025-10-16",
+                            fecha: "16/10/2026",
                             tipo: "Parcial",
                             numero: 2
                         },
                         {
-                            fecha: "2025-10-17",
+                            fecha: "17/10/2026",
                             tipo: "Recuperatorio",
                             numero: 1
                         },
                         {
-                            fecha: "2025-10-18",
+                            fecha: "18/10/2026",
                             tipo: "Recuperatorio",
                             numero: 2
                         }

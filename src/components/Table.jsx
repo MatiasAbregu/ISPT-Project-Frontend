@@ -132,100 +132,104 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                 {
                                                     options.map((v, i) => {
                                                         if (v.value == "eye")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnVisibility" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightBlue" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
                                                         else if (v.value == "edit")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnEdit"
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={v.onclick ? v.onclick : undefined}>edit</span>
                                                             );
                                                         else if (v == "delete" || v == "remove")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnDelete">delete</span>);
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed">delete</span>);
                                                         else if (v == "switch")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnDisturb">do_not_disturb_on</span>);
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed">do_not_disturb_on</span>);
                                                         else if (v.value == "degrees")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnDegrees"
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnOrange"
                                                                 onClick={v.onclick ? v.onclick : undefined}>license</span>
                                                             );
                                                         else if (v.value == "docs")
-                                                            return (<span className="material-symbols-outlined tableBtnDocs"
+                                                            return (<span className="material-symbols-outlined tableBtnLightBlue"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 docs
                                                             </span>);
                                                         else if (v == "curriculum")
                                                             return (<NavLink to={"/carreras/curriculum"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnCurriculum">
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple">
                                                                     two_pager
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "academicYear")
                                                             return (<NavLink to={"/carreras/curriculum/ciclo-academico"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnAcademicYear">
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple">
                                                                     two_pager
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "subjects")
                                                             return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares"}>
-                                                                <span className="material-symbols-outlined tableBtnSubjects">
+                                                                <span className="material-symbols-outlined tableBtnPurple">
                                                                     home_storage
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "teacher")
                                                             return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/asignaciones"}>
-                                                                <span className="material-symbols-outlined tableBtnSubjects">
+                                                                <span className="material-symbols-outlined tableBtnLightGreen">
                                                                     co_present
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "teacher2")
                                                             return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/correlativas/123456789124/asignaciones"}>
-                                                                <span className="material-symbols-outlined tableBtnSubjects">
+                                                                <span className="material-symbols-outlined tableBtnLightGreen">
                                                                     co_present
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v.value == "correlatives")
                                                             return (<NavLink to={"/carreras/curriculum/ciclo-academico/1/espacios-curriculares/123456789123/correlativas"}>
-                                                                <span className="material-symbols-outlined tableBtnCorrelatives">
+                                                                <span className="material-symbols-outlined tableBtnOrange">
                                                                     sync_alt
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v.value == "subjectsTeacher")
-                                                            return (<span className="material-symbols-outlined tableBtnSubjectsTeacher"
+                                                            return (<span className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 co_present
                                                             </span>);
                                                         else if (v == "studentSubjects")
                                                             return (<NavLink to={"/inscriptions/student-subjects"}>
-                                                                <span className="material-symbols-outlined tableBtnStudentSubjects">
+                                                                <span className="material-symbols-outlined tableBtnPurple">
                                                                     home_storage
-                                                                </span>
-                                                            </NavLink>)
-                                                        else if (v == "finalExam")
-                                                            return (<NavLink to={"/inscriptions/student-subjects/finalExam"}>
-                                                                <span className="material-symbols-outlined tableBtnFinalExams">
-                                                                    workspace_premium
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v == "grades")
                                                             return (<NavLink to={"/inscriptions/student-subjects/grades"}>
-                                                                <span className="material-symbols-outlined tableBtnGrades">
+                                                                <span className="material-symbols-outlined tableBtnLightPurple">
                                                                     exposure_plus_1
                                                                 </span>
                                                             </NavLink>)
+                                                        else if (v.value == "exams")
+                                                            return (<span className="material-symbols-outlined tableBtnOrange"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                star
+                                                            </span>)
+                                                        else if (v.value == "attendance")
+                                                            return (<span className="material-symbols-outlined tableBtnLightBlue"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                list_alt_check
+                                                            </span>)
                                                         else if (v.value == "present")
-                                                            return (<span className="material-symbols-outlined tableBtnPresent"
+                                                            return (<span className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 check
                                                             </span>)
                                                         else if (v.value == "absent")
-                                                            return (<span className="material-symbols-outlined tableBtnAbsent"
+                                                            return (<span className="material-symbols-outlined tableBtnRed"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 close
                                                             </span>)
                                                         else if (v.value == "justified")
-                                                            return (<span className="material-symbols-outlined tableBtnJustified"
+                                                            return (<span className="material-symbols-outlined tableBtnOrange"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 rule
                                                             </span>)
-                                                        else if (v.value == "tables")
-                                                            return (<span className="material-symbols-outlined tableBtnTables"
+                                                        else if (v.value == "finalExams")
+                                                            return (<span className="material-symbols-outlined tableBtnLightPurple"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 table_restaurant
                                                             </span>)
@@ -244,17 +248,17 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                             )
                                                         // MEJORARLO ------------------------------------------------------------
                                                         else if (v.value == "contact")
-                                                            return (<span className="material-symbols-outlined tableBtnContact"
+                                                            return (<span className="material-symbols-outlined tableBtnLightGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 contact_phone
                                                             </span>)
                                                         else if (v.value == "observation")
-                                                            return (<span className="material-symbols-outlined tableBtnObservation"
+                                                            return (<span className="material-symbols-outlined tableBtnPurple"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 eye_tracking
                                                             </span>)
                                                         else if (v.value == "ubication")
-                                                            return (<span className="material-symbols-outlined tableBtnUbication"
+                                                            return (<span className="material-symbols-outlined tableBtnOrange"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 location_away
                                                             </span>)
@@ -264,7 +268,7 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 nest_clock_farsight_analog
                                                             </span>)
                                                         else if (v.value == "change_status_student_in_danger")
-                                                            return (<span className="material-symbols-outlined tableBtnStatusDanger"
+                                                            return (<span className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 pinboard
                                                             </span>)

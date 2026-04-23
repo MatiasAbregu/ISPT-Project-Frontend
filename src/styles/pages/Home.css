@@ -18,6 +18,15 @@
     margin-top: 2%;
 }
 
+.homePage .homePageContainer .comboControl {
+    width: 400px;
+}
+
+.homePage .homePageContainer .comboControl .optionsContainer {
+    height: 45px;
+    justify-content: center !important;
+}
+
 .homePage .buttonContainer {
     display: flex;
     justify-content: center;
@@ -25,15 +34,25 @@
     width: 100%;
 }
 
-.chartsContainer {
+.homePage .chartsContainer {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
 
-.enrollmentContainer {
+.homePage .stadisticContainer {
+    display: flex;
+    align-items: center;
+}
+
+.homePage .stadisticContainer .studentsInDangerGraphic {
+    display: flex;
+    align-items: center;
+}
+
+.homePage .enrollmentContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,22 +64,7 @@
     margin-left: 3%;
 }
 
-.mainContent {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: auto;
-}
-
-.riskContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.riskCard{
+.homePage .riskCard{
     color: white;
     display: flex;
     flex-direction: column;
@@ -72,7 +76,7 @@
     border-radius: 5px;
 }
 
-.riskCard button{
+.homePage .riskCard button{
     margin-top: 5%;
     color: white;
     background-color: #3f0d53b3;

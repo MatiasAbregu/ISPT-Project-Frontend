@@ -20,7 +20,7 @@ export const ExamDates = () => {
             <div className="examDatesPageContainer">
                 <PathInfo />
                 <div className="controls">
-                    <InputControl icon={"search"} type={"search"}></InputControl>     
+                    <InputControl icon={"search"} type={"search"}></InputControl>
                 </div>
                 <Table
                     columns={[
@@ -33,7 +33,7 @@ export const ExamDates = () => {
                             width: 160
                         },
                         {
-                            name: "Turno",
+                            name: "Hora",
                             width: 160
                         },
                         {
@@ -44,35 +44,35 @@ export const ExamDates = () => {
                             name: "Folio",
                             width: 160
                         }
-                    ]} options={[{ value: "degrees", onclick: () => { navigate("/cursos/1/mesas-examenes/1/notas") } }]}
+                    ]} options={[{ value: "exams", onclick: () => { navigate("/cursos/1/mesas-examenes/1/notas") } }]}
                     data={[
                         {
                             materia: "Matemática",
                             fecha: "15/06/2026",
-                            turno: "Mañana",
+                            turno: "10:00",
                             libro: "1",
+                            folio: "1"
+                        },
+                        {
+                            materia: "Química",
+                            fecha: "15/12/2026",
+                            turno: "10:00",
+                            libro: "2",
                             folio: "1"
                         },
                         {
                             materia: "Física",
                             fecha: "16/06/2026",
-                            turno: "Noche",
-                            libro: "2",
-                            folio: "2"
-                        },
-                        {
-                            materia: "Química",
-                            fecha: "15/12/2026",
-                            turno: "Noche",
+                            turno: "14:00",
                             libro: "3",
-                            folio: "3"
+                            folio: "1"
                         },
                         {
                             materia: "Biología",
                             fecha: "16/12/2026",
-                            turno: "Mañana",
+                            turno: "16:00",
                             libro: "4",
-                            folio: "4"
+                            folio: "1"
                         }
                     ]} />
                 <Footer />

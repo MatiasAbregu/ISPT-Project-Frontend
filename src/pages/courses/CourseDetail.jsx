@@ -53,7 +53,7 @@ export const CourseDetail = () => {
                         name: "Promedio",
                         width: 120
                     }
-                ]} options={[{ value: "docs", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
+                ]} options={[{ value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
                       { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } }
                 ]}
                 data={[

@@ -40,6 +40,10 @@ export const Courses = () => {
                 <Table
                     columns={[
                         {
+                            name: "Carrera",
+                            width: 100
+                        },
+                        {
                             name: "Materia",
                             width: 120
                         },
@@ -53,23 +57,26 @@ export const Courses = () => {
                         }
                     ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1/alumnos`) } },
                     { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
-                    { value: "degrees", onclick: () => { navigate(`/cursos/1/evaluaciones`) } },
-                    { value: "docs", onclick: () => { navigate(`/cursos/1/asistencia`) } },
-                    { value: "tables", onclick: () => { navigate(`/cursos/1/mesas-examenes`) } }]}
+                    { value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones`) } },
+                    { value: "attendance", onclick: () => { navigate(`/cursos/1/asistencia`) } },
+                    { value: "finalExams", onclick: () => { navigate(`/cursos/1/mesas-examenes`) } }]}
                     data={[
                         {
+                            carrera: "Profesorado",
                             materia: "Materia 1",
-                            anio: 2025,
+                            anio: 2026,
                             comision: "Mañana - A"
                         },
                         {
+                            carrera: "Profesorado",
                             materia: "Materia 2",
-                            anio: 2025,
+                            anio: 2026,
                             comision: "Mañana - B"
                         },
                         {
+                            carrera: "Trayecto",
                             materia: "Materia 3",
-                            anio: 2025,
+                            anio: 2026,
                             comision: "Tarde - A"
                         }
                     ]} />

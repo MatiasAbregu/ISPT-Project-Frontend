@@ -83,50 +83,32 @@
     color: white;
 }
 
-.tableBtnVisibility:hover,
-.tableBtnDocs:hover {
+.tableBtnLightBlue:hover {
     background-color: #6382ff;
 }
 
-.tableBtnContact:hover,
-.tableBtnTeacher:hover {
+.tableBtnLightGreen:hover {
     background-color: #66ba51;
 }
 
-.tableBtnDelete:hover,
-.tableBtnDisturb:hover {
-    background-color: #bb2525;
-}
-
-.tableBtnCurriculum:hover,
-.tableBtnGrades:hover,
-.tableBtnAcademicYear:hover {
-    background-color: #c831ac;
-}
-
-.tableBtnSubjects:hover,
-.tableBtnCooperative:hover,
-.tableBtnStudentSubjects:hover,
-.tableBtnObservation:hover {
-    background-color: #8e44b0;
-}
-
-.tableBtnCorrelatives:hover,
-.tableBtnFinalExams:hover,
-.tableBtnUbication:hover,
-.tableBtnDegrees:hover {
-    background-color: #e29613;
-}
-
-.tableBtnEdit:hover,
-.tableBtnPresent:hover,
-.tableBtnStatusDanger:hover,
-.tableBtnSubjectsTeacher:hover {
+.tableBtnGreen:hover {
     background-color: #10b723;
 }
 
-.tableBtnAbsent:hover {
+.tableBtnRed:hover {
     background-color: #bb2525;
+}
+
+.tableBtnLightPurple:hover {
+    background-color: #c831ac;
+}
+
+.tableBtnPurple:hover {
+    background-color: #8e44b0;
+}
+
+.tableBtnOrange:hover {
+    background-color: #e29613;
 }
 
 .tableInputNewGrade {
