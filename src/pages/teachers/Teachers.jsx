@@ -47,11 +47,7 @@ export const Teachers = () => {
               {
                 name: "Apellido",
                 width: 130
-              },
-              {
-                name: "Edad",
-                width: 80
-              },
+              }
             ]} options={[
               { value: "eye", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={2} />); setModal(true); } },
               { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} typeDoc={"teacher"} />); setModal(true); } },
@@ -66,8 +62,7 @@ export const Teachers = () => {
               {
                 dni: 12345679,
                 nombre: "Enrique",
-                apellido: "Álvarez",
-                edad: 34,
+                apellido: "Álvarez"
               }
             ]} />
         </div>

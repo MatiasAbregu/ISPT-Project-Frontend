@@ -1,0 +1,24 @@
+.studentsInDangerPage {
+    width: 100%;
+    display: flex;
+}
+
+.studentsInDangerPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.studentsInDangerPage .controls {
+    display: flex;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.studentsInDangerPage .controls .inputControl {
+    margin: 0;
+    min-width: 250px;
+    width: 30%;
+}

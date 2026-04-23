@@ -22,11 +22,34 @@ export const Home = () => {
                 <h2>¡Bienvenido {user.username}!</h2>
                 <div className='mainContent'>
                     <div className="chartsContainer">
+                        {user.role === "Directivo" && (
+                            <>
+                                <BarChart fields={["Profesorado", "Trayecto"]} values={[40, 15]} label={"Alumnos"}
+                                    text={"Total de matriculados en cada carrera"} stepSize={1} />
+                                <BarChart fields={["Alto", "Medio", "Baja"]} values={[4, 10, 50]} label={"Alumnos"}
+                                    text={"Total de alumnos en riesgo"} stepSize={1} />
+                                <div className="riskContainer">
+                                    <div className="riskContainer">
+                                        <PieChart labels={["Alto", "Medio", "Bajo"]}
+                                            title={"Porcentaje de alumnos en riesgo"} isPercentage={true} values={[4, 10, 50]}
+                                            colors={[
+                                                'rgb(255, 68, 68)',
+                                                'rgb(233, 255, 108)',
+                                                'rgb(75, 211, 89)']
+                                            } />
+                                    </div>
+                                </div>
+                                <BarChart fields={["Titular", "Suplentes", "Interino", "EACI"]} values={[10, 1, 1, 0]} label={"Docentes"}
+                                    text={"Docentes por situación de revista"} stepSize={1} />
+                            </>)
+
+                        }
                         {user.role === "Estudiante" && (
                             <>
                                 <BarChart fields={["Materia 1", "Materia 2", "Materia 3"]} values={[8, 9, 7]} label={"Notas"}
                                     text={"Notas promedio de las materias"} stepSize={1} minY={1} maxY={10} />
-                                <PieChart text={"Materias"} labels={["Aprobadas", "Pendientes"]} values={[2, 1]}
+                                <PieChart title={"Estado de mis materias"}
+                                    text={"Materias"} labels={["Aprobadas", "Pendientes"]} values={[2, 1]}
                                     colors={['rgba(0, 230, 118, 0.5)',
                                         'rgba(255, 82, 82, 0.5)']} />
                                 <div className="enrollmentContainer">

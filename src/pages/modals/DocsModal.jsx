@@ -46,11 +46,12 @@ export const DocsModal = ({ setModal, typeDoc }) => {
                             { name: "Año", width: 100 },
                             { name: "Certificado Único de Salud", width: 150 },
                             { name: "Certificado de no inscripción en el registro de delitos sexuales", width: 150 },
-                            { name: "Certificado de Antecedentes", width: 125 },]}
+                            { name: "Certificado de Antecedentes", width: 125 },
+                            {name : "Pago de cooperadora", width: 100}]}
                             checkboxs={true}
                             data={[
-                                { year: "2025", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true } },
-                                { year: "2026", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true } }]} />}
+                                { year: "2025", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true }, co: { co: "¿Pagada?", check: true }  },
+                                { year: "2026", cus: { cus: "Entregado", check: true }, cds: { cds: "Entregado", check: true }, cda: { cda: "Entregado", check: true }, co: { co: "¿Pagada?", check: true }  }]} />}
                 </div>
                 <button type="button" className="add-button"
                     onClick={() => setModal(false)}>

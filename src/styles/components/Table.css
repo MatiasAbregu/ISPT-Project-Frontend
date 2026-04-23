@@ -83,41 +83,49 @@
     color: white;
 }
 
-.tableBtnVisibility:hover, .tableBtnDocs:hover {
+.tableBtnVisibility:hover,
+.tableBtnDocs:hover {
     background-color: #6382ff;
 }
 
-.tableBtnContact:hover, .tableBtnTeacher:hover {
+.tableBtnContact:hover,
+.tableBtnTeacher:hover {
     background-color: #66ba51;
 }
 
-.tableBtnEdit:hover {
-    background-color: #10b723;
-}
-
-.tableBtnDelete:hover, .tableBtnDisturb:hover {
+.tableBtnDelete:hover,
+.tableBtnDisturb:hover {
     background-color: #bb2525;
 }
 
-.tableBtnCurriculum:hover, .tableBtnGrades:hover, .tableBtnAcademicYear:hover {
+.tableBtnCurriculum:hover,
+.tableBtnGrades:hover,
+.tableBtnAcademicYear:hover {
     background-color: #c831ac;
 }
 
-.tableBtnSubjects:hover, .tableBtnCooperative:hover, 
-.tableBtnStudentSubjects:hover, .tableBtnObservation:hover {
+.tableBtnSubjects:hover,
+.tableBtnCooperative:hover,
+.tableBtnStudentSubjects:hover,
+.tableBtnObservation:hover {
     background-color: #8e44b0;
 }
 
-.tableBtnCorrelatives:hover, .tableBtnFinalExams:hover, 
-.tableBtnUbication:hover, .tableBtnDegrees:hover {
+.tableBtnCorrelatives:hover,
+.tableBtnFinalExams:hover,
+.tableBtnUbication:hover,
+.tableBtnDegrees:hover {
     background-color: #e29613;
 }
 
-.tableBtnPresent:hover{
+.tableBtnEdit:hover,
+.tableBtnPresent:hover,
+.tableBtnStatusDanger:hover,
+.tableBtnSubjectsTeacher:hover {
     background-color: #10b723;
 }
 
-.tableBtnAbsent:hover{
+.tableBtnAbsent:hover {
     background-color: #bb2525;
 }
 

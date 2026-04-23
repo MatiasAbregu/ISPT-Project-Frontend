@@ -25,6 +25,7 @@ import { Assignations } from './pages/teachers/Assignations'
 import { EnrollmentSubjects } from './pages/enrollments/EnrollmentSubjects'
 import { ExamRegistrations } from './pages/studentExams/ExamRegistrations'
 import { StudentExamDate } from './pages/studentExams/StudentExamDate'
+import { StudentsInDanger } from './pages/students-in-danger/StudentsInDanger'
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
         <Route path='/inscripciones-examenes/:id/fechas' element={<StudentExamDate />} />
 
         <Route path='/cargos' element={<Positions />} />
+
+        <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
         <Route path='/carreras' element={<Careers />} />
         <Route path='/carreras/curriculum' element={<Curriculum />} />

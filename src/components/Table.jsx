@@ -263,6 +263,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 nest_clock_farsight_analog
                                                             </span>)
+                                                        else if (v.value == "change_status_student_in_danger")
+                                                            return (<span className="material-symbols-outlined tableBtnStatusDanger"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                pinboard
+                                                            </span>)
                                                     })
                                                 }
                                             </div>
