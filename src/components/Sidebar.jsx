@@ -20,21 +20,26 @@ export const Sidebar = () => {
         */
         <div className='sidebar'>
             <ul>
-                <a href="/inicio" className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
-                    <span class="material-symbols-outlined">home</span><li>Inicio</li>
-                </a>
+                {
+                    user ?
+                        user.role != "Preceptor_Auxiliar" ?
+                            <a href="/inicio" className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
+                                <span class="material-symbols-outlined">home</span><li>Inicio</li>
+                            </a> : undefined
+                        : undefined
+                }
                 {
                     user ?
                         user.role == "Estudiante" ?
                             <>
                                 <a href="/inscripciones-carreras" className={url.pathname.startsWith("/inscripciones-carreras") ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones a <br/> Carreras</li>
+                                    <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones a <br /> Carreras</li>
                                 </a>
-                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias")  ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br/>Curriculares</li>
+                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br />Curriculares</li>
                                 </a>
                                 <a href="/inscripciones-examenes" className={url.pathname.startsWith("/inscripciones-examenes") ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">history_edu</span><li>Inscripciones a <br/> Exámenes Finales</li>
+                                    <span class="material-symbols-outlined">history_edu</span><li>Inscripciones a <br /> Exámenes Finales</li>
                                 </a>
                             </> : undefined
                         : undefined
@@ -78,7 +83,7 @@ export const Sidebar = () => {
                                 <a href="/mesas-examen" className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">table_chart</span><li>Mis Mesas de <br /> Examen</li>
                                 </a>
-                                </> : undefined
+                            </> : undefined
                         : undefined
                 }
                 {
