@@ -63,7 +63,7 @@ export const StudentSubjects = () => {
                         }
                     ]} options={[{ value: "degrees", onclick: () => { navigate("/mis-materias/1/evaluaciones") } },
                     { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
-                    { value: "tables", onclick: () => { setTypeModal(<StudentExamModal setModal={setModal} />); setModal(true); } }]}
+                    { value: "finalExams", onclick: () => { setTypeModal(<StudentExamModal setModal={setModal} />); setModal(true); } }]}
                     data={[
                         {
                             materia: "Materia 1",
