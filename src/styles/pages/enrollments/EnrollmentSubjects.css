@@ -36,6 +36,7 @@
 
 .enrollmentSubjectsPage .mainContent .not-available {
     background-color: #bb2525;
+    margin: 0 15px;
 }
 
 .enrollmentSubjectsPage .mainContent .available {
@@ -47,7 +48,8 @@
 }
 
 .enrollmentSubjectsPage .mainContent .not-available, .available, .approved {
-    padding: 15px 15px;
+    display: inline-block;
+    padding: 15px;
     font-weight: 700;
     border-radius: 4px;
     color: white;
@@ -71,11 +73,23 @@
 }
 
 .enrollmentSubjectsPage .comboControl {
-    margin-top: 20px;
     border: 3px solid #6f2c7e;
-    border-radius: 5vh;
     width: 95%;
-    margin-left: 2%;
+    justify-self: center;
+    margin: 0;
+    flex-wrap: nowrap;
+}
+
+.enrollmentSubjectsPage .comboControl .icon {
+    padding: 8px;
+}
+
+.enrollmentSubjectsPage .comboControl .optionsContainer {
+    flex-wrap: nowrap;
+}
+
+.enrollmentSubjectsPage .comboControl .optionsContainer span {
+    position: initial;
 }
 
 .enrollmentSubjectsPage .add-button {

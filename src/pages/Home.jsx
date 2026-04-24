@@ -17,7 +17,7 @@ export const Home = () => {
         document.title = "ISPT - Menú"
     }, []);
 
-    useEffect(() => {user.role === "Preceptor_Auxiliar" ? navigation("/asistencias-cursos") : {}}, [user])
+    useEffect(() => { user.role === "Preceptor_Auxiliar" ? navigation("/asistencias-cursos") : {} }, [user])
 
     return (
         <article className="homePage">
@@ -32,27 +32,29 @@ export const Home = () => {
                     </ComboControl>}
 
                 <div className="chartsContainer">
-                    {user.role === "Directivo" || user.role === "Preceptor" && (
+                    {user.role === "Directivo" || user.role === "Preceptor" ? (
                         <>
                             <BarChart fields={["Profesorado", "Trayecto"]} values={[40, 15]} label={"Alumnos"}
                                 text={"Total de matriculados en cada carrera"} stepSize={1} />
                             {
-                                user.role === "Directivo" ??
-                                <>
-                                    <BarChart fields={["Alto", "Medio", "Baja"]} values={[4, 10, 50]} label={"Alumnos"}
-                                        text={"Total de alumnos en riesgo"} stepSize={1} />
-                                    <PieChart labels={["Alto", "Medio", "Bajo"]}
-                                        title={"Porcentaje de alumnos en riesgo"} isPercentage={true} values={[4, 10, 50]}
-                                        colors={[
-                                            'rgb(255, 68, 68)',
-                                            'rgb(233, 255, 108)',
-                                            'rgb(75, 211, 89)']
-                                        } />
-                                </>
+                                user.role === "Directivo" ?
+                                    <>
+                                        <BarChart fields={["Alto", "Medio", "Baja"]} values={[4, 10, 50]} label={"Alumnos"}
+                                            text={"Total de alumnos en riesgo"} stepSize={1} />
+                                        <PieChart labels={["Alto", "Medio", "Bajo"]}
+                                            title={"Porcentaje de alumnos en riesgo"} isPercentage={true} values={[4, 10, 50]}
+                                            colors={[
+                                                'rgb(255, 68, 68)',
+                                                'rgb(233, 255, 108)',
+                                                'rgb(75, 211, 89)']
+                                            } />
+                                    </>
+                                    :
+                                    <></>
                             }
                             <BarChart fields={["Titular", "Suplentes", "Interino", "EACI"]} values={[10, 1, 1, 0]} label={"Docentes"}
                                 text={"Docentes por situación de revista"} stepSize={1} />
-                        </>)
+                        </>) : <></>
 
                     }
                     {user.role === "Estudiante" && (

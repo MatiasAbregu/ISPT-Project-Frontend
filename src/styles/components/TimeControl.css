@@ -84,12 +84,12 @@
 .timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl {
     margin: 0;
     width: 80%;
-    height: 35px;
     text-align: center;
     justify-self: center;
 }
 
-.timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl .optionsContainer {
+.timeControl .timePicker .timePickerSelectors .selectorColumn .comboControl .optionsContainer label{
+    flex: 1;
     justify-content: center;
 }
 

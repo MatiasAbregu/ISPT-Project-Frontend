@@ -7,8 +7,6 @@ import { CorrelativesModal } from './CorrelativesModal'
 import { ScheduleModal } from '../modals/ScheduleModal'
 import { ComboControl } from '../../components/ComboControl'
 
-
-
 export const EnrollmentSubjects = () => {
 
     const [modal, setModal] = useState(false);

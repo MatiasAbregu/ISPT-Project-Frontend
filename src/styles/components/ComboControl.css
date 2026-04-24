@@ -29,19 +29,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #6f2c7e;
     font-size: 1.6rem;
     margin: 1%;
+    border-radius: calc(100% /2);
+}
+
+.comboControl .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6f2c7e;
+    font-size: 1.6rem;
     padding: 1%;
-    border-radius: 100%;
+    border-radius: calc(100% /2);
 }
 
 .comboControl .optionsContainer .dropdown {
-    position: absolute;
-    background-color: white;
+    background-color: transparent;
     color: #6f2c7e;
     transition: transform .2s ease;
-    right: 0;
+    justify-self: flex-end !important;
 }
 
 .comboControl .optionsContainer .dropdown.open {
@@ -79,53 +86,4 @@
 .comboControl .optionsContainer .options p:hover {
     background-color: #6f2c7e;
     color: white;
-}
-
-/* MULTIPLE CHOICE COMBO */
-.multipleComboControl {
-    border-radius: 4vh !important;
-}
-
-.multipleComboControl .iconCombo {
-    height: 25px;
-}
-
-.comboControl .optionCombo {
-    display: flex;
-    width: 100%;
-}
-
-.comboControl .optionCombo .selected {
-    background-color: #b200da;
-    color: white !important;
-    display: flex;
-    align-items: center;
-}
-
-.comboControl .optionCombo .selected .checkIcon {
-    background-color: white;
-    font-size: 1.2rem;
-    color: #b200da;
-    margin-right: 2%;
-}
-
-.comboControl .optionsLabelContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 90%;
-}
-
-.comboControl .optionsLabelContainer label {
-    background-color: #6f2c7e;
-    color: white;
-    border-radius: 3vw;
-    padding: 1% 4%;
-    margin: 1% 0;
-}
-
-.labelInformative {
-    position: absolute;
-    top: -40px;
-    left: 40px;
 }
