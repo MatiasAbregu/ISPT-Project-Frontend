@@ -59,3 +59,19 @@
     padding: 15px 15px 35px 15px;
 }
 
+
+.examRegistrationsPage .option {
+    transition: all .4s ease;
+    cursor: pointer;
+    padding: 6px;
+    border: 1px solid rgb(61, 61, 61);
+    border-radius: 1vh;
+    margin: 0 1%;
+    color: black;
+    text-decoration: none;
+    
+}
+
+.examRegistrationsPage .option:hover {
+    color: white;
+}
