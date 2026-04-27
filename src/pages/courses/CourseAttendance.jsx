@@ -5,7 +5,7 @@ import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/CourseAttendance.css';
-import { PathInfo } from '../../components/PathInfo';  
+import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserProvider';
 
@@ -19,30 +19,28 @@ export const CourseAttendance = () => {
     }, []);
 
     const getPath = () => {
-    if (user?.role === "Docente") {
-        return `/cursos/1/asistencia/03-10-2025`;
-    }
+        if (user?.role === "Docente") {
+            return `/cursos/1/asistencia/03-10-2026`;
+        }
 
-    if (user?.role === "Preceptor_Auxiliar") {
-        return `/asistencias-cursos/1/dias/03-10-2025`;
-    }
-
-    return `/cursos/1/asistencia/${row.fecha}`;
-};
+        if (user?.role === "Preceptor_Auxiliar") {
+            return `/asistencias-cursos/1/asistencia/03-10-2026`;
+        }
+    };
 
     const [data, setData] = useState([
         {
-            fecha: "03/10/2025",
+            fecha: "03/10/2026",
             asistencia: "17/20",
             estado: "Completa",
         },
         {
-            fecha: "04/10/2025",
+            fecha: "04/10/2026",
             asistencia: "15/20",
             estado: "Completa",
         },
         {
-            fecha: "05/10/2025",
+            fecha: "05/10/2026",
             asistencia: "0/20",
             estado: "Pendiente",
         }

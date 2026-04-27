@@ -224,15 +224,14 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                         // MEJORARLO ------------------------------------------------------------
                                                         else if (v.value == "newGrade")
                                                             return (
-                                                                <input className="tableInputNewGrade " type="text"
-                                                                    onChange={(e) => v.onchange && v.onchange(obj, e.target.value)} />
-                                                            )
-                                                        else if (v.value == "save")
-                                                            return (
-                                                                <button className="material-symbols-outlined tableBtnLightBlue"
-                                                                    onClick={() => v.onclick && v.onclick(obj, i)}>
-                                                                    save
-                                                                </button>
+                                                                <>
+                                                                    <input className="tableInputNewGrade " type="text"
+                                                                        onChange={(e) => v.onchange && v.onchange(obj, e.target.value)} />
+                                                                    <span className="material-symbols-outlined tableBtnOrange"
+                                                                        onClick={() => v.onclick ? v.onclick : {}}>
+                                                                        rule
+                                                                    </span>
+                                                                </>
                                                             )
                                                         // MEJORARLO ------------------------------------------------------------
                                                         else if (v.value == "contact")

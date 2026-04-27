@@ -70,8 +70,8 @@ function App() {
         <Route path='/mesas-examen/:id/notas' element={<ExamGrades />} />
         
         <Route path='/asistencias-cursos' element={<Attendance />} />
-        <Route path='/asistencias-cursos/:id/dias' element={<CourseAttendance />} />
-        <Route path='/asistencias-cursos/:id/dias/:fecha' element={<DailyAttendance />} />
+        <Route path='/asistencias-cursos/:id/asistencia' element={<CourseAttendance />} />
+        <Route path='/asistencias-cursos/:id/asistencia/:fecha' element={<DailyAttendance />} />
       </Routes>
     </BrowserRouter>
   )

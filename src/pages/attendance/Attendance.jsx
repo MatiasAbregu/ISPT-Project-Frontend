@@ -54,7 +54,7 @@ export const Attendance = () => {
                             name: "División",
                             width: 120
                         }
-                    ]} options={[{ value: "attendance", onclick: () => { navigate(`/asistencias-cursos/1/dias`) } },
+                    ]} options={[{ value: "attendance", onclick: () => { navigate(`/asistencias-cursos/1/asistencia`) } },
                     { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } }
                     ]}
                     data={[

@@ -3,7 +3,7 @@ import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
-import '../../styles/pages/courses/ExamGrades.css';
+import '../../styles/pages/exams/ExamGrades.css';
 import { PathInfo } from '../../components/PathInfo';
 
 export const ExamGrades = () => {

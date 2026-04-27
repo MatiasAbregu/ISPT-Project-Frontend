@@ -35,16 +35,6 @@ export const CourseGrades = () => {
         }
     ]);
 
-    const uploadGrade = (legajo, newGrade) => {
-        setData(prev =>
-            prev.map(row =>
-                row.legajo === legajo
-                    ? { ...row, nota: newGrade }
-                    : row
-            )
-        );
-    };
-
     const [gradesDraft, setGradesDraft] = useState({});
 
     return (
@@ -55,7 +45,10 @@ export const CourseGrades = () => {
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-
+                    <button type="button" className="add-button"
+                        onClick={() => { }}>
+                        <span className="material-symbols-outlined">save</span>Guardar cambios
+                    </button>
                 </div>
                 <Table
                     columns={[
@@ -71,16 +64,7 @@ export const CourseGrades = () => {
                             name: "Nota",
                             width: 40
                         }
-                    ]} options={[{
-                        value: "newGrade", onchange: (row, value) => {
-                            setGradesDraft(prev => ({
-                                ...prev,
-                                [row.legajo]: value
-                            }))
-                        }
-                    },
-                    { value: "save", onclick: (row) => { uploadGrade(row.legajo, gradesDraft[row.legajo]) } }
-                    ]}
+                    ]} options={[{ value: "newGrade" }]}
                     data={data} />
                 <Footer />
             </div>
