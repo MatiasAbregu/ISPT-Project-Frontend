@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Table } from '../../components/Table'
 import { Footer } from '../../components/Footer'
 import { Sidebar } from '../../components/Sidebar';
@@ -8,11 +8,13 @@ import { ComboControl } from '../../components/ComboControl';
 
 import '../../styles/pages/careers/Correlatives.css';
 import { SubjectModal } from './SubjectModal';
+import { UserContext } from '../../context/UserProvider';
 
 export const Correlatives = () => {
 
   const [modal, setModal] = useState(false);
   const [typeModal, setTypeModal] = useState();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     document.title = "ISPT - Gestión de correlativas de plan de estudio";
@@ -26,11 +28,14 @@ export const Correlatives = () => {
         <PathInfo />
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
-          <h4 style={{color: 'white'}}>Espacio curricular: Matemáticas I</h4>
-          <button type="button" className="add-button"
-            onClick={() => { }}>
-            <span className="material-symbols-outlined">save</span>Guardar cambios
-          </button>
+          <h4>Espacio curricular: Matemáticas I</h4>
+          {
+            user.role == "Directivo" ?
+              <button type="button" className="add-button"
+                onClick={() => { }}>
+                <span className="material-symbols-outlined">save</span>Guardar cambios
+              </button> : undefined
+          }
         </div>
         <div className='controls2'>
           <ComboControl icon={"today"} notShowLabel={true}

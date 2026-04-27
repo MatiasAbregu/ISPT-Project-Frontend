@@ -23,7 +23,7 @@
     width: 30%;
 }
 
-.courseEvaluationsPage .add-button {
+.courseEvaluationsPage .controls .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.courseEvaluationsPage .add-button span {
+.courseEvaluationsPage .controls .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.courseEvaluationsPage .add-button:hover {
+.courseEvaluationsPage .controls .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.courseEvaluationsPage .add-button:hover span {
+.courseEvaluationsPage .controls .add-button:hover span {
     transform: rotateZ(180deg);
 }

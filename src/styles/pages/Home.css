@@ -22,10 +22,12 @@
     width: 400px;
 }
 
-.homePage .homePageContainer .comboControl .optionsContainer {
-    height: 45px;
-    justify-content: center !important;
+.homePage .homePageContainer .comboControl .optionsContainer label {
+    justify-content: center;
+    justify-self: center;
+    flex: 1;
 }
+
 
 .homePage .buttonContainer {
     display: flex;

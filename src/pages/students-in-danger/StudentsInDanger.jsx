@@ -27,8 +27,8 @@ export const StudentsInDanger = () => {
                 </div>
                 <Table columns={[
                     { name: "DNI", width: 80 },
-                    { name: "Alumno", width: 140 },
-                    { name: "Materia", width: 100 },
+                    { name: "Estudiante", width: 130 },
+                    { name: "Espacio curricular", width: 120 },
                     { name: "Riesgo", width: 80 },
                     { name: "Causa/s", width: 80 },
                     { name: "Estado", width: 80 }]}

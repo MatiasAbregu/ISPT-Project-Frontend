@@ -12,7 +12,7 @@ export const DocsModal = ({ setModal, typeDoc }) => {
     return (
         <article className="docsModal">
             <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
-            <h4>Documentación {typeDoc == "teacher" ? " del docente" : "del alumno"}</h4>
+            <h4>Documentación {typeDoc == "teacher" ? " del docente" : "del estudiante"}</h4>
             <div className="docsFormContainer">
                 {
                     typeDoc != "teacher" ?

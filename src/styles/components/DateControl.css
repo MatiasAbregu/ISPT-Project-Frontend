@@ -36,6 +36,12 @@
     right: 0;
 }
 
+.dateControl .labelInformative {
+    position: absolute;
+    top: -35px;
+    left: 40px;
+}
+
 .dateControl .calendarPicker {
     position: absolute;
     width: 400px;

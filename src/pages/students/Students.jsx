@@ -40,11 +40,11 @@ export const Students = () => {
                                 width: 50
                             },
                             {
-                                name: "Nombre",
+                                name: "Apellido",
                                 width: 100
                             },
                             {
-                                name: "Apellido",
+                                name: "Nombre",
                                 width: 100
                             },
                             {
@@ -68,22 +68,22 @@ export const Students = () => {
                         data={[
                             {
                                 legajo: "TR-2025",
-                                firstname: "Felipe",
                                 lastname: "Ferreyra",
+                                firstname: "Felipe",
                                 documentType: "DNI",
                                 documentNumber: 12345671
                             },
                             {
                                 legajo: "TR-2026",
-                                firstname: "Juan",
                                 lastname: "Lopez",
+                                firstname: "Juan",
                                 documentType: "DNI",
                                 documentNumber: 12345672
                             },
                             {
                                 legajo: "PT-2023",
-                                firstname: "María",
                                 lastname: "Sanchez",
+                                firstname: "María",
                                 documentType: "DNI",
                                 documentNumber: 12345673
                             },

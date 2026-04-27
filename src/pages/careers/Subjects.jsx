@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { InputControl } from '../../components/InputControl';
 import { ComboControl } from '../../components/ComboControl';
 import { PathInfo } from '../../components/PathInfo';
@@ -6,6 +6,7 @@ import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { SubjectModal } from './SubjectModal';
+import { UserContext } from '../../context/UserProvider';
 import '../../styles/pages/careers/Subjects.css';
 
 export const Subjects = () => {
@@ -14,6 +15,7 @@ export const Subjects = () => {
     const [typeModal, setTypeModal] = useState();
     const [turn, setTurn] = useState({ key: 1, value: "Mañana" })
     const [academicYear, setAcademicYear] = useState(1);
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de espacios curriculares en plan de estudio";
@@ -32,13 +34,16 @@ export const Subjects = () => {
                             setOption={setTurn} value={{ key: 1, value: "Mañana" }}>
                             Turno
                         </ComboControl>
-                        <button type="button" className="add-button"
-                            onClick={() => {
-                                setTypeModal(<SubjectModal typeModal={1} academicYear={academicYear} setModal={setModal} />);
-                                setModal(true);
-                            }}>
-                            <span className="material-symbols-outlined">add_circle</span>Añadir espacio curricular
-                        </button>
+                        {
+                            user.role == "Directivo" ?
+                                <button type="button" className="add-button"
+                                    onClick={() => {
+                                        setTypeModal(<SubjectModal typeModal={1} academicYear={academicYear} setModal={setModal} />);
+                                        setModal(true);
+                                    }}>
+                                    <span className="material-symbols-outlined">add_circle</span>Añadir espacio curricular
+                                </button> : undefined
+                        }
                     </div>
                 </div>
                 {
@@ -49,14 +54,13 @@ export const Subjects = () => {
                                 { name: "Nombre", width: 150 },
                                 { name: "División", width: 100 },
                                 { name: "Formato", width: 150 }]}
-                                options={[
+                                options={user.role == "Directivo" ? [
                                     {
                                         value: "eye", onclick: () => {
                                             setTypeModal(<SubjectModal typeModal={2} academicYear={academicYear} setModal={setModal} />);
                                             setModal(true);
                                         }
                                     },
-                                    "teacher",
                                     {
                                         value: "edit",
                                         onclick: () => {
@@ -64,6 +68,16 @@ export const Subjects = () => {
                                             setModal(true);
                                         }
                                     },
+                                    "teacher",
+                                    { value: "correlatives" }
+                                ] : [
+                                    {
+                                        value: "eye", onclick: () => {
+                                            setTypeModal(<SubjectModal typeModal={2} academicYear={academicYear} setModal={setModal} />);
+                                            setModal(true);
+                                        }
+                                    },
+                                    "teacher",
                                     { value: "correlatives" }
                                 ]}
                                 data={[

@@ -47,6 +47,7 @@
 }
 
 .evaluationsContainer .inputControl,
+.evaluationsContainer .comboControl,
 .evaluationsContainer .dateControl {
     margin-top: 50px;
     border: 3px solid #6f2c7e;
@@ -87,8 +88,4 @@
     color: white;
     transform: scale(1.1);
     border: 2px solid #2dca2d;
-}
-
-.evaluationsContainer .add-button:hover span {
-    transform: rotateZ(360deg);
 }

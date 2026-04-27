@@ -17,6 +17,12 @@
     align-items: center;
 }
 
+.correlativesPage .controls h4{
+    flex: 1;
+    margin-left: 25px;
+    color: white;
+}
+
 .correlativesPage .controls2 {
     justify-content: start;
     gap: 8px;

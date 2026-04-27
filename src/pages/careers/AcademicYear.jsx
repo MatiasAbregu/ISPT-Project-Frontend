@@ -31,8 +31,7 @@ export const AcademicYear = () => {
                             width: 100
                         }
                     ]}
-                    options={["subjects",
-                        { value: "edit" }]}
+                    options={["subjects"]}
                     data={[
                         {
                             year: "1°",

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import '../styles/components/Sidebar.css'
-import { useLocation } from 'react-router'
+import { NavLink, useLocation } from 'react-router'
 import { UserContext } from '../context/UserProvider';
 
 export const Sidebar = () => {
@@ -23,24 +23,25 @@ export const Sidebar = () => {
                 {
                     user ?
                         user.role != "Preceptor_Auxiliar" ?
-                            <a href="/inicio" className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
+                            <NavLink to={"/inicio"} className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
                                 <span class="material-symbols-outlined">home</span><li>Inicio</li>
-                            </a> : undefined
+                            </NavLink>
+                            : undefined
                         : undefined
                 }
                 {
                     user ?
                         user.role == "Estudiante" ?
                             <>
-                                <a href="/inscripciones-carreras" className={url.pathname.startsWith("/inscripciones-carreras") ? "activated" : ""}>
+                                <NavLink to={"/inscripciones-carreras"} className={url.pathname.startsWith("/inscripciones-carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones a <br /> Carreras</li>
-                                </a>
-                                <a href="/mis-materias" className={url.pathname.startsWith("/mis-materias") ? "activated" : ""}>
+                                </NavLink>
+                                <NavLink to={"/mis-materias"}>
                                     <span class="material-symbols-outlined">topic</span><li>Mis Espacios<br />Curriculares</li>
-                                </a>
-                                <a href="/inscripciones-examenes" className={url.pathname.startsWith("/inscripciones-examenes") ? "activated" : ""}>
+                                </NavLink>
+                                <NavLink to={"/inscripciones-examenes"}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Inscripciones a <br /> Exámenes Finales</li>
-                                </a>
+                                </NavLink>
                             </> : undefined
                         : undefined
                 }
@@ -48,12 +49,12 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Directivo" || user.role == "Preceptor" ?
                             <>
-                                <a href="/estudiantes" className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
+                                <NavLink to={"/estudiantes"} className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
-                                </a>
-                                <a href="/docentes" className={url.pathname.startsWith("/docentes") ? "activated" : ""}>
+                                </NavLink>
+                                <NavLink to={"/docentes"} className={url.pathname.startsWith("/docentes") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">cast_for_education</span><li>Docentes</li>
-                                </a>
+                                </NavLink>
                             </> : undefined
                         : undefined
                 }
@@ -61,15 +62,22 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Directivo" ?
                             <>
-                                <a href="/cargos" className={url.pathname.startsWith("/cargos") ? "activated" : ""}>
+                                <NavLink to={"/cargos"} className={url.pathname.startsWith("/cargos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">supervised_user_circle</span><li>Cargos</li>
-                                </a>
-                                <a href="/carreras" className={url.pathname.startsWith("/carreras") ? "activated" : ""}>
+                                </NavLink>
+                            </> : undefined
+                        : undefined
+                }
+                {
+                    user ?
+                        user.role == "Directivo" || user.role == "Preceptor" ?
+                            <>
+                                <NavLink to={"/carreras"} className={url.pathname.startsWith("/carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
-                                </a>
-                                <a href="/alumnos-riesgo" className={url.pathname.startsWith("/alumnos-riesgo") ? "activated" : ""}>
-                                    <span class="material-symbols-outlined">person_alert</span><li>Alumnos en <br /> riesgo</li>
-                                </a>
+                                </NavLink>
+                                <NavLink to={"/alumnos-riesgo"} className={url.pathname.startsWith("/alumnos-riesgo") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">person_alert</span><li>Estudiantes en <br /> riesgo</li>
+                                </NavLink>
                             </> : undefined
                         : undefined
                 }
@@ -77,12 +85,12 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Docente" ?
                             <>
-                                <a href="/cursos" className={url.pathname.startsWith("/cursos") ? "activated" : ""}>
+                                <NavLink to={"/cursos"} className={url.pathname.startsWith("/cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Mis Cursos</li>
-                                </a>
-                                <a href="/mesas-examen" className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
+                                </NavLink>
+                                <NavLink to={"/mesas-examen"} className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">table_chart</span><li>Mis Mesas de <br /> Examen</li>
-                                </a>
+                                </NavLink>
                             </> : undefined
                         : undefined
                 }
@@ -90,9 +98,10 @@ export const Sidebar = () => {
                     user ?
                         user.role == "Preceptor_Auxiliar" ?
                             <>
-                                <a href="/asistencias-cursos" className={url.pathname.startsWith("/asistencias-cursos") ? "activated" : ""}>
+                                <NavLink to={"/asistencias-cursos"} className={url.pathname.startsWith("/asistencias-cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Asistencias</li>
-                                </a></> : undefined
+                                </NavLink>
+                            </> : undefined
                         : undefined
                 }
                 <a href="/" className={"logOut"}>

@@ -5,6 +5,8 @@ import { Table } from "../../components/Table";
 import { Footer } from "../../components/Footer";
 import { Sidebar } from "../../components/Sidebar";
 import { PositionModal } from "./PositionModal";
+import { ContactModal } from "../modals/ContactModal";
+import { UbicationModal } from "../modals/UbicationModal";
 
 export const Positions = () => {
 
@@ -34,11 +36,11 @@ export const Positions = () => {
                             width: 85
                         },
                         {
-                            name: "Nombre",
+                            name: "Apellido",
                             width: 150
                         },
                         {
-                            name: "Apellido",
+                            name: "Nombre",
                             width: 150
                         },
                         {
@@ -49,28 +51,31 @@ export const Positions = () => {
                             name: "Estado",
                             width: 80
                         }
-                    ]} options={[{ value: "eye", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={2} />); setModal(true); } },
-                    { value: "edit", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                    ]} options={[
+                        { value: "eye", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={2} />); setModal(true); } },
+                        { value: "edit", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                        { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
+                        { value: "ubication", onclick: () => { setTypeModal(<UbicationModal setModal={setModal} />); setModal(true); } },
                         "delete",]}
                     data={[
                         {
                             dni: 12345678,
-                            firstname: "María Eugenia",
                             lastname: "Danieli",
+                            firstname: "María Eugenia",
                             rol: "Directivo",
                             estado: "Activo",
                         },
                         {
                             dni: 12345678,
+                            lastname: "Abregú",
                             firstname: "Matías",
-                            lastname: "Abregú",                       
                             rol: "Preceptor",
                             estado: "Activo",
                         },
                         {
                             dni: 12345678,
+                            lastname: "Sobrero",
                             firstname: "Martín",
-                            lastname: "Sobrero",                       
                             rol: "Preceptor",
                             estado: "Activo",
                         },

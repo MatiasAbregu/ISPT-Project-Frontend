@@ -44,6 +44,12 @@
     border-radius: calc(100% /2);
 }
 
+.comboControl .labelInformative {
+    position: absolute;
+    top: -35px;
+    left: 40px;
+}
+
 .comboControl .optionsContainer .dropdown {
     background-color: transparent;
     color: #6f2c7e;

@@ -1,4 +1,4 @@
-.examRegistrationsPage{
+.examRegistrationsPage {
     width: 100%;
     display: flex;
 }
@@ -23,19 +23,6 @@
     width: 30%;
 }
 
-.examRegistrationsPage .tooltip {
-    font-size: 16px;
-    text-decoration: underline;
-}
-.examRegistrationsPage .option {
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-    justify-content: center;
-}
-
 .examRegistrationsPage .closed {
     background-color: #bb2525;
 }
@@ -48,30 +35,17 @@
     background-color: #10b723;
 }
 
-.examRegistrationsPage .closed, .available, .registered, .closedUnder {
+.examRegistrationsPage .closed,
+.available,
+.registered,
+.closedUnder {
+    display: inline-block;
     padding: 15px 15px;
     font-weight: 700;
     border-radius: 4px;
     color: white;
 }
 
-.examRegistrationsPage .closed{
-    padding: 15px 15px 35px 15px;
-}
-
-
-.examRegistrationsPage .option {
-    transition: all .4s ease;
-    cursor: pointer;
-    padding: 6px;
-    border: 1px solid rgb(61, 61, 61);
-    border-radius: 1vh;
-    margin: 0 1%;
-    color: black;
-    text-decoration: none;
-    
-}
-
-.examRegistrationsPage .option:hover {
-    color: white;
+.examRegistrationsPage .closed {
+    margin: 0 20px;
 }

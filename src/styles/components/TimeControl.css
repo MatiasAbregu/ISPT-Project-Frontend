@@ -37,6 +37,12 @@
     right: 0;
 }
 
+.timeControl .labelInformative {
+    position: absolute;
+    top: -35px;
+    left: 40px;
+}
+
 .timeControl .timePicker {
     position: absolute;
     width: 400px;

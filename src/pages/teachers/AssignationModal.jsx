@@ -45,7 +45,7 @@ export const AssignationModal = ({ setModal, typeModal }) => {
                                     Fecha de inicio *
                                 </DateControl>
                                 <DateControl icon={"schedule"}>
-                                    Fecha de fin *
+                                    Fecha de fin
                                 </DateControl>
                             </>
                             : step == 1 ?

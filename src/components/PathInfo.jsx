@@ -16,7 +16,7 @@ export const PathInfo = ({}) => {
         asistencia: "Asistencia",
         "mis-materias": "Materias",
         carreras: "Carreras",
-        curriculum: "Curriculum",
+        "plan-de-estudio": "Plan de estudio",
         "ciclo-academico": "Ciclo académico",
         "espacios-curriculares": "Espacios curriculares",
         asignaciones: "Docentes asignados",

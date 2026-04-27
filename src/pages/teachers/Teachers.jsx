@@ -41,11 +41,11 @@ export const Teachers = () => {
                 width: 120
               },
               {
-                name: "Nombre",
+                name: "Apellido",
                 width: 130
               },
               {
-                name: "Apellido",
+                name: "Nombre",
                 width: 130
               }
             ]} options={[
@@ -53,16 +53,16 @@ export const Teachers = () => {
               { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} typeDoc={"teacher"} />); setModal(true); } },
               { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
               { value: "subjectsTeacher", onclick: () => { setTypeModal(<SubjectsAssignationsModal setModal={setModal} typeModal={3} />); setModal(true); } },
-              { value: "edit", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={3} />); setModal(true); } },
               { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
               { value: "ubication", onclick: () => { setTypeModal(<UbicationModal setModal={setModal} />); setModal(true); } },
               { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
+              { value: "edit", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={3} />); setModal(true); } },
               "delete"]}
             data={[
               {
                 dni: 12345679,
-                nombre: "Enrique",
-                apellido: "Álvarez"
+                apellido: "Álvarez",
+                nombre: "Enrique"
               }
             ]} />
         </div>

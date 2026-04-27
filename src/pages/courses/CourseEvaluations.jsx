@@ -3,10 +3,10 @@ import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
-import '../../styles/pages/courses/CourseEvaluations.css';
 import { useNavigate } from 'react-router-dom';
 import { EvaluationsModal } from './EvaluationsModal';
 import { PathInfo } from '../../components/PathInfo';
+import '../../styles/pages/courses/CourseEvaluations.css';
 
 export const CourseEvaluations = () => {
 
@@ -47,7 +47,9 @@ export const CourseEvaluations = () => {
                             name: "Número de instancia evaluativa",
                             width: 40
                         }
-                    ]} options={[{ value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones/1/notas`) } }]}
+                    ]} options={[{ value: "edit", onclick: () => { navigate(`/cursos/1/evaluaciones/1/notas`) } },
+                    "delete"
+                    ]}
                     data={[
                         {
                             fecha: "15/10/2026",

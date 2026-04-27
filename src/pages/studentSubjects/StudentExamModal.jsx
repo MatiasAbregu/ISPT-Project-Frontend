@@ -16,8 +16,8 @@ export const StudentExamModal = ({ setModal }) => {
 
   return (
     <article className="studentExamModal">
-      <span 
-        className="material-symbols-outlined close" 
+      <span
+        className="material-symbols-outlined close"
         onClick={() => setModal(false)}
       >
         cancel
@@ -26,35 +26,35 @@ export const StudentExamModal = ({ setModal }) => {
       <h4>Última mesa de examen</h4>
 
       <div className="examCard">
+        <div className='examCardContainer'>
+          <div className={`status ${exam.estado.toLowerCase()}`}>
+            <span>{exam.estado}</span>
+            <span>Nota: {exam.nota}</span>
+          </div>
 
-        <div className={`status ${exam.estado.toLowerCase()}`}>
-          <span>{exam.estado}</span>
-          <span>Nota: {exam.nota}</span>
+          <div className="examInfo">
+            <div>
+              <span className="label">Fecha:</span>
+              <span>{exam.fecha}</span>
+            </div>
+            <div>
+              <span className="label">Hora:</span>
+              <span>{exam.hora}</span>
+            </div>
+            <div>
+              <span className="label">Docente:</span>
+              <span>{exam.docente}</span>
+            </div>
+            <div>
+              <span className="label">Libro:</span>
+              <span>{exam.libro}</span>
+            </div>
+            <div>
+              <span className="label">Folio:</span>
+              <span>{exam.folio}</span>
+            </div>
+          </div>
         </div>
-
-        <div className="examInfo">
-          <div>
-            <span className="label">Fecha:</span>
-            <span>{exam.fecha}</span>
-          </div>
-          <div>
-            <span className="label">Hora:</span>
-            <span>{exam.hora}</span>
-          </div>
-          <div>
-            <span className="label">Docente:</span>
-            <span>{exam.docente}</span>
-          </div>
-          <div>
-            <span className="label">Libro:</span>
-            <span>{exam.libro}</span>
-          </div>
-          <div>
-            <span className="label">Folio:</span>
-            <span>{exam.folio}</span>
-          </div>
-        </div>
-
       </div>
     </article>
   )

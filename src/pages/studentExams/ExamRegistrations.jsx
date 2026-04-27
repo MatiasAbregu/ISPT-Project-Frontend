@@ -96,7 +96,10 @@ export const ExamRegistrations = () => {
                         {
                             materia: "Materia 3",
                             estadoEstudiante: "Regular",
-                            estadoInscripcion: <div><span className="closed">Cerrada: fecha de <br /></span><span className="closedUnder">inscripción vencida</span></div>,
+                            estadoInscripcion:
+                                <div>
+                                    <span className="closed">Cerrada: fecha de inscripción vencida</span>
+                                </div>,
                             opciones: (
                                 <div className="optionsContainer">
                                     {getOption("cerrada")}

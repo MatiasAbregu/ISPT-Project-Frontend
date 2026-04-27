@@ -51,12 +51,12 @@ function App() {
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
         <Route path='/carreras' element={<Careers />} />
-        <Route path='/carreras/curriculum' element={<Curriculum />} />
-        <Route path='/carreras/curriculum/ciclo-academico' element={<AcademicYear />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:id/espacios-curriculares' element={<Subjects />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/asignaciones' element={<Assignations />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas' element={<Correlatives />} />
-        <Route path='/carreras/curriculum/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas/:cupof2/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/plan-de-estudio' element={<Curriculum />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico' element={<AcademicYear />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:id/espacios-curriculares' element={<Subjects />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas' element={<Correlatives />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas/:cupof2/asignaciones' element={<Assignations />} />
 
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../styles/pages/careers/Curriculum.css';
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
@@ -6,11 +6,13 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { CurriculumModal } from './CurriculumModal';
 import { PathInfo } from '../../components/PathInfo';
+import { UserContext } from '../../context/UserProvider';
 
 export const Curriculum = () => {
 
   const [modal, setModal] = useState(false);
   const [typeModal, setTypeModal] = useState();
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     document.title = "ISPT - Gestión de plan de estudio";
@@ -24,10 +26,13 @@ export const Curriculum = () => {
         <PathInfo />
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
-          <button type="button" className="add-button"
-            onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); }}>
-            <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
-          </button>
+          {
+            user.role == "Directivo" ?
+              <button type="button" className="add-button"
+                onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); }}>
+                <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
+              </button> : undefined
+          }
         </div>
         <Table
           columns={[{
@@ -39,8 +44,11 @@ export const Curriculum = () => {
             width: 100
           }
           ]}
-          options={["academicYear",
-            { value: "edit", onclick: () => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); } }]}
+          options={user.role == "Directivo" ?
+            ["academicYear",
+              { value: "edit", onclick: () => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); } }]
+            : ["academicYear"]
+          }
           data={[
             {
               resolucion: "EE/11",

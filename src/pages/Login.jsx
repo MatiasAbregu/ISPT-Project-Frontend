@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import '../styles/pages/Login.css';
 import { useForm } from "react-hook-form";
 import LoginYUP from "../schemas/LoginYUP";
@@ -6,10 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { InputControl } from "../components/InputControl";
+import { UserContext } from '../context/UserProvider';
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const { user, login } = useContext(UserContext);
 
     useEffect(() => {
         document.title = "ISPT - Iniciar Sesión"
@@ -19,6 +21,12 @@ export const Login = () => {
 
     const onHandle = (e) => {
         console.log(e);
+        if (e.username.toLowerCase() == "directivo") login({ username: "Directivo", role: "Directivo" })
+        else if (e.username.toLowerCase() == "preceptor") login({ username: "Preceptor", role: "Preceptor" })
+        else if (e.username.toLowerCase() == "preceptor_auxiliar") login({ username: "Preceptor Auxiliar", role: "Preceptor_Auxiliar" })
+        else if (e.username.toLowerCase() == "docente") login({ username: "Docente", role: "Docente" })
+        else if (e.username.toLowerCase() == "estudiante") login({ username: "Estudiante", role: "Estudiante" })
+        else return;
         navigate("/inicio");
     }
 
