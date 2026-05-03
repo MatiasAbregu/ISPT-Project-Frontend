@@ -29,8 +29,9 @@ import { StudentExamDate } from './pages/studentExams/StudentExamDate'
 import { StudentsInDanger } from './pages/students-in-danger/StudentsInDanger'
 import { Attendance } from './pages/attendance/Attendance'
 import { SchoolYear } from './pages/schoolYear/SchoolYear'
-import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
+import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
+import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 
 function App() {
   return (
@@ -52,8 +53,9 @@ function App() {
         <Route path='/cargos' element={<Positions />} />
 
         <Route path='/ciclos-lectivos' element={<SchoolYear />} />
-        <Route path='/ciclos-lectivos/:id/comisiones' element={<SchoolYearSections />} />
-        <Route path='/ciclos-lectivos/:id/comisiones/:idSection/estudiantes' element={<SectionStudents />} />
+        <Route path='/ciclos-lectivos/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
+        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones' element={<SchoolYearSections />} />
+        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones/:idSection/estudiantes' element={<SectionStudents />} />
 
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 

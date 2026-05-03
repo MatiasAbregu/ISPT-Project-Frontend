@@ -46,7 +46,7 @@ export const SchoolYear = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/comisiones`) } }
+                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares`) } }
                     ]}
                     data={[
                         {

@@ -27,7 +27,8 @@ export const PathInfo = ({}) => {
         "mesas-examen": "Mesas de Examen",
         "comisiones": "Comisiones",
         "ciclos-lectivos": "Ciclos lectivos",
-        estudiantes: "Estudiantes"
+        estudiantes: "Estudiantes",
+        divisiones: "Divisiones"
     };
 
     const segments = url.pathname.split("/").filter(Boolean);
