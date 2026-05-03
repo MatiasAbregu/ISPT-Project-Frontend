@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import '../../styles/pages/schoolYear/schoolYear.css';
+import '../../styles/pages/schoolYear/SchoolYear.css';
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
