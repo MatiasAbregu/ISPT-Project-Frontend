@@ -75,6 +75,9 @@ export const Sidebar = () => {
                                 <NavLink to={"/carreras"} className={url.pathname.startsWith("/carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
                                 </NavLink>
+                                <NavLink to={"/ciclos-lectivos"} className={url.pathname.startsWith("/ciclos-lectivos") ? "activated" : ""}>
+                                    <span class="material-symbols-outlined">groups</span><li>Ciclos lectivos</li>
+                                </NavLink>
                                 <NavLink to={"/alumnos-riesgo"} className={url.pathname.startsWith("/alumnos-riesgo") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">person_alert</span><li>Estudiantes en <br /> riesgo</li>
                                 </NavLink>
