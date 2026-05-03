@@ -29,6 +29,7 @@ export const StudentsInDanger = () => {
                     { name: "DNI", width: 80 },
                     { name: "Estudiante", width: 130 },
                     { name: "Espacio curricular", width: 120 },
+                    { name: "Docente", width: 120 },
                     { name: "Riesgo", width: 80 },
                     { name: "Causa/s", width: 80 },
                     { name: "Estado", width: 80 }]}
@@ -40,11 +41,11 @@ export const StudentsInDanger = () => {
                     // POR AVISAR, AVISADO, JUSTIFICADO
                     data={[
                         {
-                            dni: 12345671, name: "Felipe Ferreyra", status: "Matemática I", fi: "Alto",
+                            dni: 12345671, name: "Felipe Ferreyra", status: "Matemática I", docente: "Juan Perez", fi: "Alto",
                             r: "80% de faltas y 2 parciales desaprobados", e: "Por avisar"
                         },
                         {
-                            dni: 12345672, name: "Juan Lopez", format: "Inglés", fi: "Medio",
+                            dni: 12345672, name: "Juan Lopez", format: "Inglés", docente: "Maria Garcia", fi: "Medio",
                             r: "40% de faltas y 1 parcial desaprobado", e: "Avisado"
                         },
                     ]}

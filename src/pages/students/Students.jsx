@@ -64,7 +64,7 @@ export const Students = () => {
                             { value: "ubication", onclick: () => { setTypeModal(<UbicationModal setModal={setModal} />); setModal(true); } },
                             { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
                             { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } },
-                            "delete"]}
+                            ]}
                         data={[
                             {
                                 legajo: "TR-2025",
