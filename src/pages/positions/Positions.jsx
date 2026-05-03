@@ -54,8 +54,7 @@ export const Positions = () => {
                     ]} options={[
                         { value: "eye", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={2} />); setModal(true); } },
                         { value: "edit", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={3} />); setModal(true); } },
-                        { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
-                        { value: "ubication", onclick: () => { setTypeModal(<UbicationModal setModal={setModal} />); setModal(true); } },
+                        { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },   
                         "delete",]}
                     data={[
                         {

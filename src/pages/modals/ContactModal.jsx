@@ -14,14 +14,17 @@ export const ContactModal = ({ setModal }) => {
       <h4>Contacto</h4>
       <div className="contactFormContainer">
         <form>
-          <InputControl type={"tel"} icon={"local_hospital"}>
-            Número de emergencias
+          <InputControl type={"email"} icon={"email"}>
+            Correo electrónico de la persona
           </InputControl>
           <InputControl type={"tel"} icon={"phone"} >
-            Número de celular
+            Número de celular de la persona
           </InputControl>
-          <InputControl type={"email"} icon={"email"}>
-            Correo electrónico
+          <InputControl type={"tel"} icon={"local_hospital"}>
+            Número del contacto de emergencia
+          </InputControl>
+          <InputControl type={"text"} icon={"person"}>
+            Persona asociada al contacto de emergencia
           </InputControl>
           <div className='buttonContainer'>
             {

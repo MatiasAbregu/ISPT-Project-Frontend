@@ -42,15 +42,10 @@ export const Correlatives = () => {
             options={[{ key: 1, value: "1° año" }, { key: 2, value: "2° año" }, { key: 3, value: "3° año" }]}>
             Año del plan
           </ComboControl>
-          <ComboControl icon={"wb_twilight"} notShowLabel={true}
-            options={[{ key: 1, value: "Mañana" }, { key: 2, value: "Tarde" }]}>
-            Turno
-          </ComboControl>
         </div>
         <Table columns={[
-          { name: "CUPOF", width: 120 },
+          { name: "Código", width: 120 },
           { name: "Nombre", width: 150 },
-          { name: "División", width: 100 },
           { name: "Formato", width: 150 },
           { name: "Correlativa", width: 100 }]}
           options={[
@@ -64,8 +59,8 @@ export const Correlatives = () => {
           ]}
           checkboxs={true}
           data={[
-            { codigo: 123456789124, name: "Matématicas II", division: "A", format: "Asignatura", c: { c: "¿Correlativa?", check: true } },
-            { codigo: 123456789125, name: "Pedagogía", division: "A", format: "Seminario", c: { c: "¿Correlativa?", check: true } }
+            { codigo: "MAT-02", name: "Matématicas II", format: "Asignatura", c: { c: "¿Correlativa?", check: true } },
+            { codigo: "PD-01", name: "Pedagogía", format: "Seminario", c: { c: "¿Correlativa?", check: true } }
           ]}
         />
         <Footer />

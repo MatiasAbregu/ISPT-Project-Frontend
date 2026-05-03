@@ -52,8 +52,6 @@ export const Home = () => {
                                     :
                                     <></>
                             }
-                            <BarChart fields={["Titular", "Suplentes", "Interino", "EACI"]} values={[10, 1, 1, 0]} label={"Docentes"}
-                                text={"Docentes por situación de revista"} stepSize={1} />
                         </>) : <></>
 
                     }

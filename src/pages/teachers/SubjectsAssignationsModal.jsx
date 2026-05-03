@@ -5,8 +5,8 @@ import { InputControl } from '../../components/InputControl'
 export const SubjectsAssignationsModal = ({ setModal }) => {
 
     const [subjects, setSubjects] = useState([
-        { cupof: "123456789123", career: "Profesorado", subject: "Matemática I", sr: "Titular" },
-        { cupof: "123456789128", career: "Profesorado", subject: "Matemática II", sr: "Suplente" }
+        { career: "Profesorado", subject: "Matemática I", al: "2026" },
+        { career: "Profesorado", subject: "Matemática II", al: "2026" }
     ]);
 
     return (
@@ -24,9 +24,8 @@ export const SubjectsAssignationsModal = ({ setModal }) => {
                                         <hr />
                                         <ul>
                                             <li><span className='underline'>Carrera</span>: {v.career}</li>
-                                            <li><span className='underline'>Cupof</span>: {v.cupof}</li>
                                             <li><span className='underline'>Espacio curricular</span>: {v.subject}</li>
-                                            <li><span className='underline'>Situación revista</span>: {v.sr}</li>
+                                            <li><span className='underline'>Año lectivo</span>: {v.al}</li>
                                         </ul>
                                     </div>);
                             })
