@@ -26,7 +26,7 @@ export const SectionStudents = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => {  }}>
+                        onClick={() => { }}>
                         <span className="material-symbols-outlined">add_circle</span>Inscribir estudiante
                     </button>
                 </div>

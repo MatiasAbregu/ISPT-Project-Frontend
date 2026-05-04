@@ -30,8 +30,10 @@ import { StudentsInDanger } from './pages/students-in-danger/StudentsInDanger'
 import { Attendance } from './pages/attendance/Attendance'
 import { SchoolYear } from './pages/schoolYear/SchoolYear'
 import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
+import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
+import { StudentSections } from './pages/students/StudentSections'
 
 function App() {
   return (
