@@ -28,19 +28,15 @@ export const SchoolYearSections = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => {  }}>
+                        onClick={() => { }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir comisión
                     </button>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "Espacio curricular",
-                            width: 120
-                        },
-                        {
                             name: "División",
-                            width: 80
+                            width: 120
                         },
                         {
                             name: "Docente",
@@ -48,24 +44,27 @@ export const SchoolYearSections = () => {
                         },
                         {
                             name: "Cantidad de alumnos",
-                            width: 80
+                            width: 120
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/comisiones/1/estudiantes`) } }
+                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones/1/estudiantes`) } }
                     ]}
                     data={[
                         {
-                            materia: "Matemática",
                             division: "A",
                             docente: "Juan Pérez",
-                            cantidadAlumnos: 30
+                            alumnos: "30"
                         },
                         {
-                            materia: "Lengua",
                             division: "B",
                             docente: "María García",
-                            cantidadAlumnos: 25
+                            alumnos: "25"
+                        },
+                        {
+                            division: "C",
+                            docente: "Pedro López",
+                            alumnos: "28"
                         }
                     ]}
                 />

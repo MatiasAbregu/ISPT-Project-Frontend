@@ -1,67 +1,66 @@
 import React, { useContext, useEffect, useState } from 'react'
+import '../../styles/pages/schoolYear/SchoolYearSubjects.css';
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
+import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/pages/schoolYear/SchoolYear.css';
-import { SchoolYearModal } from './SchoolYearModal';
 
-export const SchoolYear = () => {
+export const SchoolYearSubjects = () => {
 
-    const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
     }, []);
 
     return (
-        <article className='schoolYearPage'>
+        <article className='schoolYearSubjectsPage'>
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
-            <div className='schoolYearPageContainer'>
+            <div className='schoolYearSubjectsPageContainer'>
+                <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button type="button" className="add-button"
-                        onClick={() => {
-                            setTypeModal(<SchoolYearModal setModal={setModal} />);
-                            setModal(true);
-                        }}>
-                        <span className="material-symbols-outlined">add_circle</span>Añadir ciclo lectivo
-                    </button>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "Carrera",
+                            name: "Espacio curricular",
                             width: 120
                         },
                         {
-                            name: "Plan de estudio",
-                            width: 120
+                            name: "Año",
+                            width: 80
                         },
                         {
-                            name: "Año lectivo",
-                            width: 120
+                            name: "Cantidad de comisiones",
+                            width: 80
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares`) } }
+                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones`) } }
                     ]}
                     data={[
                         {
-                            carrera: "Profesorado",
-                            plan: "Plan 2024 (Res. EE/11)",
-                            anio: "2026"
+                            materia: "Matemática I",
+                            año: "1°",
+                            comisiones: "3"
                         },
                         {
-                            carrera: "Trayecto",
-                            plan: "Plan 2025 (Res. EE/25)",
-                            anio: "2026"
+                            materia: "Lengua",
+                            año: "1°",
+                            comisiones: "2"
+                        },
+                        {
+                            materia: "Matemática II",
+                            año: "2°",
+                            comisiones: "2"
                         }
                     ]}
                 />

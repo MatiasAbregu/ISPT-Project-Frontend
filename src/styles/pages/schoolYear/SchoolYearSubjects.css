@@ -1,15 +1,15 @@
-.schoolYearSectionsPage{
+.schoolYearSubjectsPage{
     width: 100%;
     display: flex;
 }
 
-.schoolYearSectionsPageContainer {
+.schoolYearSubjectsPageContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.schoolYearSectionsPage .controls {
+.schoolYearSubjectsPage .controls {
     display: flex;
     width: 98%;
     margin: 1% 1% 0 1%;
@@ -17,13 +17,13 @@
     align-items: center;
 }
 
-.schoolYearSectionsPage .controls .inputControl {
+.schoolYearSubjectsPage .controls .inputControl {
     margin: 0;
     min-width: 250px;
     width: 30%;
 }
 
-.schoolYearSectionsPage .schoolYearSectionsPageContainer .add-button {
+.schoolYearSubjectsPage .schoolYearSubjectsPageContainer .add-button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,18 +36,17 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.schoolYearSectionsPage .schoolYearSectionsPageContainer .add-button span {
+.schoolYearSubjectsPage .schoolYearSubjectsPageContainer .add-button span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.schoolYearSectionsPage .schoolYearSectionsPageContainer .add-button:hover {
+.schoolYearSubjectsPage .schoolYearSubjectsPageContainer .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.schoolYearSectionsPage .schoolYearSectionsPageContainer .add-button:hover span {
+.schoolYearSubjectsPage .schoolYearSubjectsPageContainer .add-button:hover span {
     transform: rotateZ(180deg);
 }
-
