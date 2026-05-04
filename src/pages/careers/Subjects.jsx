@@ -28,7 +28,6 @@ export const Subjects = () => {
                 <PathInfo />
                 <div className='controls'>
                     <InputControl icon={"search"} type={"search"}></InputControl>
-
                     {
                         user.role == "Directivo" ?
                             <button type="button" className="add-button"
@@ -39,7 +38,6 @@ export const Subjects = () => {
                                 <span className="material-symbols-outlined">add_circle</span>Añadir espacio curricular
                             </button> : undefined
                     }
-
                 </div>
                 {
                     turn ?

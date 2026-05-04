@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import '../../styles/pages/schoolYear/SchoolYear.css';
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/pages/schoolYear/SchoolYear.css';
+import { SchoolYearModal } from './SchoolYearModal';
 
 export const SchoolYear = () => {
 
@@ -26,7 +27,10 @@ export const SchoolYear = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => {  }}>
+                        onClick={() => {
+                            setTypeModal(<SchoolYearModal setModal={setModal} />);
+                            setModal(true);
+                        }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir ciclo lectivo
                     </button>
                 </div>

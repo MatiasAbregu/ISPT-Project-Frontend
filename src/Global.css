@@ -1,7 +1,3 @@
-* {
-    user-select: none;
-}
-
 body {
     background: linear-gradient(160deg, #6f2c7e, #d32abc 60%);
     margin: 0;
