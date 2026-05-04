@@ -10,6 +10,7 @@ import { DegreesModal } from "../modals/DegreesModal";
 import { ContactModal } from "../modals/ContactModal";
 import { UbicationModal } from "../modals/UbicationModal";
 import { ObservationModal } from "../modals/ObservationModal";
+import { FolderModal } from "./FolderModal";
 
 export const Students = () => {
 
@@ -36,8 +37,8 @@ export const Students = () => {
                     <Table
                         columns={[
                             {
-                                name: "Legajo",
-                                width: 50
+                                name: "N° de documento",
+                                width: 80
                             },
                             {
                                 name: "Apellido",
@@ -50,15 +51,12 @@ export const Students = () => {
                             {
                                 name: "Tipo de documento",
                                 width: 80
-                            },
-                            {
-                                name: "N° de documento",
-                                width: 80
                             }
                         ]}
                         options={[
                             { value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
                             { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} />); setModal(true); } },
+                            { value: "folder", onclick: () => { setTypeModal(<FolderModal setModal={setModal} />); setModal(true); } },
                             { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
                             { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },                       
                             { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
@@ -66,25 +64,25 @@ export const Students = () => {
                             ]}
                         data={[
                             {
-                                legajo: "TR-2025",
+                                documentNumber: 12345671,
                                 lastname: "Ferreyra",
                                 firstname: "Felipe",
                                 documentType: "DNI",
-                                documentNumber: 12345671
+                               
                             },
                             {
-                                legajo: "TR-2026",
+                                documentNumber: 12345672,
                                 lastname: "Lopez",
                                 firstname: "Juan",
                                 documentType: "DNI",
-                                documentNumber: 12345672
+                                
                             },
                             {
-                                legajo: "PT-2023",
+                                documentNumber: 12345673,
                                 lastname: "Sanchez",
                                 firstname: "María",
                                 documentType: "DNI",
-                                documentNumber: 12345673
+            
                             },
                         ]} />
                 </div>

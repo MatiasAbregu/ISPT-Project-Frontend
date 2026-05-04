@@ -259,6 +259,11 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 pinboard
                                                             </span>)
+                                                        else if (v.value == "folder")
+                                                            return (<span className="material-symbols-outlined tableBtnBlue"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                folder
+                                                            </span>)
                                                     })
                                                 }
                                             </div>

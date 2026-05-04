@@ -1,0 +1,132 @@
+.folderModal {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.folderModal h4 {
+    color: white;
+}
+
+.folderModal form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 540px;
+    width: 80%;
+}
+
+.folderModal span.close {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    z-index: 10;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.folderModal span.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+.folderList {
+    background-color: white;
+    width: 80%;
+    border-radius: 20px;
+    display: flex;
+    padding: 10px 0 60px 0;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.folderModal .add-button {
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+    border: 2px solid #6f2c7e;
+    align-self: flex-end;
+    display: flex;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.folderModal .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.1);
+    border: 2px solid #2dca2d;
+}
+
+
+.folderList {
+    background-color: white;
+    width: 40%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.folderCard {
+    width: 80%;
+    border-radius: 15px;
+    border: 2px solid #6f2c7e;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.folderHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.folderHeader h5 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.folderIcon {
+    color: #6f2c7e;
+    font-size: 1.6rem;
+}
+
+.folderBody p {
+    margin: 2px 0;
+    font-size: 0.95rem;
+}
+
+.folderCard.inactive {
+    border-color: #ccc;
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+
+.folderCard.inactive .folderIcon {
+    color: #999;
+}
+
+.badge.inactive {
+    margin-left: auto;
+    background-color: #999;
+    color: white;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
