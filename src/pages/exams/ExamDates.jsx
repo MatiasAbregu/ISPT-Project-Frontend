@@ -56,7 +56,9 @@ export const ExamDates = () => {
                             name: "Folio",
                             width: 160
                         }
-                    ]} options={user.role == "Docente" ? [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }] : ["delete"]}
+                    ]} options={
+                        user.role == "Docente" ? [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]
+                            : [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }, "delete"]}
                     data={user.role == "Directivo" ?
                         [
                             {

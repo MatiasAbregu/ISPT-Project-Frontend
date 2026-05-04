@@ -42,6 +42,18 @@ export const Curriculum = () => {
           {
             name: "Duración",
             width: 100
+          },
+          {
+            name: "Fecha de lanzamiento",
+            width: 110
+          },
+          {
+            name: "Fecha en qué entro en vigencia",
+            width: 100
+          },
+          {
+            name: "Fecha dónde terminó",
+            width: 110
           }
           ]}
           options={user.role == "Directivo" ?
@@ -52,11 +64,17 @@ export const Curriculum = () => {
           data={[
             {
               resolucion: "EE/11",
-              duracion: "3 años"
+              duracion: "3 años",
+              dateStart: "01/03/2011",
+              dateOk: "04/04/2011",
+              dateEnd: "31/12/2020"
             },
             {
               resolucion: "EE/2025",
-              duracion: "2 años"
+              duracion: "2 años",
+              dateStart: "01/02/2025",
+              dateOk: "03/02/2025",
+              dateEnd: "----"
             }
           ]}
         />

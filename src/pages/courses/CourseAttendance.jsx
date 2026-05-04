@@ -58,7 +58,7 @@ export const CourseAttendance = () => {
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button className="add-button">
+                    <button className="add-button" onClick={() => { navigate(getPath()) }}>
                         Añadir día actual
                     </button>
                 </div>
