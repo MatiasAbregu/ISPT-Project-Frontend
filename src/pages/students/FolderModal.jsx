@@ -1,7 +1,9 @@
 import React from 'react'
 import '../../styles/pages/students/FolderModal.css'
+import { useNavigate } from 'react-router';
 
 export const FolderModal = ({ setModal, onSelect }) => {
+    const navigate = useNavigate();
 
     const folders = [
   {
@@ -33,7 +35,6 @@ export const FolderModal = ({ setModal, onSelect }) => {
                     <div 
                         key={index} 
                         className={`folderCard ${!f.activo ? "inactive" : ""}`}
-                        onClick={() => f.activo && onSelect(f)}
                     >
                         <div className="folderHeader">
                             <span className="material-symbols-outlined folderIcon">folder</span>
@@ -46,8 +47,8 @@ export const FolderModal = ({ setModal, onSelect }) => {
                             <p><strong>Plan:</strong> {f.plan}</p>
                         </div>
 
-                        <button className="add-button">
-                            Ver comisiones
+                        <button className="add-button" onClick={() => navigate(`/estudiantes/1/espacios-curriculares`)}>
+                            Ver espacios curriculares
                         </button>
                     </div>
                 ))}

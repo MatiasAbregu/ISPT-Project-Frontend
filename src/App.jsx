@@ -32,6 +32,7 @@ import { SchoolYear } from './pages/schoolYear/SchoolYear'
 import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
+import { StudentSections } from './pages/students/StudentSections'
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
         <Route path='/inicio' element={<Home />} />
 
         <Route path='/estudiantes' element={<Students />} />
+        <Route path='/estudiantes/:id/espacios-curriculares' element={<StudentSections />} />
+        
         <Route path='/inscripciones-carreras' element={<Enrollments />} />
         <Route path='/inscripciones-carreras/:id/materias' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
