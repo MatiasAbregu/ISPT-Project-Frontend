@@ -168,20 +168,20 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                     home_storage
                                                                 </span>
                                                             </NavLink>)
-                                                        else if (v == "teacher")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/123456789123/asignaciones"}>
+                                                        else if (v == "commission")
+                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/divisiones"}>
                                                                 <span className="material-symbols-outlined tableBtnLightGreen">
-                                                                    co_present
+                                                                    group_work
                                                                 </span>
                                                             </NavLink>)
-                                                        else if (v == "teacher2")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/123456789123/correlativas/123456789124/asignaciones"}>
+                                                        else if (v == "teacher")
+                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/divisiones/A/asignaciones"}>
                                                                 <span className="material-symbols-outlined tableBtnLightGreen">
                                                                     co_present
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v.value == "correlatives")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/123456789123/correlativas"}>
+                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/correlativas"}>
                                                                 <span className="material-symbols-outlined tableBtnOrange">
                                                                     sync_alt
                                                                 </span>

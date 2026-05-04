@@ -59,7 +59,7 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                "teacher",
+                                "commission",
                                 { value: "correlatives" }
                             ] : [
                                 {
@@ -68,7 +68,7 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                "teacher",
+                                "commission",
                                 { value: "correlatives" }
                             ]}
                             data={[

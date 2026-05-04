@@ -54,8 +54,7 @@ export const Correlatives = () => {
                 setTypeModal(<SubjectModal typeModal={2} setModal={setModal} />);
                 setModal(true);
               }
-            },
-            "teacher2"
+            }
           ]}
           checkboxs={true}
           data={[

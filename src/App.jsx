@@ -31,6 +31,7 @@ import { Attendance } from './pages/attendance/Attendance'
 import { SchoolYear } from './pages/schoolYear/SchoolYear'
 import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
+import { Commissions } from './pages/careers/Commissions'
 
 function App() {
   return (
@@ -61,9 +62,10 @@ function App() {
         <Route path='/carreras/plan-de-estudio' element={<Curriculum />} />
         <Route path='/carreras/plan-de-estudio/ciclo-academico' element={<AcademicYear />} />
         <Route path='/carreras/plan-de-estudio/ciclo-academico/:id/espacios-curriculares' element={<Subjects />} />
-        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/asignaciones' element={<Assignations />} />
-        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas' element={<Correlatives />} />
-        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:cupof/correlativas/:cupof2/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:id/divisiones'
+          element={<Commissions />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:id/divisiones/:commission/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/plan-de-estudio/ciclo-academico/:idCA/espacios-curriculares/:id/correlativas' element={<Correlatives />} />
 
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />
@@ -75,7 +77,7 @@ function App() {
 
         <Route path='/mesas-examen' element={<ExamDates />} />
         <Route path='/mesas-examen/:id/notas' element={<ExamGrades />} />
-        
+
         <Route path='/asistencias-cursos' element={<Attendance />} />
         <Route path='/asistencias-cursos/:id/asistencia' element={<CourseAttendance />} />
         <Route path='/asistencias-cursos/:id/asistencia/:fecha' element={<DailyAttendance />} />
