@@ -27,10 +27,6 @@ export const SchoolYearSections = () => {
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button type="button" className="add-button"
-                        onClick={() => { }}>
-                        <span className="material-symbols-outlined">add_circle</span>Añadir comisión
-                    </button>
                 </div>
                 <Table
                     columns={[
@@ -48,7 +44,8 @@ export const SchoolYearSections = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones/1/estudiantes`) } }
+                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones/1/estudiantes`) } },
+                        { value: "schedule"}
                     ]}
                     data={[
                         {

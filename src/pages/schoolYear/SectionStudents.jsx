@@ -50,7 +50,7 @@ export const SectionStudents = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { } }
+                        "delete"
                     ]}
                     data={[
                         {

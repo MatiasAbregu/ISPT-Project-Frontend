@@ -38,6 +38,7 @@ export const PathInfo = ({}) => {
             {segments.map((s, i) => {
 
                 const isId = !isNaN(s);
+                const isInfo = s === "A";
                 if (isId) return;
 
                 const label = translations[s] || s;
@@ -52,10 +53,16 @@ export const PathInfo = ({}) => {
                     <span key={i}>
                         {i > 0 && " > "}
 
+                        
+
                         {isLast ? (
                             <span>{label}</span>
                         ) : (
-                            <Link to={pathTo}>{label}</Link>
+                            isInfo ? (
+                                <span>{label}</span>
+                            ) : (
+                                <Link to={pathTo}>{label}</Link>
+                            )
                         )}
                     </span>
                 );

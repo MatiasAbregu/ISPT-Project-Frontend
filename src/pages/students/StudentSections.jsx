@@ -36,23 +36,26 @@ export const StudentSections = () => {
                         {
                             name: "Estado",
                             width: 120
+                        },
+                        {
+                            name: "Riesgo",
+                            width: 120
                         }
-                    ]}
-                    options={[
-                        { value: "eye", onclick: () => { } }
                     ]}
                     data={[
                         {
                             espacioCurricular: "Matemática I",
                             division: "A",
                             anioLectivo: "2026",
-                            estado: "Regular"
+                            estado: "Regular",
+                            riesgo: "Bajo"
                         },
                         {
                             espacioCurricular: "Lengua",
                             division: "A",
                             anioLectivo: "2026",
-                            estado: "Libre"
+                            estado: "Libre",
+                            riesgo: "Alto"
                         }
                     ]}
                 />
