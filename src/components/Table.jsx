@@ -135,7 +135,7 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                             return (<span key={i} className="material-symbols-outlined tableBtnLightBlue" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
                                                         else if (v.value == "edit")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnGreen"
-                                                                onClick={v.onclick ? v.onclick : undefined}>edit</span>
+                                                                onClick={() => v.onclick && v.onclick(obj)}>edit</span>
                                                             );
                                                         else if (v == "delete" || v == "remove")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnRed">delete</span>);

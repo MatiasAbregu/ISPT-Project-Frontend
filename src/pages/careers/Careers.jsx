@@ -6,16 +6,24 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { CareerModal } from './CareerModal';
 import { UserContext } from '../../context/UserProvider';
+import CareersService from '../../services/careers/careers';
 
 export const Careers = () => {
 
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de carreras";
+        getAllCareers();
     }, []);
+
+    const getAllCareers = async () => {
+        const response = await CareersService.getAll();
+        setData(response.data);
+    }
 
     return (
         <article className='careersPage'>
@@ -25,7 +33,7 @@ export const Careers = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     {user.role == "Directivo" ? <button type="button" className="add-button"
-                        onClick={() => { setTypeModal(<CareerModal setModal={setModal} />); setModal(true); }}>
+                        onClick={() => { setTypeModal(<CareerModal setModal={setModal} typeModal="add" getAll={getAllCareers}/>); setModal(true); }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir carrera
                     </button> : undefined}
                 </div>
@@ -38,24 +46,30 @@ export const Careers = () => {
                         {
                             name: "Carrera",
                             width: 180
+                        },
+                        {
+                            name: "Titulo",
+                            width: 180
                         }
                     ]}
                     options={
                         user.role == "Directivo" ?
                             ["curriculum",
-                                { value: "edit", onclick: () => { setTypeModal(<CareerModal setModal={setModal} />); setModal(true); } }]
+                                {value: "edit",
+    onclick: (obj) => {
+        setTypeModal(
+            <CareerModal
+                setModal={setModal}
+                typeModal="edit"
+                careerId={obj.id}
+                getAll={getAllCareers}
+            />
+        );
+        setModal(true);
+    } }]
                             :
                             ["curriculum"]}
-                    data={[
-                        {
-                            codigo: "1",
-                            carrera: "Profesorado"
-                        },
-                        {
-                            codigo: "2",
-                            carrera: "Trayecto"
-                        }
-                    ]}
+                    data={data}
                 />
                 <Footer />
             </div>

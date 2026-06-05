@@ -50,7 +50,6 @@ export const Teachers = () => {
               }
             ]} options={[
               { value: "eye", onclick: () => { setTypeModal(<TeacherModal setModal={setModal} typeModal={2} />); setModal(true); } },
-              { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} typeDoc={"teacher"} />); setModal(true); } },
               { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
               { value: "subjectsTeacher", onclick: () => { setTypeModal(<SubjectsAssignationsModal setModal={setModal} typeModal={3} />); setModal(true); } },
               { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
