@@ -7,9 +7,11 @@ import { Sidebar } from '../../components/Sidebar';
 import { CareerModal } from './CareerModal';
 import { UserContext } from '../../context/UserProvider';
 import CareersService from '../../services/careers/careers';
+import { useNavigate } from 'react-router-dom';
 
 export const Careers = () => {
 
+    const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
@@ -33,7 +35,7 @@ export const Careers = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     {user.role == "Directivo" ? <button type="button" className="add-button"
-                        onClick={() => { setTypeModal(<CareerModal setModal={setModal} typeModal="add" getAll={getAllCareers}/>); setModal(true); }}>
+                        onClick={() => { setTypeModal(<CareerModal setModal={setModal} typeModal="add" getAll={getAllCareers} />); setModal(true); }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir carrera
                     </button> : undefined}
                 </div>
@@ -54,19 +56,21 @@ export const Careers = () => {
                     ]}
                     options={
                         user.role == "Directivo" ?
-                            ["curriculum",
-                                {value: "edit",
-    onclick: (obj) => {
-        setTypeModal(
-            <CareerModal
-                setModal={setModal}
-                typeModal="edit"
-                careerId={obj.id}
-                getAll={getAllCareers}
-            />
-        );
-        setModal(true);
-    } }]
+                            [{ value: "curriculum", onclick: (obj) => { navigate(`/carreras/${obj.id}/plan-de-estudio`) }},
+                                {
+                                value: "edit",
+                                onclick: (obj) => {
+                                    setTypeModal(
+                                        <CareerModal
+                                            setModal={setModal}
+                                            typeModal="edit"
+                                            careerId={obj.id}
+                                            getAll={getAllCareers}
+                                        />
+                                    );
+                                    setModal(true);
+                                }
+                            }]
                             :
                             ["curriculum"]}
                     data={data}

@@ -4,7 +4,7 @@ import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
 import { ComboControl } from "./ComboControl";
 
-export const Table = ({ columns, data, options, checkboxs }) => {
+export const Table = ({ columns, data, options, checkboxs, showId, showForeignKeys }) => {
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -114,9 +114,12 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                     data ?
                         data.map((obj, i) =>
                             <tr key={i}>
-                                {
+                                { 
                                     checkboxs ?
                                         Object.entries(obj).map(([key, value], i2) => {
+                                            if (showId === false && key === 'id') {
+                                                return null;
+                                            }
                                             if (value.check == true) {
                                                 return (<td key={i2}>
                                                     <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2} /></div>
@@ -124,7 +127,12 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                             } else
                                                 return (<td key={i2}>{value}</td>);
                                         })
-                                        : Object.entries(obj).map(([key, value], i2) => <td key={i2}>{value}</td>)
+                                        : Object.entries(obj).map(([key, value], i2) => {
+                                            if (showId === false && key === 'id') {
+                                                return null;
+                                            }
+                                            return (<td key={i2}>{value}</td>);
+                                        })
                                 }{
                                     options ?
                                         <td>
@@ -132,7 +140,8 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                 {
                                                     options.map((v, i) => {
                                                         if (v.value == "eye")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightBlue" onClick={v.onclick ? v.onclick : undefined}>visibility</span>);
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightBlue" 
+                                                                onClick={() => v.onclick && v.onclick(obj)}>visibility</span>);
                                                         else if (v.value == "edit")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>edit</span>
@@ -150,18 +159,20 @@ export const Table = ({ columns, data, options, checkboxs }) => {
                                                                 onClick={v.onclick ? v.onclick : undefined}>
                                                                 docs
                                                             </span>);
-                                                        else if (v == "curriculum")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple">
+                                                        else if (v.value == "curriculum")
+                                                            return (
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple"
+                                                                 onClick={() => v.onclick && v.onclick(obj)}>
                                                                     two_pager
                                                                 </span>
-                                                            </NavLink>)
-                                                        else if (v == "academicYear")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico"}>
-                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple">
+                                                            );
+                                                        else if (v.value == "academicYear")
+                                                            return (
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightPurple"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
                                                                     two_pager
                                                                 </span>
-                                                            </NavLink>)
+                                                            )
                                                         else if (v == "subjects")
                                                             return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares"}>
                                                                 <span className="material-symbols-outlined tableBtnPurple">

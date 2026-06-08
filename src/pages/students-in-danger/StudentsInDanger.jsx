@@ -45,7 +45,7 @@ export const StudentsInDanger = () => {
                             r: "80% de faltas y 2 parciales desaprobados", e: "Por avisar"
                         },
                         {
-                            dni: 12345672, name: "Juan Lopez", format: "Inglés", docente: "Maria Garcia", fi: "Medio",
+                            dni: 12345672, name: "Juan Lopez", status: "Inglés", docente: "Maria Garcia", fi: "Medio",
                             r: "40% de faltas y 1 parcial desaprobado", e: "Avisado"
                         },
                     ]}

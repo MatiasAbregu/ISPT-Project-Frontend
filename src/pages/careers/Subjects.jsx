@@ -7,6 +7,9 @@ import { Sidebar } from '../../components/Sidebar';
 import { SubjectModal } from './SubjectModal';
 import { UserContext } from '../../context/UserProvider';
 import '../../styles/pages/careers/Subjects.css';
+import SubjectService from '../../services/careers/subjects';
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export const Subjects = () => {
 
@@ -15,11 +18,23 @@ export const Subjects = () => {
     const [turn, setTurn] = useState("Mañana")
     const [academicYear, setAcademicYear] = useState(1);
     const { user } = useContext(UserContext);
+    const { idCurriculum } = useParams();
+    const navigate = useNavigate();
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de espacios curriculares en plan de estudio";
-    }, []);
+        getAllSubjects();
+        
+    });
 
+    const getAllSubjects = async () => {
+        const response = await SubjectService.getByCurriculumId(idCurriculum);
+        setData(response.data);
+    }
+    
+    const tableData = data.map(({ type, duration, ...rest }) => rest);
+    ///carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares  
     return (
         <article className='subjectsPage'>
             <Sidebar />
@@ -32,7 +47,7 @@ export const Subjects = () => {
                         user.role == "Directivo" ?
                             <button type="button" className="add-button"
                                 onClick={() => {
-                                    setTypeModal(<SubjectModal typeModal={1} academicYear={academicYear} setModal={setModal} />);
+                                    setTypeModal(<SubjectModal typeModal={"add"} setModal={setModal} curriculumId = {idCurriculum} getByCurriculumId={getAllSubjects} />);
                                     setModal(true);
                                 }}>
                                 <span className="material-symbols-outlined">add_circle</span>Añadir espacio curricular
@@ -44,18 +59,19 @@ export const Subjects = () => {
                         <Table columns={[
                             { name: "Código", width: 120 },
                             { name: "Nombre", width: 150 },
+                            { name: "Año académico", width: 150},
                             { name: "Formato", width: 150 }]}
                             options={user.role == "Directivo" ? [
                                 {
-                                    value: "eye", onclick: () => {
-                                        setTypeModal(<SubjectModal typeModal={2} academicYear={academicYear} setModal={setModal} />);
+                                    value: "eye", onclick: (obj) => {
+                                        setTypeModal(<SubjectModal typeModal={"view"} setModal={setModal} curriculumId={idCurriculum} subjectId={obj.id} getByCurriculumId={getAllSubjects} />);
                                         setModal(true);
                                     }
                                 },
                                 {
                                     value: "edit",
-                                    onclick: () => {
-                                        setTypeModal(<SubjectModal typeModal={3} academicYear={academicYear} setModal={setModal} />);
+                                    onclick: (obj) => {
+                                        setTypeModal(<SubjectModal typeModal={"edit"} setModal={setModal} curriculumId={idCurriculum} subjectId={obj.id} getByCurriculumId={getAllSubjects} />);
                                         setModal(true);
                                     }
                                 },
@@ -63,19 +79,18 @@ export const Subjects = () => {
                                 { value: "correlatives" }
                             ] : [
                                 {
-                                    value: "eye", onclick: () => {
-                                        setTypeModal(<SubjectModal typeModal={2} academicYear={academicYear} setModal={setModal} />);
+                                    value: "eye", onclick: (obj) => {
+                                        setTypeModal(<SubjectModal typeModal={"view"} setModal={setModal} curriculumId={idCurriculum} subjectId={obj.id} getByCurriculumId={getAllSubjects} />);
                                         setModal(true);
                                     }
                                 },
                                 "commission",
                                 { value: "correlatives" }
                             ]}
-                            data={[
-                                { code: "MAT-01", name: "Matématicas I", format: "Asignatura" },
-                                { codigo: "MAT-02", name: "Matématicas II", format: "Asignatura" },
-                                { codigo: "PD-01", name: "Pedagogía", format: "Seminario" }
-                            ]}
+
+                            showId={false}
+
+                            data={tableData}
                         />
                         : undefined
                 }

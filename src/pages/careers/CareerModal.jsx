@@ -9,7 +9,7 @@ import CareersService from '../../services/careers/careers'
 
 export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
 
-    const { data, register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(CareerYUP) })
+    const { data, register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(CareerYUP) })
 
     const onSubmit = async (data) => {
         if (typeModal === "add") {
@@ -21,6 +21,24 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
         setModal(false)
         await getAll()
     }
+
+     const loadCareer = async () => {
+        const response = await CareersService.getById(careerId);
+
+        const career = response.data;
+
+        reset({
+            Name: career.name,
+            Title: career.title
+        });
+
+    }
+
+    useEffect(() => {
+        if (typeModal === "edit") {
+            loadCareer();
+        }
+    }, [typeModal]);
 
     return (
         <article className="careerModal">

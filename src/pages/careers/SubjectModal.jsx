@@ -8,49 +8,77 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import SubjectYUP from '../../schemas/SubjectYUP'
 import { TimeControl } from '../../components/TimeControl'
 import '../../styles/pages/careers/SubjectModal.css'
+import SubjectService from '../../services/careers/subjects'
 
-export const SubjectModal = ({ setModal, typeModal, academicYear = 1 }) => {
+export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, getByCurriculumId }) => {
 
     const [step, setStep] = useState(0);
 
-    const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(SubjectYUP),
-        defaultValues: typeModal != 1 ? {
-            code: "MAT-01",
-            academicYear: academicYear,
-            nameSubject: "Matemáticas I",
-            subjectType: "Asignatura",
-            typeSemester: "Anual",
-            turn: "Mañana",
-            division: "A",
-            startTime: "11:00",
-            endTime: "13:00",
-            professorship: 3,
-            observations: ""
-        } : { academicYear: academicYear }
-    });
+    const { register, handleSubmit, formState: { errors }, setValue, getValues, reset } = useForm({ resolver: yupResolver(SubjectYUP) });
+
+        useEffect(() => {
+            if (typeModal === "add" || !subjectId) return;
+
+            loadSubject();
+        }, [subjectId, typeModal]);
+
+
+    const onSubmit = async (data) => {
+
+        data = {
+            ...data,
+            CurriculumId: curriculumId
+        }
+
+        console.log(data);
+        if (typeModal === "add") {
+            await SubjectService.create(data)
+        } else {
+            data = { ...data, Id: subjectId }
+            await SubjectService.update(subjectId, data)
+        }
+        setModal(false)
+        await getByCurriculumId(curriculumId)
+    }
+
+    const loadSubject = async () => {
+        const response = await SubjectService.getById(subjectId);
+
+        const subject = response.data;
+
+        reset({
+            Code: subject.code,
+            Year: subject.year,
+            Name: subject.name,
+            Format: subject.format,
+            Type: subject.type,
+            Duration: subject.duration
+        });
+
+    }
+
+    const isView = typeModal === "view";
 
     return (
         <article className="subjectModal">
             <span class="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
-            <h4>{typeModal == 1 ? "Agregar nuevo espacio curricular" : typeModal == 2 ?
+            <h4>{typeModal == "add" ? "Agregar nuevo espacio curricular" : typeModal == "view" ?
                 "Ver espacio curricular" : "Actualizar espacio curricular"}</h4>
             <div className="subjectFormContainer">
                 <p className="arrow" onClick={() => {
                     if (step > 0) setStep(prev => prev - 1);
                 }}>&lt;</p>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
                     {
                         step == 0 ?
                             <>
-                                <InputControl type={"text"} icon={"signature"} register={register} data={"cupof"} key={1}>
+                                <InputControl type={"text"} icon={"signature"} register={register} data={"Code"} error={errors.Code} key={1} readonly={isView}> 
                                     Ingrese el código del espacio curricular *
                                 </InputControl>
-                                <InputControl type={"number"} icon={"today"} register={register} data={"academicYear"} key={2}
-                                    readonly={true}>
+                                <InputControl type={"number"} icon={"today"} register={register} data={"Year"} key={2} error={errors.Year} readonly={isView}>
                                     Año académico *
                                 </InputControl>
-                                <InputControl type={"text"} icon={"label"} register={register} data={"nameSubject"} key={3}>
+                                <InputControl type={"text"} icon={"label"} register={register} data={"Name"} key={3} error={errors.Name} readonly={isView}>
                                     Ingrese el nombre del del espacio curricular *
                                 </InputControl>
                             </>
@@ -58,7 +86,7 @@ export const SubjectModal = ({ setModal, typeModal, academicYear = 1 }) => {
                                 <>
                                     <ComboControl icon={"signature"}
                                         options={[{ key: 1, value: "Asignatura" }, { key: 2, value: "Seminario" }]}
-                                        setValue={setValue} data={"subjectType"} getValues={getValues} key={4}>
+                                        setValue={setValue} data={"Format"} register={register} error={errors.Format} getValues={getValues} key={4} readOnly={isView}>
                                         Seleccione tipo de espacio curricular *
                                     </ComboControl>
                                     <ComboControl icon={"signature"}
@@ -67,21 +95,20 @@ export const SubjectModal = ({ setModal, typeModal, academicYear = 1 }) => {
                                             { key: 2, value: "Bimestral" },
                                             { key: 3, value: "Cuatrimestral" }
                                         ]}
-                                        setValue={setValue} data={"typeSemester"} getValues={getValues} key={10}>
+                                        setValue={setValue} data={"Type"} register={register} error={errors.Type} getValues={getValues} key={10} readOnly={isView}>
                                         Seleccione tipo de cursado *
                                     </ComboControl>
                                     <InputControl type={"number"} icon={"nest_clock_farsight_analog"} key={9}
-                                        register={register} data={"professorship"}>
+                                        register={register} data={"Duration"} error={errors.Duration} readonly={isView}>
                                         Ingrese las horas cátedras *
                                     </InputControl>
                                     {
-                                        typeModal == 2 ?
+                                        isView ?
                                             <></>
                                             :
-                                            <button type="button" className="add-button"
-                                                onClick={() => setModal(false)}>
+                                            <button type="submit" className="add-button">
                                                 <span className="material-symbols-outlined">save</span>
-                                                {typeModal != 1 ? "Actualizar espacio curricular" : "Crear espacio curricular"}
+                                                {typeModal != "add" ? "Actualizar espacio curricular" : "Crear espacio curricular"}
                                             </button>
                                     }
                                 </> : undefined
