@@ -10,14 +10,6 @@
     color: white;
 }
 
-.folderModal form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 540px;
-    width: 80%;
-}
-
 .folderModal span.close {
     position: absolute;
     color: white;
@@ -34,20 +26,27 @@
     transform: scale(1.3) rotateZ(180deg);
 }
 
-.folderList {
-    background-color: white;
-    width: 80%;
-    border-radius: 20px;
+.folderContainer {
     display: flex;
-    padding: 10px 0 60px 0;
-    margin-bottom: 30px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    background-color: white;
+    width: 90%;
+    border-radius: 20px;
+
+    padding: 20px 0;
 }
 
 .folderModal .add-button {
+    align-self: center !important;
+}
+
+.folderModal .add-button,
+.folderModal .file-button,
+.folderModal .cancel-button {
     background-color: white;
-    margin-top: 10px;
     padding: 10px 20px;
     border-radius: 15px;
     border: none;
@@ -56,31 +55,33 @@
     border: 2px solid #6f2c7e;
     align-self: flex-end;
     display: flex;
+    align-items: center;
 
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.folderModal .add-button:hover {
+.folderModal .add-button:hover,
+.folderModal .file-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.1);
     border: 2px solid #2dca2d;
 }
 
-
 .folderList {
-    background-color: white;
-    width: 40%;
-    border-radius: 20px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    border-radius: 20px;
     gap: 15px;
-    padding: 20px;
-    margin-bottom: 30px;
+    margin: 10px 0;
+    justify-content: center;
 }
 
 .folderCard {
-    width: 80%;
+    width: 30%;
     border-radius: 15px;
     border: 2px solid #6f2c7e;
     padding: 15px;
@@ -88,7 +89,6 @@
     flex-direction: column;
     gap: 8px;
 }
-
 
 .folderHeader {
     display: flex;
@@ -129,4 +129,24 @@
     font-size: 0.7rem;
     padding: 3px 8px;
     border-radius: 10px;
+}
+
+.btnContainer {
+    display: flex;
+    width: 60dvw;
+    justify-content: space-evenly;
+}
+
+.folderModal .add-button:hover,
+.folderModal .file-button:hover,
+.folderModal .cancel-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.1);
+    border: 2px solid #2dca2d;
+}
+
+.folderModal .cancel-button:hover {
+    background-color: #ff4444;
+    border-color: #ff4444;
 }

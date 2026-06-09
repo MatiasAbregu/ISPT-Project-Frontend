@@ -11,25 +11,25 @@
 }
 
 .register-button, .cancel-button {
-    background-color: white !important;
+    background-color: white;
     display: flex;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 20px;
     border: none;
-    color: #6f2c7e !important;
+    color: #6f2c7e;
     cursor: pointer;
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
 .register-button:hover {
-    background-color: #2dca2d !important;
-    color: white !important;
+    background-color: #2dca2d;
+    color: white;
     transform: scale(1.05);
 }
 
 .cancel-button:hover {
-    background-color: #ff4444 !important;
-    color: white !important;
+    background-color: #ff4444;
+    color: white;
     transform: scale(1.05);
 }

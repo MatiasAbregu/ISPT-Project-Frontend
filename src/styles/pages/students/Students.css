@@ -23,7 +23,8 @@
     width: 30%;
 }
 
-.studentsPage .add-button-student {
+.studentsPage .add-button-student,
+.studentsPage .studentsPageContainer .btn-select button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +37,50 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
+.studentsPage .studentsPageContainer .btn-select button {
+    border-radius: initial;
+    width: 100%;
+    display: block;
+    text-align: end;
+    padding: 12px 18px;
+}
+
 .studentsPage .add-button-student span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.studentsPage .add-button-student:hover {
+.studentsPage .studentsPageContainer .add-button-student:hover,
+.studentsPage .studentsPageContainer .btn-select button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.studentsPage .add-button-student:hover span {
+.studentsPage .studentsPageContainer .add-button-student:hover span {
     transform: rotateZ(180deg);
+}
+
+.studentsPage .studentsPageContainer .createControl {
+    position: relative;
+}
+
+.studentsPage .studentsPageContainer .btn-select {
+    background-color: white;
+    border: 2px solid #6f2c7e;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    z-index: 999;
+
+    width: 330px;
+    right: 0;
+}
+
+.studentsPage .studentsPageContainer .btn-select.show {
+    display: block;
 }

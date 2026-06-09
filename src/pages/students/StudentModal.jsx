@@ -67,105 +67,95 @@ export const StudentModal = ({ setModal, typeModal }) => {
                     {
                         step == 0 ?
                             <>
-                                <InputControl type={"text"} icon={"id_card"} register={register} data={"file"} key={1}>
-                                    Ingrese el legajo del estudiante *
+                                <InputControl type={"text"} icon={"person"} register={register} data={"firstname"} key={4}>
+                                    Ingrese el nombre *
                                 </InputControl>
-                                <ComboControl icon={"person_check"}
-                                    options={[{ key: 1, value: "Activo" }, { key: 2, value: "Inactivo" }, { key: 3, value: "Egresado" }]} setValue={setValue} data={"status"} getValues={getValues} key={2}>
-                                    Seleccione el estado del alumno *
-                                </ComboControl>
-                                <DateControl icon={"calendar_month"} setValue={setValue} data={"startDate"}
-                                    getValues={getValues} key={3}>
-                                    Seleccione fecha cuando inició a cursar *
+                                <InputControl type={"text"} icon={"person"} register={register} data={"lastname"} key={5}>
+                                    Ingrese el apellido *
+                                </InputControl>
+                                <DateControl icon={"cake"} setValue={setValue} data={"birthdate"}
+                                    getValues={getValues} key={6}>
+                                    Seleccione la fecha de nacimiento *
                                 </DateControl>
-                            </>
-                            : step == 1 ?
+                                <ComboControl icon={"diversity_1"}
+                                    options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]} setValue={setValue} data={"gender"} getValues={getValues} key={7}>
+                                    Seleccione un género *
+                                </ComboControl>
+                            </> :
+                            step == 1 ?
                                 <>
-                                    <InputControl type={"text"} icon={"person"} register={register} data={"firstname"} key={4}>
-                                        Ingrese el nombre *
-                                    </InputControl>
-                                    <InputControl type={"text"} icon={"person"} register={register} data={"lastname"} key={5}>
-                                        Ingrese el apellido *
-                                    </InputControl>
-                                    <DateControl icon={"cake"} setValue={setValue} data={"birthdate"}
-                                        getValues={getValues} key={6}>
-                                        Seleccione la fecha de nacimiento *
-                                    </DateControl>
-                                    <ComboControl icon={"diversity_1"}
-                                        options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]} setValue={setValue} data={"gender"} getValues={getValues} key={7}>
-                                        Seleccione un género *
+                                    <ComboControl icon={"id_card"} options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]}
+                                        register={register} data={"typeDocument"} getValues={getValues}
+                                        key={8}>
+                                        Seleccione el tipo de documento *
                                     </ComboControl>
+                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={9}>
+                                        Ingrese el N° de documento *
+                                    </InputControl>
+                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"cuil"} key={10}>
+                                        Ingrese el CUIL *
+                                    </InputControl>
                                 </> :
                                 step == 2 ?
                                     <>
-                                        <ComboControl icon={"id_card"} options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]}
-                                            register={register} data={"typeDocument"} getValues={getValues}
-                                            key={8}>
-                                            Seleccione el tipo de documento *
+                                        <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={11}
+                                            register={register} data={"nativeCountry"} getValues={getValues}>
+                                            Seleccione país de origen *
                                         </ComboControl>
-                                        <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={9}>
-                                            Ingrese el N° de documento *
+                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={12}
+                                            register={register} data={"nativeProvince"} getValues={getValues}>
+                                            Seleccione provincia de origen *
+                                        </ComboControl>
+                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={13}
+                                            register={register} data={"actualDeparment"} getValues={getValues}>
+                                            Seleccione departamento de Córdoba donde reside *
+                                        </ComboControl>
+                                        <InputControl type={"text"} icon={"pin_drop"} key={14} register={register}
+                                            data={"address"}>
+                                            Domicilio donde reside *
                                         </InputControl>
-                                        <InputControl type={"text"} icon={"id_card"} register={register} data={"cuil"} key={10}>
-                                            Ingrese el CUIL *
-                                        </InputControl>
-                                    </> :
-                                    step == 3 ?
+                                    </>
+                                    : step == 3 ?
                                         <>
-                                            <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={11}
-                                                register={register} data={"nativeCountry"} getValues={getValues}>
-                                                Seleccione país de origen *
-                                            </ComboControl>
-                                            <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={12}
-                                                register={register} data={"nativeProvince"} getValues={getValues}>
-                                                Seleccione provincia de origen *
-                                            </ComboControl>
-                                            <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={13}
-                                                register={register} data={"actualDeparment"} getValues={getValues}>
-                                                Seleccione departamento de Córdoba donde reside *
-                                            </ComboControl>
-                                            <InputControl type={"text"} icon={"pin_drop"} key={14} register={register}
-                                                data={"address"}>
-                                                Domicilio donde reside *
+                                            <InputControl type={"tel"} icon={"phone"} key={15} register={register}
+                                                data={"phoneNumber"}>
+                                                Ingrese el número de celular
                                             </InputControl>
-                                        </>
-                                        : step == 4 ?
+                                            <InputControl type={"email"} icon={"email"} key={16} register={register}
+                                                data={"email"}>
+                                                Ingrese el correo electrónico
+                                            </InputControl>
+                                            <InputControl type={"tel"} icon={"local_hospital"} key={17} register={register}
+                                                data={"emergencyNumber"}>
+                                                Ingrese el número de emergencias
+                                            </InputControl>
+                                            <InputControl type={"text"} icon={"person"} key={18} register={register}
+                                                data={"email"}>
+                                                Ingrese nombre/parentesco del contacto de emergencia
+                                            </InputControl>
+                                        </> : step == 4 ?
                                             <>
-                                                <InputControl type={"tel"} icon={"phone"} key={15} register={register}
-                                                    data={"phoneNumber"}>
-                                                    Ingrese el número de celular
-                                                </InputControl>
-                                                <InputControl type={"tel"} icon={"local_hospital"} key={16} register={register}
-                                                    data={"emergencyNumber"}>
-                                                    Ingrese el número de emergencias
-                                                </InputControl>
-                                                <InputControl type={"email"} icon={"email"} key={17} register={register}
-                                                    data={"email"}>
-                                                    Ingrese el correo electrónico
-                                                </InputControl>
                                                 <InputControl type={"text"} icon={"person"} register={register} data={"practicePlace"}
-                                                    key={18}>
+                                                    key={19}>
                                                     Ingrese el lugar de práctica (solo para alumnos de 3° y 4° año)
                                                 </InputControl>
-                                            </> : step == 5 ?
-                                                <>
-                                                    <InputControl type={"textarea"} icon={"visibility"} key={19}>Observaciones</InputControl>
-                                                    {
-                                                        typeModal == 2 ? <></> :
-                                                            <button type="button" className="add-button"
-                                                                onClick={() => setModal(false)}>
-                                                                <span className="material-symbols-outlined">save</span>
-                                                                {typeModal != 1 ? "Actualizar estudiante" : "Crear estudiante"}
-                                                            </button>
-                                                    }
-                                                </> : undefined
+                                                <InputControl type={"textarea"} icon={"visibility"} key={20}>Observaciones</InputControl>
+                                                {
+                                                    typeModal == 2 ? <></> :
+                                                        <button type="button" className="add-button"
+                                                            onClick={() => setModal(false)}>
+                                                            <span className="material-symbols-outlined">save</span>
+                                                            {typeModal != 1 ? "Actualizar estudiante" : "Crear estudiante"}
+                                                        </button>
+                                                }
+                                            </> : undefined
                     }
                 </form>
                 <p className="arrow" onClick={() => {
-                    if (step < 5) setStep(prev => prev + 1);
+                    if (step < 4) setStep(prev => prev + 1);
                 }}>&gt;</p>
             </div>
-            <StepsControl stepsQuantity={6} setStep={setStep} step={step} />
+            <StepsControl stepsQuantity={5} setStep={setStep} step={step} />
         </article>
     )
 }
