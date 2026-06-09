@@ -7,16 +7,29 @@ import { Sidebar } from '../../components/Sidebar';
 import { CurriculumModal } from './CurriculumModal';
 import { PathInfo } from '../../components/PathInfo';
 import { UserContext } from '../../context/UserProvider';
+import CurriculumService from '../../services/careers/curriculum';
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export const Curriculum = () => {
 
   const [modal, setModal] = useState(false);
   const [typeModal, setTypeModal] = useState();
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     document.title = "ISPT - Gestión de plan de estudio";
+    getAllCurriculums();
   }, []);
+
+  const getAllCurriculums = async () => {
+          const response = await CurriculumService.getByCareerId(id);
+          setData(response.data);
+      }
+
 
   return (
     <article className='curriculumPage'>
@@ -29,7 +42,7 @@ export const Curriculum = () => {
           {
             user.role == "Directivo" ?
               <button type="button" className="add-button"
-                onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); }}>
+                onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="add" getByCareerId={getAllCurriculums} careerId={id}/>); setModal(true); }}>
                 <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
               </button> : undefined
           }
@@ -57,26 +70,12 @@ export const Curriculum = () => {
           }
           ]}
           options={user.role == "Directivo" ?
-            ["academicYear",
-              { value: "edit", onclick: () => { setTypeModal(<CurriculumModal setModal={setModal} />); setModal(true); } }]
+            [{value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`)},
+              { value: "edit", onclick: (obj) => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id} />); setModal(true); } }]
             : ["academicYear"]
           }
-          data={[
-            {
-              resolucion: "EE/11",
-              duracion: "3 años",
-              dateStart: "01/03/2011",
-              dateOk: "04/04/2011",
-              dateEnd: "31/12/2020"
-            },
-            {
-              resolucion: "EE/2025",
-              duracion: "2 años",
-              dateStart: "01/02/2025",
-              dateOk: "03/02/2025",
-              dateEnd: "----"
-            }
-          ]}
+          showId={false}
+            data={data}
         />
         <Footer />
       </div>

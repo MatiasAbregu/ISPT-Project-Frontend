@@ -42,14 +42,16 @@
     margin-bottom: 30px;
 }
 
-.curriculumFormContainer .inputControl {
+.curriculumFormContainer .inputControl,
+.curriculumFormContainer .dateControl {
     margin-top: 50px;
     border: 3px solid #6f2c7e;
     border-radius: 5vh;
 }
 
 .curriculumFormContainer .inputControl label,
-.curriculumFormContainer .textareaControl label {
+.curriculumFormContainer .textareaControl label,
+.curriculumFormContainer .dateControl label {
     color: #6f2c7e !important;
     margin-left: 90px;
 }
@@ -90,6 +92,6 @@
     border: 2px solid #2dca2d;
 }
 
-.careerFormContainer .add-button span {
+.curriculumFormContainer .add-button span {
     transition: transform .3s ease;
 }

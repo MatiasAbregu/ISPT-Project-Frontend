@@ -7,6 +7,11 @@ class CareersService{
 getAll(){
     return axios.get(`${API_URL}`);
 }
+
+getById(careerId){
+    return axios.get(`${API_URL}/${careerId}`);
+}
+
     //POST
 create(data){
     return axios.post(`${API_URL}`, data);
