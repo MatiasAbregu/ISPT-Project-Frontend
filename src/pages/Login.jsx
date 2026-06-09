@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { InputControl } from "../components/InputControl";
 import { UserContext } from '../context/UserProvider';
+import AuthService from '../services/auth/AuthService';
 
 export const Login = () => {
 
@@ -19,15 +20,16 @@ export const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm({ resolver: yupResolver(LoginYUP) });
 
-    const onHandle = (e) => {
-        console.log(e);
-        if (e.username.toLowerCase() == "directivo") login({ username: "Directivo", role: "Directivo" })
-        else if (e.username.toLowerCase() == "preceptor") login({ username: "Preceptor", role: "Preceptor" })
-        else if (e.username.toLowerCase() == "preceptor_auxiliar") login({ username: "Preceptor Auxiliar", role: "Preceptor_Auxiliar" })
-        else if (e.username.toLowerCase() == "docente") login({ username: "Docente", role: "Docente" })
-        else if (e.username.toLowerCase() == "estudiante") login({ username: "Estudiante", role: "Estudiante" })
-        else return;
-        navigate("/inicio");
+    const onHandle = async (e) => {
+        const res = (await AuthService.login(e)).data;
+
+        console.log(res);
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+            login(res.object);
+            navigate("/inicio");
+        } else {
+            console.log(res.message);
+        }
     }
 
     return (
@@ -41,7 +43,7 @@ export const Login = () => {
                         <InputControl type={"password"} icon={"key_vertical"}
                             register={register} data={"password"} error={errors["password"]} >Contraseña</InputControl>
                         <InputControl type={"checkbox"} register={register}
-                            setValue={setValue} data={"sessiontype"} watch={watch} >Mantener sesión iniciada</InputControl>
+                            setValue={setValue} data={"rememberMe"} watch={watch} >Mantener sesión iniciada</InputControl>
                     </div>
                 </div>
                 <button type="submit">Iniciar Sesión</button>
@@ -50,3 +52,10 @@ export const Login = () => {
         </>
     );
 }
+
+// if (e.username.toLowerCase() == "directivo") login({ username: "Directivo", role: "Directivo" })
+// else if (e.username.toLowerCase() == "preceptor") login({ username: "Preceptor", role: "Preceptor" })
+// else if (e.username.toLowerCase() == "preceptor_auxiliar") login({ username: "Preceptor Auxiliar", role: "Preceptor_Auxiliar" })
+// else if (e.username.toLowerCase() == "docente") login({ username: "Docente", role: "Docente" })
+// else if (e.username.toLowerCase() == "estudiante") login({ username: "Estudiante", role: "Estudiante" })
+// else return;

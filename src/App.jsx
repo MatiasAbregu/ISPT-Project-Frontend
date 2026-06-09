@@ -34,6 +34,7 @@ import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
 import { StudentSections } from './pages/students/StudentSections'
+import { ProtectedRoute } from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -41,11 +42,13 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Login />} />
-        <Route path='/inicio' element={<Home />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path='/inicio' element={<Home />} />
+        </Route>
 
         <Route path='/estudiantes' element={<Students />} />
         <Route path='/estudiantes/:id/espacios-curriculares' element={<StudentSections />} />
-        
+
         <Route path='/inscripciones-carreras' element={<Enrollments />} />
         <Route path='/inscripciones-carreras/:id/materias' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />

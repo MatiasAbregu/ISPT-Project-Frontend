@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserProvider';
 export const Sidebar = () => {
 
     const url = useLocation();
-    const { user } = useContext(UserContext);
+    const { user, logout } = useContext(UserContext);
 
     return (
         /*
@@ -22,7 +22,7 @@ export const Sidebar = () => {
             <ul>
                 {
                     user ?
-                        user.role != "Preceptor_Auxiliar" ?
+                        !user.roles.includes("Preceptor_Auxiliar") ?
                             <NavLink to={"/inicio"} className={url.pathname.startsWith("/inicio") ? "activated" : ""}>
                                 <span class="material-symbols-outlined">home</span><li>Inicio</li>
                             </NavLink>
@@ -31,7 +31,7 @@ export const Sidebar = () => {
                 }
                 {
                     user ?
-                        user.role == "Estudiante" ?
+                        user.roles.includes("Estudiante") ?
                             <>
                                 <NavLink to={"/inscripciones-carreras"} className={url.pathname.startsWith("/inscripciones-carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">assignment_turned_in</span><li>Inscripciones a <br /> carreras</li>
@@ -47,7 +47,7 @@ export const Sidebar = () => {
                 }
                 {
                     user ?
-                        user.role == "Directivo" || user.role == "Preceptor" ?
+                        user.roles.includes("Directivo") || user.roles.includes("Preceptor") ?
                             <>
                                 <NavLink to={"/estudiantes"} className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">school</span><li>Estudiantes</li>
@@ -60,7 +60,7 @@ export const Sidebar = () => {
                 }
                 {
                     user ?
-                        user.role == "Directivo" ?
+                        user.roles.includes("Directivo") ?
                             <>
                                 <NavLink to={"/cargos"} className={url.pathname.startsWith("/cargos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">supervised_user_circle</span><li>Cargos</li>
@@ -70,7 +70,7 @@ export const Sidebar = () => {
                 }
                 {
                     user ?
-                        user.role == "Directivo" || user.role == "Preceptor" ?
+                        user.roles.includes("Directivo") || user.roles.includes("Preceptor") ?
                             <>
                                 <NavLink to={"/carreras"} className={url.pathname.startsWith("/carreras") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">history_edu</span><li>Carreras</li>
@@ -86,7 +86,7 @@ export const Sidebar = () => {
                 }
                 {
                     user ?
-                        user.role == "Docente" ?
+                        user.roles.includes("Docente") ?
                             <>
                                 <NavLink to={"/cursos"} className={url.pathname.startsWith("/cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Mis cursos</li>
@@ -95,7 +95,7 @@ export const Sidebar = () => {
                         : undefined
                 }
                 {user ?
-                    user.role == "Directivo" || user.role == "Docente" ?
+                    user.roles.includes("Directivo") || user.roles.includes("Docente") ?
                         <>
                             <NavLink to={"/mesas-examen"} className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
                                 <span class="material-symbols-outlined">table_chart</span><li>
@@ -105,7 +105,7 @@ export const Sidebar = () => {
                     : undefined}
                 {
                     user ?
-                        user.role == "Preceptor_Auxiliar" ?
+                        user.roles.includes("Preceptor_Auxiliar") ?
                             <>
                                 <NavLink to={"/asistencias-cursos"} className={url.pathname.startsWith("/asistencias-cursos") ? "activated" : ""}>
                                     <span class="material-symbols-outlined">book_2</span><li>Cursos</li>
@@ -113,7 +113,7 @@ export const Sidebar = () => {
                             </> : undefined
                         : undefined
                 }
-                <a href="/" className={"logOut"}>
+                <a href="/" onClick={() => logout()} className={"logOut"}>
                     <span class="material-symbols-outlined">power_settings_circle</span><li>Cerrar Sesión</li>
                 </a>
             </ul>

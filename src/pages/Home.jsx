@@ -26,18 +26,18 @@ export const Home = () => {
                 <h2>¡Bienvenido {user.username}!</h2>
 
                 {/* Componente para docente */}
-                {user.role === "Docente" &&
+                {user.roles.includes("Docente") &&
                     <ComboControl options={[{ key: 1, value: "Matemática I" }, { key: 2, value: "Inglés" }]} notShowLabel={true}>
                         Materia
                     </ComboControl>}
 
                 <div className="chartsContainer">
-                    {user.role === "Directivo" || user.role === "Preceptor" ? (
+                    {user.roles.includes("Directivo") || user.roles.includes("Preceptor") ? (
                         <>
                             <BarChart fields={["Profesorado", "Trayecto"]} values={[40, 15]} label={"Alumnos"}
                                 text={"Total de matriculados en cada carrera"} stepSize={1} />
                             {
-                                user.role === "Directivo" ?
+                                user.roles.includes("Directivo") ?
                                     <>
                                         <BarChart fields={["Alto", "Medio", "Baja"]} values={[4, 10, 50]} label={"Alumnos"}
                                             text={"Total de alumnos en riesgo"} stepSize={1} />
@@ -55,7 +55,7 @@ export const Home = () => {
                         </>) : <></>
 
                     }
-                    {user.role === "Estudiante" && (
+                    {user.roles.includes("Estudiante") && (
                         <>
                             <BarChart fields={["Materia 1", "Materia 2", "Materia 3"]} values={[8, 9, 7]} label={"Notas"}
                                 text={"Notas promedio de las materias"} stepSize={1} minY={1} maxY={10} />
@@ -69,7 +69,7 @@ export const Home = () => {
                             </div>
                         </>
                     )}
-                    {user.role === "Docente" && (
+                    {user.roles.includes("Docente") && (
                         <>
                             <div className='stadisticContainer'>
                                 <BarChart label={"%"} text={"Porcentajes de las asistencias de los alumnos"}
