@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/components/DateControl.css';
 
-export const DateControl = ({ icon, children, setValue, data, getValues, readOnly }) => {
+export const DateControl = ({ icon, children, setValue, data, getValues, readOnly, value }) => {
 
     const [daySelected, setDaySelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +27,12 @@ export const DateControl = ({ icon, children, setValue, data, getValues, readOnl
         document.addEventListener("mousedown", handleCursorOut);
         return () => document.removeEventListener("mousedown", handleCursorOut);
     }, [])
+
+    useEffect(() => {
+        if (value) {
+            setDaySelected(new Date(value));
+        }
+    }, [value]);
 
     const formatDate = (date) => {
         if (!date) return "";
@@ -80,7 +86,7 @@ export const DateControl = ({ icon, children, setValue, data, getValues, readOnl
     }
 
     useEffect(() => {
-        if (typeof setValue == "function" && daySelected != null && daySelected != undefined) 
+        if (typeof setValue == "function" && daySelected != null && daySelected != undefined)
             setValue(data, daySelected);
     }, [daySelected]);
 

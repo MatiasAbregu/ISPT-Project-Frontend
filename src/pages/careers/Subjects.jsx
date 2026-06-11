@@ -7,7 +7,7 @@ import { Sidebar } from '../../components/Sidebar';
 import { SubjectModal } from './SubjectModal';
 import { UserContext } from '../../context/UserProvider';
 import '../../styles/pages/careers/Subjects.css';
-import SubjectService from '../../services/careers/subjects';
+import SubjectService from '../../services/careers/SubjectsService';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ export const Subjects = () => {
     const [academicYear, setAcademicYear] = useState(1);
     const { user } = useContext(UserContext);
     const { idCurriculum } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState([]);
 
@@ -33,7 +34,7 @@ export const Subjects = () => {
         setData(response.data);
     }
     
-    const tableData = data.map(({ type, duration, ...rest }) => rest);
+    const tableData = data.map(({ type, duration, isCorrelative, ...rest }) => rest);
     ///carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares  
     return (
         <article className='subjectsPage'>
@@ -44,7 +45,7 @@ export const Subjects = () => {
                 <div className='controls'>
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     {
-                        user.role == "Directivo" ?
+                        user?.roles.includes("Directivo") ?
                             <button type="button" className="add-button"
                                 onClick={() => {
                                     setTypeModal(<SubjectModal typeModal={"add"} setModal={setModal} curriculumId = {idCurriculum} getByCurriculumId={getAllSubjects} />);
@@ -61,7 +62,7 @@ export const Subjects = () => {
                             { name: "Nombre", width: 150 },
                             { name: "Año académico", width: 150},
                             { name: "Formato", width: 150 }]}
-                            options={user.role == "Directivo" ? [
+                            options={user?.roles.includes("Directivo") ? [
                                 {
                                     value: "eye", onclick: (obj) => {
                                         setTypeModal(<SubjectModal typeModal={"view"} setModal={setModal} curriculumId={idCurriculum} subjectId={obj.id} getByCurriculumId={getAllSubjects} />);
@@ -76,7 +77,7 @@ export const Subjects = () => {
                                     }
                                 },
                                 "commission",
-                                { value: "correlatives" }
+                                { value: "correlatives", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${obj.id}/correlativas`) }
                             ] : [
                                 {
                                     value: "eye", onclick: (obj) => {

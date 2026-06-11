@@ -4,12 +4,12 @@ import { InputControl } from '../../components/InputControl'
 import CurriculumYUP from '../../schemas/CurriculumYUP'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import CurriculumService from '../../services/careers/curriculum'
+import CurriculumService from '../../services/careers/CurriculumService'
 import { DateControl } from '../../components/DateControl'
 
 export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, getByCareerId}) => {
 
-    const { register, handleSubmit, setValue, getValues, formState: { errors }, reset } = useForm({ resolver: yupResolver(CurriculumYUP) })
+    const { register, handleSubmit, setValue, getValues, formState: { errors }, reset, watch } = useForm({ resolver: yupResolver(CurriculumYUP) })
 
   useEffect(() => {
     register("StartDate");
@@ -63,15 +63,15 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
                     <InputControl label={"Plan de estudio"} icon={"contract_edit"} data={"Resolution"} register={register} error={errors.Resolution}>Ingrese la resolución</InputControl>
                     <InputControl label={"Duración"} icon={"timer"} type={"number"} data={"Duration"} register={register} error={errors.Duration}>Ingrese la duración</InputControl>
                     <DateControl icon={"calendar_month"} data={"StartDate"} register={register} error={errors.StartDate}
-                    setValue={setValue} getValues={getValues} >
+                    setValue={setValue} getValues={getValues} value={watch("StartDate")}>
                         Seleccione la fecha de inicio de la carrera *
                     </DateControl>
                     <DateControl icon={"calendar_month"} data={"EndDate"} register={register} error={errors.EndDate}
-                    setValue={setValue} getValues={getValues} >
+                    setValue={setValue} getValues={getValues} value={watch("EndDate")}>
                         Seleccione la fecha de fin de la carrera *
                     </DateControl>
                     <DateControl icon={"calendar_month"} data={"VigencyDate"} register={register} error={errors.VigencyDate}
-                    setValue={setValue} getValues={getValues} >
+                    setValue={setValue} getValues={getValues} value={watch("VigencyDate")}>
                         Seleccione la fecha de vigencia de la carrera *
                     </DateControl>
                     <button type="submit" className="add-button">

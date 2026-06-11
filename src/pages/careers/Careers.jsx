@@ -6,7 +6,7 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { CareerModal } from './CareerModal';
 import { UserContext } from '../../context/UserProvider';
-import CareersService from '../../services/careers/careers';
+import CareersService from '../../services/careers/CareersService';
 import { useNavigate } from 'react-router-dom';
 
 export const Careers = () => {
@@ -34,7 +34,7 @@ export const Careers = () => {
             <div className='careersPageContainer'>
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    {user.role == "Directivo" ? <button type="button" className="add-button"
+                    {user?.roles.includes("Directivo") ? <button type="button" className="add-button"
                         onClick={() => { setTypeModal(<CareerModal setModal={setModal} typeModal="add" getAll={getAllCareers} />); setModal(true); }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir carrera
                     </button> : undefined}
@@ -55,7 +55,7 @@ export const Careers = () => {
                         }
                     ]}
                     options={
-                        user.role == "Directivo" ?
+                        user?.roles.includes("Directivo") ?
                             [{ value: "curriculum", onclick: (obj) => { navigate(`/carreras/${obj.id}/plan-de-estudio`) }},
                                 {
                                 value: "edit",

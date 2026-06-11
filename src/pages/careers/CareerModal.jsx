@@ -5,7 +5,7 @@ import '../../styles/pages/careers/CareerModal.css'
 import CareerYUP from '../../schemas/CareerYUP'
 import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import CareersService from '../../services/careers/careers'
+import CareersService from '../../services/careers/CareersService'
 
 export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
 

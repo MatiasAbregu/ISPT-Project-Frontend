@@ -5,20 +5,39 @@ import { Sidebar } from '../../components/Sidebar';
 import { PathInfo } from '../../components/PathInfo';
 import { InputControl } from '../../components/InputControl';
 import { ComboControl } from '../../components/ComboControl';
-
 import '../../styles/pages/careers/Correlatives.css';
 import { SubjectModal } from './SubjectModal';
 import { UserContext } from '../../context/UserProvider';
+import SubjectsService from '../../services/careers/SubjectsService';
+import { useParams } from 'react-router';
 
 export const Correlatives = () => {
 
   const [modal, setModal] = useState(false);
   const [typeModal, setTypeModal] = useState();
   const { user } = useContext(UserContext);
+  const { idCurriculum } = useParams(); 
+  const { idSubject } = useParams();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     document.title = "ISPT - Gestión de correlativas de plan de estudio";
+    getPossibleCorrelatives();
+    console.log(data);
   }, []);
+
+  const getPossibleCorrelatives = async () => {
+    const response = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
+    setData(response.data);
+  }
+
+ const tableData = data.map(({ type, year, duration, isCorrelative, ...rest }) => ({
+    ...rest,
+    c: {
+        c: "¿Correlativa?",
+        check: isCorrelative
+    }
+}));
 
   return (
     <article className='correlativesPage'>
@@ -30,7 +49,7 @@ export const Correlatives = () => {
           <InputControl icon={"search"} type={"search"}></InputControl>
           <h4>Espacio curricular: Matemáticas I</h4>
           {
-            user.role == "Directivo" ?
+            user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
                 onClick={() => { }}>
                 <span className="material-symbols-outlined">save</span>Guardar cambios
@@ -56,11 +75,9 @@ export const Correlatives = () => {
               }
             }
           ]}
+          showId={false}
           checkboxs={true}
-          data={[
-            { codigo: "MAT-02", name: "Matématicas II", format: "Asignatura", c: { c: "¿Correlativa?", check: true } },
-            { codigo: "PD-01", name: "Pedagogía", format: "Seminario", c: { c: "¿Correlativa?", check: true } }
-          ]}
+          data={tableData}
         />
         <Footer />
       </div>

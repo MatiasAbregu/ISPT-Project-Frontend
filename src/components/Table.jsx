@@ -120,7 +120,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                             if (showId === false && key === 'id') {
                                                 return null;
                                             }
-                                            if (value.check == true) {
+                                            if (typeof value === "object" && value !== null && "check" in value) {
                                                 return (<td key={i2}>
                                                     <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2} /></div>
                                                 </td>);
@@ -192,11 +192,12 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                                 </span>
                                                             </NavLink>)
                                                         else if (v.value == "correlatives")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/correlativas"}>
-                                                                <span className="material-symbols-outlined tableBtnOrange">
+                                                            return (
+                                                                <span className="material-symbols-outlined tableBtnOrange"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
                                                                     sync_alt
                                                                 </span>
-                                                            </NavLink>)
+                                                            )
                                                         else if (v.value == "subjectsTeacher")
                                                             return (<span className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={v.onclick ? v.onclick : undefined}>
