@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
-export const ComboControl = ({ icon, children, options, setOption, setValue, data, getValues, readOnly, notShowLabel, value }) => {
+export const ComboControl = ({ icon, children, options, setOption, setValue, data,
+    getValues, readOnly, notShowLabel, value, error }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(value ? value : null);

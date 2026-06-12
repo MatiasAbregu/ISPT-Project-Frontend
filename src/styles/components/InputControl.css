@@ -1,6 +1,6 @@
 .inputControl,
 .checkControl,
-.textareaControl  {
+.textareaControl {
     color: white;
     display: flex;
     font-size: 1.2rem;
@@ -31,7 +31,8 @@
     height: 250px;
 }
 
-.inputControl label, .textareaControl label {
+.inputControl label,
+.textareaControl label {
     position: absolute;
     color: #6f2c7e;
     width: 90%;
@@ -46,13 +47,12 @@
 .inputControl:has(input:focus) label,
 .inputControl:has(input:not(:placeholder-shown)) label {
     transform: translateY(-95%) translateX(-10%);
-    color: white;
 }
 
 .textareaControl:has(textarea:focus) label,
 .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-58%) translateX(-10%);
-    color: white;
+    transform: translateY(-60%) translateX(-10%) !important;
+    color: #6f2c7e !important;
 }
 
 .checkControl label {
@@ -70,7 +70,8 @@
     transform: none;
 }
 
-.inputControl div, .textareaControl div {
+.inputControl div,
+.textareaControl div {
     display: flex;
     align-items: center;
     background-color: white;
@@ -78,7 +79,8 @@
     border-radius: 5vh;
 }
 
-.inputControl div input, .textareaControl textarea {
+.inputControl div input,
+.textareaControl textarea {
     background-color: transparent;
     border: none;
     width: 97%;
@@ -100,11 +102,13 @@
     height: 90%;
 }
 
-.inputControl div input:focus, .textareaControl textarea:focus {
+.inputControl div input:focus,
+.textareaControl textarea:focus {
     outline: none;
 }
 
-.inputControl div span, .textareaControl div span {
+.inputControl div span,
+.textareaControl div span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,15 +123,21 @@
     font-size: 1.6rem;
 }
 
+.inputControl.errorInput {
+    border: 3px solid red !important;
+    border-radius: 7vh;
+}
+
+.inputControl.errorInput label{
+    color: red;
+}
+
 .errorInputMsg {
     padding: 0;
     margin: 0;
+    text-align: center;
     text-decoration: underline;
-}
-
-.inputControl.errorInput {
-    border: 3px solid red; 
-    border-radius: 7vh;
+    color: red;
 }
 
 .inputControl .add_text {

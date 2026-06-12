@@ -6,7 +6,7 @@ import { ComboControl } from '../../components/ComboControl'
 import { StepsControl } from '../../components/StepsControl'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import TeacherYUP from '../../schemas/TeacherYUP'
+import PersonYUP from '../../schemas/person-schemas/PersonYUP'
 
 const provinces = {
     "Argentina": [{ key: 1, value: "Córdoba" }, { key: 2, value: "Buenos Aires" }, { key: 3, value: "Mendoza" }],
@@ -27,7 +27,7 @@ export const TeacherModal = ({ setModal, typeModal }) => {
     const [countrySelected, setCountrySelected] = useState("");
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(TeacherYUP),
+        resolver: yupResolver(PersonYUP),
         defaultValues: typeModal != 1 ? {
             firstname: "Enrique",
             lastname: "Álvarez",

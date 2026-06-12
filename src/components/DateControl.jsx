@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/components/DateControl.css';
 
-export const DateControl = ({ icon, children, setValue, data, getValues, readOnly }) => {
+export const DateControl = ({ icon, children, setValue, data, getValues, readOnly, error, clearErrors }) => {
 
     const [daySelected, setDaySelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -80,71 +80,81 @@ export const DateControl = ({ icon, children, setValue, data, getValues, readOnl
     }
 
     useEffect(() => {
-        if (typeof setValue == "function" && daySelected != null && daySelected != undefined) 
+        if (typeof setValue == "function" && daySelected != null && daySelected != undefined) {
             setValue(data, daySelected);
+            if (typeof clearErrors === "function") {
+                clearErrors(data);
+            }
+        }
     }, [daySelected]);
 
     const daysArray = getDaysOfCalendar(currentDate);
 
     return (
-        <div className='dateControl' ref={dateRef} onClick={!readOnly ? () => setIsOpen(prev => !prev) : {}}>
-            <span className="material-symbols-outlined">{icon}</span>
-            {daySelected != null && (daySelected != undefined || daySelected != null) ?
-                <label className="labelInformative">{children}</label> : undefined}
-            {daySelected ? <label>{formatDate(daySelected)}</label> : <label>{children}</label>}
-            <span className={`material-symbols-outlined calendar`}>calendar_month</span>
-            {
-                isOpen ?
-                    <div className='calendarPicker'>
-                        <div className='calendarPickerHeader' onClick={(e) => e.stopPropagation()}>
-                            <button onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                setCurrentDate(new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), 1));
-                            }}>&lt;&lt;</button>
-                            <button onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
-                            }}>&lt;</button>
-                            <p>{months[currentDate.getMonth()]} {currentDate.getFullYear()}</p>
-                            <button onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
-                            }}>&gt;</button>
-                            <button onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                setCurrentDate(new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), 1));
-                            }}>&gt;&gt;</button>
-                        </div>
-                        <div className='calendarPickerContainer'>
-                            <div className='datesName' onClick={(e) => e.stopPropagation()}>
-                                {
-                                    weekend.map((d, i) => (<span key={i}>{d}</span>))
-                                }
+        <div>
+            <div className={`dateControl ${error?.message ? "errorInput" : ""}`} ref={dateRef} onClick={!readOnly ? () => setIsOpen(prev => !prev) : {}}>
+                <span className="material-symbols-outlined">{icon}</span>
+                {daySelected != null && (daySelected != undefined || daySelected != null) ?
+                    <label className="labelInformative">{children}</label> : undefined}
+                {daySelected ? <label>{formatDate(daySelected)}</label> : <label>{children}</label>}
+                <span className={`material-symbols-outlined calendar`}>calendar_month</span>
+                {
+                    isOpen ?
+                        <>
+                            <div className='calendarPicker'>
+                                <div className='calendarPickerHeader' onClick={(e) => e.stopPropagation()}>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        setCurrentDate(new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), 1));
+                                    }}>&lt;&lt;</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+                                    }}>&lt;</button>
+                                    <p>{months[currentDate.getMonth()]} {currentDate.getFullYear()}</p>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+                                    }}>&gt;</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        setCurrentDate(new Date(currentDate.getFullYear() + 1, currentDate.getMonth(), 1));
+                                    }}>&gt;&gt;</button>
+                                </div>
+                                <div className='calendarPickerContainer'>
+                                    <div className='datesName' onClick={(e) => e.stopPropagation()}>
+                                        {
+                                            weekend.map((d, i) => (<span key={i}>{d}</span>))
+                                        }
+                                    </div>
+                                    <div className='dates'>
+                                        {
+                                            daysArray.map((dayObj, i) => {
+                                                return (
+                                                    <button key={i} className={`${daySelected ?
+                                                        dayObj.date.getTime() == daySelected.getTime() ? "active" : ""
+                                                        : ""}`}
+                                                        onClick={(e) => {
+                                                            setDaySelected(dayObj.date);
+                                                            e.preventDefault();
+                                                        }}>
+                                                        {dayObj.day}
+                                                    </button>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
-                            <div className='dates'>
-                                {
-                                    daysArray.map((dayObj, i) => {
-                                        return (
-                                            <button key={i} className={`${daySelected ?
-                                                dayObj.date.getTime() == daySelected.getTime() ? "active" : ""
-                                                : ""}`}
-                                                onClick={(e) => {
-                                                    setDaySelected(dayObj.date);
-                                                    e.preventDefault();
-                                                }}>
-                                                {dayObj.day}
-                                            </button>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div> : undefined
-            }
+                        </>
+                        : undefined
+                }
+            </div>
+            {error ? <p className="errorInputMsg">{error.message}</p> : undefined}
         </div>
     )
 }

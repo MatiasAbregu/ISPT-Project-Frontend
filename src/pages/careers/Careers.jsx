@@ -15,7 +15,7 @@ export const Careers = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
 
     useEffect(() => {
         document.title = "ISPT - Gestión de carreras";
@@ -24,7 +24,9 @@ export const Careers = () => {
 
     const getAllCareers = async () => {
         const response = await CareersService.getAll();
-        setData(response.data);
+        if(response.data) {
+            setData(response.data);
+        }
     }
 
     return (

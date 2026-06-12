@@ -114,7 +114,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                     data ?
                         data.map((obj, i) =>
                             <tr key={i}>
-                                { 
+                                {
                                     checkboxs ?
                                         Object.entries(obj).map(([key, value], i2) => {
                                             if (showId === false && key === 'id') {
@@ -140,7 +140,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                 {
                                                     options.map((v, i) => {
                                                         if (v.value == "eye")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightBlue" 
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightBlue"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>visibility</span>);
                                                         else if (v.value == "edit")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnGreen"
@@ -162,14 +162,14 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                         else if (v.value == "curriculum")
                                                             return (
                                                                 <span key={i} className="material-symbols-outlined tableBtnLightPurple"
-                                                                 onClick={() => v.onclick && v.onclick(obj)}>
+                                                                    onClick={() => v.onclick && v.onclick(obj)}>
                                                                     two_pager
                                                                 </span>
                                                             );
                                                         else if (v.value == "academicYear")
                                                             return (
                                                                 <span key={i} className="material-symbols-outlined tableBtnLightPurple"
-                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                    onClick={() => v.onclick && v.onclick(obj)}>
                                                                     two_pager
                                                                 </span>
                                                             )
@@ -282,7 +282,10 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                         : undefined
                                 }
                             </tr>)
-                        : undefined
+                        : 
+                        <tr>
+                            <td colSpan={5}>¡No hay datos a mostrar aún!</td>
+                        </tr>
                 }
             </tbody>
         </table>

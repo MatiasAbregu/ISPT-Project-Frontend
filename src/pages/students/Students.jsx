@@ -18,10 +18,16 @@ export const Students = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const [showCreateOptions, setShowCreateOptions] = useState(false);
+    
+    const [data, setData] = useState();
 
     useEffect(() => {
         document.title = "ISPT - Gestión de estudiantes";
     }, []);
+
+    const getAllStudents = () => {
+
+    }
 
     return (
         <article className="studentsPage">
@@ -83,29 +89,7 @@ export const Students = () => {
                             { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
                             { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } },
                         ]}
-                        data={[
-                            {
-                                documentNumber: 12345671,
-                                lastname: "Ferreyra",
-                                firstname: "Felipe",
-                                documentType: "DNI",
-
-                            },
-                            {
-                                documentNumber: 12345672,
-                                lastname: "Lopez",
-                                firstname: "Juan",
-                                documentType: "DNI",
-
-                            },
-                            {
-                                documentNumber: 12345673,
-                                lastname: "Sanchez",
-                                firstname: "María",
-                                documentType: "DNI",
-
-                            },
-                        ]} />
+                        data={data} />
                 </div>
                 <Footer />
             </div>

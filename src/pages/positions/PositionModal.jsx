@@ -6,7 +6,7 @@ import { DateControl } from '../../components/DateControl'
 import { StepsControl } from '../../components/StepsControl'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import PositionYUP from '../../schemas/PositionYUP'
+import PersonYUP from '../../schemas/person-schemas/PersonYUP'
 
 const provinces = {
     "Argentina": [{ key: 1, value: "Córdoba" }, { key: 2, value: "Buenos Aires" }, { key: 3, value: "Mendoza" }],
@@ -26,7 +26,7 @@ export const PositionModal = ({ setModal, typeModal }) => {
     const [countrySelected, setCountrySelected] = useState("");
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(PositionYUP),
+        resolver: yupResolver(PersonYUP),
         defaultValues: typeModal != 1 ? {
             firstname: "María Eugenia",
             lastname: "Danieli",

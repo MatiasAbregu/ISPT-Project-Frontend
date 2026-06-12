@@ -118,3 +118,12 @@
     background-color: #6f2c7e;
     color: white;
 }
+
+.dateControl.errorInput {
+    border: 3px solid red !important;
+    border-radius: 7vh;
+}
+
+.dateControl.errorInput label{
+    color: red;
+}
