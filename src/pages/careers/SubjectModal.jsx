@@ -44,7 +44,7 @@ export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, get
     const loadSubject = async () => {
         const response = await SubjectService.getById(subjectId);
 
-        const subject = response.data;
+        const subject = response.object;
 
         reset({
             Code: subject.code,

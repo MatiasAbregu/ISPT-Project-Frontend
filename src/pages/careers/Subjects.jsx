@@ -27,11 +27,11 @@ export const Subjects = () => {
         document.title = "ISPT - Gestión de espacios curriculares en plan de estudio";
         getAllSubjects();
         
-    });
+    }, []);
 
     const getAllSubjects = async () => {
         const response = await SubjectService.getByCurriculumId(idCurriculum);
-        setData(response.data);
+        setData(response.object);
     }
     
     const tableData = data.map(({ type, duration, isCorrelative, ...rest }) => rest);
@@ -76,7 +76,7 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                "commission",
+                                { value: "commission", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${obj.id}/divisiones`) },
                                 { value: "correlatives", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${obj.id}/correlativas`) }
                             ] : [
                                 {
@@ -85,7 +85,7 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                "commission",
+                                { value: "commission" },
                                 { value: "correlatives" }
                             ]}
 

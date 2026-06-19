@@ -4,7 +4,7 @@ import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
 import { ComboControl } from "./ComboControl";
 
-export const Table = ({ columns, data, options, checkboxs, showId, showForeignKeys }) => {
+export const Table = ({ columns, data, options, checkboxs, showId, showForeignKeys, onCheckboxChange }) => {
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -122,7 +122,9 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                             }
                                             if (typeof value === "object" && value !== null && "check" in value) {
                                                 return (<td key={i2}>
-                                                    <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2} /></div>
+                                                    <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2}
+                                                    checked={value.check} 
+                                                    onclick={(checked) => onCheckboxChange?.(obj, checked)} /></div>
                                                 </td>);
                                             } else
                                                 return (<td key={i2}>{value}</td>);
@@ -179,18 +181,20 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                                     home_storage
                                                                 </span>
                                                             </NavLink>)
-                                                        else if (v == "commission")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/divisiones"}>
-                                                                <span className="material-symbols-outlined tableBtnLightGreen">
+                                                        else if (v.value == "commission")
+                                                            return (
+                                                                <span className="material-symbols-outlined tableBtnLightGreen"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
                                                                     group_work
                                                                 </span>
-                                                            </NavLink>)
-                                                        else if (v == "teacher")
-                                                            return (<NavLink to={"/carreras/plan-de-estudio/ciclo-academico/1/espacios-curriculares/1/divisiones/A/asignaciones"}>
-                                                                <span className="material-symbols-outlined tableBtnLightGreen">
+                                                            )
+                                                        else if (v.value == "teacher")
+                                                            return (
+                                                                <span className="material-symbols-outlined tableBtnLightGreen"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
                                                                     co_present
                                                                 </span>
-                                                            </NavLink>)
+                                                            )
                                                         else if (v.value == "correlatives")
                                                             return (
                                                                 <span className="material-symbols-outlined tableBtnOrange"

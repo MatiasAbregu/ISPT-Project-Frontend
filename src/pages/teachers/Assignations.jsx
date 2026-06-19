@@ -28,7 +28,7 @@ export const Assignations = () => {
                 <PathInfo />
                 <div className='controls'>
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    {user.role == "Directivo" ?
+                    {user?.roles.includes("Directivo") ?
                         <button type="button" className="add-button"
                             onClick={() => {
                                 setTypeModal(<AssignationModal setModal={setModal} />);
@@ -43,7 +43,7 @@ export const Assignations = () => {
                     { name: "Situación revista", width: 100 },
                     { name: "Fecha de inicio", width: 80 },
                     { name: "Fecha de fin", width: 80 }]}
-                    options={user.role == "Directivo" ?
+                    options={user?.roles.includes("Directivo") ?
                         [
                             {
                                 value: "eye", onclick: () => {

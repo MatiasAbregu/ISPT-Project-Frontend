@@ -4,21 +4,25 @@ const API_URL = "http://localhost:5293/api/curriculum";
 
 class CurriculumService{
     //GET
-getByCareerId(careerId){
-    return axios.get(`${API_URL}/career/${careerId}`);
+async getByCareerId(careerId){
+    const response = await axios.get(`${API_URL}/career/${careerId}`);
+    return response.data;
 }
 
-getById(curriculumId){
-    return axios.get(`${API_URL}/${curriculumId}`);
+async getById(curriculumId){
+    const response = await axios.get(`${API_URL}/${curriculumId}`);
+    return response.data;
 }
     //POST
-create(data){
-    return axios.post(`${API_URL}`, data);
+async create(data){
+    const response = await axios.post(`${API_URL}`, data);
+    return response.data;
 }
     //PUT
-update(curriculumId, data){
+async update(curriculumId, data){
     console.log(`${API_URL}/${curriculumId}`, data);
-    return axios.put(`${API_URL}/${curriculumId}`, data);
+    const response = await axios.put(`${API_URL}/${curriculumId}`, data);
+    return response.data;
 }
     //DELETE
 }

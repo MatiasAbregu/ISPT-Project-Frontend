@@ -41,7 +41,7 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
  const loadCurriculum = async () => {
         const response = await CurriculumService.getById(curriculumId);
 
-        const curriculum = response.data;
+        const curriculum = response.object;
 
         reset({
             Resolution: curriculum.resolution,
