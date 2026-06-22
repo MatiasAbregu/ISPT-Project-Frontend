@@ -7,6 +7,7 @@ import { UserContext } from '../../context/UserProvider';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/schoolYear/SchoolYear.css';
 import { SchoolYearModal } from './SchoolYearModal';
+import SchoolYearService from '../../services/schoolYears/SchoolYearService';
 
 export const SchoolYear = () => {
 
@@ -14,10 +15,17 @@ export const SchoolYear = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
+        getAllSchoolYears();
     }, []);
+
+    const getAllSchoolYears = async () => {
+        const response = await SchoolYearService.getAll();
+        setData(response.object);
+    }
 
     return (
         <article className='schoolYearPage'>
@@ -28,7 +36,7 @@ export const SchoolYear = () => {
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
                         onClick={() => {
-                            setTypeModal(<SchoolYearModal setModal={setModal} />);
+                            setTypeModal(<SchoolYearModal setModal={setModal} getAll={getAllSchoolYears}/>);
                             setModal(true);
                         }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir ciclo lectivo
@@ -52,18 +60,8 @@ export const SchoolYear = () => {
                     options={[
                         { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares`) } }
                     ]}
-                    data={[
-                        {
-                            carrera: "Profesorado",
-                            plan: "Plan 2024 (Res. EE/11)",
-                            anio: "2026"
-                        },
-                        {
-                            carrera: "Trayecto",
-                            plan: "Plan 2025 (Res. EE/25)",
-                            anio: "2026"
-                        }
-                    ]}
+                    data={data}
+                    showId={false}
                 />
                 <Footer />
             </div>
