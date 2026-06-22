@@ -121,3 +121,7 @@
     background-color: #cb2b2b;
     color: white;
 }
+
+.degreesFormContainer .textInfo {
+    margin-left: 20px;
+}

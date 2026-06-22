@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import '../styles/components/DateControl.css';
 
-export const DateControl = ({ icon, children, setValue, data, getValues, readOnly, error, clearErrors }) => {
+export const DateControl = ({ icon, children, setValue, data, getValues, readOnly, error, clearErrors, value }) => {
 
     const [daySelected, setDaySelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -21,12 +21,41 @@ export const DateControl = ({ icon, children, setValue, data, getValues, readOnl
                 setIsOpen(false);
         }
 
-        if (typeof getValues == "function" && (getValues(data) != null || getValues(data) != undefined))
-            setDaySelected(new Date(getValues(data)));
+        if (typeof getValues == "function" && getValues(data)) {
+            const initialDate = new Date(getValues(data));
+            setDaySelected(initialDate);
+        }
 
         document.addEventListener("mousedown", handleCursorOut);
         return () => document.removeEventListener("mousedown", handleCursorOut);
     }, [])
+
+    useEffect(() => {
+        if (value) {
+            const incomingDate = new Date(value);
+            if (!daySelected || daySelected.getTime() !== incomingDate.getTime()) {
+                setDaySelected(incomingDate);
+            }
+        } else {
+            if (daySelected !== null) setDaySelected(null);
+        }
+    }, [value]);
+
+    useEffect(() => {
+        if (typeof setValue === "function" && daySelected) {
+            if (typeof getValues === "function") {
+                const currentFormValue = getValues(data);
+                const currentFormTime = currentFormValue ? new Date(currentFormValue).getTime() : 0;
+
+                if (currentFormTime !== daySelected.getTime()) {
+                    setValue(data, daySelected);
+                    if (typeof clearErrors === "function") {
+                        clearErrors(data);
+                    }
+                }
+            }
+        }
+    }, [daySelected, data, setValue, getValues, clearErrors]);
 
     const formatDate = (date) => {
         if (!date) return "";
@@ -92,7 +121,8 @@ export const DateControl = ({ icon, children, setValue, data, getValues, readOnl
 
     return (
         <div>
-            <div className={`dateControl ${error?.message ? "errorInput" : ""}`} ref={dateRef} onClick={!readOnly ? () => setIsOpen(prev => !prev) : {}}>
+            <div className={`dateControl ${error?.message ? "errorInput" : ""}`} ref={dateRef}
+                onClick={!readOnly ? () => setIsOpen(prev => !prev) : undefined}>
                 <span className="material-symbols-outlined">{icon}</span>
                 {daySelected != null && (daySelected != undefined || daySelected != null) ?
                     <label className="labelInformative">{children}</label> : undefined}

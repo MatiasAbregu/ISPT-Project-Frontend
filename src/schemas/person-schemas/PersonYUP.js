@@ -4,8 +4,8 @@ import LocationYUP from "./LocationYUP";
 
 export default Yup.object().shape({
     id: Yup.number(),
-    createdById: Yup.string(),
-    updatedById: Yup.string(),
+    createdById: Yup.string().nullable(),
+    updatedById: Yup.string().nullable(),
     firstname: Yup.string().required("Complete este campo antes de continuar"),
     lastname: Yup.string().required("Complete este campo antes de continuar"),
     birthdate: Yup.date().required("Seleccione una fecha de nacimiento"),
@@ -19,7 +19,7 @@ export default Yup.object().shape({
         .required("Complete este campo antes de continuar."),
     locationDTO: LocationYUP,
     contactDTO: ContactYUP,
-    practicePlace: Yup.string(),
-    observations: Yup.string(),
-    roleName: Yup.string()
+    practicePlace: Yup.string().nullable(),
+    observations: Yup.string().nullable(),
+    roleName: Yup.string().nullable()
 });

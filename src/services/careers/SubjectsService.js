@@ -11,6 +11,10 @@ getByCurriculumId(curriculumId){
 getById(subjectId){
     return axios.get(`${API_URL}/${subjectId}`);
 }
+
+getPossibleCorrelatives(curriculumId, subjectId){
+    return axios.get(`${API_URL}/${curriculumId}/${subjectId}`)
+}
     //POST
 create(data){
     return axios.post(`${API_URL}`, data);

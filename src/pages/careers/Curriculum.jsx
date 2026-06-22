@@ -7,7 +7,7 @@ import { Sidebar } from '../../components/Sidebar';
 import { CurriculumModal } from './CurriculumModal';
 import { PathInfo } from '../../components/PathInfo';
 import { UserContext } from '../../context/UserProvider';
-import CurriculumService from '../../services/careers/curriculum';
+import CurriculumService from '../../services/careers/CurriculumService';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ export const Curriculum = () => {
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
           {
-            user.role == "Directivo" ?
+            user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
                 onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="add" getByCareerId={getAllCurriculums} careerId={id}/>); setModal(true); }}>
                 <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
@@ -69,7 +69,7 @@ export const Curriculum = () => {
             width: 110
           }
           ]}
-          options={user.role == "Directivo" ?
+          options={user?.roles.includes("Directivo") ?
             [{value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`)},
               { value: "edit", onclick: (obj) => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id} />); setModal(true); } }]
             : ["academicYear"]

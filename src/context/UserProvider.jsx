@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
 import { jwtDecode } from "jwt-decode";
+import AuthService from "../services/auth/AuthService";
 
 export const UserContext = createContext();
 
@@ -62,14 +63,36 @@ export const UserProvider = ({ children }) => {
     if (!encryptedToken) return null;
     try {
       const bytes = CryptoJS.AES.decrypt(encryptedToken, SECRET_KEY);
-      return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      const token = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      return token;
     } catch (error) {
       return null;
     }
   }
 
+  const refreshToken = async () => {
+    const currentToken = getToken();
+    if (!currentToken) {
+      logout();
+      return null;
+    }
+
+    try {
+      const res = (await AuthService.refresh(currentToken)).data;
+      if (res && res.statusCode >= 200 && res.statusCode < 300) {
+        login(res.object);
+        return res.object.accessToken; // 🟢 QUEDA: Retornamos el string del token para Axios
+      }
+    } catch (error) {
+      console.error("Error en AuthService.refresh:", error);
+    }
+
+    logout();
+    return null;
+  }
+
   return (
-    <UserContext.Provider value={{ user, login, logout, getToken }}>
+    <UserContext.Provider value={{ user, login, logout, getToken, refreshToken }}>
       {children}
     </UserContext.Provider>
   );

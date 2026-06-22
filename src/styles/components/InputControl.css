@@ -108,7 +108,8 @@
 }
 
 .inputControl div span,
-.textareaControl div span {
+.textareaControl div span,
+.inputControl .add_text {
     display: flex;
     justify-content: center;
     align-items: center;

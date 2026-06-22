@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import SubjectYUP from '../../schemas/SubjectYUP'
 import { TimeControl } from '../../components/TimeControl'
 import '../../styles/pages/careers/SubjectModal.css'
-import SubjectService from '../../services/careers/subjects'
+import SubjectService from '../../services/careers/SubjectsService'
 
 export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, getByCurriculumId }) => {
 

@@ -23,7 +23,6 @@ export const Login = () => {
     const onHandle = async (e) => {
         const res = (await AuthService.login(e)).data;
 
-        console.log(res);
         if (res.statusCode >= 200 && res.statusCode < 300) {
             login(res.object);
             navigate("/inicio");
