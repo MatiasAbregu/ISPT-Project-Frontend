@@ -25,7 +25,7 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
      const loadCareer = async () => {
         const response = await CareersService.getById(careerId);
 
-        const career = response.data;
+        const career = response.object;
 
         reset({
             Name: career.name,

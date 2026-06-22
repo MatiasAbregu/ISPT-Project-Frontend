@@ -10,15 +10,17 @@ import { SubjectModal } from './SubjectModal';
 import { UserContext } from '../../context/UserProvider';
 import SubjectsService from '../../services/careers/SubjectsService';
 import { useParams } from 'react-router';
+import CorrelativesService from '../../services/careers/CorrelativeService';
 
 export const Correlatives = () => {
 
   const [modal, setModal] = useState(false);
   const [typeModal, setTypeModal] = useState();
   const { user } = useContext(UserContext);
-  const { idCurriculum } = useParams(); 
+  const { idCurriculum } = useParams();
   const { idSubject } = useParams();
   const [data, setData] = useState([]);
+  const [pendingChanges, setPendingChanges] = useState([]);
 
   useEffect(() => {
     document.title = "ISPT - Gestión de correlativas de plan de estudio";
@@ -26,18 +28,33 @@ export const Correlatives = () => {
     console.log(data);
   }, []);
 
+  useEffect(() => {
+  console.log("Pending changes:", pendingChanges);
+}, [pendingChanges]);
+
   const getPossibleCorrelatives = async () => {
     const response = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
-    setData(response.data);
+    setData(response.object);
   }
 
- const tableData = data.map(({ type, year, duration, isCorrelative, ...rest }) => ({
+  const tableData = data.map(({ type, year, duration, isCorrelative, ...rest }) => ({
     ...rest,
     c: {
-        c: "¿Correlativa?",
-        check: isCorrelative
+      c: "¿Correlativa?",
+      check: isCorrelative
     }
-}));
+  }));
+
+  const saveChanges = async () => {
+  if (pendingChanges.length === 0)
+  return;
+
+  await CorrelativesService.saveChanges(idSubject, pendingChanges);
+
+  setPendingChanges([]);
+
+  getPossibleCorrelatives();
+  }
 
   return (
     <article className='correlativesPage'>
@@ -51,7 +68,7 @@ export const Correlatives = () => {
           {
             user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
-                onClick={() => { }}>
+                onClick={() => {saveChanges()}}>
                 <span className="material-symbols-outlined">save</span>Guardar cambios
               </button> : undefined
           }
@@ -78,6 +95,29 @@ export const Correlatives = () => {
           showId={false}
           checkboxs={true}
           data={tableData}
+          onCheckboxChange={(row, checked) => {
+            setData(prev => prev.map(item => 
+              item.id === row.id 
+                ? { ...item, isCorrelative: checked }
+                : item
+            ));
+
+            setPendingChanges(prev => {
+              const exists = prev.find(x => x.subjectCorrelativeId == row.id);
+
+              if(exists) {
+                return prev.map(x =>
+                  x.subjectCorrelativeId === row.id
+                    ? { ...x, isCorrelative: checked }
+                    : x
+                )
+              }
+              
+              
+              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked }];
+            })
+
+          }}
         />
         <Footer />
       </div>

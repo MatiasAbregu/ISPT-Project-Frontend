@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import '../styles/components/InputControl.css';
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, className, readonly }) => {
+    data, error, setValue, watch, typeCheckbox, className, readonly, checked }) => {
 
     if (type == "search") {
         const input = useRef();
@@ -80,10 +80,11 @@ export const InputControl = ({ children, type, icon, register,
         );
     } else { // Si no cumple ninguna condición anterior, es un checkbox
         if (typeCheckbox == 2) {
-            const [check, setCheck] = useState(false);
+            const [check, setCheck] = useState(checked ?? false);
 
             return (
-                <div className="checkControl" onClick={() => { setCheck(prev => !prev) }}>
+                <div className="checkControl" onClick={() => { const newValue = !check; setCheck(newValue); 
+                if (typeof onclick === "function") onclick(newValue); }}>
                     <input type="checkbox" readOnly={readonly} style={{ display: "none" }} />
                     <span className="material-symbols-outlined" >{check ? "check_circle" : "circle"}</span>
                     <label>{children}</label>

@@ -27,7 +27,7 @@ export const Curriculum = () => {
 
   const getAllCurriculums = async () => {
           const response = await CurriculumService.getByCareerId(id);
-          setData(response.data);
+          setData(response.object);
       }
 
 

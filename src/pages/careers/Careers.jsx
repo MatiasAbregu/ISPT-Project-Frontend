@@ -24,9 +24,7 @@ export const Careers = () => {
 
     const getAllCareers = async () => {
         const response = await CareersService.getAll();
-        if(response.data) {
-            setData(response.data);
-        }
+        setData(response.object);
     }
 
     return (

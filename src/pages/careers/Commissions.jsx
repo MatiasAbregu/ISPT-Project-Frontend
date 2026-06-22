@@ -4,10 +4,16 @@ import { PathInfo } from '../../components/PathInfo';
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
+import { useParams } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export const Commissions = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
+    const { id } = useParams();
+    const { idCurriculum } = useParams();
+    const { idSubject } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = "ISPT - División";
@@ -36,7 +42,7 @@ export const Commissions = () => {
                             width: 100
                         }
                     ]}
-                    options={["teacher"]}
+                    options={[{value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`)}]}
                     data={[
                         {
                             year: "A",
