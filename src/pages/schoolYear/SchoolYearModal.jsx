@@ -68,7 +68,9 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
                     }}>
                         Seleccione una carrera
                     </ComboControl>
-                    <ComboControl options={dataCurriculums} key={currentCareerId} data={"CurriculumId"} setValue={setValue} returnKey={true}
+                    <ComboControl options={dataCurriculums} key={currentCareerId} data={"CurriculumId"} setOption={(value) => {
+                        setValue("CurriculumId", value);
+                    }} returnKey={true}
                         icon={"two_pager"}>
                         Seleccione plan de estudio
                     </ComboControl>
