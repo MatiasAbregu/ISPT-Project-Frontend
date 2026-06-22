@@ -46,10 +46,6 @@ export const Positions = () => {
                         {
                             name: "Cargo",
                             width: 100
-                        },
-                        {
-                            name: "Estado",
-                            width: 80
                         }
                     ]} options={[
                         { value: "eye", onclick: () => { setTypeModal(<PositionModal setModal={setModal} typeModal={2} />); setModal(true); } },
@@ -61,22 +57,19 @@ export const Positions = () => {
                             dni: 12345678,
                             lastname: "Danieli",
                             firstname: "María Eugenia",
-                            rol: "Directivo",
-                            estado: "Activo",
+                            rol: "Directivo"
                         },
                         {
                             dni: 12345678,
                             lastname: "Abregú",
                             firstname: "Matías",
-                            rol: "Preceptor",
-                            estado: "Activo",
+                            rol: "Preceptor"
                         },
                         {
                             dni: 12345678,
                             lastname: "Sobrero",
                             firstname: "Martín",
-                            rol: "Preceptor",
-                            estado: "Activo",
+                            rol: "Preceptor"
                         },
                     ]} />
                 <Footer />

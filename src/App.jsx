@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './Global.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login'
@@ -35,18 +35,29 @@ import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
 import { StudentSections } from './pages/students/StudentSections'
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { UserContext } from './context/UserProvider'
+import { injectAuthFunctions } from './services/api'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
+  const { getToken, refreshToken } = useContext(UserContext);
+
+  useEffect(() => {
+    injectAuthFunctions(getToken, refreshToken);
+  }, [getToken, refreshToken]);
+
   return (
     <BrowserRouter>
+      <Toaster position='bottom-right' reverseOrder={false} toastOptions={{ duration: 5000, style: { fontFamily: "Teachers" } }} />
+
       <Routes>
 
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route path='/inicio' element={<Home />} />
+          <Route path='/estudiantes' element={<Students />} />
         </Route>
 
-        <Route path='/estudiantes' element={<Students />} />
         <Route path='/estudiantes/:id/espacios-curriculares' element={<StudentSections />} />
 
         <Route path='/inscripciones-carreras' element={<Enrollments />} />

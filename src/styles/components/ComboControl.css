@@ -93,3 +93,12 @@
     background-color: #6f2c7e;
     color: white;
 }
+
+.comboControl.errorInput {
+    border: 3px solid red !important;
+    border-radius: 7vh;
+}
+
+.comboControl.errorInput label{
+    color: red;
+}

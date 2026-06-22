@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import '../styles/components/InputControl.css';
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, className, onclick, readonly, checked }) => {
+    data, error, setValue, watch, typeCheckbox, className, readonly, checked }) => {
 
     if (type == "search") {
         const input = useRef();
@@ -19,13 +19,15 @@ export const InputControl = ({ children, type, icon, register,
             </>
         );
     } else if (type == "textarea") {
+        const input = useRef();
+
         return (
             <>
                 <div className={`textareaControl ${className} ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
                     <div className="textareaContainer">
                         <span className="material-symbols-outlined">{icon}</span>
-                        <textarea placeholder=" " readOnly={readonly}></textarea>
+                        <textarea placeholder=" " readOnly={readonly} {...typeof register == "function" ? register(data) : {}}></textarea>
                     </div>
                 </div>
                 {error ? <p className="errorInputMsg">{error.message}</p> : undefined}
@@ -33,7 +35,6 @@ export const InputControl = ({ children, type, icon, register,
         )
     }
     else if (type == "add_text") {
-        const [value, setValue] = useState("");
         const input = useRef();
 
         return (
@@ -42,9 +43,9 @@ export const InputControl = ({ children, type, icon, register,
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
-                        <input type={type} placeholder=" " ref={input} readOnly={readonly} onChange={e => setValue(e.target.value)} />
-                        <span class="material-symbols-outlined add_text" onClick={typeof onclick == "function" ?
-                            () => onclick(value) : undefined}>add_circle</span>
+                        <input type={type} placeholder=" " ref={input}
+                            {...typeof register == "function" ? register(data) : {}} />
+                        <button class="material-symbols-outlined add_text" type="submit">add_circle</button>
                     </div>
                 </div>
             </>

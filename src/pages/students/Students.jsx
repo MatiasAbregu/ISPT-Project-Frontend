@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Footer } from "../../components/Footer";
 import { Table } from "../../components/Table";
 import { InputControl } from "../../components/InputControl";
@@ -8,10 +8,11 @@ import { StudentModal } from "./StudentModal";
 import { DocsModal } from "../modals/DocsModal";
 import { DegreesModal } from "../modals/DegreesModal";
 import { ContactModal } from "../modals/ContactModal";
-import { UbicationModal } from "../modals/UbicationModal";
 import { ObservationModal } from "../modals/ObservationModal";
 import { FolderModal } from "./FolderModal";
 import { AddPersonInStudenModal } from "./AddPersonInStudentModal";
+import StudentService from "../../services/students/StudentService";
+import toast from "react-hot-toast";
 
 export const Students = () => {
 
@@ -19,9 +20,29 @@ export const Students = () => {
     const [typeModal, setTypeModal] = useState();
     const [showCreateOptions, setShowCreateOptions] = useState(false);
 
+    const [data, setData] = useState();
+
     useEffect(() => {
         document.title = "ISPT - Gestión de estudiantes";
+        getAllStudents();
     }, []);
+
+    const getAllStudents = async () => {
+        try {
+            const res = await StudentService.getAllStudents();
+
+            if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                setData(res.data.object);
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
 
     return (
         <article className="studentsPage">
@@ -37,7 +58,7 @@ export const Students = () => {
                         <div className={`btn-select ${showCreateOptions ? "show" : ""}`}>
                             <button type="button"
                                 onClick={() => {
-                                    setTypeModal(<StudentModal setModal={setModal} typeModal={1} />);
+                                    setTypeModal(<StudentModal setModal={setModal} typeModal={1} getAllStudents={getAllStudents} />);
                                     setModal(true);
                                     setShowCreateOptions(false);
                                 }}>
@@ -62,6 +83,10 @@ export const Students = () => {
                                 width: 80
                             },
                             {
+                                name: "Tipo de documento",
+                                width: 80
+                            },
+                            {
                                 name: "Apellido",
                                 width: 100
                             },
@@ -69,43 +94,43 @@ export const Students = () => {
                                 name: "Nombre",
                                 width: 100
                             },
-                            {
-                                name: "Tipo de documento",
-                                width: 80
-                            }
-                        ]}
+                        ]} showId={false}
                         options={[
-                            { value: "eye", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={2} />); setModal(true); } },
-                            { value: "docs", onclick: () => { setTypeModal(<DocsModal setModal={setModal} />); setModal(true); } },
+                            {
+                                value: "eye", onclick: (obj) => {
+                                    setTypeModal(<StudentModal setModal={setModal} typeModal={2} studentId={obj.id} />);
+                                    setModal(true);
+                                }
+                            },
+                            {
+                                value: "edit", onclick: (obj) => {
+                                    setTypeModal(<StudentModal setModal={setModal} typeModal={3} studentId={obj.id}
+                                        getAllStudents={getAllStudents} />);
+                                    setModal(true);
+                                }
+                            },
+                            // EN FOLDER FALTA DOCS
                             { value: "folder", onclick: () => { setTypeModal(<FolderModal setModal={setModal} />); setModal(true); } },
-                            { value: "degrees", onclick: () => { setTypeModal(<DegreesModal setModal={setModal} />); setModal(true); } },
-                            { value: "contact", onclick: () => { setTypeModal(<ContactModal setModal={setModal} />); setModal(true); } },
-                            { value: "observation", onclick: () => { setTypeModal(<ObservationModal setModal={setModal} />); setModal(true); } },
-                            { value: "edit", onclick: () => { setTypeModal(<StudentModal setModal={setModal} typeModal={3} />); setModal(true); } },
+                            {
+                                value: "degrees", onclick: (obj) => {
+                                    setTypeModal(<DegreesModal setModal={setModal} personId={obj.id} />);
+                                    setModal(true);
+                                }
+                            },
+                            {
+                                value: "contact", onclick: (obj) => {
+                                    setTypeModal(<ContactModal setModal={setModal} personId={obj.id} />);
+                                    setModal(true);
+                                }
+                            },
+                            {
+                                value: "observation", onclick: (obj) => {
+                                    setTypeModal(<ObservationModal setModal={setModal} requestId={obj.id} sendTo={"person"} />);
+                                    setModal(true);
+                                }
+                            },
                         ]}
-                        data={[
-                            {
-                                documentNumber: 12345671,
-                                lastname: "Ferreyra",
-                                firstname: "Felipe",
-                                documentType: "DNI",
-
-                            },
-                            {
-                                documentNumber: 12345672,
-                                lastname: "Lopez",
-                                firstname: "Juan",
-                                documentType: "DNI",
-
-                            },
-                            {
-                                documentNumber: 12345673,
-                                lastname: "Sanchez",
-                                firstname: "María",
-                                documentType: "DNI",
-
-                            },
-                        ]} />
+                        data={data} />
                 </div>
                 <Footer />
             </div>

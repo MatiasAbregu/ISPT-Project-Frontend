@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import TeacherYUP from '../../schemas/TeacherYUP'
 import { InputControl } from '../../components/InputControl'
 import '../../styles/pages/teachers/AssignationModal.css'
 import { ComboControl } from '../../components/ComboControl'
 import { StepsControl } from '../../components/StepsControl'
 import { DateControl } from '../../components/DateControl'
+import PersonYUP from '../../schemas/person-schemas/PersonYUP'
 
 export const AssignationModal = ({ setModal, typeModal }) => {
 
     const [step, setStep] = useState(0);
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(TeacherYUP)
+        resolver: yupResolver(PersonYUP)
     });
 
     return (

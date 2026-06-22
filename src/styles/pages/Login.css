@@ -45,3 +45,8 @@
     color: white;
     text-align: center;
 }
+
+.loginForm .inputControl:has(input:focus) label,
+.loginForm .inputControl:has(input:not(:placeholder-shown)) label {
+    color: white;
+}
