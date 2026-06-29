@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
 export const ComboControl = ({ icon, children, options = [], setOption, setValue, data,
-    getValues, readOnly, notShowLabel, value, error, clearErrors }) => {
+    getValues, readOnly, notShowLabel, value, error, clearErrors, returnKey }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(() => {
@@ -47,7 +47,7 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
         if (selectedOption && selectedOption.value !== undefined) {
             if (typeof setValue === "function" && typeof getValues === "function") {
                 if (getValues(data) !== selectedOption.value) {
-                    setValue(data, selectedOption.value);
+                    setValue(data, returnKey ? selectedOption.key : selectedOption.value);
                     if (typeof clearErrors === "function") {
                         clearErrors(data);
                     }
@@ -55,10 +55,10 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
             }
 
             if (typeof setOption === "function") {
-                setOption(selectedOption.value);
+                setOption(returnKey ? selectedOption.key : selectedOption.value);
             }
         }
-    }, [selectedOption, data, setValue, getValues, clearErrors, setOption]);
+    }, [selectedOption, data, setValue, getValues, clearErrors, setOption, returnKey]);
 
     return (
         <div>
