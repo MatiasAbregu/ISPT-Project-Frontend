@@ -97,10 +97,6 @@ export const DegreesModal = ({ setModal, personId }) => {
                             })
                             : <p className='textInfo'>Aún no hay títulos registrados a esta persona.</p>}
                     </div>
-                    <button type="button" className="add-button"
-                        onClick={() => setModal(false)}>
-                        <span className="material-symbols-outlined">save</span> Guardar cambios
-                    </button>
                 </form>
             </div>
         </article>

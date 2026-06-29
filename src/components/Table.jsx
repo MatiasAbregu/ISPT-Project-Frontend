@@ -123,8 +123,8 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                             if (typeof value === "object" && value !== null && "check" in value) {
                                                 return (<td key={i2}>
                                                     <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2}
-                                                    checked={value.check} 
-                                                    onclick={(checked) => onCheckboxChange?.(obj, checked)} /></div>
+                                                        checked={value.check}
+                                                        onclick={(checked) => onCheckboxChange?.(obj, checked)} /></div>
                                                 </td>);
                                             } else
                                                 return (<td key={i2}>{value}</td>);
@@ -148,8 +148,11 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                             return (<span key={i} className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>edit</span>
                                                             );
-                                                        else if (v == "delete" || v == "remove")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed">delete</span>);
+                                                        else if (v.value == "delete" || v.value == "remove")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                delete
+                                                            </span>);
                                                         else if (v == "switch")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnRed">do_not_disturb_on</span>);
                                                         else if (v.value == "degrees")
@@ -184,14 +187,14 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                         else if (v.value == "commission")
                                                             return (
                                                                 <span className="material-symbols-outlined tableBtnLightGreen"
-                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                    onClick={() => v.onclick && v.onclick(obj)}>
                                                                     group_work
                                                                 </span>
                                                             )
                                                         else if (v.value == "teacher")
                                                             return (
                                                                 <span className="material-symbols-outlined tableBtnLightGreen"
-                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                    onClick={() => v.onclick && v.onclick(obj)}>
                                                                     co_present
                                                                 </span>
                                                             )
@@ -294,6 +297,6 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                         </tr>
                 }
             </tbody>
-        </table>
+        </table >
     );
 }

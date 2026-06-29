@@ -1,4 +1,4 @@
-.teachersPage{
+.teachersPage {
     width: 100%;
     display: flex;
 }
@@ -23,7 +23,8 @@
     width: 30%;
 }
 
-.teachersPage .add-button-teacher {
+.teachersPage .add-button-teacher,
+.teachersPage .teachersPageContainer .btn-select button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +37,50 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
+.teachersPage .teachersPageContainer .btn-select button {
+    border-radius: initial;
+    width: 100%;
+    display: block;
+    text-align: end;
+    padding: 12px 18px;
+}
+
 .teachersPage .add-button-teacher span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.teachersPage .add-button-teacher:hover {
+.teachersPage .teachersPageContainer .add-button-teacher:hover,
+.teachersPage .teachersPageContainer .btn-select button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.teachersPage .add-button-teacher:hover span {
+.teachersPage .teachersPageContainer .add-button-teacher:hover span {
     transform: rotateZ(180deg);
+}
+
+.teachersPage .teachersPageContainer .createControl {
+    position: relative;
+}
+
+.teachersPage .teachersPageContainer .btn-select {
+    background-color: white;
+    border: 2px solid #6f2c7e;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    z-index: 999;
+
+    width: 330px;
+    right: 0;
+}
+
+.teachersPage .teachersPageContainer .btn-select.show {
+    display: block;
 }

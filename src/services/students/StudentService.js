@@ -16,6 +16,10 @@ class StudentService {
         return api.post("/students", data);
     }
 
+    addPersonInStudent(data) {
+        return api.post("/students/add-with-cuil", data);
+    }
+
     // PUT
     updateStudent(data) {
         return api.put("/students", data);

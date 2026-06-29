@@ -23,7 +23,8 @@
     width: 30%;
 }
 
-.positionsPage .add-button-position {
+.positionsPage .add-button-position,
+.positionsPage .positionsPageContainer .btn-select button {
     background-color: white;
     display: flex;
     text-decoration: none;
@@ -36,17 +37,50 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
+.positionsPage .positionsPageContainer .btn-select button {
+    border-radius: initial;
+    width: 100%;
+    display: block;
+    text-align: end;
+    padding: 12px 18px;
+}
+
 .positionsPage .add-button-position span {
     margin-right: 8px;
     transition: transform .6s ease;
 }
 
-.positionsPage .add-button-position:hover {
+.positionsPage .positionsPageContainer .add-button-position:hover,
+.positionsPage .positionsPageContainer .btn-select button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.05);
 }
 
-.positionsPage .add-button-position:hover span {
+.positionsPage .positionsPageContainer .add-button-position:hover span {
     transform: rotateZ(180deg);
+}
+
+.positionsPage .positionsPageContainer .createControl {
+    position: relative;
+}
+
+.positionsPage .positionsPageContainer .btn-select {
+    background-color: white;
+    border: 2px solid #6f2c7e;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+
+    overflow: hidden;
+    display: none;
+    position: absolute;
+    z-index: 999;
+
+    width: 330px;
+    right: 0;
+}
+
+.positionsPage .positionsPageContainer .btn-select.show {
+    display: block;
 }

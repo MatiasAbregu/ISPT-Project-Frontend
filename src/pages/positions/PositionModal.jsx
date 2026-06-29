@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../styles/pages/positions/PositionModal.css'
 import { InputControl } from '../../components/InputControl'
 import { ComboControl } from '../../components/ComboControl'
@@ -6,7 +6,10 @@ import { DateControl } from '../../components/DateControl'
 import { StepsControl } from '../../components/StepsControl'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import PersonYUP from '../../schemas/person-schemas/PersonYUP'
+import StrictPersonYUP from '../../schemas/person-schemas/StrictPersonYUP'
+import { UserContext } from '../../context/UserProvider'
+import PositionService from '../../services/positions/PositionService'
+import toast from 'react-hot-toast'
 
 const provinces = {
     "Argentina": [{ key: 1, value: "Córdoba" }, { key: 2, value: "Buenos Aires" }, { key: 3, value: "Mendoza" }],
@@ -21,126 +24,211 @@ const provinces = {
     "Venezuela": [{ key: 1, value: "Caracas" }, { key: 2, value: "Maracaibo" }, { key: 3, value: "Cumaná" }]
 };
 
-export const PositionModal = ({ setModal, typeModal }) => {
+export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersonal }) => {
     const [step, setStep] = useState(0);
     const [countrySelected, setCountrySelected] = useState("");
+    const { user } = useContext(UserContext);
 
-    const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm({
-        resolver: yupResolver(PersonYUP),
-        defaultValues: typeModal != 1 ? {
-            firstname: "María Eugenia",
-            lastname: "Danieli",
-            birthdate: new Date("1975-10-11"),
-            gender: "Femenino",
-            roles: ["Directivo"],
-            typeDocument: "DNI",
-            documentNumber: "12345678",
-            cuil: "20-12345678-8",
-            nativeCountry: "Argentina",
-            nativeProvince: "Córdoba",
-            actualDeparment: "Capital",
-            address: "Av. Nuñez 1190",
-            phoneNumber: "3512259671",
-            email: "maria@gmail.com",
-            observations: ""
-        } : {}
+    const { register, handleSubmit, formState: { errors }, setValue, getValues, clearErrors, reset, watch } = useForm({
+        resolver: yupResolver(StrictPersonYUP),
+        shouldUnregister: false
     });
 
     useEffect(() => {
         if (typeModal != 1) setCountrySelected(getValues("nativeCountry"));
     }, [typeModal])
 
+    useEffect(() => {
+        if (personId != 0) getPositionById(personId);
+    }, [personId]);
+
+    // REQUESTS
+    // POST
+    const createOrUpdatePosition = async (data) => {
+        let finalData;
+        if (typeModal == 1) {
+            finalData = {
+                ...data,
+                createdById: user.id || user.ID
+            }
+        } else if (typeModal == 3) {
+            finalData = {
+                ...data,
+                updatedById: user.id || user.ID,
+                Id: personId
+            }
+        }
+
+        if (finalData.roleName == "Preceptor Auxiliar") finalData.roleName = "Preceptor_Auxiliar";
+
+        try {
+            const res = typeModal == 1 ? await PositionService.createPosition(finalData) : await PositionService.updatePosition(finalData)
+            if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                toast.success(res.data.object);
+                setModal(false);
+                getAllPersonal();
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
+
+    // GET
+    const getPositionById = async (id) => {
+        try {
+            const res = await PositionService.getPositionById(id);
+
+            if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                const data = res.data.object;
+
+                reset({
+                    firstname: data.firstname,
+                    lastname: data.lastname,
+                    birthdate: new Date(data.birthdate),
+                    gender: data.gender,
+                    typeDocument: data.typeDocument,
+                    documentNumber: data.documentNumber,
+                    cuil: data.cuil,
+                    roleName: data.roleName,
+                    locationDTO: {
+                        country: data.locationDTO.country,
+                        province: data.locationDTO.province,
+                        department: data.locationDTO.department,
+                        address: data.locationDTO.address
+                    },
+                    contactDTO: {
+                        phoneNumber: data.contactDTO.phoneNumber,
+                        email: data.contactDTO.email,
+                        emergencyNumber: data.contactDTO.emergencyNumber,
+                        contactNameEmergency: data.contactDTO.contactNameEmergency
+                    },
+                    practicePlace: data.practicePlace,
+                    observations: data.observations
+                })
+            }
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
+    //
+
     return (
         <article className="positionModal">
-            <span class="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
+            <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
             <h4>{typeModal == 1 ? "Agregar nueva persona con cargo" : typeModal == 2 ? "Ver persona con cargo" : "Actualizar persona con cargo"}</h4>
             <div className="positionFormContainer">
                 <p className="arrow" onClick={() => {
                     if (step > 0) setStep(prev => prev - 1);
                 }}>&lt;</p>
-                <form>
+                <form onSubmit={handleSubmit(createOrUpdatePosition, (e) => console.log(e))}>
                     {
                         step == 0 ?
-                            <>
-                                <InputControl type={"text"} icon={"person"} register={register} data={"firstname"} key={1}>
-                                    Ingrese el nombre *
-                                </InputControl>
-                                <InputControl type={"text"} icon={"person"} register={register} data={"lastname"} key={2}>
+                            <><InputControl type={"text"} icon={"person"} register={register} data={"firstname"} key={1}
+                                error={errors.firstname} readonly={typeModal == 2 ? true : false}>
+                                Ingrese el nombre *
+                            </InputControl>
+                                <InputControl type={"text"} icon={"person"} register={register} data={"lastname"} key={2}
+                                    error={errors.lastname} readonly={typeModal == 2 ? true : false}>
                                     Ingrese el apellido *
                                 </InputControl>
-                                <DateControl icon={"cake"} setValue={setValue} data={"birthdate"}
-                                    getValues={getValues} key={3}>
+                                <DateControl icon={"cake"} setValue={setValue} data={"birthdate"} value={watch("birthdate")} getValues={getValues} key={3}
+                                    error={errors.birthdate} clearErrors={clearErrors} readOnly={typeModal == 2 ? true : false}>
                                     Seleccione la fecha de nacimiento *
                                 </DateControl>
-                                <ComboControl icon={"diversity_1"}
-                                    options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]} setValue={setValue} data={"gender"} getValues={getValues} key={4}>
+                                <ComboControl icon={"diversity_1"} clearErrors={clearErrors} readOnly={typeModal == 2 ? true : false}
+                                    options={[{ key: 1, value: "Masculino" }, { key: 2, value: "Femenino" }, { key: 3, value: "Otro" }]}
+                                    setValue={setValue} data={"gender"} getValues={getValues} key={4} error={errors.gender}
+                                    value={watch("gender")}>
                                     Seleccione un género *
                                 </ComboControl>
                             </> :
                             step == 1 ?
                                 <>
-                                    <ComboControl icon={"person"} 
-                                        options={[{ key: 1, value: "Directivo" }, { key: 2, value: "Preceptor" }, { key: 3, value: "Preceptor Auxiliar" }]} setValue={setValue} data={"roles"} getValues={getValues} key={5}>
+                                    <ComboControl icon={"person"} options={[{ key: 1, value: "Directivo" }, { key: 2, value: "Preceptor" }, { key: 3, value: "Preceptor Auxiliar" }]} setValue={setValue} data={"roleName"} getValues={getValues}
+                                        clearErrors={clearErrors} readOnly={typeModal == 2 ? true : false} key={5} error={errors.roleName}
+                                        value={watch("roleName")}>
                                         Seleccione un rol *
                                     </ComboControl>
                                     <ComboControl icon={"id_card"} options={[{ key: 1, value: "DNI" }, { key: 2, value: "Pasaporte" }]}
-                                        register={register} data={"typeDocument"} getValues={getValues}
-                                        key={6}>
+                                        setValue={setValue} data={"typeDocument"} getValues={getValues} key={6} error={errors.typeDocument}
+                                        readOnly={typeModal == 2 ? true : false} value={watch("typeDocument")}>
                                         Seleccione el tipo de documento *
                                     </ComboControl>
-                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={7}>
+                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"documentNumber"} key={7}
+                                        error={errors.documentNumber} readonly={typeModal == 2 ? true : false}>
                                         Ingrese el N° de documento *
                                     </InputControl>
-                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"cuil"} key={8}>
+                                    <InputControl type={"text"} icon={"id_card"} register={register} data={"cuil"} key={8}
+                                        readonly={typeModal == 2 ? true : false} error={errors.cuil}>
                                         Ingrese el CUIL *
                                     </InputControl>
                                 </> :
                                 step == 2 ?
                                     <>
                                         <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={9}
-                                            register={register} data={"nativeCountry"} getValues={getValues}>
+                                            data={"locationDTO.country"} getValues={getValues} setValue={setValue}
+                                            value={watch("locationDTO.country")} error={errors.locationDTO?.country} readOnly={typeModal == 2 ? true : false}>
                                             Seleccione país de origen *
                                         </ComboControl>
-                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={10}
-                                            register={register} data={"nativeProvince"} getValues={getValues}>
+                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={10} setValue={setValue}
+                                            data={"locationDTO.province"} getValues={getValues} error={errors.locationDTO?.province} value={watch("locationDTO.province")} readOnly={typeModal == 2 ? true : false}>
                                             Seleccione provincia de origen *
                                         </ComboControl>
-                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={11}
-                                            register={register} data={"actualDeparment"} getValues={getValues}>
+                                        <ComboControl icon={"domain"} options={[{ key: 1, value: "Calamuchita" }, { key: 2, value: "Capital" }, { key: 3, value: "Colón" }, { key: 4, value: "Cruz del Eje" }, { key: 5, value: "General Roca" }, { key: 6, value: "General San Martín" }, { key: 7, value: "Ischilín" }, { key: 8, value: "Juárez Celman" }, { key: 9, value: "Marcos Juárez" }, { key: 10, value: "Minas" }, { key: 11, value: "Pocho" }, { key: 12, value: "Presidente Roque Sáenz Peña" }, { key: 13, value: "Punilla" }, { key: 14, value: "Río Cuarto" }, { key: 15, value: "Río Primero" }, { key: 16, value: "Río Seco" }, { key: 17, value: "Río Segundo" }, { key: 18, value: "San Alberto" }, { key: 19, value: "San Javier" }, { key: 20, value: "San Justo" }, { key: 21, value: "Santa María" }, { key: 22, value: "Sobremonte" }, { key: 23, value: "Tercero Arriba" }, { key: 24, value: "Totoral" }, { key: 25, value: "Tulumba" }, { key: 26, value: "Unión" }]} key={11} setValue={setValue}
+                                            data={"locationDTO.department"} getValues={getValues} error={errors.locationDTO?.department} readOnly={typeModal == 2 ? true : false} value={watch("locationDTO.department")}>
                                             Seleccione departamento de Córdoba donde reside *
                                         </ComboControl>
                                         <InputControl type={"text"} icon={"pin_drop"} key={12} register={register}
-                                            data={"address"}>
+                                            readonly={typeModal == 2 ? true : false} data={"locationDTO.address"} error={errors.locationDTO?.address}>
                                             Domicilio donde reside *
                                         </InputControl>
                                     </>
                                     : step == 3 ?
                                         <>
-                                            <InputControl type={"tel"} icon={"phone"} key={13} register={register}
-                                                data={"phoneNumber"}>
+                                            <InputControl type={"tel"} icon={"phone"} key={13} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.phoneNumber"} error={errors.contactDTO?.phoneNumber}>
                                                 Ingrese el número de celular
                                             </InputControl>
-                                            <InputControl type={"email"} icon={"email"} key={14} register={register}
-                                                data={"email"}>
-                                                Ingrese el email
+                                            <InputControl type={"email"} icon={"email"} key={14} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.email"} error={errors.contactDTO?.email}>
+                                                Ingrese el correo electrónico
                                             </InputControl>
-                                            <InputControl type={"textarea"} icon={"visibility"} key={15}>Observaciones</InputControl>
-                                            {
-                                                typeModal == 2 ? <></> :
-                                                    <button type="button" className="add-button"
-                                                        onClick={() => setModal(false)}>
-                                                        <span className="material-symbols-outlined">save</span>
-                                                        {typeModal != 1 ? "Actualizar docente" : "Crear docente"}
-                                                    </button>
-                                            }
-                                        </> : undefined
+                                            <InputControl type={"tel"} icon={"local_hospital"} key={15} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.emergencyNumber"} error={errors.contactDTO?.emergencyNumber}>
+                                                Ingrese el número de emergencias
+                                            </InputControl>
+                                            <InputControl type={"text"} icon={"person"} key={16} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.contactNameEmergency"} error={errors.contactDTO?.contactNameEmergency}>
+                                                Ingrese nombre/parentesco del contacto de emergencia
+                                            </InputControl>
+                                        </> : step == 4 ?
+                                            <>
+                                                <InputControl register={register} data={"observations"} type={"textarea"}
+                                                    readonly={typeModal == 2 ? true : false} icon={"visibility"} key={17}
+                                                    error={errors.observations}>
+                                                    Observaciones
+                                                </InputControl>
+                                                {
+                                                    typeModal == 2 ? <></> :
+                                                        <button type="submit" className="add-button">
+                                                            <span className="material-symbols-outlined">save</span>
+                                                            {typeModal != 1 ? "Actualizar persona con cargo" : "Crear persona con cargo"}
+                                                        </button>
+                                                }
+                                            </> : undefined
                     }
                 </form>
                 <p className="arrow" onClick={() => {
-                    if (step < 3) setStep(prev => prev + 1);
+                    if (step < 4) setStep(prev => prev + 1);
                 }}>&gt;</p>
             </div>
-            <StepsControl stepsQuantity={4} setStep={setStep} step={step} />
+            <StepsControl stepsQuantity={5} setStep={setStep} step={step} />
         </article>
     )
 }

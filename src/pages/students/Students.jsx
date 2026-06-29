@@ -3,16 +3,17 @@ import { Footer } from "../../components/Footer";
 import { Table } from "../../components/Table";
 import { InputControl } from "../../components/InputControl";
 import { Sidebar } from "../../components/Sidebar";
-import "../../styles/pages/students/Students.css";
 import { StudentModal } from "./StudentModal";
 import { DocsModal } from "../modals/DocsModal";
 import { DegreesModal } from "../modals/DegreesModal";
 import { ContactModal } from "../modals/ContactModal";
 import { ObservationModal } from "../modals/ObservationModal";
 import { FolderModal } from "./FolderModal";
-import { AddPersonInStudenModal } from "./AddPersonInStudentModal";
 import StudentService from "../../services/students/StudentService";
 import toast from "react-hot-toast";
+import { AddExistentPersonModal } from '../modals/AddExistentPersonModal'
+
+import "../../styles/pages/students/Students.css";
 
 export const Students = () => {
 
@@ -20,7 +21,7 @@ export const Students = () => {
     const [typeModal, setTypeModal] = useState();
     const [showCreateOptions, setShowCreateOptions] = useState(false);
 
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de estudiantes";
@@ -66,7 +67,7 @@ export const Students = () => {
                             </button>
                             <button type="button"
                                 onClick={() => {
-                                    setTypeModal(<AddPersonInStudenModal setModal={setModal} />);
+                                    setTypeModal(<AddExistentPersonModal setModal={setModal} typeModal={"student"} getAll={getAllStudents} />);
                                     setModal(true);
                                     setShowCreateOptions(false);
                                 }}>

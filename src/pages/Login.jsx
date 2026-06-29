@@ -27,7 +27,7 @@ export const Login = () => {
             login(res.object);
             navigate("/inicio");
         } else {
-            console.log(res.message);
+            toast.error("No se pudo conectar con el servidor.");
         }
     }
 
