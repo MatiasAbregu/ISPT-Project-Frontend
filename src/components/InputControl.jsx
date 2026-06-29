@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import '../styles/components/InputControl.css';
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, className, readonly, checked }) => {
+    data, error, setValue, watch, typeCheckbox, className, readonly, checked, onclick }) => {
 
     if (type == "search") {
         const input = useRef();

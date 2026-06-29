@@ -58,7 +58,7 @@ export const SchoolYear = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares`) } }
+                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${obj.id}/espacios-curriculares`) } }
                     ]}
                     data={data}
                     showId={false}

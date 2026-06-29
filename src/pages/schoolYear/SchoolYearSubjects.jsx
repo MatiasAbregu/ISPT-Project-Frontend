@@ -7,6 +7,8 @@ import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
 import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import SubjectService from '../../services/careers/SubjectsService';
 
 export const SchoolYearSubjects = () => {
 
@@ -14,10 +16,20 @@ export const SchoolYearSubjects = () => {
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
+    const { id } = useParams();
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
+        getBySchoolYear();
     }, []);
+
+    const getBySchoolYear = async () => {
+        const response = await SubjectService.getBySchoolYear(id);
+        setData(response.object);
+    }
+
+    const tableData = data.map(({ code, type, duration, isCorrelative, ...rest }) => rest);
 
     return (
         <article className='schoolYearSubjectsPage'>
@@ -44,25 +56,10 @@ export const SchoolYearSubjects = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones`) } }
+                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/1/espacios-curriculares/${obj.id}/divisiones`) } }
                     ]}
-                    data={[
-                        {
-                            materia: "Matemática I",
-                            año: "1°",
-                            comisiones: "3"
-                        },
-                        {
-                            materia: "Lengua",
-                            año: "1°",
-                            comisiones: "2"
-                        },
-                        {
-                            materia: "Matemática II",
-                            año: "2°",
-                            comisiones: "2"
-                        }
-                    ]}
+                    showId={false}
+                    data={tableData}
                 />
                 <Footer />
             </div>

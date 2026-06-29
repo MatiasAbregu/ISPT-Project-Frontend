@@ -9,6 +9,11 @@ async getByCurriculumId(curriculumId){
     return response.data;
 }
 
+async getBySchoolYear(schoolYearId){
+    const response = await axios.get(`${API_URL}/schoolyear/${schoolYearId}`);
+    return response.data;
+}
+
 async getById(subjectId){
     const response = await axios.get(`${API_URL}/${subjectId}`);
     return response.data;
