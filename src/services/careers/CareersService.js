@@ -1,28 +1,22 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5293/api/careers";
+import api from "../api";
 
 class CareersService {
     //GET
     async getAll() {
-        const response = await axios.get(`${API_URL}`);
-        return response.data;
+        return api.get(`/careers`);
     }
 
     async getById(careerId) {
-        const response = await axios.get(`${API_URL}/${careerId}`);
-        return response.data;
+        return api.get(`/careers/${careerId}`);
     }
 
     //POST
     async create(data) {
-        const response = await axios.post(`${API_URL}`, data);
-        return response.data;
+        return api.post(`/careers`, data);
     }
     //PUT
     async update(careerId, data) {
-        const response = await axios.put(`${API_URL}/${careerId}`, data);
-        return response.data;
+        return api.put(`/careers/${careerId}`, data);
     }
     //DELETE
 }

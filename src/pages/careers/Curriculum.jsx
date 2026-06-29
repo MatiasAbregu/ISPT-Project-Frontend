@@ -10,6 +10,7 @@ import { UserContext } from '../../context/UserProvider';
 import CurriculumService from '../../services/careers/CurriculumService';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export const Curriculum = () => {
 
@@ -26,9 +27,22 @@ export const Curriculum = () => {
   }, []);
 
   const getAllCurriculums = async () => {
-          const response = await CurriculumService.getByCareerId(id);
-          setData(response.object);
+          try{
+            const response = await CurriculumService.getByCareerId(id);
+            if(response.data.statusCode >= 200 && response.data.statusCode < 300){
+              setData(response.data.object);
+            }
+          } catch(error){
+            console.log(error);
+            if(error.response && error.response.data){
+              const backendResponse = error.response.data;
+              toast.error(backendResponse.message);
+            } else {
+              toast.error("No se pudo conectar con el servidor.");
+            }
+          }
       }
+
 
 
   return (

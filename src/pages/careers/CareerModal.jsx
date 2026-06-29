@@ -6,6 +6,7 @@ import CareerYUP from '../../schemas/CareerYUP'
 import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CareersService from '../../services/careers/CareersService'
+import toast from 'react-hot-toast'
 
 export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
 
@@ -23,16 +24,26 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
     }
 
      const loadCareer = async () => {
-        const response = await CareersService.getById(careerId);
-
-        const career = response.object;
-
-        reset({
-            Name: career.name,
-            Title: career.title
-        });
-
+        try {
+            const response = await CareersService.getById(careerId);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                const career = response.data.object;
+                reset({
+                    Name: career.name,
+                    Title: career.title
+                });
+            }
+        } 
+        catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
     }
+
 
     useEffect(() => {
         if (typeModal === "edit") {

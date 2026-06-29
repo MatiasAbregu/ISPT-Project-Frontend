@@ -10,6 +10,7 @@ import '../../styles/pages/careers/Subjects.css';
 import SubjectService from '../../services/careers/SubjectsService';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 export const Subjects = () => {
 
@@ -30,11 +31,29 @@ export const Subjects = () => {
     }, []);
 
     const getAllSubjects = async () => {
-        const response = await SubjectService.getByCurriculumId(idCurriculum);
-        setData(response.object);
+        try
+        {
+            const res = await SubjectService.getByCurriculumId(idCurriculum);
+           
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300)
+            {
+                setData(res.data.object);
+            }
+        }
+        catch (error) 
+        {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
     }
-    
-    const tableData = data.map(({ type, duration, isCorrelative, ...rest }) => rest);
+
+
+
     ///carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares  
     return (
         <article className='subjectsPage'>
@@ -91,7 +110,7 @@ export const Subjects = () => {
 
                             showId={false}
 
-                            data={tableData}
+                            data={data}
                         />
                         : undefined
                 }

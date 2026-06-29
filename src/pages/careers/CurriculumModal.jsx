@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CurriculumService from '../../services/careers/CurriculumService'
 import { DateControl } from '../../components/DateControl'
+import toast from 'react-hot-toast'
 
 export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, getByCareerId}) => {
 
@@ -39,17 +40,27 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
     }
 
  const loadCurriculum = async () => {
-        const response = await CurriculumService.getById(curriculumId);
-
-        const curriculum = response.object;
-
-        reset({
-            Resolution: curriculum.resolution,
-            Duration: curriculum.duration,
-            StartDate: curriculum.startDate ? new Date(curriculum.startDate) : null,
-            EndDate: curriculum.endDate ? new Date(curriculum.endDate) : null,
-            VigencyDate: curriculum.vigencyDate ? new Date(curriculum.vigencyDate) : null
-        });
+        try{
+            const res = await CurriculumService.getById(curriculumId)
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300){
+                const curriculum = res.data.object
+                reset({
+                    Resolution: curriculum.resolution,
+                    Duration: curriculum.duration,
+                    StartDate: curriculum.startDate ? new Date(curriculum.startDate) : null,
+                    EndDate: curriculum.endDate ? new Date(curriculum.endDate) : null,
+                    VigencyDate: curriculum.vigencyDate ? new Date(curriculum.vigencyDate) : null
+                });
+            }
+        } 
+        catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("Error al cargar el plan de estudios");
+            }
+        }
 
     }
 

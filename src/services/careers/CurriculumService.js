@@ -1,28 +1,22 @@
-import axios from "axios";
+import api from "../api";
 
-const API_URL = "http://localhost:5293/api/curriculum";
 
 class CurriculumService{
     //GET
 async getByCareerId(careerId){
-    const response = await axios.get(`${API_URL}/career/${careerId}`);
-    return response.data;
+    return api.get(`/curriculum/career/${careerId}`);
 }
 
 async getById(curriculumId){
-    const response = await axios.get(`${API_URL}/${curriculumId}`);
-    return response.data;
+    return api.get(`/curriculum/${curriculumId}`);
 }
     //POST
 async create(data){
-    const response = await axios.post(`${API_URL}`, data);
-    return response.data;
+    return api.post(`/curriculum`, data);
 }
     //PUT
 async update(curriculumId, data){
-    console.log(`${API_URL}/${curriculumId}`, data);
-    const response = await axios.put(`${API_URL}/${curriculumId}`, data);
-    return response.data;
+    return api.put(`/curriculum/${curriculumId}`, data);
 }
     //DELETE
 }

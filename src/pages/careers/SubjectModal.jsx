@@ -9,10 +9,13 @@ import SubjectYUP from '../../schemas/SubjectYUP'
 import { TimeControl } from '../../components/TimeControl'
 import '../../styles/pages/careers/SubjectModal.css'
 import SubjectService from '../../services/careers/SubjectsService'
+import { useParams } from 'react-router'
+import toast from 'react-hot-toast'
 
 export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, getByCurriculumId }) => {
 
     const [step, setStep] = useState(0);
+    
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues, reset } = useForm({ resolver: yupResolver(SubjectYUP) });
 
@@ -42,20 +45,34 @@ export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, get
     }
 
     const loadSubject = async () => {
-        const response = await SubjectService.getById(subjectId);
-
-        const subject = response.object;
-
-        reset({
-            Code: subject.code,
-            Year: subject.year,
-            Name: subject.name,
-            Format: subject.format,
-            Type: subject.type,
-            Duration: subject.duration
-        });
+        try
+        {
+            const res = await SubjectService.getById(subjectId);
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300)
+            {
+                const subject = res.data.object;
+                reset({
+                    Code: subject.code,
+                    Year: subject.year,
+                    Name: subject.name,
+                    Format: subject.format,
+                    Type: subject.type,
+                    Duration: subject.duration
+                });
+            }
+            
+        } catch (error)
+        {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
 
     }
+
 
     const isView = typeModal === "view";
 

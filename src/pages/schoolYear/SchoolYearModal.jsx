@@ -26,7 +26,7 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
     const getAllCareers = async () => {
             const response = await CareersService.getAll();
             const careers = [];
-            response.object.forEach(element => {
+            response.data.object.forEach(element => {
                 careers.push({ key: element.id, value: element.name });
             });
             setDataCareers(careers);

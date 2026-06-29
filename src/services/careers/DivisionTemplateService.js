@@ -1,18 +1,14 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5293/api/division-templates";
+import api from "../api";
 
 class DivisionTemplateService {
     //GET
     async getBySubject(subjectId) {
-        const response = await axios.get(`${API_URL}/subject/${subjectId}`);
-        return response.data;
+        return api.get(`division-templates/subject/${subjectId}`);
     }
 
     //POST
     async create(subjectId) {
-        const response = await axios.post(`${API_URL}/subject/${subjectId}`);
-        return response.data;
+        return api.post(`division-templates/subject/${subjectId}`);
     }
     //PUT
 

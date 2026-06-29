@@ -33,11 +33,26 @@ export const Correlatives = () => {
 }, [pendingChanges]);
 
   const getPossibleCorrelatives = async () => {
-    const response = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
-    setData(response.object);
+    try
+    {
+      const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
+      if(res.data.statusCode >= 200 && res.data.statusCode < 300)
+      {
+        setData(res.data.object);
+      }
+    } catch (error) 
+    {
+      if(error.response && error.response.data) {
+        const backendResponse = error.response.data;
+        toast.error(backendResponse.message);
+      } else {
+        toast.error("No se pudo conectar con el servidor.");
+      }
+    }
   }
 
-  const tableData = data.map(({ type, year, duration, isCorrelative, ...rest }) => ({
+
+  const tableData = data.map(({ isCorrelative, ...rest }) => ({
     ...rest,
     c: {
       c: "¿Correlativa?",

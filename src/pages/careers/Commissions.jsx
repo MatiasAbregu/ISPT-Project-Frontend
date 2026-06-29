@@ -24,14 +24,27 @@ export const Commissions = () => {
     }, []);
 
     const getDivisionTemplates = async () => {
-        const response = await DivisionTemplateService.getBySubject(idSubject);
-        setData(response.object);
+        try
+        {
+            const res = await DivisionTemplateService.getBySubject(idSubject);
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300){
+                setData(res.data.object);
+            }
+        } catch (error) 
+        {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                console.error(backendResponse.message);
+            } else {
+                console.error("No se pudo conectar con el servidor.");
+            }
+        }
     }
 
     const handleAddDivision = async () => {
         try {
             const response = await DivisionTemplateService.create(idSubject);
-            if (response.statusCode === 201) {
+            if (response.data.statusCode === 201) {
                 getDivisionTemplates();
             }
         } catch (error) {

@@ -1,38 +1,29 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5293/api/subjects";
+import api from "../api";
 
 class SubjectsService{
     //GET
 async getByCurriculumId(curriculumId){
-    const response = await axios.get(`${API_URL}/curriculum/${curriculumId}`);
-    return response.data;
+    return api.get(`/subjects/curriculum/${curriculumId}`);
 }
 
 async getBySchoolYear(schoolYearId){
-    const response = await axios.get(`${API_URL}/schoolyear/${schoolYearId}`);
-    return response.data;
+    return api.get(`/subjects/schoolyear/${schoolYearId}`);
 }
 
 async getById(subjectId){
-    const response = await axios.get(`${API_URL}/${subjectId}`);
-    return response.data;
+    return api.get(`/subjects/${subjectId}`);
 }
 
 async getPossibleCorrelatives(curriculumId, subjectId){
-    const response = await axios.get(`${API_URL}/${curriculumId}/${subjectId}`);
-    return response.data;
+    return api.get(`/subjects/${curriculumId}/${subjectId}`);
 }
     //POST
 async create(data){
-    const response = await axios.post(`${API_URL}`, data);
-    return response.data;
+    return api.post(`/subjects`, data);
 }
     //PUT
 async update(subjectId, data){
-    console.log(`${API_URL}/${subjectId}`, data);
-    const response = await axios.put(`${API_URL}/${subjectId}`, data);
-    return response.data;
+    return api.put(`/subjects/${subjectId}`, data);
 }
     //DELETE
 }
