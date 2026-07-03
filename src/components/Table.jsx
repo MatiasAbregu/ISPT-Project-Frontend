@@ -293,7 +293,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                             </tr>)
                         :
                         <tr>
-                            <td colSpan={5}>¡No hay datos a mostrar aún!</td>
+                            <td colSpan={columns.length + 1}>¡No hay datos a mostrar aún!</td>
                         </tr>
                 }
             </tbody>
