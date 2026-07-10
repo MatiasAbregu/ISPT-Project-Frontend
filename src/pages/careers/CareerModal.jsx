@@ -7,17 +7,29 @@ import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CareersService from '../../services/careers/CareersService'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
 
     const { data, register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(CareerYUP) })
 
+    const { user } = useContext(UserContext);
+
     const onSubmit = async (data) => {
         if (typeModal === "add") {
-            await CareersService.create(data)
+            let finalData = {
+                ...data,
+                createdById: user.id || user.ID
+            }
+            await CareersService.create(finalData)
         } else {
-            data = { ...data, Id: careerId }
-            await CareersService.update(careerId, data)
+            let finalData = {
+                ...data,
+                updatedById: user.id || user.ID,
+                Id: careerId
+            }
+            await CareersService.update(careerId, finalData)
         }
         setModal(false)
         await getAll()

@@ -9,6 +9,7 @@ import SchoolYearYUP from '../../schemas/SchoolYearYUP'
 import SchoolYearService from '../../services/schoolYears/SchoolYearService'
 import CareersService from '../../services/careers/CareersService'
 import CurriculumService from '../../services/careers/CurriculumService'
+import toast from 'react-hot-toast'
 
 export const SchoolYearModal = ({ setModal, getAll }) => {
 
@@ -24,27 +25,45 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
     }
 
     const getAllCareers = async () => {
-            const response = await CareersService.getAll();
-            const careers = [];
-            response.data.object.forEach(element => {
-                careers.push({ key: element.id, value: element.name });
-            });
-            setDataCareers(careers);
+        try
+        {
+            const res = await CareersService.getAll();
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                const careers = [];
+                res.data.object.forEach(element => {
+                    careers.push({ key: element.id, value: element.name });
+                });
+                setDataCareers(careers);
+            }
+
         }
+        catch(error)
+        {
+            if(error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            }
+        }
+    }
+
 
     const getAllCurriculums = async () => {
-        let curriculums = [];
-        if (!currentCareerId){
-            curriculums = [{ key: null, value: 'Seleccione una carrera' }];
-            setDataCurriculums(curriculums);
-            return;
+        try{
+            const res = await CurriculumService.getByCareerId(currentCareerId);
+            if(res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                const curriculums = [];
+                res.data.object.forEach(element => {
+                    curriculums.push({ key: element.id, value: element.resolution });
+                });
+                setDataCurriculums(curriculums);
+            }
         }
-        const response = await CurriculumService.getByCareerId(currentCareerId);
-        curriculums = [];
-        response.object.forEach(element => {
-            curriculums.push({ key: element.id, value: element.resolution });
-        });
-        setDataCurriculums(curriculums);
+        catch(error){
+            if(error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            }
+        }
     }
     
     useEffect(() => {

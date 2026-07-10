@@ -7,10 +7,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CurriculumService from '../../services/careers/CurriculumService'
 import { DateControl } from '../../components/DateControl'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, getByCareerId}) => {
 
     const { register, handleSubmit, setValue, getValues, formState: { errors }, reset, watch } = useForm({ resolver: yupResolver(CurriculumYUP) })
+    const { user } = useContext(UserContext);
 
   useEffect(() => {
     register("StartDate");
@@ -30,10 +33,18 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
 
         console.log(data);
         if (typeModal === "add") {
-            await CurriculumService.create(data)
+            let finalData = {
+                ...data,
+                createdById: user.id || user.ID
+            }
+            await CurriculumService.create(finalData)
         } else {
-            data = { ...data, Id: curriculumId }
-            await CurriculumService.update(curriculumId, data)
+            let finalData = {
+                ...data,
+                updatedById: user.id || user.ID,
+                Id: curriculumId
+            }
+            await CurriculumService.update(curriculumId, finalData)
         }
         setModal(false)
         await getByCareerId(careerId)
