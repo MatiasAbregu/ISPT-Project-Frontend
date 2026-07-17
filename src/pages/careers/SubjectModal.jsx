@@ -11,9 +11,12 @@ import '../../styles/pages/careers/SubjectModal.css'
 import SubjectService from '../../services/careers/SubjectsService'
 import { useParams } from 'react-router'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, getByCurriculumId }) => {
 
+    const { user } = useContext(UserContext);
     const [step, setStep] = useState(0);
     
 
@@ -30,14 +33,19 @@ export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, get
 
         data = {
             ...data,
-            CurriculumId: curriculumId
+            CurriculumId: curriculumId,
+            createdById: user.id || user.ID
         }
 
         console.log(data);
         if (typeModal === "add") {
             await SubjectService.create(data)
         } else {
-            data = { ...data, Id: subjectId }
+            data = { 
+                ...data, 
+                Id: subjectId,
+                updatedById: user.id || user.ID 
+            }
             await SubjectService.update(subjectId, data)
         }
         setModal(false)

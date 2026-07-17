@@ -7,8 +7,8 @@ class DivisionTemplateService {
     }
 
     //POST
-    async create(subjectId) {
-        return api.post(`division-templates/subject/${subjectId}`);
+    async create(subjectId, userId) {
+        return api.post(`division-templates/subject/${subjectId}/${userId}`);
     }
     //PUT
 

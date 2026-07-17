@@ -6,6 +6,8 @@ import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserProvider';
 import DivisionTemplateService from '../../services/careers/DivisionTemplateService';
 
 export const Commissions = () => {
@@ -16,7 +18,7 @@ export const Commissions = () => {
     const { idSubject } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         document.title = "ISPT - División";
@@ -43,7 +45,7 @@ export const Commissions = () => {
 
     const handleAddDivision = async () => {
         try {
-            const response = await DivisionTemplateService.create(idSubject);
+            const response = await DivisionTemplateService.create(idSubject, user.id || user.ID);
             if (response.data.statusCode === 201) {
                 getDivisionTemplates();
             }

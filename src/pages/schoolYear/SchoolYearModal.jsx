@@ -10,6 +10,8 @@ import SchoolYearService from '../../services/schoolYears/SchoolYearService'
 import CareersService from '../../services/careers/CareersService'
 import CurriculumService from '../../services/careers/CurriculumService'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 export const SchoolYearModal = ({ setModal, getAll }) => {
 
@@ -17,9 +19,14 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
     const [dataCareers, setDataCareers] = useState([]);
     const [currentCareerId, setCurrentCareerId] = useState(null);
     const [dataCurriculums, setDataCurriculums] = useState([]);
+    const { user } = useContext(UserContext);
 
     const onSubmit = async (data) => {
-        await SchoolYearService.create(data)
+        let finalData = {
+            ...data,
+            createdById: user.id || user.ID
+        }
+        await SchoolYearService.create(finalData)
         setModal(false)
         await getAll()
     }

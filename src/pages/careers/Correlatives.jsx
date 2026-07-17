@@ -123,13 +123,13 @@ export const Correlatives = () => {
               if(exists) {
                 return prev.map(x =>
                   x.subjectCorrelativeId === row.id
-                    ? { ...x, isCorrelative: checked }
+                    ? { ...x, isCorrelative: checked, createdById: user.id || user.ID }
                     : x
                 )
               }
               
               
-              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked }];
+              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked, createdById: user.id || user.ID }];
             })
 
           }}
