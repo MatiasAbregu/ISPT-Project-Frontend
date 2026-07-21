@@ -53,11 +53,6 @@
     border-radius: 5vh;
 }
 
-.careerFormContainer .dateControl,
-.careerFormContainer .comboControl {
-    margin-top: 55px;
-}
-
 .careerFormContainer .textareaControl {
     height: 300px;
 }
@@ -70,17 +65,6 @@
 .careerFormContainer .textareaControl label {
     color: #6f2c7e !important;
     margin-left: 90px;
-}
-
-.careerFormContainer .inputControl:has(input:focus) label,
-.careerFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-85%) translateX(-5%);
-}
-
-.careerFormContainer .textareaControl:has(textarea:focus) label,
-.careerFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-63%) translateX(-5%);
-    color: white;
 }
 
 .buttonContainer {

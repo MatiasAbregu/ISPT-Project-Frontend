@@ -13,17 +13,28 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
     const { data, register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(CareerYUP) })
 
     const onSubmit = async (data) => {
-        if (typeModal === "add") {
-            await CareersService.create(data)
-        } else {
-            data = { ...data, Id: careerId }
-            await CareersService.update(careerId, data)
+        try {
+            let res;
+            if (typeModal === "add") res = await CareersService.create(data);
+            else {
+                data = { ...data, Id: careerId }
+                res = await CareersService.update(careerId, data);
+            }
+
+            toast.success(res.data?.message || "¡Operación éxitosa!");
+            setModal(false)
+            await getAll()
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
         }
-        setModal(false)
-        await getAll()
     }
 
-     const loadCareer = async () => {
+    const loadCareer = async () => {
         try {
             const response = await CareersService.getById(careerId);
             if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
@@ -33,7 +44,7 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
                     Title: career.title
                 });
             }
-        } 
+        }
         catch (error) {
             if (error.response && error.response.data) {
                 const backendResponse = error.response.data;

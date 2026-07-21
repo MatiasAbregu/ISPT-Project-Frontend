@@ -49,28 +49,6 @@
     border-radius: 5vh;
 }
 
-.curriculumFormContainer .inputControl label,
-.curriculumFormContainer .textareaControl label,
-.curriculumFormContainer .dateControl label {
-    color: #6f2c7e !important;
-    margin-left: 90px;
-}
-
-.curriculumFormContainer .inputControl.number label {
-    transform: translateY(-85%) translateX(-5%) !important;
-}
-
-.curriculumFormContainer .inputControl:has(input:focus) label,
-.curriculumFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-85%) translateX(-5%);
-}
-
-.curriculumFormContainer .textareaControl:has(textarea:focus) label,
-.curriculumFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-63%) translateX(-5%);
-    color: white;
-}
-
 .curriculumFormContainer .add-button {
     background-color: white;
     padding: 10px 20px;

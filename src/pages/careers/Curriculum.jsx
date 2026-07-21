@@ -27,21 +27,21 @@ export const Curriculum = () => {
   }, []);
 
   const getAllCurriculums = async () => {
-          try{
-            const response = await CurriculumService.getByCareerId(id);
-            if(response.data.statusCode >= 200 && response.data.statusCode < 300){
-              setData(response.data.object);
-            }
-          } catch(error){
-            console.log(error);
-            if(error.response && error.response.data){
-              const backendResponse = error.response.data;
-              toast.error(backendResponse.message);
-            } else {
-              toast.error("No se pudo conectar con el servidor.");
-            }
-          }
+    try {
+      const response = await CurriculumService.getByCareerId(id);
+      if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+        setData(response.data.object);
       }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data) {
+        const backendResponse = error.response.data;
+        toast.error(backendResponse.message);
+      } else {
+        toast.error("No se pudo conectar con el servidor.");
+      }
+    }
+  }
 
 
 
@@ -56,7 +56,7 @@ export const Curriculum = () => {
           {
             user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
-                onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="add" getByCareerId={getAllCurriculums} careerId={id}/>); setModal(true); }}>
+                onClick={() => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="add" getByCareerId={getAllCurriculums} careerId={id} />); setModal(true); }}>
                 <span className="material-symbols-outlined">add_circle</span>Añadir plan de estudio
               </button> : undefined
           }
@@ -71,10 +71,6 @@ export const Curriculum = () => {
             width: 100
           },
           {
-            name: "Fecha de lanzamiento",
-            width: 110
-          },
-          {
             name: "Fecha en qué entro en vigencia",
             width: 100
           },
@@ -84,12 +80,17 @@ export const Curriculum = () => {
           }
           ]}
           options={user?.roles.includes("Directivo") ?
-            [{value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`)},
-              { value: "edit", onclick: (obj) => { setTypeModal(<CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id} />); setModal(true); } }]
+            [{ value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`) },
+            {
+              value: "edit", onclick: (obj) => {
+                setTypeModal(<CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id} />);
+                setModal(true);
+              }
+            }]
             : ["academicYear"]
           }
           showId={false}
-            data={data}
+          data={data}
         />
         <Footer />
       </div>

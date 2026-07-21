@@ -42,6 +42,30 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
         });
     }
 
+    const formatIfDateTime = (value) => {
+        if (typeof value !== 'string') return value;
+
+        const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
+
+        if (isoDateTimeRegex.test(value)) {
+
+            if (value.startsWith("0001-01-01")) {
+                return "----";
+            }
+
+            const date = new Date(value);
+            if (!isNaN(date.getTime())) {
+                return new Intl.DateTimeFormat('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                }).format(date);
+            }
+        }
+
+        return value;
+    };
+
     const handleMouseUp = () => {
         setIsResizing(false);
         setResizingColumn(null);
@@ -121,19 +145,23 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                 return null;
                                             }
                                             if (typeof value === "object" && value !== null && "check" in value) {
-                                                return (<td key={i2}>
-                                                    <div className="tdCheck">{value[key]} <InputControl type={"checkbox"} typeCheckbox={2}
-                                                        checked={value.check}
-                                                        onclick={(checked) => onCheckboxChange?.(obj, checked)} /></div>
-                                                </td>);
+                                                return (
+                                                    <td key={i2}>
+                                                        <div className="tdCheck">
+                                                            {formatIfDateTime(value[key])}
+                                                            <InputControl type={"checkbox"} typeCheckbox={2}
+                                                                checked={value.check}
+                                                                onclick={(checked) => onCheckboxChange?.(obj, checked)} />
+                                                        </div>
+                                                    </td>);
                                             } else
-                                                return (<td key={i2}>{value}</td>);
+                                                return (<td key={i2}>{formatIfDateTime(value)}</td>);
                                         })
                                         : Object.entries(obj).map(([key, value], i2) => {
                                             if (showId === false && key === 'id') {
                                                 return null;
                                             }
-                                            return (<td key={i2}>{value}</td>);
+                                            return (<td key={i2}>{formatIfDateTime(value)}</td>);
                                         })
                                 }{
                                     options ?
