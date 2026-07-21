@@ -214,14 +214,14 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                             </NavLink>)
                                                         else if (v.value == "commission")
                                                             return (
-                                                                <span className="material-symbols-outlined tableBtnLightGreen"
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightGreen"
                                                                     onClick={() => v.onclick && v.onclick(obj)}>
                                                                     group_work
                                                                 </span>
                                                             )
                                                         else if (v.value == "teacher")
                                                             return (
-                                                                <span className="material-symbols-outlined tableBtnLightGreen"
+                                                                <span key={i} className="material-symbols-outlined tableBtnLightGreen"
                                                                     onClick={() => v.onclick && v.onclick(obj)}>
                                                                     co_present
                                                                 </span>

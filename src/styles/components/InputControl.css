@@ -36,7 +36,7 @@
     position: absolute;
     color: #6f2c7e;
     width: 90%;
-    margin-left: 10%;
+    margin-left: 5.8dvw;
     height: 95%;
     display: flex;
     align-items: center;
@@ -46,7 +46,7 @@
 
 .inputControl:has(input:focus) label,
 .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-95%) translateX(-10%);
+    transform: translateY(-95%) translateX(-4%);
 }
 
 .textareaControl:has(textarea:focus) label,
@@ -58,16 +58,6 @@
 .checkControl label {
     margin-left: 2%;
     cursor: pointer;
-}
-
-.inputControl.number label {
-    position: absolute;
-    color: white;
-}
-
-.inputControl.number:has(input:focus) label,
-.inputControl.number:has(input:not(:placeholder-shown)) label {
-    transform: none;
 }
 
 .inputControl div,

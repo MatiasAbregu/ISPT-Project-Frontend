@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 540px;
+    min-height: 440px;
     width: 80%;
 }
 
@@ -40,7 +40,7 @@
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0 60px 0;
+    padding: 10px 0 40px 0;
     margin-bottom: 30px;
 }
 
@@ -66,26 +66,9 @@
     overflow: hidden;
 }
 
-.subjectFormContainer .inputControl label,
-.subjectFormContainer .textareaControl label {
-    color: #6f2c7e !important;
-    margin-left: 90px;
-}
-
-.subjectFormContainer .inputControl:has(input:focus) label,
-.subjectFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-85%) translateX(-5%);
-}
-
-.subjectFormContainer .textareaControl:has(textarea:focus) label,
-.subjectFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-63%) translateX(-5%);
-    color: white;
-}
-
 .subjectFormContainer .add-button {
     background-color: white;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px 20px;
     border-radius: 15px;
     border: none;

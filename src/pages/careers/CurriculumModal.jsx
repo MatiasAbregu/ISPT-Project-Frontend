@@ -6,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CurriculumService from '../../services/careers/CurriculumService'
 import { DateControl } from '../../components/DateControl'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 import '../../styles/pages/careers/CurriculumModal.css'
 
@@ -13,6 +15,7 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
 
     const { register, handleSubmit, setValue, getValues, formState: { errors }, reset, watch } =
         useForm({ resolver: yupResolver(CurriculumYUP) })
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         register("EndDate");
@@ -23,21 +26,36 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
     }, [register, curriculumId, typeModal]);
 
     const onSubmit = async (data) => {
-
-        data = {
-            ...data,
-            CareerId: careerId
+        try {
+            let res;
+            if (typeModal === "add") {
+                let finalData = {
+                    ...data,
+                    CareerId: careerId,
+                    createdById: user.id || user.ID
+                }
+                res = await CurriculumService.create(finalData)
+            } else {
+                let finalData = {
+                    ...data,
+                    CareerId: careerId,
+                    updatedById: user.id || user.ID,
+                    Id: curriculumId
+                }
+                res = await CurriculumService.update(curriculumId, finalData)
+            }
+            
+            toast.success(res.data?.message || "¡Operación éxitosa!");
+            setModal(false)
+            await getByCareerId(careerId);
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
         }
-
-        console.log(data);
-        if (typeModal === "add") {
-            await CurriculumService.create(data)
-        } else {
-            data = { ...data, Id: curriculumId }
-            await CurriculumService.update(curriculumId, data)
-        }
-        setModal(false)
-        await getByCareerId(careerId)
     }
 
     const parseValidDate = (dateString) => {
@@ -80,7 +98,8 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
                     <InputControl label={"Plan de estudio"} icon={"contract_edit"} data={"Resolution"} register={register} error={errors.Resolution}>
                         Ingrese la resolución
                     </InputControl>
-                    <InputControl label={"Duración"} icon={"timer"} type={"number"} data={"Duration"} register={register} error={errors.Duration}>
+                    <InputControl label={"Duración"} icon={"timer"} type={"number"} data={"Duration"}
+                        register={register} error={errors.Duration}>
                         Ingrese la duración
                     </InputControl>
                     <DateControl icon={"calendar_month"} data={"VigencyDate"} register={register} error={errors.VigencyDate}
@@ -89,7 +108,7 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
                     </DateControl>
                     <DateControl icon={"calendar_month"} data={"EndDate"} register={register} error={errors.EndDate}
                         setValue={setValue} getValues={getValues} value={watch("EndDate")}>
-                        Seleccione la fecha de fin del plan *
+                        Seleccione la fecha de fin del plan
                     </DateControl>
                     <button type="submit" className="add-button">
                         <span className="material-symbols-outlined">save</span> {typeModal === "add" ? "Guardar cambios" : "Actualizar cambios"}

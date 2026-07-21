@@ -60,23 +60,6 @@
     overflow: hidden;
 }
 
-.positionFormContainer .inputControl label,
-.positionFormContainer .textareaControl label {
-    color: #6f2c7e !important;
-    margin-left: 90px;
-}
-
-.positionFormContainer .inputControl:has(input:focus) label,
-.positionFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-85%) translateX(-5%);
-}
-
-.positionFormContainer .textareaControl:has(textarea:focus) label,
-.positionFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-63%) translateX(-5%);
-    color: white;
-}
-
 .positionFormContainer .add-button {
     background-color: white;
     margin-top: 10px;

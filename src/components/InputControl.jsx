@@ -9,7 +9,7 @@ export const InputControl = ({ children, type, icon, register,
 
         return (
             <>
-                <div className={`inputControl ${className}`} onClick={() => input.current?.focus()}>
+                <div className={`inputControl ${className ?? ""}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
@@ -23,7 +23,7 @@ export const InputControl = ({ children, type, icon, register,
 
         return (
             <>
-                <div className={`textareaControl ${className} ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
+                <div className={`textareaControl ${className ?? ""} ${error?.message ? "errorInput" : ""}`} onClick={() => input.current?.focus()}>
                     <label>{children}</label>
                     <div className="textareaContainer">
                         <span className="material-symbols-outlined">{icon}</span>
@@ -56,7 +56,7 @@ export const InputControl = ({ children, type, icon, register,
 
         if (type == "number") {
             return (
-                <div className={`inputControl number ${className} ${error?.message ? "errorInput" : ""}`}>
+                <div className={`inputControl number ${className ?? ""} ${error?.message ? "errorInput" : ""}`}>
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
@@ -83,8 +83,10 @@ export const InputControl = ({ children, type, icon, register,
             const [check, setCheck] = useState(checked ?? false);
 
             return (
-                <div className="checkControl" onClick={() => { const newValue = !check; setCheck(newValue); 
-                if (typeof onclick === "function") onclick(newValue); }}>
+                <div className="checkControl" onClick={() => {
+                    const newValue = !check; setCheck(newValue);
+                    if (typeof onclick === "function") onclick(newValue);
+                }}>
                     <input type="checkbox" readOnly={readonly} style={{ display: "none" }} />
                     <span className="material-symbols-outlined" >{check ? "check_circle" : "circle"}</span>
                     <label>{children}</label>

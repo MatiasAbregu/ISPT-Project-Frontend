@@ -9,6 +9,7 @@ import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import SubjectService from '../../services/careers/SubjectsService';
+import toast from 'react-hot-toast';
 
 export const SchoolYearSubjects = () => {
 
@@ -25,9 +26,38 @@ export const SchoolYearSubjects = () => {
     }, []);
 
     const getBySchoolYear = async () => {
-        const response = await SubjectService.getBySchoolYear(id);
-        setData(response.object);
+        try {
+            const response = await SubjectService.getBySchoolYear(id);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
     }
+
+    /*
+     try {
+            const response = await CareersService.getAll();
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    */
 
     const tableData = data.map(({ code, type, duration, isCorrelative, ...rest }) => rest);
 

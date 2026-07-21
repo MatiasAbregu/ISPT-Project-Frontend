@@ -24,7 +24,7 @@ export const SchoolYear = () => {
 
     const getAllSchoolYears = async () => {
         const response = await SchoolYearService.getAll();
-        setData(response.object);
+        setData(response.data.object);
     }
 
     return (

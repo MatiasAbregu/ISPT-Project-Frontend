@@ -7,18 +7,31 @@ import { set, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CareersService from '../../services/careers/CareersService'
 import toast from 'react-hot-toast'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 
 export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
 
     const { data, register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(CareerYUP) })
 
+    const { user } = useContext(UserContext);
+
     const onSubmit = async (data) => {
         try {
             let res;
-            if (typeModal === "add") res = await CareersService.create(data);
-            else {
-                data = { ...data, Id: careerId }
-                res = await CareersService.update(careerId, data);
+            if (typeModal === "add") {
+                let finalData = {
+                    ...data,
+                    createdById: user.id || user.ID
+                }
+                res = await CareersService.create(finalData)
+            } else {
+                let finalData = {
+                    ...data,
+                    updatedById: user.id || user.ID,
+                    Id: careerId
+                }
+                res = await CareersService.update(careerId, finalData)
             }
 
             toast.success(res.data?.message || "¡Operación éxitosa!");
@@ -54,7 +67,6 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
             }
         }
     }
-
 
     useEffect(() => {
         if (typeModal === "edit") {

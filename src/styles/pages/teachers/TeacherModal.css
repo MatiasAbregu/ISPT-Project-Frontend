@@ -66,23 +66,6 @@
     overflow: hidden;
 }
 
-.teacherFormContainer .inputControl label,
-.teacherFormContainer .textareaControl label {
-    color: #6f2c7e !important;
-    margin-left: 90px;
-}
-
-.teacherFormContainer .inputControl:has(input:focus) label,
-.teacherFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
-    transform: translateY(-85%) translateX(-5%);
-}
-
-.teacherFormContainer .textareaControl:has(textarea:focus) label,
-.teacherFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
-    transform: translateY(-63%) translateX(-5%);
-    color: white;
-}
-
 .teacherFormContainer .add-button {
     background-color: white;
     margin-top: 10px;

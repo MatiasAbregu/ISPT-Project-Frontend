@@ -66,11 +66,6 @@
     overflow: hidden;
 }
 
-.studentFormContainer .inputControl label,
-.studentFormContainer .textareaControl label {
-    margin-left: 90px;
-}
-
 .studentFormContainer .add-button {
     background-color: white;
     margin-top: 10px;
