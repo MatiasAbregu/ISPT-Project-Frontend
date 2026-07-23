@@ -38,13 +38,13 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
             } else {
                 let finalData = {
                     ...data,
-                    CareerId: careerId,
+                    CareerId: parseInt(careerId),
                     updatedById: user.id || user.ID,
                     Id: curriculumId
                 }
                 res = await CurriculumService.update(curriculumId, finalData)
             }
-            
+
             toast.success(res.data?.message || "¡Operación éxitosa!");
             setModal(false)
             await getByCareerId(careerId);
@@ -111,7 +111,8 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
                         Seleccione la fecha de fin del plan
                     </DateControl>
                     <button type="submit" className="add-button">
-                        <span className="material-symbols-outlined">save</span> {typeModal === "add" ? "Guardar cambios" : "Actualizar cambios"}
+                        <span className="material-symbols-outlined">save</span>
+                        {typeModal === "add" ? "Crear plan de estudio" : "Actualizar plan de estudio"}
                     </button>
                 </form>
             </div>

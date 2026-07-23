@@ -83,7 +83,9 @@ export const Curriculum = () => {
             [{ value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`) },
             {
               value: "edit", onclick: (obj) => {
-                setTypeModal(<CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id} />);
+                setTypeModal(
+                  <CurriculumModal setModal={setModal} typeModal="edit" getByCareerId={getAllCurriculums} curriculumId={obj.id}
+                    careerId={id} />);
                 setModal(true);
               }
             }]
