@@ -42,22 +42,6 @@ export const SchoolYearSubjects = () => {
         }
     }
 
-    /*
-     try {
-            const response = await CareersService.getAll();
-            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
-                setData(response.data.object);
-            }
-        } catch (error) {
-            console.log(error);
-            if (error.response && error.response.data) {
-                const backendResponse = error.response.data;
-                toast.error(backendResponse.message);
-            } else {
-                toast.error("No se pudo conectar con el servidor.");
-            }
-        }
-    */
 
     const tableData = data.map(({ code, type, duration, isCorrelative, ...rest }) => rest);
 
@@ -86,7 +70,7 @@ export const SchoolYearSubjects = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/1/espacios-curriculares/${obj.id}/divisiones`) } }
+                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${id}/espacios-curriculares/${obj.id}/divisiones`) } }
                     ]}
                     showId={false}
                     data={tableData}

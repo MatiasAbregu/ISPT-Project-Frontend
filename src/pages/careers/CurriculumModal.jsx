@@ -38,7 +38,6 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
             } else {
                 let finalData = {
                     ...data,
-                    CareerId: careerId,
                     updatedById: user.id || user.ID,
                     Id: curriculumId
                 }

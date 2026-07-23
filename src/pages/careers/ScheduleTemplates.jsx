@@ -8,11 +8,10 @@ import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserProvider';
-import DivisionTemplateService from '../../services/careers/DivisionTemplateService';
 import toast from 'react-hot-toast'
-import '../../styles/pages/careers/Commissions.css';
+import '../../styles/pages/careers/ScheduleTemplates.css';
 
-export const Commissions = () => {
+export const ScheduleTemplates = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { id } = useParams();
@@ -24,10 +23,10 @@ export const Commissions = () => {
 
     useEffect(() => {
         document.title = "ISPT - División";
-        getDivisionTemplates();
+
     }, []);
 
-    const getDivisionTemplates = async () => {
+    const getScheduleTemplates = async () => {
         try
         {
             const res = await DivisionTemplateService.getBySubject(idSubject);
@@ -45,50 +44,46 @@ export const Commissions = () => {
         }
     }
 
-    const handleAddDivision = async () => {
-        try {
-            const response = await DivisionTemplateService.create(idSubject, user.id || user.ID);
-            if (response.data.statusCode === 201) {
-                toast.success(response.data?.message || "¡Operación éxitosa!");
-                getDivisionTemplates();
-            }
-        } catch (error) {
-            console.error(error);
-            if (error.response && error.response.data) {
-                const backendResponse = error.response.data;
-                toast.error(backendResponse.message);
-            } else {
-                toast.error("No se pudo conectar con el servidor.");
-            }
-        }
-    };
 
     return (
-        <article className='commissionsPage'>
+        <article className='scheduleTemplatesPage'>
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
-            <div className="commissionsPageContainer">
+            <div className="scheduleTemplatesPageContainer">
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
                         onClick={() => {
-                            handleAddDivision();
+                           
                         }}>
-                        <span className="material-symbols-outlined">add_circle</span>Añadir división
+                        <span className="material-symbols-outlined">add_circle</span>Añadir módulo
                     </button>
                 </div>
                 <Table
                     columns={[
                         {
-                            name: "División",
+                            name: "Hora de Inicio",
+                            width: 100
+                        },
+                        {
+                            name: "Hora de Fin",
                             width: 100
                         }
                     ]}
-                    options={[{ value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`) },
-                        { value: "schedule", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`) }
+                    options={[{ value: "edit", onclick: (obj) => navigate() }]}
+                    data={[
+                        {
+                            id: 1,
+                            startTime: "08:00",
+                            endTime: "09:00"
+                        },
+                        {
+                            id: 2,
+                            startTime: "09:00",
+                            endTime: "10:00"
+                        }
                     ]}
-                    data={data}
                     showId={false}
                 />
                 <Footer />

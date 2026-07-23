@@ -27,7 +27,6 @@ export const Subjects = () => {
     useEffect(() => {
         document.title = "ISPT - Gestión de espacios curriculares en plan de estudio";
         getAllSubjects();
-        
     }, []);
 
     const getAllSubjects = async () => {
