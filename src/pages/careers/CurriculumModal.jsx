@@ -45,7 +45,7 @@ export const CurriculumModal = ({ setModal, typeModal, careerId, curriculumId, g
                 res = await CurriculumService.update(curriculumId, finalData)
             }
 
-            toast.success(res.data?.message || "¡Operación éxitosa!");
+            toast.success(res.data?.object || "¡Operación éxitosa!");
             setModal(false)
             await getByCareerId(careerId);
         } catch (error) {

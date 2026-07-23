@@ -49,7 +49,7 @@ export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, get
                 res = await SubjectService.update(subjectId, finalData);
             }
 
-            toast.success(res.data?.message || "¡Operación éxitosa!");
+            toast.success(res.data?.object || "¡Operación éxitosa!");
             setModal(false)
             await getByCurriculumId(curriculumId)
         } catch (error) {
@@ -68,7 +68,6 @@ export const SubjectModal = ({ setModal, typeModal, curriculumId, subjectId, get
             const res = await SubjectService.getById(subjectId);
             if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
                 const subject = res.data.object;
-                console.log(subject);
                 reset({
                     Code: subject.code,
                     Year: subject.year,

@@ -34,7 +34,7 @@ export const CareerModal = ({ setModal, typeModal, careerId, getAll }) => {
                 res = await CareersService.update(careerId, finalData)
             }
 
-            toast.success(res.data?.message || "¡Operación éxitosa!");
+            toast.success(res.data?.object || "¡Operación éxitosa!");
             setModal(false)
             await getAll()
         } catch (error) {
