@@ -1,0 +1,117 @@
+.schoolYearModal {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schoolYearModal h4 {
+    color: white;
+}
+
+.schoolYearModal form {
+    display: flex;
+    flex-direction: column;
+    min-height: 360px;
+    width: 80%;
+    padding-top: 10px;
+}
+
+.schoolYearModal span.close {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    z-index: 10;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.schoolYearModal span.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+.schoolYearFormContainer {
+    background-color: white;
+    width: 95%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    margin-bottom: 30px;
+}
+
+.schoolYearFormContainer .inputControl,
+.schoolYearFormContainer .dateControl,
+.schoolYearFormContainer .comboControl,
+.schoolYearFormContainer .textareaControl {
+    margin-top: 50px;
+    border: 3px solid #6f2c7e;
+    border-radius: 5vh;
+}
+
+.schoolYearFormContainer .dateControl,
+.schoolYearFormContainer .comboControl {
+    margin-top: 55px;
+}
+
+.schoolYearFormContainer .textareaControl {
+    height: 300px;
+}
+
+.schoolYearFormContainer .textareaControl div {
+    overflow: hidden;
+}
+
+.schoolYearFormContainer .inputControl label,
+.schoolYearFormContainer .textareaControl label {
+    color: #6f2c7e !important;
+    margin-left: 90px;
+}
+
+.schoolYearFormContainer .inputControl:has(input:focus) label,
+.schoolYearFormContainer .inputControl:has(input:not(:placeholder-shown)) label {
+    transform: translateY(-85%) translateX(-5%);
+}
+
+.schoolYearFormContainer .textareaControl:has(textarea:focus) label,
+.schoolYearFormContainer .textareaControl:has(textarea:not(:placeholder-shown)) label {
+    transform: translateY(-63%) translateX(-5%);
+    color: white;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.schoolYearFormContainer .add-button {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: #6f2c7e;
+    cursor: pointer;
+    border: 2px solid #6f2c7e;
+    align-self: flex-end;
+    display: flex;
+    margin-top: 20px;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.schoolYearFormContainer .add-button:hover {
+    background-color: #2dca2d;
+    color: white;
+    transform: scale(1.1);
+    border: 2px solid #2dca2d;
+}
+
+.schoolYearFormContainer .add-button span {
+    transition: transform .3s ease;
+}

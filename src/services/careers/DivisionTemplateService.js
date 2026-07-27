@@ -10,7 +10,11 @@ class DivisionTemplateService {
     async create(subjectId, userId) {
         return api.post(`division-templates/subject/${subjectId}/${userId}`);
     }
+
     //PUT
+    async changeDivisionStatus(divisionTemplateId){
+        return api.put(`division-templates/subject/${divisionTemplateId}`);
+    }
 
     //DELETE
 }

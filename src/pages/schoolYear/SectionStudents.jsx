@@ -6,6 +6,7 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
 import { PathInfo } from '../../components/PathInfo';
+import { SectionStudentsModal } from './SectionStudentsModal';
 
 export const SectionStudents = () => {
 
@@ -26,7 +27,10 @@ export const SectionStudents = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
-                        onClick={() => { }}>
+                        onClick={() => { 
+                            setTypeModal(<SectionStudentsModal setModal={setModal} />);
+                            setModal(true);
+                        }}>
                         <span className="material-symbols-outlined">add_circle</span>Inscribir estudiante
                     </button>
                 </div>

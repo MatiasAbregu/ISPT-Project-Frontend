@@ -141,6 +141,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                 {
                                     checkboxs ?
                                         Object.entries(obj).map(([key, value], i2) => {
+                                            console.log("A:", key);
                                             if (showId === false && key === 'id') {
                                                 return null;
                                             }
@@ -158,7 +159,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                 return (<td key={i2}>{formatIfDateTime(value)}</td>);
                                         })
                                         : Object.entries(obj).map(([key, value], i2) => {
-                                            if (showId === false && key === 'id') {
+                                            if ((showId === false && key === 'id') || key === 'state') {
                                                 return null;
                                             }
                                             return (<td key={i2}>{formatIfDateTime(value)}</td>);
@@ -181,8 +182,14 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                                 onClick={() => v.onclick && v.onclick(obj)}>
                                                                 delete
                                                             </span>);
-                                                        else if (v == "switch")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed">do_not_disturb_on</span>);
+                                                        else if (v.value == "switch") {
+                                                            const isEnabled = Boolean(obj.state);
+                                                            return (
+                                                                <span key={i} className={`material-symbols-outlined ${isEnabled ? "tableBtnRed" : "tableBtnGreen "}`}
+                                                                    onClick={() => v.onclick && v.onclick(obj)}>
+                                                                    {isEnabled ? "do_not_disturb_on" : "check_circle"}
+                                                                </span>);
+                                                        }
                                                         else if (v.value == "degrees")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnOrange"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>license</span>

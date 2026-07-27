@@ -32,6 +32,7 @@ import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
 import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
+import { ScheduleTemplates } from './pages/careers/ScheduleTemplates'
 import { StudentSections } from './pages/students/StudentSections'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { UserContext } from './context/UserProvider'
@@ -81,7 +82,9 @@ function App() {
         <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares' element={<Subjects />} />
         <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones'
           element={<Commissions />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones/:commission/asignaciones' element={<Assignations />} />
+        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones/:idCommission/horarios'
+          element={<ScheduleTemplates />} />
+        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones/:idCommission/asignaciones' element={<Assignations />} />
         <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/correlativas' element={<Correlatives />} />
 
         <Route path='/docentes' element={<Teachers />} />

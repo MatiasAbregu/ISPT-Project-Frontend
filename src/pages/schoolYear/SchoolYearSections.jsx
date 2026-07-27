@@ -7,17 +7,40 @@ import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
 import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import DivisionService from '../../services/careers/DivisionService';
 
 export const SchoolYearSections = () => {
 
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
+    const { id } = useParams();
+    const { idSubject } = useParams();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
-
+    const [data, setData] = useState([]);
+    
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
+        getBySchoolYearSubject();
     }, []);
+
+    const getBySchoolYearSubject = async () => {
+        try {
+            const response = await DivisionService.getBySchoolYearSubject(id, idSubject);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    };
 
     return (
         <article className='schoolYearSectionsPage'>
@@ -44,26 +67,11 @@ export const SchoolYearSections = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: () => { navigate(`/ciclos-lectivos/1/espacios-curriculares/1/divisiones/1/estudiantes`) } },
+                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${id}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/estudiantes`) } },
                         { value: "schedule"}
                     ]}
-                    data={[
-                        {
-                            division: "A",
-                            docente: "Juan Pérez",
-                            alumnos: "30"
-                        },
-                        {
-                            division: "B",
-                            docente: "María García",
-                            alumnos: "25"
-                        },
-                        {
-                            division: "C",
-                            docente: "Pedro López",
-                            alumnos: "28"
-                        }
-                    ]}
+                    data={data}
+                    showId={false}
                 />
                 <Footer />
             </div>

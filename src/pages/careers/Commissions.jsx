@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserProvider';
 import DivisionTemplateService from '../../services/careers/DivisionTemplateService';
+import toast from 'react-hot-toast'
+import '../../styles/pages/careers/Commissions.css';
 
 export const Commissions = () => {
     const [modal, setModal] = useState(false);
@@ -26,14 +28,12 @@ export const Commissions = () => {
     }, []);
 
     const getDivisionTemplates = async () => {
-        try
-        {
+        try {
             const res = await DivisionTemplateService.getBySubject(idSubject);
-            if(res.data.statusCode >= 200 && res.data.statusCode < 300){
+            if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
                 setData(res.data.object);
             }
-        } catch (error) 
-        {
+        } catch (error) {
             if (error.response && error.response.data) {
                 const backendResponse = error.response.data;
                 console.error(backendResponse.message);
@@ -47,18 +47,38 @@ export const Commissions = () => {
         try {
             const response = await DivisionTemplateService.create(idSubject, user.id || user.ID);
             if (response.data.statusCode === 201) {
+                toast.success(response.data?.object || "¡Operación éxitosa!");
                 getDivisionTemplates();
             }
         } catch (error) {
-            console.error(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
         }
     };
 
+    const changeStatus = async (id) => {
+        try {
+            const res = await DivisionTemplateService.changeDivisionStatus(id);
+            toast.success(res.data?.object || "¡Operación éxitosa!");
+        } catch (error) {
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
+
     return (
-        <article className='curriculumPage'>
+        <article className='commissionsPage'>
             <Sidebar />
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
-            <div className="curriculumPageContainer">
+            <div className="commissionsPageContainer">
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
@@ -76,7 +96,15 @@ export const Commissions = () => {
                             width: 100
                         }
                     ]}
-                    options={[{ value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`) }]}
+                    options={[{ value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`) },
+                    { value: "schedule", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`) },
+                    {
+                        value: "switch", onclick: async (obj) => {
+                            await changeStatus(obj.id);
+                            await getDivisionTemplates();
+                        }        
+                    }
+                    ]}
                     data={data}
                     showId={false}
                 />
