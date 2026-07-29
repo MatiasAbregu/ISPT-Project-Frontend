@@ -69,7 +69,7 @@ export const Careers = () => {
                     ]}
                     options={
                         user?.roles.includes("Directivo") ?
-                            [{ value: "curriculum", onclick: (obj) => { navigate(`/carreras/${obj.id}/plan-de-estudio`) }},
+                            [{ value: "curriculum", onclick: (obj) => { navigate(`/carreras:${obj.name}/${obj.id}/plan-de-estudio`) }},
                                 {
                                 value: "edit",
                                 onclick: (obj) => {

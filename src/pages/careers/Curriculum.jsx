@@ -20,6 +20,7 @@ export const Curriculum = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const { id } = useParams();
+  const { carreraSlug } = useParams();
 
   useEffect(() => {
     document.title = "ISPT - Gestión de plan de estudio";
@@ -80,7 +81,7 @@ export const Curriculum = () => {
           }
           ]}
           options={user?.roles.includes("Directivo") ?
-            [{ value: "academicYear", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${obj.id}/espacios-curriculares`) },
+            [{ value: "academicYear", onclick: (obj) => navigate(`/${carreraSlug}/${id}/plan-de-estudio:${obj.resolution}/${obj.id}/espacios-curriculares`) },
             {
               value: "edit", onclick: (obj) => {
                 setTypeModal(

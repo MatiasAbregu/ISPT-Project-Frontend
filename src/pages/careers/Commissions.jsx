@@ -16,8 +16,11 @@ export const Commissions = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const { id } = useParams();
+    const { carreraSlug } = useParams();
     const { idCurriculum } = useParams();
+    const { planDeEstudioSlug } = useParams();
     const { idSubject } = useParams();
+    const { espacioCurricularSlug } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const { user } = useContext(UserContext);
@@ -96,8 +99,8 @@ export const Commissions = () => {
                             width: 100
                         }
                     ]}
-                    options={[{ value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`) },
-                    { value: "schedule", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`) },
+                    options={[{ value: "teacher", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/${espacioCurricularSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/asignaciones`) },
+                    { value: "schedule", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/${espacioCurricularSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) },
                     {
                         value: "switch", onclick: async (obj) => {
                             await changeStatus(obj.id);

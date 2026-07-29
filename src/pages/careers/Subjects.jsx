@@ -21,6 +21,8 @@ export const Subjects = () => {
     const { user } = useContext(UserContext);
     const { idCurriculum } = useParams();
     const { id } = useParams();
+    const { carreraSlug } = useParams();
+    const { planDeEstudioSlug } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState([]);
 
@@ -94,8 +96,8 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                { value: "commission", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${obj.id}/divisiones`) },
-                                { value: "correlatives", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${obj.id}/correlativas`) }
+                                { value: "commission", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/espacios-curriculares:${obj.name}/${obj.id}/divisiones`) },
+                                { value: "correlatives", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/espacios-curriculares:${obj.name}/${obj.id}/correlativas`) }
                             ] : [
                                 {
                                     value: "eye", onclick: (obj) => {

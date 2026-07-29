@@ -32,23 +32,50 @@ export const PathInfo = ({}) => {
         horarios: "Horarios"
     };
 
-    const segments = url.pathname.split("/").filter(Boolean);
+    const rawSegments = url.pathname.split("/").filter(Boolean);
+
+    const getLabel = (segment) => {
+        const decoded = decodeURIComponent(segment);
+        const match = decoded.match(/^(.+):([^:]+)$/)
+
+        if (match) {
+            const [, prefix, name] = match;
+            const translatedPrefix = translations[prefix] || prefix;
+            return `${translatedPrefix} (${name})`;
+        }
+
+        return translations[decoded] || decoded;
+    }
+
+    const buildPathTo = (index) => {
+        const slicedSegments = rawSegments.slice(0, index + 1).map((segment, idx) => {
+            
+            if(idx === index) {
+                const match = segment.match(/^(.+):([^:]+)$/);
+                if (match) {
+                    return match[1];
+                }
+            }
+            
+            return segment;
+        });
+
+        return "/" + slicedSegments.join("/");
+    };
 
  return (
         <div className="pathInfo">
-            {segments.map((s, i) => {
+            {rawSegments.map((s, i) => {
 
                 const isId = !isNaN(s);
                 const isInfo = s === "A";
                 if (isId) return;
 
-                const label = translations[s] || s;
+                const label = getLabel(s);
 
-                const pathTo = "/" + segments
-                    .slice(0, i + 1)
-                    .join("/");
+                const pathTo = buildPathTo(i);
 
-                const isLast = i === segments.length - 1;
+                const isLast = i === rawSegments.length - 1;
 
                 return (
                     <span key={i}>
