@@ -5,8 +5,10 @@ import PersonService from '../../services/people/PersonService';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ObservationYUP from '../../schemas/person-schemas/ObservationYUP';
+import TeacherObservationYUP from '../../schemas/teachers/TeacherDivisionObservationYUP';
 import { UserContext } from '../../context/UserProvider';
 import toast from 'react-hot-toast';
+import TeacherAssignationService from '../../services/teachers/TeacherAssignationService';
 
 export const ObservationModal = ({ setModal, sendTo, requestId }) => {
 
@@ -14,7 +16,7 @@ export const ObservationModal = ({ setModal, sendTo, requestId }) => {
   const { user } = useContext(UserContext);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(ObservationYUP),
+    resolver: yupResolver(sendTo == "person" ? ObservationYUP : TeacherObservationYUP),
     shouldUnregister: false
   });
 
@@ -31,6 +33,16 @@ export const ObservationModal = ({ setModal, sendTo, requestId }) => {
           const data = res.data.object;
           reset({
             personId: data.personId,
+            observation: data.observation
+          });
+        }
+      } else if (sendTo == "teacherDivision") {
+        const res = await TeacherAssignationService.getObservationByTeacherDivisionId(id);
+
+        if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+          const data = res.data.object;
+          reset({
+            teacherDivisionId: data.teacherDivisionId,
             observation: data.observation
           });
         }
@@ -52,11 +64,13 @@ export const ObservationModal = ({ setModal, sendTo, requestId }) => {
         ...data,
         updatedById: user.id || user.ID,
       }
-      const res = await PersonService.updateObservation(finalData);
+      let res;
+
+      if (sendTo == "person") res = await PersonService.updateObservation(finalData);
+      else if (sendTo == "teacherDivision") res = await TeacherAssignationService.updateObservation(finalData);
 
       if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
         toast.success(res.data.object);
-
         setShowEdit(false);
         await getObservation(requestId);
       }

@@ -96,13 +96,19 @@ export const Commissions = () => {
                             width: 100
                         }
                     ]}
-                    options={[{ value: "teacher", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.year}/asignaciones`) },
-                    { value: "schedule", onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`) },
+                    options={[{
+                        value: "teacher",
+                        onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/asignaciones`)
+                    },
+                    {
+                        value: "schedule",
+                        onclick: (obj) => navigate(`/carreras/${id}/plan-de-estudio/${idCurriculum}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`)
+                    },
                     {
                         value: "switch", onclick: async (obj) => {
                             await changeStatus(obj.id);
                             await getDivisionTemplates();
-                        }        
+                        }
                     }
                     ]}
                     data={data}

@@ -5,12 +5,12 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
     getValues, readOnly, notShowLabel, value, error, clearErrors, returnKey }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(() => {
-        if (value) {
-            return options?.find(x => x.value === value) || null;
-        }
-        return null;
-    });
+    const findOption = (val) => {
+        if (val === undefined || val === null) return null;
+        return options.find(x => returnKey ? x.key === val : x.value === val) || null;
+    };
+
+    const [selectedOption, setSelectedOption] = useState(() => findOption(value));
     const selectRef = useRef(null);
     const optionsRef = useRef(null);
 
@@ -22,7 +22,7 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
 
         if (typeof getValues === "function" && getValues(data)) {
             const formVal = getValues(data);
-            const found = options.find(x => x.value === formVal);
+            const found = findOption(formVal);
             if (found) setSelectedOption(found);
         }
 
@@ -31,17 +31,17 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
     }, []);
 
     useEffect(() => {
-        if (value) {
-            if (!selectedOption || selectedOption.value !== value) {
-                const found = options.find(x => x.value === value);
-                if (found) {
-                    setSelectedOption(found);
-                }
+        const currentTargetValue = returnKey ? selectedOption?.key : selectedOption?.value;
+
+        if (value !== undefined && value !== null) {
+            if (!selectedOption || currentTargetValue !== value) {
+                const found = findOption(value);
+                if (found) setSelectedOption(found);
             }
-        } else {
-            if (selectedOption !== null) setSelectedOption(null);
+        } else if (selectedOption !== null) {
+            setSelectedOption(null);
         }
-    }, [value, options]);
+    }, [value, options, returnKey]);
 
     useEffect(() => {
         if (selectedOption && selectedOption.value !== undefined) {

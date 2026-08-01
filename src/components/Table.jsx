@@ -43,12 +43,12 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
     }
 
     const formatIfDateTime = (value) => {
+        if(value == null) return "----";
         if (typeof value !== 'string') return value;
 
         const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
 
         if (isoDateTimeRegex.test(value)) {
-
             if (value.startsWith("0001-01-01")) {
                 return "----";
             }
