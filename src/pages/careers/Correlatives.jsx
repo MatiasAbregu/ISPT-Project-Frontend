@@ -5,12 +5,14 @@ import { Sidebar } from '../../components/Sidebar';
 import { PathInfo } from '../../components/PathInfo';
 import { InputControl } from '../../components/InputControl';
 import { ComboControl } from '../../components/ComboControl';
-import '../../styles/pages/careers/Correlatives.css';
 import { SubjectModal } from './SubjectModal';
 import { UserContext } from '../../context/UserProvider';
 import SubjectsService from '../../services/careers/SubjectsService';
 import { useParams } from 'react-router';
 import CorrelativesService from '../../services/careers/CorrelativeService';
+
+import '../../styles/pages/careers/Correlatives.css';
+import toast from 'react-hot-toast';
 
 export const Correlatives = () => {
 
@@ -25,24 +27,17 @@ export const Correlatives = () => {
   useEffect(() => {
     document.title = "ISPT - Gestión de correlativas de plan de estudio";
     getPossibleCorrelatives();
-    console.log(data);
   }, []);
 
-  useEffect(() => {
-  console.log("Pending changes:", pendingChanges);
-}, [pendingChanges]);
 
   const getPossibleCorrelatives = async () => {
-    try
-    {
+    try {
       const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
-      if(res.data.statusCode >= 200 && res.data.statusCode < 300)
-      {
+      if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
         setData(res.data.object);
       }
-    } catch (error) 
-    {
-      if(error.response && error.response.data) {
+    } catch (error) {
+      if (error.response && error.response.data) {
         const backendResponse = error.response.data;
         toast.error(backendResponse.message);
       } else {
@@ -50,7 +45,6 @@ export const Correlatives = () => {
       }
     }
   }
-
 
   const tableData = data.map(({ isCorrelative, ...rest }) => ({
     ...rest,
@@ -61,14 +55,25 @@ export const Correlatives = () => {
   }));
 
   const saveChanges = async () => {
-  if (pendingChanges.length === 0)
-  return;
+    if (pendingChanges.length === 0)
+      return;
 
-  await CorrelativesService.saveChanges(idSubject, pendingChanges);
+    try {
+      const res = await CorrelativesService.saveChanges(idSubject, pendingChanges);
+      if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const backendResponse = error.response.data;
+        toast.error(backendResponse.message);
+      } else {
+        toast.error("No se pudo conectar con el servidor.");
+      }
+    }
 
-  setPendingChanges([]);
-
-  getPossibleCorrelatives();
+    setPendingChanges([]);
+    getPossibleCorrelatives();
   }
 
   return (
@@ -83,7 +88,7 @@ export const Correlatives = () => {
           {
             user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
-                onClick={() => {saveChanges()}}>
+                onClick={() => { saveChanges() }}>
                 <span className="material-symbols-outlined">save</span>Guardar cambios
               </button> : undefined
           }
@@ -111,8 +116,8 @@ export const Correlatives = () => {
           checkboxs={true}
           data={tableData}
           onCheckboxChange={(row, checked) => {
-            setData(prev => prev.map(item => 
-              item.id === row.id 
+            setData(prev => prev.map(item =>
+              item.id === row.id
                 ? { ...item, isCorrelative: checked }
                 : item
             ));
@@ -120,15 +125,14 @@ export const Correlatives = () => {
             setPendingChanges(prev => {
               const exists = prev.find(x => x.subjectCorrelativeId == row.id);
 
-              if(exists) {
+              if (exists) {
                 return prev.map(x =>
                   x.subjectCorrelativeId === row.id
                     ? { ...x, isCorrelative: checked, createdById: user.id || user.ID }
                     : x
                 )
               }
-              
-              
+
               return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked, createdById: user.id || user.ID }];
             })
 

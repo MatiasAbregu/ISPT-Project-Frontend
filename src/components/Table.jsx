@@ -141,7 +141,6 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                 {
                                     checkboxs ?
                                         Object.entries(obj).map(([key, value], i2) => {
-                                            console.log("A:", key);
                                             if (showId === false && key === 'id') {
                                                 return null;
                                             }
