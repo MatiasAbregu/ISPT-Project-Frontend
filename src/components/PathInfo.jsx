@@ -3,7 +3,7 @@ import '../styles/components/PathInfo.css';
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export const PathInfo = ({}) => {
+export const PathInfo = ({ }) => {
 
     const url = useLocation();
 
@@ -32,29 +32,48 @@ export const PathInfo = ({}) => {
         horarios: "Horarios"
     };
 
-    const segments = url.pathname.split("/").filter(Boolean);
+    const rawSegments = url.pathname.split("/").filter(Boolean);
 
- return (
+    const getLabel = (segment) => {
+        const decoded = decodeURIComponent(segment);
+        const match = decoded.match(/^(.+):([^:]+)$/)
+
+        if (match) {
+            const [, prefix, name] = match;
+            const translatedPrefix = translations[prefix] || prefix;
+            const formattedName = name.replace("_", "/");
+            return `${translatedPrefix} (${formattedName})`;
+        }
+
+        return translations[decoded] || decoded;
+    }
+
+    const cleanSegment = (segment) => {
+        const match = segment.match(/^(.+):([^:]+)$/);
+        return match ? match[1] : segment;
+    };
+
+    const buildPathTo = (index) => {
+        const slicedSegments = rawSegments.slice(0, index + 1).map(cleanSegment);
+
+        return "/" + slicedSegments.join("/");
+    };
+
+    return (
         <div className="pathInfo">
-            {segments.map((s, i) => {
+            {rawSegments.map((s, i) => {
 
                 const isId = !isNaN(s);
                 const isInfo = s === "A";
-                if (isId) return;
+                if (isId) return null;
 
-                const label = translations[s] || s;
-
-                const pathTo = "/" + segments
-                    .slice(0, i + 1)
-                    .join("/");
-
-                const isLast = i === segments.length - 1;
+                const label = getLabel(s);
+                const pathTo = buildPathTo(i);
+                const isLast = i === rawSegments.length - 1;
 
                 return (
                     <span key={i}>
                         {i > 0 && " > "}
-
-                        
 
                         {isLast ? (
                             <span>{label}</span>
@@ -69,5 +88,5 @@ export const PathInfo = ({}) => {
                 );
             })}
         </div>
-);
+    );
 }

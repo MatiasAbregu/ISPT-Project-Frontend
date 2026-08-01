@@ -78,14 +78,14 @@ function App() {
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
         <Route path='/carreras' element={<Careers />} />
-        <Route path='/carreras/:id/plan-de-estudio' element={<Curriculum />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares' element={<Subjects />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones'
+        <Route path='/:carreraSlug/:id/plan-de-estudio' element={<Curriculum />} />
+        <Route path='/:carreraSlug/:id/:planDeEstudioSlug/:idCurriculum/espacios-curriculares' element={<Subjects />} />
+        <Route path='/:carreraSlug/:id/:planDeEstudioSlug/:idCurriculum/:espacioCurricularSlug/:idSubject/divisiones'
           element={<Commissions />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones/:idCommission/horarios'
+        <Route path='/:carreraSlug/:id/:planDeEstudioSlug/:idCurriculum/:espacioCurricularSlug/:idSubject/:divisionSlug/:idCommission/horarios'
           element={<ScheduleTemplates />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/divisiones/:idCommission/asignaciones' element={<Assignations />} />
-        <Route path='/carreras/:id/plan-de-estudio/:idCurriculum/espacios-curriculares/:idSubject/correlativas' element={<Correlatives />} />
+        <Route path='/:carreraSlug/:id/:planDeEstudioSlug/:idCurriculum/:espacioCurricularSlug/:idSubject/:divisionSlug/:idCommission/asignaciones' element={<Assignations />} />
+        <Route path='/:carreraSlug/:id/:planDeEstudioSlug/:idCurriculum/:espacioCurricularSlug/:idSubject/correlativas' element={<Correlatives />} />
 
         <Route path='/docentes' element={<Teachers />} />
         <Route path='/cursos' element={<Courses />} />

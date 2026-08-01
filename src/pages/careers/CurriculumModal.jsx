@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { InputControl } from '../../components/InputControl'
-import CurriculumYUP from '../../schemas/CurriculumYUP'
+import CurriculumYUP from '../../schemas/careers/CurriculumYUP'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import CurriculumService from '../../services/careers/CurriculumService'
