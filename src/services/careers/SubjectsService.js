@@ -2,6 +2,10 @@ import api from "../api";
 
 class SubjectsService{
     //GET
+async getAll(){
+    return api.get(`/subjects`);
+}
+
 async getByCurriculumId(curriculumId){
     return api.get(`/subjects/curriculum/${curriculumId}`);
 }
