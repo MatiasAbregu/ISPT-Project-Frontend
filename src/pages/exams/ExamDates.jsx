@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserProvider';
 import { ExamModal } from './ExamModal';
 import '../../styles/pages/exams/ExamDates.css';
+import ExamService from '../../services/exams/FinalExamService';
+import toast from 'react-hot-toast';
 
 export const ExamDates = () => {
 
@@ -14,10 +16,29 @@ export const ExamDates = () => {
     const [typeModal, setTypeModal] = useState();
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+    const [data, setData] = useState();
 
     useEffect(() => {
         document.title = "ISPT - Fechas de Exámenes";
+        getAllExams();
     }, []);
+
+    const getAllExams = async () => {
+        try {
+            const response = await ExamService.getAll();
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
 
     return (
         <article className="examDatesPage">
@@ -27,9 +48,9 @@ export const ExamDates = () => {
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     {
-                        user.role == "Directivo" ?
+                        user.roles.includes("Directivo") ?
                             <button type="button" className="add-button"
-                                onClick={() => { setTypeModal(<ExamModal setModal={setModal} />); setModal(true); }}>
+                                onClick={() => { setTypeModal(<ExamModal setModal={setModal} getAll={getAllExams} />); setModal(true); }}>
                                 <span className="material-symbols-outlined">add_circle</span>Añadir mesa de examen
                             </button> : undefined
                     }
@@ -59,47 +80,8 @@ export const ExamDates = () => {
                     ]} options={
                         user.role == "Docente" ? [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]
                             : [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }, "delete"]}
-                    data={user.role == "Directivo" ?
-                        [
-                            {
-                                materia: "Matemática I",
-                                fecha: "15/06/2026",
-                                turno: "10:00",
-                                libro: "1",
-                                folio: "1"
-                            },
-                            {
-                                materia: "Química",
-                                fecha: "15/12/2026",
-                                turno: "10:00",
-                                libro: "2",
-                                folio: "1"
-                            },
-                            {
-                                materia: "Física",
-                                fecha: "16/06/2026",
-                                turno: "14:00",
-                                libro: "3",
-                                folio: "1"
-                            },
-                            {
-                                materia: "Biología",
-                                fecha: "16/12/2026",
-                                turno: "16:00",
-                                libro: "4",
-                                folio: "1"
-                            }
-                        ] :
-                        [
-                            {
-                                materia: "Matemática",
-                                fecha: "15/06/2026",
-                                turno: "10:00",
-                                libro: "1",
-                                folio: "1"
-                            }
-                        ]
-                    } />
+                    showId={false}
+                    data={data} />
                 <Footer />
             </div>
         </article>
