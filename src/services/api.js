@@ -1,7 +1,8 @@
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL_DEPLOY;
 
 const api = axios.create({
-    baseURL: "http://localhost:5293/api-v1",
+    baseURL: {API_URL},
 });
 
 let refreshTokenFunction = null;
