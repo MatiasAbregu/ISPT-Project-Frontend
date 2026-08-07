@@ -11,6 +11,7 @@ import "../../styles/pages/teachers/Teachers.css";
 import { SubjectsAssignationsModal } from "./SubjectsAssignationsModal";
 import TeacherService from "../../services/teachers/TeacherService";
 import { AddExistentPersonModal } from "../modals/AddExistentPersonModal";
+import toast from "react-hot-toast";
 
 export const Teachers = () => {
 

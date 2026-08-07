@@ -81,7 +81,7 @@ export const UserProvider = ({ children }) => {
       const res = (await AuthService.refresh(currentToken)).data;
       if (res && res.statusCode >= 200 && res.statusCode < 300) {
         login(res.object);
-        return res.object.accessToken; // 🟢 QUEDA: Retornamos el string del token para Axios
+        return res.object.accessToken; // QUEDA: Retornamos el string del token para Axios
       }
     } catch (error) {
       console.error("Error en AuthService.refresh:", error);
