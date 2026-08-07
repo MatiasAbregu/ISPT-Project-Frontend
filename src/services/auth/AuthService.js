@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL_ENV = import.meta.env.VITE_API_URL_DEPLOY;
+const API_URL_ENV = import.meta.env.VITE_API_URL_DEVELOPMENT;
 
 const API_URL = `${API_URL_ENV}/auth`;
 
