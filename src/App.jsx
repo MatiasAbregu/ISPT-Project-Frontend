@@ -34,6 +34,7 @@ import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
 import { ScheduleTemplates } from './pages/careers/ScheduleTemplates'
 import { StudentSections } from './pages/students/StudentSections'
+import { SectionSchedules } from './pages/schoolYear/SectionSchedules'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { UserContext } from './context/UserProvider'
 import { injectAuthFunctions } from './services/api'
@@ -74,6 +75,7 @@ function App() {
         <Route path='/ciclos-lectivos/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
         <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones' element={<SchoolYearSections />} />
         <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones/:idSection/estudiantes' element={<SectionStudents />} />
+        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones/:idSection/horarios' element={<SectionSchedules />} />
 
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
