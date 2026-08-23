@@ -3,7 +3,7 @@ import '../styles/components/PathInfo.css';
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export const PathInfo = ({ }) => {
+export const PathInfo = ({}) => {
 
     const url = useLocation();
 
@@ -47,33 +47,43 @@ export const PathInfo = ({ }) => {
 
         return translations[decoded] || decoded;
     }
-
-    const cleanSegment = (segment) => {
-        const match = segment.match(/^(.+):([^:]+)$/);
-        return match ? match[1] : segment;
-    };
+    
 
     const buildPathTo = (index) => {
-        const slicedSegments = rawSegments.slice(0, index + 1).map(cleanSegment);
+        const slicedSegments = rawSegments.slice(0, index + 1).map((segment, idx) => {
+            
+            if(idx === index) {
+                const match = segment.match(/^(.+):([^:]+)$/);
+                if (match) {
+                    return match[1];
+                }
+            }
+            
+            return segment;
+        });
 
         return "/" + slicedSegments.join("/");
     };
 
-    return (
+ return (
         <div className="pathInfo">
             {rawSegments.map((s, i) => {
 
                 const isId = !isNaN(s);
                 const isInfo = s === "A";
-                if (isId) return null;
+                if (isId) return;
 
                 const label = getLabel(s);
+
                 const pathTo = buildPathTo(i);
+
                 const isLast = i === rawSegments.length - 1;
 
                 return (
                     <span key={i}>
                         {i > 0 && " > "}
+
+                        
 
                         {isLast ? (
                             <span>{label}</span>
@@ -88,5 +98,5 @@ export const PathInfo = ({ }) => {
                 );
             })}
         </div>
-    );
+);
 }
