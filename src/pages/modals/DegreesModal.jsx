@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../styles/pages/modals/DegreesModal.css'
 import { InputControl } from '../../components/InputControl'
 import toast from 'react-hot-toast';
@@ -6,10 +6,12 @@ import DegreeService from '../../services/students/DegreeService';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import DegreeYUP from '../../schemas/students/DegreeYUP';
+import { UserContext } from '../../context/UserProvider';
 
 export const DegreesModal = ({ setModal, personId }) => {
 
-    const [degrees, setDegrees] = useState(["Ingeniero en sistemas"]);
+    const [degrees, setDegrees] = useState();
+    const { user } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(DegreeYUP),
         shouldUnregister: false,
@@ -45,6 +47,10 @@ export const DegreesModal = ({ setModal, personId }) => {
 
     const degreeCreate = async (data) => {
         try {
+            let finalData = {
+                ...data,
+                createdById: user.id || user.ID
+            }
             const res = await DegreeService.createDegree(data);
 
             if (res.data.statusCode >= 200 && res.data.statusCode < 300) {

@@ -111,7 +111,12 @@ export const Students = () => {
                                 }
                             },
                             // EN FOLDER FALTA DOCS
-                            { value: "folder", onclick: () => { setTypeModal(<FolderModal setModal={setModal} />); setModal(true); } },
+                            {
+                                value: "folder", onclick: (obj) => {
+                                    setTypeModal(<FolderModal setModal={setModal} studentId={obj.id} />);
+                                    setModal(true);
+                                }
+                            },
                             {
                                 value: "degrees", onclick: (obj) => {
                                     setTypeModal(<DegreesModal setModal={setModal} personId={obj.id} />);

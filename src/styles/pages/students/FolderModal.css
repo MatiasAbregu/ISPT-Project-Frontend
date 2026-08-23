@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.folderModal h4 {
+.folderModal h3 {
     color: white;
 }
 
@@ -39,6 +39,29 @@
     padding: 20px 0;
 }
 
+.folderModal .infoDiv {
+    width: 90%;
+    text-align: center;
+}
+
+.folderModal .formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 60dvw;
+    margin-top: 15px;
+    border: 2px solid #6f2c7e;
+    border-radius: 20px;
+    padding: 1dvw;
+    padding-bottom: 55px;
+}
+
+.folderModal .inputControl,
+.folderModal .comboControl {
+    margin-top: 50px;
+    border: 3px solid #6f2c7e;
+    border-radius: 5vh;
+}
+
 .folderModal .add-button {
     align-self: center !important;
 }
@@ -47,7 +70,7 @@
 .folderModal .file-button,
 .folderModal .cancel-button {
     background-color: white;
-    padding: 10px 20px;
+    padding: 7px 20px;
     border-radius: 15px;
     border: none;
     color: #6f2c7e;
@@ -81,7 +104,7 @@
 }
 
 .folderCard {
-    width: 30%;
+    width: 40dvw;
     border-radius: 15px;
     border: 2px solid #6f2c7e;
     padding: 15px;
@@ -117,18 +140,28 @@
     color: #999;
 }
 
-
 .folderCard.inactive .folderIcon {
     color: #999;
 }
 
-.badge.inactive {
+.badge {
     margin-left: auto;
-    background-color: #999;
     color: white;
-    font-size: 0.7rem;
-    padding: 3px 8px;
+    font-size: 0.8rem;
+    padding: 3px 12px;
     border-radius: 10px;
+}
+
+.badge.activo {
+    background-color: #6f2c7e;
+}
+
+.badge.inactivo {
+    background-color: #999;
+}
+
+.badge.egresado {
+    background-color: #4bbe4b;
 }
 
 .btnContainer {
@@ -139,14 +172,36 @@
 
 .folderModal .add-button:hover,
 .folderModal .file-button:hover,
-.folderModal .cancel-button:hover {
+.folderModal .cancel-button:hover,
+.folderModal .editBtn:hover {
     background-color: #2dca2d;
     color: white;
-    transform: scale(1.1);
+    transform: scale(1.04);
     border: 2px solid #2dca2d;
 }
 
 .folderModal .cancel-button:hover {
     background-color: #ff4444;
     border-color: #ff4444;
+}
+
+.folderModal .folderBtnContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+.folderModal .editBtn {
+    background-color: white;
+    padding: 7px 10px;
+    border-radius: 15px;
+    border: none;
+    color: #6f2c7e;
+    cursor: pointer;
+    border: 2px solid #6f2c7e;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }

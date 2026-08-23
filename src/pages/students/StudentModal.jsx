@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import '../../styles/pages/students/StudentModal.css'
 import { InputControl } from '../../components/InputControl'
 import { DateControl } from '../../components/DateControl'
 import { ComboControl } from '../../components/ComboControl'
@@ -10,6 +9,8 @@ import PersonYUP from '../../schemas/person-schemas/PersonYUP'
 import StudentService from '../../services/students/StudentService'
 import { UserContext } from '../../context/UserProvider'
 import toast from 'react-hot-toast'
+
+import '../../styles/pages/students/StudentModal.css'
 
 const provinces = {
     "Argentina": [{ key: 1, value: "Córdoba" }, { key: 2, value: "Buenos Aires" }, { key: 3, value: "Mendoza" }],
