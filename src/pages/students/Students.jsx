@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Footer } from "../../components/Footer";
 import { Table } from "../../components/Table";
 import { InputControl } from "../../components/InputControl";
@@ -20,8 +20,9 @@ export const Students = () => {
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
     const [showCreateOptions, setShowCreateOptions] = useState(false);
-
     const [data, setData] = useState([]);
+
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de estudiantes";
@@ -45,10 +46,50 @@ export const Students = () => {
         }
     }
 
+   const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Reset input value so the same file can be selected twice if needed
+        e.target.value = null;
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        const loadingToast = toast.loading("Procesando archivo Excel...");
+
+        try {
+            const res = await StudentService.importExcel(formData);
+
+            toast.dismiss(loadingToast);
+
+            if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                toast.success(res.data.message || "¡Estudiantes importados con éxito!");
+                getAllStudents(); // Refresh table data
+            }
+        } catch (error) {
+            toast.dismiss(loadingToast);
+            if (error.response && error.response.data) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error("Hubo un error al intentar importar el archivo.");
+            }
+        }
+    };
+
     return (
         <article className="studentsPage">
             {modal ? <div className="modalBackground">{typeModal}</div> : <></>}
             <Sidebar />
+
+            <input 
+                type="file" 
+                ref={fileInputRef} 
+                style={{ display: "none" }} 
+                accept=".xlsx, .xls"
+                onChange={handleFileChange}
+            />
+
             <div className="studentsPageContainer">
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
@@ -72,6 +113,13 @@ export const Students = () => {
                                     setShowCreateOptions(false);
                                 }}>
                                 Añadir una persona existente a estudiantes
+                            </button>
+                            <button type="button"
+                                onClick={() => {
+                                    setShowCreateOptions(false);
+                                    fileInputRef.current.click(); // Trigger native file picker
+                                }}>
+                                Importar estudiantes desde Excel (.xlsx)
                             </button>
                         </div>
                     </div>

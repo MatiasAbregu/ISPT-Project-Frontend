@@ -38,7 +38,7 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
                     updatedById: user.id || user.ID,
                     Id: scheduleTemplateId
                 }
-                res = await ScheduleTemplateService.update(scheduleTemplateId, finalData)
+                /*res = await ScheduleTemplateService.update(scheduleTemplateId, finalData)*/
             }
             toast.success(res.data?.object || "¡Operación éxitosa!")
             setModal(false)

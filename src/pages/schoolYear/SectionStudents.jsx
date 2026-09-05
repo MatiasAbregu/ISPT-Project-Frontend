@@ -7,16 +7,37 @@ import { Sidebar } from '../../components/Sidebar';
 import { UserContext } from '../../context/UserProvider';
 import { PathInfo } from '../../components/PathInfo';
 import { SectionStudentsModal } from './SectionStudentsModal';
+import SectionStudentsService from '../../services/schoolYears/SectionStudentsService';
+import { useParams } from 'react-router';
 
 export const SectionStudents = () => {
 
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
-    const { user } = useContext(UserContext);
+    const { user } = useContext(UserContext);  
+    const { idSection } = useParams();  
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
+        getSectionStudents();
     }, []);
+
+    const getSectionStudents = async () => {
+            try {
+                const res = await SectionStudentsService.getByDivisionId(idSection);
+                if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+                    setData(res.data.object);
+                }
+            } catch (error) {
+                if (error.response && error.response.data) {
+                    const backendResponse = error.response.data;
+                    console.error(backendResponse.message);
+                } else {
+                    console.error("No se pudo conectar con el servidor.");
+                }
+            }
+        }
 
     return (
         <article className='sectionStudentsPage'>
@@ -56,26 +77,8 @@ export const SectionStudents = () => {
                     options={[
                         "delete"
                     ]}
-                    data={[
-                        {
-                            legajo: "12345",
-                            estudiante: "Juan Pérez",
-                            estado: "Regular",
-                            riesgo: "Bajo"
-                        },
-                        {
-                            legajo: "67890",
-                            estudiante: "María García",
-                            estado: "Libre",
-                            riesgo: "Alto"
-                        },
-                        {
-                            legajo: "11111",
-                            estudiante: "Pedro López",
-                            estado: "Aprobado",
-                            riesgo: "-"
-                        }
-                    ]}
+                    data={data}
+                    showId={false}
                 />
                 <Footer />
             </div>

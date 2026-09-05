@@ -29,7 +29,7 @@ export const Correlatives = () => {
     getPossibleCorrelatives();
   }, []);
 
-
+  
   const getPossibleCorrelatives = async () => {
     try {
       const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
@@ -132,7 +132,6 @@ export const Correlatives = () => {
                     : x
                 )
               }
-
               return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked, createdById: user.id || user.ID }];
             })
 
