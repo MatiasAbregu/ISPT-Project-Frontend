@@ -49,7 +49,7 @@ export const SectionStudents = () => {
                     <InputControl icon={"search"} type={"search"}></InputControl>
                     <button type="button" className="add-button"
                         onClick={() => { 
-                            setTypeModal(<SectionStudentsModal setModal={setModal} />);
+                            setTypeModal(<SectionStudentsModal setModal={setModal} getAll={getSectionStudents}/>);
                             setModal(true);
                         }}>
                         <span className="material-symbols-outlined">add_circle</span>Inscribir estudiante
