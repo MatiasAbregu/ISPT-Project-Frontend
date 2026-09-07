@@ -29,7 +29,7 @@ export const Correlatives = () => {
     getPossibleCorrelatives();
   }, []);
 
-  
+
   const getPossibleCorrelatives = async () => {
     try {
       const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
@@ -115,26 +115,24 @@ export const Correlatives = () => {
           showId={false}
           checkboxs={true}
           data={tableData}
-          onCheckboxChange={(row, checked) => {
+          onCheckboxChange={(row, columnKey, checked) => {
+            const isChecked = typeof columnKey === 'boolean' ? columnKey : checked;
+
             setData(prev => prev.map(item =>
-              item.id === row.id
-                ? { ...item, isCorrelative: checked }
-                : item
+              item.id === row.id ? { ...item, isCorrelative: isChecked } : item
             ));
 
             setPendingChanges(prev => {
               const exists = prev.find(x => x.subjectCorrelativeId == row.id);
-
               if (exists) {
                 return prev.map(x =>
                   x.subjectCorrelativeId === row.id
-                    ? { ...x, isCorrelative: checked, createdById: user.id || user.ID }
+                    ? { ...x, isCorrelative: isChecked, createdById: user.id || user.ID }
                     : x
-                )
+                );
               }
-              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: checked, createdById: user.id || user.ID }];
-            })
-
+              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: isChecked, createdById: user.id || user.ID }];
+            });
           }}
         />
         <Footer />

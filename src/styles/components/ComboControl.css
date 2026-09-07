@@ -64,6 +64,7 @@
 .comboControl .optionsContainer .optionsOverflow {
     position: absolute;
     top: 110%;
+    min-width: 6.5dvw;
     width: 100%;
     overflow: hidden;
     background-color: white;
@@ -79,12 +80,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 30vh;
+    text-align: center;
 }
 
 .comboControl .optionsContainer .options p {
     width: 100%;
     margin: 0;
-    padding: 2% 0 2% 3%;
+    padding: 1.6dvh 0 1.6dvh 0;
     color: #6f2c7e;
     font-size: 1.1rem;
 }

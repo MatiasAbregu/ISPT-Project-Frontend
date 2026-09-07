@@ -1,52 +1,32 @@
 .docsModal {
-    width: 100%;
-    position: relative;
+    width: 97%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.docsModal h4 {
-    color: white;
-}
+.docsModal span.back {
+    color: #6f2c7e;
+    border: 2px #6f2c7e solid;
+    padding: 3px;
+    border-radius: calc(100% / 2);
 
-.docsModal form {
-    display: flex;
-    flex-direction: column;
-    min-height: 500px;
-    width: 80%;
-}
-
-.docsModal span.close {
-    position: absolute;
-    color: white;
-    right: 30px;
-    top: 30px;
+    align-self: flex-start;
     cursor: pointer;
-    transition: color .3s ease, transform .3s ease;
+    transition: color .3s ease, transform .3s ease, background-color .3s ease;
 }
 
-.docsModal span.close:hover {
-    color: #cb2b2b;
-    transform: scale(1.3) rotateZ(180deg);
+.docsModal span.back:hover {
+    color: #fff;
+    background-color: #6f2c7e;
+    transform: scale(1.2);
 }
 
-.docsFormContainer {
-    background-color: white;
-    width: 95%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px 0 10px 0;
-    margin-bottom: 30px;
-}
-
-.docsModal .checkControl{
+.docsModal .checkControl {
     color: #6f2c7e;
 }
 
-.docsModal .docsOnlyOnce, .docsModal .docsPerYear {
+.docsModal .docsOnlyOnce,
+.docsModal .docsPerYear {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,7 +50,7 @@
     text-decoration: underline #6f2c7e;
 }
 
-.docsFormContainer .add-button {
+.docsModal .add-button {
     background-color: white;
     padding: 10px 20px;
     border-radius: 15px;
@@ -84,13 +64,63 @@
     transition: transform .3s ease, color .3s ease, background-color .3s ease;
 }
 
-.docsFormContainer .add-button:hover{
+.docsModal .add-button:hover {
     background-color: #2dca2d;
     color: white;
     transform: scale(1.1);
     border: 2px solid #2dca2d;
 }
 
-.docsFormContainer .add-button span {
+.docsModal .add-button span {
     transition: transform .3s ease;
+}
+
+.docsModal .tableOverflow {
+    width: 100%;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.docsModal .deliverablePerYearTitleBox {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+.docsModal .deliverablePerYearTitleBox .titleDocs {
+    grid-column: 2;
+}
+
+.docsModal .deliverablePerYearTitleBox .deliverablePerYearBtns {
+    display: flex;
+    width: 98%;
+    justify-content: flex-end;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.docsModal .deliverableYearAdd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.docsModal .deliverableYearAdd p {
+    margin: 0;
+    color: #6f2c7e;
+    font-size: 1.1rem;
+}
+
+.docsModal .deliverablePerYearTitleBox .deliverablePerYearBtns .comboControl {
+    margin: 0;
+}
+
+.docsModal .deliverablePerYearTitleBox .deliverablePerYearBtns .comboControl .optionsContainer {
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.docsModal .deliverablePerYearTitleBox .deliverablePerYearBtns .comboControl .optionsContainer label {
+    margin-left: 8px;
 }

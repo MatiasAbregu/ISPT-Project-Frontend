@@ -4,7 +4,7 @@ import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
 import { ComboControl } from "./ComboControl";
 
-export const Table = ({ columns, data, options, checkboxs, showId, showForeignKeys, onCheckboxChange }) => {
+export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxChange }) => {
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -43,7 +43,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
     }
 
     const formatIfDateTime = (value) => {
-        if(value == null) return "----";
+        if (value == null) return "----";
         if (typeof value !== 'string') return value;
 
         const isoDateTimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
@@ -145,13 +145,17 @@ export const Table = ({ columns, data, options, checkboxs, showId, showForeignKe
                                                 return null;
                                             }
                                             if (typeof value === "object" && value !== null && "check" in value) {
+
+                                                const textKey = Object.keys(value).find(k => k !== "check");
+                                                const labelText = textKey ? value[textKey] : "";
+
                                                 return (
                                                     <td key={i2}>
                                                         <div className="tdCheck">
-                                                            {formatIfDateTime(value[key])}
+                                                            {formatIfDateTime(labelText)}
                                                             <InputControl type={"checkbox"} typeCheckbox={2}
                                                                 checked={value.check}
-                                                                onclick={(checked) => onCheckboxChange?.(obj, checked)} />
+                                                                onclick={(checked) => onCheckboxChange?.(obj, key, checked)} />
                                                         </div>
                                                     </td>);
                                             } else

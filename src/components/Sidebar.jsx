@@ -9,15 +9,6 @@ export const Sidebar = () => {
     const { user, logout } = useContext(UserContext);
 
     return (
-        /*
-        - Plan de estudio
-        - Materias
-        - Correlatividades
-        - Asistencias
-        - Notas
-        - Mesa de examenes
-        - Inscripciones
-        */
         <div className='sidebar'>
             <ul>
                 {
@@ -99,7 +90,7 @@ export const Sidebar = () => {
                         <>
                             <NavLink to={"/mesas-examen"} className={url.pathname.startsWith("/mesas-examen") ? "activated" : ""}>
                                 <span className="material-symbols-outlined">table_chart</span><li>
-                                    {user.role == "Directivo" ? "Mesas" : "Mis mesas"} de <br /> examen</li>
+                                    Mesas de <br /> examen</li>
                             </NavLink>
                         </> : undefined
                     : undefined}
