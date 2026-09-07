@@ -11,31 +11,40 @@ import toast from 'react-hot-toast'
 import { useParams } from 'react-router';
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import SchoolYearYUP from '../../schemas/schoolYear/SchoolYearYUP'
 import StudentService from '../../services/students/StudentService'
+import { SearchComboControl } from '../../components/SearchComboControl'
+import SectionStudentYUP from '../../schemas/schoolYear/SectionStudentYUP'
+import SectionStudentsService from '../../services/schoolYears/SectionStudentsService'
 
 export const SectionStudentsModal = ({ setModal, getAll }) => {
-    const { data, register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ resolver: yupResolver(SchoolYearYUP) })
-    const [dataCareers, setDataCareers] = useState([]);
-    const [currentCareerId, setCurrentCareerId] = useState(null);
-    const [dataCurriculums, setDataCurriculums] = useState([]);
-    const [currentStudentId, setCurrentStudentId] = useState(null);
+    const { data, register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ resolver: yupResolver(SectionStudentYUP) })
+    //const [currentStudentId, setCurrentStudentId] = useState(null);
     const [dataStudents, setDataStudents] = useState([]);
     const { user } = useContext(UserContext);
     const { id } = useParams();
+    const { idSection } = useParams();
 
     const onSubmit = async (data) => {
-
+        let finalData = {
+            ...data,
+            schoolYearId: id,
+            divisionId: idSection,
+            createdById: user.id || user.ID
+        }
+        console.log(finalData);
+        await SectionStudentsService.PostFileDivision(finalData)
+        setModal(false)
+        await getAll()
     }
 
     const getStudentsBySchoolYearId = async () => {
         try{
             const res = await StudentService.getStudentsBySchoolYearId(id);
-            console.log(res.data);
             if(res.data.statusCode >= 200 && res.data.statusCode < 300) {
+
                const students = [];
                res.data.object.forEach(element => {
-                students.push({ key: element.id, value: `${element.firstName} ${element.lastName} - ${element.documentNumber}` });
+                students.push({ key: element.fileId, value: `${element.lastName}, ${element.firstName} | DNI: ${element.documentNumber} | Legajo: ${element.fileCode}` });
                })
                setDataStudents(students);
             }
@@ -61,13 +70,15 @@ export const SectionStudentsModal = ({ setModal, getAll }) => {
             <h4>Inscribir estudiante</h4>
             <div className="sectionStudentsFormContainer">
                 <form className="sectionStudentsForm" onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
-                    <ComboControl options={dataStudents} icon={"history_edu"} returnKey={true} setOption={(value) => {
-                        setCurrentStudentId(value);
+                    
+                    <SearchComboControl options={dataStudents} data={"FileId"} icon={"history_edu"} returnKey={true} setOption={(value) => {
+                        setValue("FileId", value);
                     }}>
                         Seleccione un estudiante
-                    </ComboControl>
+                    </SearchComboControl>
+
                     <button type="submit" className="add-button">
-                        <span className="material-symbols-outlined">save</span> Guardar cambios
+                        <span className="material-symbols-outlined">save</span> Inscribir estudiante
                     </button>
                 </form>
             </div>
