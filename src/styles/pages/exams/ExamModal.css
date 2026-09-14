@@ -88,7 +88,6 @@
     margin-top: 10px;
     padding: 10px 20px;
     border-radius: 15px;
-    border: none;
     color: #6f2c7e;
     cursor: pointer;
     border: 2px solid #6f2c7e;
@@ -124,5 +123,40 @@
 .examFormContainer .arrow:hover {
     background-color: white;
     border: 2px solid #6f2c7e;
+    color: #6f2c7e;
+}
+
+.examFormContainer .tribunal-btn {
+    background-color: white;
+    margin-top: 50px;
+    padding: .8dvw;
+    border-radius: 5.5vh;
+    color: #6f2c7e;
+    cursor: pointer;
+    border: 3px solid #6f2c7e;
+    display: flex;
+    align-items: center;
+    font-size: 1.07rem;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.examFormContainer .tribunal-btn:hover {
+    background-color: #6f2c7e;
+    color: white;
+}
+
+.examFormContainer .tribunal-btn span {
+    background-color: #6f2c7e;
+    color: white;
+    padding: 11px;
+    margin-right: 10px;
+    border-radius: calc(100% / 2);
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.examFormContainer .tribunal-btn:hover span {
+    background-color: white;
     color: #6f2c7e;
 }

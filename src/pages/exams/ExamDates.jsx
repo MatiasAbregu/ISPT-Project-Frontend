@@ -78,8 +78,12 @@ export const ExamDates = () => {
                             width: 160
                         }
                     ]} options={
-                        user.role == "Docente" ? [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]
-                            : [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }, "delete"]}
+                        (user.roles.includes("Directivo") || user.roles.includes("Preceptor")) ?
+                            [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } },
+                            { value: "edit", onclick: () => { } },
+                            { value: "delete", onclick: () => { } }] :
+                            [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]
+                    }
                     showId={false}
                     data={data} />
                 <Footer />

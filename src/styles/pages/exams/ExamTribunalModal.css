@@ -1,0 +1,21 @@
+.examModal span.back {
+    color: #6f2c7e;
+    border: 2px #6f2c7e solid;
+    padding: 3px;
+    border-radius: calc(100% / 2);
+
+    align-self: flex-start;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease, background-color .3s ease;
+}
+
+.examModal span.back:hover {
+    color: #fff;
+    background-color: #6f2c7e;
+    transform: scale(1.2);
+}
+
+.examModal .formTribunal {
+    width: 100%;
+    padding: 0 4dvw;
+}
