@@ -58,7 +58,9 @@ export const SchoolYear = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${obj.id}/espacios-curriculares`) } }
+                        { value: "eye", onclick: (obj) => { 
+                            const safeName = `${obj.careerName}, ${obj.resolution.replace("/", "_")}, ${obj.schoolYearNumber}`;
+                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/espacios-curriculares`) } }
                     ]}
                     data={data}
                     showId={false}

@@ -19,7 +19,8 @@ export const SchoolYearSubjects = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [data, setData] = useState([]);
-
+    const {ciclosLectivosSlug} = useParams();
+ 
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
         getBySchoolYear();
@@ -70,7 +71,7 @@ export const SchoolYearSubjects = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${id}/espacios-curriculares/${obj.id}/divisiones`) } }
+                        { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/espacios-curriculares:${obj.name}/${obj.id}/divisiones`) } }
                     ]}
                     showId={false}
                     data={tableData}

@@ -19,6 +19,8 @@ export const SchoolYearSections = () => {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const {ciclosLectivosSlug} = useParams();
+    const {espaciosCurricularesSlug} = useParams();
     
     useEffect(() => {
         document.title = "ISPT - Gestión de ciclos lectivos";
@@ -67,8 +69,8 @@ export const SchoolYearSections = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/ciclos-lectivos/${id}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/estudiantes`) } },
-                        { value: "schedule", onclick: (obj) => { navigate(`/ciclos-lectivos/${id}/espacios-curriculares/${idSubject}/divisiones/${obj.id}/horarios`) }}
+                        { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/estudiantes`) } },
+                        { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }}
                     ]}
                     data={data}
                     showId={false}

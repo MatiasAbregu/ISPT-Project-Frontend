@@ -72,10 +72,10 @@ function App() {
         <Route path='/cargos' element={<Positions />} />
 
         <Route path='/ciclos-lectivos' element={<SchoolYear />} />
-        <Route path='/ciclos-lectivos/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
-        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones' element={<SchoolYearSections />} />
-        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones/:idSection/estudiantes' element={<SectionStudents />} />
-        <Route path='/ciclos-lectivos/:id/espacios-curriculares/:idSubject/divisiones/:idSection/horarios' element={<SectionSchedules />} />
+        <Route path='/:ciclosLectivosSlug/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/divisiones' element={<SchoolYearSections />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/estudiantes' element={<SectionStudents />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/horarios' element={<SectionSchedules />} />
 
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
