@@ -23,13 +23,18 @@ export const Correlatives = () => {
   const { idSubject } = useParams();
   const [data, setData] = useState([]);
   const [pendingChanges, setPendingChanges] = useState([]);
+  const [subjectName, setSubjectName] = useState("");
 
   useEffect(() => {
     document.title = "ISPT - Gestión de correlativas de plan de estudio";
     getPossibleCorrelatives();
+    getSubject();
   }, []);
 
-
+  useEffect(() => {
+    console.log('Pending changes: ', pendingChanges);
+  }, [pendingChanges]);
+  
   const getPossibleCorrelatives = async () => {
     try {
       const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
@@ -46,11 +51,31 @@ export const Correlatives = () => {
     }
   }
 
-  const tableData = data.map(({ isCorrelative, ...rest }) => ({
+  const getSubject = async () => {
+    try {
+      const res = await SubjectsService.getById(idSubject);
+      if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
+        setSubjectName(res.data.object.name);
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        const backendResponse = error.response.data;
+        toast.error(backendResponse.message);
+      } else {
+        toast.error("No se pudo conectar con el servidor.");
+      }
+    }
+  }
+
+  const tableData = data.map(({ isCorrelative, isMandatory, ...rest }) => ({
     ...rest,
     c: {
       c: "¿Correlativa?",
       check: isCorrelative
+    },
+    o: {
+      o: "¿Es necesario aprobarla?",
+      check: isMandatory
     }
   }));
 
@@ -84,7 +109,7 @@ export const Correlatives = () => {
         <PathInfo />
         <div className="controls">
           <InputControl icon={"search"} type={"search"}></InputControl>
-          <h4>Espacio curricular: Matemáticas I</h4>
+          <h4>Espacio curricular: {subjectName}</h4>
           {
             user?.roles.includes("Directivo") ?
               <button type="button" className="add-button"
@@ -103,7 +128,8 @@ export const Correlatives = () => {
           { name: "Código", width: 120 },
           { name: "Nombre", width: 150 },
           { name: "Formato", width: 150 },
-          { name: "Correlativa", width: 100 }]}
+          { name: "Correlativa", width: 100 },
+          {name: "Obligatoriedad", width: 100}]}
           options={[
             {
               value: "eye", onclick: () => {
@@ -116,10 +142,13 @@ export const Correlatives = () => {
           checkboxs={true}
           data={tableData}
           onCheckboxChange={(row, columnKey, checked) => {
-            const isChecked = typeof columnKey === 'boolean' ? columnKey : checked;
+            
+            const fieldToUpdate = columnKey === 'c' ? 'isCorrelative' : 'isMandatory';
+
+            const currentItem = data.find(x => x.id === row.id) || {};
 
             setData(prev => prev.map(item =>
-              item.id === row.id ? { ...item, isCorrelative: isChecked } : item
+              item.id === row.id ? { ...item, [fieldToUpdate]: checked } : item
             ));
 
             setPendingChanges(prev => {
@@ -127,11 +156,16 @@ export const Correlatives = () => {
               if (exists) {
                 return prev.map(x =>
                   x.subjectCorrelativeId === row.id
-                    ? { ...x, isCorrelative: isChecked, createdById: user.id || user.ID }
+                    ? { ...x, [fieldToUpdate]: checked, createdById: user.id || user.ID }
                     : x
                 );
               }
-              return [...prev, { subjectCorrelativeId: row.id, isCorrelative: isChecked, createdById: user.id || user.ID }];
+
+              return [...prev, { subjectCorrelativeId: row.id,
+                 isCorrelative: currentItem.isCorrelative ?? false,
+                 isMandatory: currentItem.isMandatory ?? false,
+                 [fieldToUpdate]: checked,
+                 createdById: user.id || user.ID }];
             });
           }}
         />
