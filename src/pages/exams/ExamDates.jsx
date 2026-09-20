@@ -9,6 +9,7 @@ import { ExamModal } from './ExamModal';
 import '../../styles/pages/exams/ExamDates.css';
 import ExamService from '../../services/exams/FinalExamService';
 import toast from 'react-hot-toast';
+import FinalExamService from '../../services/exams/FinalExamService';
 
 export const ExamDates = () => {
 
@@ -28,6 +29,24 @@ export const ExamDates = () => {
             const response = await ExamService.getAll();
             if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
                 setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
+
+    const deleteExam = async (id) => {
+        try {
+            const response = await FinalExamService.deleteExam(id);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                toast.success(response.data.object);
+                await getAllExams();
             }
         } catch (error) {
             console.log(error);
@@ -79,10 +98,36 @@ export const ExamDates = () => {
                         }
                     ]} options={
                         (user.roles.includes("Directivo") || user.roles.includes("Preceptor")) ?
-                            [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } },
-                            { value: "edit", onclick: () => { } },
-                            { value: "delete", onclick: () => { } }] :
-                            [{ value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }]
+                            [
+                                {
+                                    value: "eye", onclick: (obj) => {
+                                        setTypeModal(<ExamModal readOnly={true} examId={obj.id} setModal={setModal} getAll={getAllExams} />);
+                                        setModal(true);
+                                    }
+                                },
+                                { value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } },
+                                {
+                                    value: "edit", onclick: (obj) => {
+                                        setTypeModal(<ExamModal examId={obj.id} setModal={setModal} getAll={getAllExams} />);
+                                        setModal(true);
+                                    }
+                                },
+                                {
+                                    value: "delete", onclick: async (obj) => {
+                                        await deleteExam(obj.id);
+                                    }
+                                }
+                            ]
+                            :
+                            [
+                                {
+                                    value: "eye", onclick: (obj) => {
+                                        setTypeModal(<ExamModal readOnly={true} examId={obj.id} setModal={setModal} getAll={getAllExams} />);
+                                        setModal(true);
+                                    }
+                                },
+                                { value: "exams", onclick: () => { navigate("/mesas-examen/1/notas") } }
+                            ]
                     }
                     showId={false}
                     data={data} />

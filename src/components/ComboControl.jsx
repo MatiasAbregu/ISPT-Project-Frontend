@@ -31,9 +31,9 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
     }, []);
 
     useEffect(() => {
-        const currentTargetValue = returnKey ? selectedOption?.key : selectedOption?.value;
-
         if (value !== undefined && value !== null) {
+            const currentTargetValue = returnKey ? selectedOption?.key : selectedOption?.value;
+
             if (!selectedOption || currentTargetValue !== value) {
                 const found = findOption(value);
                 if (found) setSelectedOption(found);
@@ -41,7 +41,7 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
         } else if (selectedOption !== null) {
             setSelectedOption(null);
         }
-    }, [value, options, returnKey]);
+    }, [value, returnKey]);
 
     useEffect(() => {
         if (selectedOption && selectedOption.value !== undefined) {

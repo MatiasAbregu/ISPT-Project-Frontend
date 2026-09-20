@@ -19,3 +19,38 @@
     width: 100%;
     padding: 0 4dvw;
 }
+
+.examModal .formTribunal .btn-box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 0 50px;
+}
+
+.examModal .formTribunal .saveBtn,
+.examModal .formTribunal .cleanBtn {
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: #6f2c7e;
+    cursor: pointer;
+    border: 2px solid #6f2c7e;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.examModal .formTribunal .saveBtn:hover {
+    background-color: #2dca2d;
+    color: white;
+    border: 2px solid #2dca2d;
+}
+
+.examModal .formTribunal .cleanBtn:hover {
+    background-color: #bb2525;
+    color: white;
+    border: 2px solid #bb2525
+}
