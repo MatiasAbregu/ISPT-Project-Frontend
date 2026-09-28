@@ -15,7 +15,7 @@ import { UserContext } from '../../context/UserProvider'
 
 export const SchoolYearModal = ({ setModal, getAll }) => {
 
-    const { data, register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ resolver: yupResolver(SchoolYearYUP) })
+    const { data, register, handleSubmit, formState: { errors }, reset, setValue} = useForm({resolver: yupResolver(SchoolYearYUP)})
     const [dataCareers, setDataCareers] = useState([]);
     const [currentCareerId, setCurrentCareerId] = useState(null);
     const [dataCurriculums, setDataCurriculums] = useState([]);
@@ -26,7 +26,7 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
             ...data,
             createdById: user.id || user.ID
         }
-        await SchoolYearService.create(finalData)
+        await SchoolYearService.createByGrade(finalData)
         setModal(false)
         await getAll()
     }
@@ -83,6 +83,21 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
         getAllCurriculums();
     }, [currentCareerId]);
 
+    const currentYear = new Date().getFullYear();
+
+    const schoolYearsOptions = [
+        { key: (currentYear - 1).toString(), value: (currentYear - 1).toString() },
+        { key: (currentYear).toString(), value: (currentYear).toString() },
+        { key: (currentYear + 1).toString(), value: (currentYear + 1).toString() }
+    ];
+
+    const handleGlobalPlanChange = (value) => {
+        console.log("value", value);
+        setValue("CurriculumYear1", value);
+        setValue("CurriculumYear2", value);
+        setValue("CurriculumYear3", value);
+    }
+
     return (
         <article className="schoolYearModal">
             <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
@@ -94,11 +109,32 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
                     }}>
                         Seleccione una carrera
                     </ComboControl>
-                    <ComboControl options={dataCurriculums} key={currentCareerId} data={"CurriculumId"} setOption={(value) => {
-                        setValue("CurriculumId", value);
+                    <ComboControl options={schoolYearsOptions} icon={"history_edu"} data={"SchoolYearNumber"} returnKey={true} setOption={(value) => {
+                        setValue("SchoolYearNumber", value);
+                    }}>
+                        Seleccione un año lectivo
+                    </ComboControl>
+                    <ComboControl options={dataCurriculums} key={`global-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => handleGlobalPlanChange(value)} returnKey={true}
+                        icon={"two_pager"}>
+                        Seleccione plan de estudio general
+                    </ComboControl>
+                    <ComboControl options={dataCurriculums} key={`year1-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
+                        setValue("CurriculumYear1", value);
                     }} returnKey={true}
                         icon={"two_pager"}>
-                        Seleccione plan de estudio
+                        Seleccione plan de estudio año 1
+                    </ComboControl>
+                    <ComboControl options={dataCurriculums} key={`year2-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
+                        setValue("CurriculumYear2", value);
+                    }} returnKey={true}
+                        icon={"two_pager"}>
+                        Seleccione plan de estudio año 2
+                    </ComboControl>
+                    <ComboControl options={dataCurriculums} key={`year3-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
+                        setValue("CurriculumYear3", value);
+                    }} returnKey={true}
+                        icon={"two_pager"}>
+                        Seleccione plan de estudio año 3
                     </ComboControl>
                     <button type="submit" className="add-button">
                         <span className="material-symbols-outlined">save</span> Guardar cambios

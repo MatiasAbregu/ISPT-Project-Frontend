@@ -17,18 +17,19 @@ export const SchoolYearSubjects = () => {
     const [typeModal, setTypeModal] = useState();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
-    const { id } = useParams();
+    
+    const { ciclosLectivosSlug, gradeSlug, idGrade, id } = useParams();
     const [data, setData] = useState([]);
-    const {ciclosLectivosSlug} = useParams();
  
     useEffect(() => {
-        document.title = "ISPT - Gestión de ciclos lectivos";
+        document.title = "ISPT - Gestión de espacios curriculares";
         getBySchoolYear();
-    }, []);
+    }, [id]);
 
     const getBySchoolYear = async () => {
         try {
-            const response = await SubjectService.getBySchoolYear(id);
+            console.log("ID que se está enviando al backend:", idGrade);
+            const response = await SubjectService.getBySchoolYear(idGrade);
             if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
                 setData(response.data.object);
             }
@@ -42,7 +43,6 @@ export const SchoolYearSubjects = () => {
             }
         }
     }
-
 
     const tableData = data.map(({ code, type, duration, isCorrelative, ...rest }) => rest);
 
@@ -71,7 +71,13 @@ export const SchoolYearSubjects = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/espacios-curriculares:${obj.name}/${obj.id}/divisiones`) } }
+                        { 
+                            value: "eye", 
+                            onclick: (obj) => { 
+
+                                navigate(`/${ciclosLectivosSlug}/${id}/${gradeSlug}/${idGrade}/espacios-curriculares:${obj.name}/${obj.id}/divisiones`);
+                            } 
+                        }
                     ]}
                     showId={false}
                     data={tableData}

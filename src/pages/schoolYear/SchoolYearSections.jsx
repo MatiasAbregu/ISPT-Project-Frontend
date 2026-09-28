@@ -14,7 +14,7 @@ export const SchoolYearSections = () => {
 
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
-    const { id } = useParams();
+    const { id, idGrade, gradeSlug } = useParams();
     const { idSubject } = useParams();
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
@@ -69,8 +69,8 @@ export const SchoolYearSections = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/estudiantes`) } },
-                        { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }}
+                        { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${gradeSlug}/${idGrade}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/estudiantes`) } },
+                        { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${gradeSlug}/${idGrade}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }}
                     ]}
                     data={data}
                     showId={false}
