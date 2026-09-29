@@ -30,7 +30,8 @@ export const PathInfo = ({}) => {
         estudiantes: "Estudiantes",
         divisiones: "Divisiones",
         horarios: "Horarios",
-        anios: "Años"
+        anios: "Años",
+        "espacios-curriculares-ciclos": "Espacios curriculares"
     };
 
     const rawSegments = url.pathname.split("/").filter(Boolean);

@@ -74,7 +74,7 @@ function App() {
 
         <Route path='/ciclos-lectivos' element={<SchoolYear />} />
         <Route path='/:ciclosLectivosSlug/:id/anios' element={<SchoolYearGrades />} />
-        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/espacios-curriculares' element={<SchoolYearSubjects />} />
+        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/espacios-curriculares-ciclos' element={<SchoolYearSubjects />} />
         <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/divisiones' element={<SchoolYearSections />} />
         <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/estudiantes' element={<SectionStudents />} />
         <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/horarios' element={<SectionSchedules />} />

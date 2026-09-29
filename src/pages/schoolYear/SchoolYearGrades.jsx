@@ -57,7 +57,7 @@ export const SchoolYearGrades = () => {
                         { 
                             value: "eye", 
                             onclick: (obj) => { 
-                                navigate(`/${ciclosLectivosSlug}/${id}/anios:${obj.academicYear}/${obj.id}/espacios-curriculares`);
+                                navigate(`/${ciclosLectivosSlug}/${id}/anios:${obj.academicYear}/${obj.id}/espacios-curriculares-ciclos`);
                             } 
                         }
                     ]}
