@@ -49,14 +49,22 @@ export const SchoolYear = () => {
                             width: 120
                         },
                         {
+                            name: "Plan de estudio",
+                            width: 120
+                        },
+                        {
                             name: "Año lectivo",
+                            width: 120
+                        },
+                        {
+                            name: "Años de cursado",
                             width: 120
                         }
                     ]}
                     options={[
                         { value: "eye", onclick: (obj) => { 
-                            const safeName = `${obj.careerName || 'Carrera'}, ${obj.schoolYearNumber}`;
-                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/anios`) } }
+                            const safeName = `${obj.careerName}, ${obj.resolution.replace("/", "_")}, ${obj.schoolYearNumber}`;
+                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/espacios-curriculares`) } }
                     ]}
                     data={data}
                     showId={false}

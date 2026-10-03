@@ -28,7 +28,6 @@ import { StudentExamDate } from './pages/studentExams/StudentExamDate'
 import { StudentsInDanger } from './pages/students-in-danger/StudentsInDanger'
 import { Attendance } from './pages/attendance/Attendance'
 import { SchoolYear } from './pages/schoolYear/SchoolYear'
-import { SchoolYearGrades } from './pages/schoolYear/SchoolYearGrades'
 import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
 import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
@@ -73,11 +72,10 @@ function App() {
         <Route path='/cargos' element={<Positions />} />
 
         <Route path='/ciclos-lectivos' element={<SchoolYear />} />
-        <Route path='/:ciclosLectivosSlug/:id/anios' element={<SchoolYearGrades />} />
-        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/espacios-curriculares-ciclos' element={<SchoolYearSubjects />} />
-        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/divisiones' element={<SchoolYearSections />} />
-        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/estudiantes' element={<SectionStudents />} />
-        <Route path='/:ciclosLectivosSlug/:id/:gradeSlug/:idGrade/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/horarios' element={<SectionSchedules />} />
+        <Route path='/:ciclosLectivosSlug/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/divisiones' element={<SchoolYearSections />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/estudiantes' element={<SectionStudents />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/horarios' element={<SectionSchedules />} />
 
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 

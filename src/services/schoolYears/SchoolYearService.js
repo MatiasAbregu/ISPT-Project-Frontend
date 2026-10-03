@@ -14,17 +14,9 @@ async getById(careerId){
     return api.get(`/schoolyears/${careerId}`);
 }
 
-async getCurriculumsBySchoolYearId(schoolYearId) {
-    return api.get(`/schoolyears/${schoolYearId}/curriculums`);
-}
-
     //POST
 async create(data){
     return api.post(`/schoolyears`, data);
-}
-
-async createByGrade(data){
-    return api.post(`/schoolyears/by-grade`, data);
 }
     //PUT
     //DELETE

@@ -29,9 +29,7 @@ export const PathInfo = ({}) => {
         "ciclos-lectivos": "Ciclos lectivos",
         estudiantes: "Estudiantes",
         divisiones: "Divisiones",
-        horarios: "Horarios",
-        anios: "Años",
-        "espacios-curriculares-ciclos": "Espacios curriculares"
+        horarios: "Horarios"
     };
 
     const rawSegments = url.pathname.split("/").filter(Boolean);

@@ -15,25 +15,27 @@ import { UserContext } from '../../context/UserProvider'
 
 export const SchoolYearModal = ({ setModal, getAll }) => {
 
-    const { data, register, handleSubmit, formState: { errors }, reset, setValue} = useForm({resolver: yupResolver(SchoolYearYUP)})
+    const { data, register, handleSubmit, formState: { errors }, reset, setValue } = useForm({ resolver: yupResolver(SchoolYearYUP) })
     const [dataCareers, setDataCareers] = useState([]);
     const [currentCareerId, setCurrentCareerId] = useState(null);
     const [dataCurriculums, setDataCurriculums] = useState([]);
+    const [selectedCurriculum, setSelectedCurriculum] = useState(null); // Estado para controlar cuándo se seleccionó la resolución
     const { user } = useContext(UserContext);
 
     const onSubmit = async (data) => {
         let finalData = {
             ...data,
+            years: data.years ? data.years.map(Number) : [],
             createdById: user.id || user.ID
         }
-        await SchoolYearService.createByGrade(finalData)
+
+        await SchoolYearService.create(finalData)
         setModal(false)
         await getAll()
     }
 
     const getAllCareers = async () => {
-        try
-        {
+        try {
             const res = await CareersService.getAll();
             if(res.data.statusCode >= 200 && res.data.statusCode < 300) {
                 const careers = [];
@@ -42,20 +44,15 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
                 });
                 setDataCareers(careers);
             }
-
-        }
-        catch(error)
-        {
+        } catch(error) {
             if(error.response && error.response.data) {
-                const backendResponse = error.response.data;
-                toast.error(backendResponse.message);
+                toast.error(error.response.data.message);
             }
         }
     }
 
-
     const getAllCurriculums = async () => {
-        try{
+        try {
             const res = await CurriculumService.getByCareerId(currentCareerId);
             if(res.data.statusCode >= 200 && res.data.statusCode < 300) {
                 const curriculums = [];
@@ -64,11 +61,9 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
                 });
                 setDataCurriculums(curriculums);
             }
-        }
-        catch(error){
+        } catch(error) {
             if(error.response && error.response.data) {
-                const backendResponse = error.response.data;
-                toast.error(backendResponse.message);
+                toast.error(error.response.data.message);
             }
         }
     }
@@ -80,23 +75,13 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
     }, []);
 
     useEffect(() => {
-        getAllCurriculums();
+        if (currentCareerId) {
+            getAllCurriculums();
+        } else {
+            setDataCurriculums([]);
+            setSelectedCurriculum(null);
+        }
     }, [currentCareerId]);
-
-    const currentYear = new Date().getFullYear();
-
-    const schoolYearsOptions = [
-        { key: (currentYear - 1).toString(), value: (currentYear - 1).toString() },
-        { key: (currentYear).toString(), value: (currentYear).toString() },
-        { key: (currentYear + 1).toString(), value: (currentYear + 1).toString() }
-    ];
-
-    const handleGlobalPlanChange = (value) => {
-        console.log("value", value);
-        setValue("CurriculumYear1", value);
-        setValue("CurriculumYear2", value);
-        setValue("CurriculumYear3", value);
-    }
 
     return (
         <article className="schoolYearModal">
@@ -104,38 +89,39 @@ export const SchoolYearModal = ({ setModal, getAll }) => {
             <h4>Crear ciclo lectivo</h4>
             <div className="schoolYearFormContainer">
                 <form className="schoolYearForm" onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
+                    
                     <ComboControl options={dataCareers} icon={"history_edu"} returnKey={true} setOption={(value) => {
                         setCurrentCareerId(value);
+                        setSelectedCurriculum(null); 
                     }}>
                         Seleccione una carrera
                     </ComboControl>
-                    <ComboControl options={schoolYearsOptions} icon={"history_edu"} data={"SchoolYearNumber"} returnKey={true} setOption={(value) => {
-                        setValue("SchoolYearNumber", value);
-                    }}>
-                        Seleccione un año lectivo
+
+                    <ComboControl options={dataCurriculums} key={currentCareerId} data={"CurriculumId"} setOption={(value) => {
+                        setValue("CurriculumId", value);
+                        setSelectedCurriculum(value); 
+                    }} returnKey={true} icon={"two_pager"}>
+                        Seleccione plan de estudio
                     </ComboControl>
-                    <ComboControl options={dataCurriculums} key={`global-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => handleGlobalPlanChange(value)} returnKey={true}
-                        icon={"two_pager"}>
-                        Seleccione plan de estudio general
-                    </ComboControl>
-                    <ComboControl options={dataCurriculums} key={`year1-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
-                        setValue("CurriculumYear1", value);
-                    }} returnKey={true}
-                        icon={"two_pager"}>
-                        Seleccione plan de estudio año 1
-                    </ComboControl>
-                    <ComboControl options={dataCurriculums} key={`year2-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
-                        setValue("CurriculumYear2", value);
-                    }} returnKey={true}
-                        icon={"two_pager"}>
-                        Seleccione plan de estudio año 2
-                    </ComboControl>
-                    <ComboControl options={dataCurriculums} key={`year3-${currentCareerId}`} data={"CurriculumId"} setOption={(value) => {
-                        setValue("CurriculumYear3", value);
-                    }} returnKey={true}
-                        icon={"two_pager"}>
-                        Seleccione plan de estudio año 3
-                    </ComboControl>
+
+                    {selectedCurriculum && (
+                        <div className="yearsCheckboxContainer" >
+                            <label>Seleccione los años:</label>
+                            <div>
+                                {[1, 2, 3].map((yearNum) => (
+                                    <label key={yearNum}>
+                                        <input 
+                                            type="checkbox" 
+                                            value={yearNum}
+                                            {...register("years")} 
+                                        />
+                                        {yearNum}°
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     <button type="submit" className="add-button">
                         <span className="material-symbols-outlined">save</span> Guardar cambios
                     </button>
