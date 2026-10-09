@@ -46,8 +46,7 @@
 
 .schoolYearFormContainer .inputControl,
 .schoolYearFormContainer .dateControl,
-.schoolYearFormContainer .comboControl,
-.schoolYearFormContainer .textareaControl {
+.schoolYearFormContainer .comboControl{
     margin-top: 50px;
     border: 3px solid #6f2c7e;
     border-radius: 5vh;
@@ -58,16 +57,7 @@
     margin-top: 55px;
 }
 
-.schoolYearFormContainer .textareaControl {
-    height: 300px;
-}
-
-.schoolYearFormContainer .textareaControl div {
-    overflow: hidden;
-}
-
-.schoolYearFormContainer .inputControl label,
-.schoolYearFormContainer .textareaControl label {
+.schoolYearFormContainer .inputControl label {
     color: #6f2c7e !important;
     margin-left: 90px;
 }
@@ -114,4 +104,34 @@
 
 .schoolYearFormContainer .add-button span {
     transition: transform .3s ease;
+}
+
+
+.schoolYearFormContainer .checkControl {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.schoolYearFormContainer .checkControl .material-symbols-outlined {
+    color: #6f2c7e;
+}
+
+.schoolYearFormContainer .checkControl label {
+    color: #6f2c7e !important;
+    margin-left: 0 !important;
+    cursor: pointer;
+}
+
+.schoolYearFormContainer .labelCheckbox {
+    color: #6f2c7e !important;
+    font-size: 19.2px;
+    padding-top: 10px;
+}
+
+.schoolYearFormContainer .yearsCheckboxContainer {
+    margin-top: 20px;
+    display: flex;
 }

@@ -216,6 +216,7 @@ export const DocsModal = ({ setModal, fileId }) => {
                         watch={watch}>
                         Acta de nacimiento
                     </InputControl>
+                    
                 </div>
             </div>
             <div className='docsPerYear'>
