@@ -195,7 +195,7 @@ export const StudentModal = ({ setModal, typeModal, studentId = 0, getAllStudent
                                                 Ingrese el número de celular
                                             </InputControl>
                                             <InputControl type={"email"} icon={"email"} key={13} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.email"} error={errors.contactDTO?.email}>
-                                                Ingrese el correo electrónico
+                                                Ingrese el correo electrónico *
                                             </InputControl>
                                             <InputControl type={"tel"} icon={"local_hospital"} key={14} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.emergencyNumber"} error={errors.contactDTO?.emergencyNumber}>
                                                 Ingrese el número de emergencias
@@ -209,8 +209,8 @@ export const StudentModal = ({ setModal, typeModal, studentId = 0, getAllStudent
                                                     key={16} error={errors.practicePlace} readonly={typeModal == 2 ? true : false}>
                                                     Ingrese el lugar de práctica (solo para alumnos de 3° y 4° año)
                                                 </InputControl>
-                                                <InputControl register={register} data={"observations"} type={"textarea"} 
-                                                readonly={typeModal == 2 ? true : false} icon={"visibility"} key={17}
+                                                <InputControl register={register} data={"observations"} type={"textarea"}
+                                                    readonly={typeModal == 2 ? true : false} icon={"visibility"} key={17}
                                                     error={errors.observations}>
                                                     Observaciones
                                                 </InputControl>

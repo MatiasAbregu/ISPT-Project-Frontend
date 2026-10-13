@@ -14,7 +14,9 @@ const parseTokenToUser = (token) => {
     const decoded = jwtDecode(token.accessToken);
     return {
       id: decoded.ID || "",
+      personId: decoded.PersonId || "",
       username: decoded.Username || "",
+      fullname: decoded.Fullname || "",
       roles: decoded.Role
         ? (Array.isArray(decoded.Role) ? decoded.Role : [decoded.Role])
         : []

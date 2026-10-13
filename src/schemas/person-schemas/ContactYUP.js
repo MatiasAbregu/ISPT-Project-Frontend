@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export default Yup.object().shape({
     id: Yup.number(),
     updatedById: Yup.string().nullable(),
-    email: Yup.string().email("Ingrese un formato de correo válido"),
+    email: Yup.string().email("Ingrese un formato de correo válido").required("El email es requerido."),
     phoneNumber: Yup.string()
         .transform((value) => (value === "" ? null : value))
         .nullable()

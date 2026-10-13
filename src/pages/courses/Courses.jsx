@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { InputControl } from '../../components/InputControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
@@ -7,15 +7,15 @@ import '../../styles/pages/courses/Courses.css';
 import { useNavigate } from 'react-router-dom';
 import { PathInfo } from '../../components/PathInfo';
 import { ScheduleModal } from '../modals/ScheduleModal';
+import { UserContext } from '../../context/UserProvider';
+import TeacherCourses from '../../services/courses/TeacherCourses';
 
 export const Courses = () => {
-    useEffect(() => {
-        document.title = "ISPT - Gestión de Cursos";
-    }, []);
 
+    const { user } = useContext(UserContext);
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
-
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     const schedules = [
@@ -27,6 +27,31 @@ export const Courses = () => {
             ]
         }
     ]
+
+    useEffect(() => {
+        document.title = "ISPT - Gestión de Cursos";
+    }, []);
+
+    useEffect(() => {
+        getCourses();
+    }, [user]);
+
+    const getCourses = async () => {
+        try {
+            const response = await TeacherCourses.getCourses(user.personId);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
 
     return (
 
@@ -60,26 +85,8 @@ export const Courses = () => {
                     { value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones`) } },
                     { value: "attendance", onclick: () => { navigate(`/cursos/1/asistencia`) } }
                     ]}
-                    data={[
-                        {
-                            carrera: "Profesorado",
-                            materia: "Materia 1",
-                            anio: 2026,
-                            comision: "Mañana - A"
-                        },
-                        {
-                            carrera: "Profesorado",
-                            materia: "Materia 2",
-                            anio: 2026,
-                            comision: "Mañana - B"
-                        },
-                        {
-                            carrera: "Trayecto",
-                            materia: "Materia 3",
-                            anio: 2026,
-                            comision: "Tarde - A"
-                        }
-                    ]} />
+                    data={data}
+                    showId={false} />
                 <Footer />
             </div>
         </article>

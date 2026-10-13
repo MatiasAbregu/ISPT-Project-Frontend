@@ -199,7 +199,7 @@ export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersona
                                                 Ingrese el número de celular
                                             </InputControl>
                                             <InputControl type={"email"} icon={"email"} key={14} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.email"} error={errors.contactDTO?.email}>
-                                                Ingrese el correo electrónico
+                                                Ingrese el correo electrónico *
                                             </InputControl>
                                             <InputControl type={"tel"} icon={"local_hospital"} key={15} register={register} readonly={typeModal == 2 ? true : false} data={"contactDTO.emergencyNumber"} error={errors.contactDTO?.emergencyNumber}>
                                                 Ingrese el número de emergencias

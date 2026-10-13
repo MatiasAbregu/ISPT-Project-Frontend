@@ -23,7 +23,7 @@ export const Home = () => {
         <article className="homePage">
             <Sidebar />
             <div className='homePageContainer'>
-                <h2>¡Bienvenido {user.username}!</h2>
+                <h2>¡Bienvenido {user.fullname ? user.fullname : user.username}!</h2>
 
                 {/* Componente para docente */}
                 {user.roles.includes("Docente") &&
