@@ -4,7 +4,7 @@ import '../styles/components/Table.css';
 import { InputControl } from "./InputControl";
 import { ComboControl } from "./ComboControl";
 
-export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxChange }) => {
+export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxChange, hiddenColumns = [] }) => {
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -141,7 +141,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                 {
                                     checkboxs ?
                                         Object.entries(obj).map(([key, value], i2) => {
-                                            if (showId === false && key === 'id') {
+                                            if ((showId === false && key === 'id') || hiddenColumns.includes(key)) {
                                                 return null;
                                             }
                                             if (typeof value === "object" && value !== null && "check" in value) {
@@ -162,7 +162,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                                 return (<td key={i2}>{formatIfDateTime(value)}</td>);
                                         })
                                         : Object.entries(obj).map(([key, value], i2) => {
-                                            if ((showId === false && key === 'id') || key === 'state') {
+                                            if ((showId === false && key === 'id') || key === 'state' || hiddenColumns.includes(key)) {
                                                 return null;
                                             }
                                             return (<td key={i2}>{formatIfDateTime(value)}</td>);

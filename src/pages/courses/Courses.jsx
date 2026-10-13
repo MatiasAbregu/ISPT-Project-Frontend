@@ -80,12 +80,15 @@ export const Courses = () => {
                             name: "División",
                             width: 120
                         }
-                    ]} options={[{ value: "eye", onclick: () => { navigate(`/cursos/1/alumnos`) } },
-                    { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
-                    { value: "exams", onclick: () => { navigate(`/cursos/1/evaluaciones`) } },
-                    { value: "attendance", onclick: () => { navigate(`/cursos/1/asistencia`) } }
+                    ]}
+                    options={[
+                        { value: "eye", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/alumnos`) } },
+                        { value: "schedule", onclick: (obj) => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
+                        { value: "exams", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/evaluaciones`) } },
+                        { value: "attendance", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/asistencia`) } }
                     ]}
                     data={data}
+                    hiddenColumns={["divisionId"]}
                     showId={false} />
                 <Footer />
             </div>
