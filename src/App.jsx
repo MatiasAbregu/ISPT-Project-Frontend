@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import './Global.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login'
@@ -39,6 +39,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { UserContext } from './context/UserProvider'
 import { injectAuthFunctions } from './services/api'
 import { Toaster } from 'react-hot-toast'
+import { News } from './pages/news/News'
 
 function App() {
   const { getToken, refreshToken } = useContext(UserContext);
@@ -57,6 +58,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path='/inicio' element={<Home />} />
           <Route path='/estudiantes' element={<Students />} />
+          <Route path='/novedades' element={<News />} />
         </Route>
 
         <Route path='/estudiantes/:id/espacios-curriculares' element={<StudentSections />} />

@@ -1,0 +1,286 @@
+.newsPage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+
+.newsPageContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newsControls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    margin: 1% 1% 0;
+}
+
+.newsAddButton,
+.newsPublishButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 19px;
+    border: none;
+    border-radius: 20px;
+    background: white;
+    color: #6f2c7e;
+    cursor: pointer;
+    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+    white-space: nowrap;
+}
+
+.newsAddButton:hover,
+.newsPublishButton:hover:not(:disabled) {
+    background: #2dca2d;
+    color: white;
+    transform: scale(1.03);
+}
+
+.newsControls .inputControl {
+    width: 30%;
+    min-width: 250px;
+    margin: 0;
+}
+
+.newsTitle {
+    margin: 26px auto 20px;
+    color: white;
+    text-align: center;
+}
+
+.newsList {
+    width: 92%;
+    max-width: 1050px;
+    align-self: center;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+}
+
+.newsCard {
+    display: flex;
+    gap: 18px;
+    padding: 22px 26px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 8px 22px rgba(45, 16, 55, .13);
+}
+
+.newsCardMarker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 3px;
+    color: #8c4099;
+}
+
+.newsCardMarker .material-symbols-outlined { font-size: 27px; }
+
+.newsCardBody { min-width: 0; }
+
+.newsCardMeta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #76577b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.newsCardMeta time {
+    color: #48424a;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-family: 'Teachers', cursive;
+}
+
+.newsDeleteButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 6px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #805888;
+    cursor: pointer;
+}
+
+.newsDeleteButton:hover { background: #f5e8f6; color: #b42338; }
+.newsDeleteButton .material-symbols-outlined { font-size: 21px; }
+
+.newsDeleteConfirm {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+    color: #653c6e;
+    font-size: 14px;
+}
+
+.newsDeleteConfirm > span { margin-right: auto; }
+.newsDeleteCancel,
+.newsDeleteAccept {
+    padding: 7px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.newsDeleteCancel { border: 1px solid #d8cbdc; background: white; color: #604866; }
+.newsDeleteAccept { border: 1px solid #b42338; background: #b42338; color: white; }
+.newsDeleteAccept:disabled,
+.newsDeleteCancel:disabled { opacity: .65; cursor: wait; }
+
+.newsCard h2 {
+    margin: 8px 0 7px;
+    color: #44234b;
+    font-size: 21px;
+}
+
+.newsCard p {
+    margin: 0;
+    color: #48424a;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.newsState {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 30px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .94);
+    color: #63436b;
+    text-align: center;
+}
+
+.newsState .material-symbols-outlined { font-size: 36px; }
+
+.newsEmptyMessage {
+    color: #000;
+    font-family: 'Teachers', cursive;
+}
+
+.newsModal {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newsModal h4 { color: white; }
+
+.newsModal .close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.newsModal button.close {
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.newsModal button.close:hover {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+
+.newsFormContainer {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 10px 0 35px;
+    border-radius: 20px;
+    background: white;
+}
+
+.newsForm {
+    width: 80%;
+    min-height: 390px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.newsFormContainer .inputControl,
+.newsFormContainer .textareaControl {
+    margin-top: 50px;
+    border: 3px solid #6f2c7e;
+    border-radius: 5vh;
+}
+
+.newsFormContainer .inputControl label,
+.newsFormContainer .textareaControl label {
+    margin-left: 90px;
+    color: #6f2c7e !important;
+}
+
+.newsFormContainer .textareaControl {
+    height: 230px;
+}
+
+.newsFormContainer .textareaControl div {
+    overflow: hidden;
+}
+
+.newsFormContainer .add-button {
+    align-self: flex-end;
+    display: flex;
+    gap: 7px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid #6f2c7e;
+    border-radius: 15px;
+    background: white;
+    color: #6f2c7e;
+    cursor: pointer;
+    transition: transform .3s ease, color .3s ease, background-color .3s ease;
+}
+
+.newsFormContainer .add-button:hover:not(:disabled) {
+    transform: scale(1.1);
+    border-color: #2dca2d;
+    background: #2dca2d;
+    color: white;
+}
+
+.newsFormContainer .add-button:disabled { opacity: .65; cursor: wait; }
+.newsFormContainer .add-button span { transition: transform .3s ease; }
+
+@media (max-width: 650px) {
+    .newsControls { gap: 12px; }
+    .newsControls .inputControl { width: 100%; min-width: 0; }
+    .newsControls .newsAddButton { padding: 10px; }
+    .newsTitle { margin: 22px auto 16px; }
+    .newsCard { padding: 18px; }
+    .newsCardMeta { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .newsModal button.close { top: 14px; right: 14px; }
+    .newsForm { width: 88%; }
+    .newsFormContainer .inputControl label,
+    .newsFormContainer .textareaControl label { margin-left: 55px; }
+}
