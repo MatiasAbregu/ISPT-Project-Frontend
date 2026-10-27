@@ -1,13 +1,15 @@
 import api from "../api";
 
-class FinalExamService {
+class TeacherCoursesService {
 
     //GET
     getCourses(teacherId) {
         return api.get(`/teacher-courses/${teacherId}`);
     }
 
-
+    getSchedules(divisionId) {
+        return api.get(`/teacher-courses/schedules/${divisionId}`);
+    }
 
     //POST
 
@@ -16,4 +18,4 @@ class FinalExamService {
 
 }
 
-export default new FinalExamService();
+export default new TeacherCoursesService();

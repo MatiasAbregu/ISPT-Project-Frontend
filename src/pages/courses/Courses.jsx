@@ -5,10 +5,10 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/Courses.css';
 import { useNavigate } from 'react-router-dom';
-import { PathInfo } from '../../components/PathInfo';
 import { ScheduleModal } from '../modals/ScheduleModal';
 import { UserContext } from '../../context/UserProvider';
 import TeacherCourses from '../../services/courses/TeacherCourses';
+import toast from 'react-hot-toast';
 
 export const Courses = () => {
 
@@ -17,16 +17,6 @@ export const Courses = () => {
     const [typeModal, setTypeModal] = useState();
     const [data, setData] = useState([]);
     const navigate = useNavigate();
-
-    const schedules = [
-        {
-            division: "Turno Mañana A",
-            horarios: [
-                { dia: "Lunes", desde: "08:00", hasta: "10:00" },
-                { dia: "Miércoles", desde: "08:00", hasta: "10:00" },
-            ]
-        }
-    ]
 
     useEffect(() => {
         document.title = "ISPT - Gestión de Cursos";
@@ -41,6 +31,23 @@ export const Courses = () => {
             const response = await TeacherCourses.getCourses(user.personId);
             if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
                 setData(response.data.object);
+            }
+        } catch (error) {
+            console.log(error);
+            if (error.response && error.response.data) {
+                const backendResponse = error.response.data;
+                toast.error(backendResponse.message);
+            } else {
+                toast.error("No se pudo conectar con el servidor.");
+            }
+        }
+    }
+
+    const getSchedules = async (id) => {
+        try {
+            const response = await TeacherCourses.getSchedules(id);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                return response.data.object;
             }
         } catch (error) {
             console.log(error);
@@ -83,7 +90,14 @@ export const Courses = () => {
                     ]}
                     options={[
                         { value: "eye", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/alumnos`) } },
-                        { value: "schedule", onclick: (obj) => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
+                        {
+                            value: "schedule", onclick: async (obj) => {
+                                const schedules = await getSchedules(obj.divisionId);
+                                setTypeModal(
+                                    <ScheduleModal setModal={setModal} schedules={schedules} />);
+                                setModal(true);
+                            }
+                        },
                         { value: "exams", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/evaluaciones`) } },
                         { value: "attendance", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/asistencia`) } }
                     ]}
