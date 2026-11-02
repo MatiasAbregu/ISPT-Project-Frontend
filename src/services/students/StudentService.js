@@ -11,6 +11,10 @@ class StudentService {
         return api.get(`/students/${id}`)
     }
 
+    getMySubjects() {
+        return api.get("/students/my-subjects");
+    }
+
     getStudentsBySchoolYearId(schoolYearId) {
         return api.get(`/students/school-year/${schoolYearId}`)
     }

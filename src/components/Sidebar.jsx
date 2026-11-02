@@ -43,11 +43,11 @@ export const Sidebar = () => {
                     user ?
                         user.roles.includes("Directivo") || user.roles.includes("Preceptor") ?
                             <>
-                                <NavLink to={"/estudiantes"} className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
-                                    <span className="material-symbols-outlined">school</span><li>Estudiantes</li>
-                                </NavLink>
                                 <NavLink to={"/novedades"} className={url.pathname.startsWith("/novedades") ? "activated" : ""}>
                                     <span className="material-symbols-outlined">campaign</span><li>Novedades</li>
+                                </NavLink>
+                                <NavLink to={"/estudiantes"} className={url.pathname.startsWith("/estudiantes") ? "activated" : ""}>
+                                    <span className="material-symbols-outlined">school</span><li>Estudiantes</li>
                                 </NavLink>
                                 <NavLink to={"/docentes"} className={url.pathname.startsWith("/docentes") ? "activated" : ""}>
                                     <span className="material-symbols-outlined">cast_for_education</span><li>Docentes</li>

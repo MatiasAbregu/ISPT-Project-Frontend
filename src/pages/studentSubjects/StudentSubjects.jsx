@@ -8,15 +8,35 @@ import { useNavigate } from 'react-router-dom';
 import { ScheduleModal } from '../modals/ScheduleModal';
 import { StudentExamModal } from './StudentExamModal';
 import { StudentAttendanceModal } from './StudentAttendanceModal';
+import StudentService from '../../services/students/StudentService';
 
 export const StudentSubjects = () => {
 
 
+    const [subjects, setSubjects] = useState([]);
     const [modal, setModal] = useState(false);
     const [typeModal, setTypeModal] = useState();
 
     useEffect(() => {
         document.title = "ISPT - Mis Materias";
+        const loadSubjects = async () => {
+            try {
+                const response = await StudentService.getMySubjects();
+                const rows = response.data?.object ?? [];
+                setSubjects(rows.map((row) => ({
+                    materia: row.subject,
+                    anio: row.schoolYear,
+                    division: row.division,
+                    promedio: row.average == null ? "Sin datos" : row.average,
+                    asistencia: row.attendancePercentage == null ? "Sin datos" : `${row.attendancePercentage}%`,
+                    estado: "Sin datos"
+                })));
+            } catch (error) {
+                console.error("Error al cargar los espacios curriculares del estudiante:", error);
+                setSubjects([]);
+            }
+        };
+        loadSubjects();
     }, []);
 
     const navigate = useNavigate();
@@ -44,58 +64,33 @@ export const StudentSubjects = () => {
                     columns={[
                         {
                             name: "Espacio Curricular",
-                            width: 120
+                            width: 220
                         },
                         {
                             name: "Año Lectivo",
-                            width: 120
+                            width: 130
                         },
                         {
                             name: "División",
-                            width: 120
+                            width: 130
                         },
                         {
                             name: "Promedio",
-                            width: 120
+                            width: 130
                         },
                         {
                             name: "% Asistencia",
-                            width: 120
+                            width: 130
                         },
                         {
                             name: "Estado",
-                            width: 120
+                            width: 130
                         }
                     ]} options={[{ value: "degrees", onclick: () => { navigate("/mis-materias/1/evaluaciones") } },
                     { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
                     { value: "finalExams", onclick: () => { setTypeModal(<StudentExamModal setModal={setModal} />); setModal(true); } },
                     { value: "attendance", onclick: () => { setTypeModal(<StudentAttendanceModal setModal={setModal} />); setModal(true); } }]}
-                    data={[
-                        {
-                            materia: "Materia 1",
-                            anio: 2025,
-                            division: "Mañana - A",
-                            promedio: 8,
-                            asistencia: 90,
-                            estado: "Aprobada (Promoción)"
-                        },
-                        {
-                            materia: "Materia 2",
-                            anio: 2025,
-                            division: "Tarde - A",
-                            promedio: 3,
-                            asistencia: 60,
-                            estado: "Libre"
-                        },
-                        {
-                            materia: "Materia 3",
-                            anio: 2025,
-                            division: "Tarde - B",
-                            promedio: 9,
-                            asistencia: 85,
-                            estado: "Aprobada (Examen Final)"
-                        }
-                    ]} />
+                    data={subjects} />
                 <Footer />
             </div>
         </article>
