@@ -21,6 +21,8 @@ export const ScheduleModal = ({ setModal, schedules }) => {
     return value;
   };
 
+  const hasDivisions = Array.isArray(schedules) && schedules.some(item => item && 'division' in item);
+
   return (
     <article className="scheduleModal">
       <span
@@ -33,15 +35,41 @@ export const ScheduleModal = ({ setModal, schedules }) => {
       <h4>Horarios</h4>
 
       <div className="scheduleContainer">
-        {schedules.map((schedule, i) => (
-          <div className="scheduleBlock" key={i}>
-            <h5>{schedule.day}</h5>
+        {hasDivisions ? (
+          Object.entries(
+            schedules.reduce((acc, item) => {
+              const division = item?.division;
+              if (!acc[division]) {
+                acc[division] = [];
+              }
+              acc[division].push(item);
+              return acc;
+            }, {})
+          ).map(([divisionName, divisionItems]) => (
+            <div className="divisionGroup" key={divisionName}>
+              <h3>División: {divisionName}</h3>
 
-            <ul>
-              <p>{formatDateTime(schedule.startTime)}h - {formatDateTime(schedule.endTime)}h</p>
-            </ul>
-          </div>
-        ))}
+              {divisionItems.map((schedule, i) => (
+                <div className="scheduleBlock" key={i}>
+                  <h5>{schedule.day}</h5>
+                  <ul>
+                    <p>{formatDateTime(schedule.startTime)}h - {formatDateTime(schedule.endTime)}h</p>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))
+        ) : (
+          schedules.map((schedule, i) => (
+            <div className="scheduleBlock" key={i}>
+              <h5>{schedule.day}</h5>
+
+              <ul>
+                <p>{formatDateTime(schedule.startTime)}h - {formatDateTime(schedule.endTime)}h</p>
+              </ul>
+            </div>
+          ))
+        )}
       </div>
     </article>
   );

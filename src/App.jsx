@@ -64,7 +64,7 @@ function App() {
         <Route path='/estudiantes/:id/espacios-curriculares' element={<StudentSections />} />
 
         <Route path='/inscripciones-carreras' element={<Enrollments />} />
-        <Route path='/inscripciones-carreras/:id/materias' element={<EnrollmentSubjects />} />
+        <Route path='/inscripciones-carreras/:curriculumId/espacios-curriculares/:schoolYearNumber' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
         <Route path='/mis-materias/:id/evaluaciones' element={<StudentEvaluations />} />
 

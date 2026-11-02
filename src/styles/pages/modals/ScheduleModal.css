@@ -35,7 +35,7 @@
     padding: 30px;
     margin-bottom: 30px;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 
@@ -48,8 +48,9 @@
 
 .scheduleBlock h5 {
     font-size: 1rem;
-    margin-bottom: 10px;
-    color: black;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    color: #6f2c7e;
     text-decoration: underline;
     text-align: center;
 }
@@ -65,5 +66,26 @@
 }
 
 .scheduleBlock p {
-    color: #555;
+    color: #6f2c7e;
+    font-weight: 700;
+}
+
+.divisionGroup {
+    border: #6f2c7e 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.divisionGroup h3 {
+    color: #6f2c7e;
+    text-align: center;
+    padding-bottom: 10px;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #6f2c7e;
+}
+
+.divisionGroup .scheduleBlock {
+    text-align: center;
+    padding: 8px 20px;
+    margin: 8px 0;
 }

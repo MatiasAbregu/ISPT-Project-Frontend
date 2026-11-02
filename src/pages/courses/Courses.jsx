@@ -31,6 +31,7 @@ export const Courses = () => {
             const response = await TeacherCourses.getCourses(user.personId);
             if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
                 setData(response.data.object);
+                console.log(response.data.object)
             }
         } catch (error) {
             console.log(error);
