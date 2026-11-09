@@ -3,8 +3,17 @@
     padding: 7px 10px;
     border-radius: 20px;
     width: fit-content;
+    max-width: calc(100% - 30px);
     margin-left: 15px;
     margin-top: 10px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.pathInfo > span {
+    overflow-wrap: anywhere;
 }
 
 .pathInfo a{

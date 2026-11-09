@@ -66,7 +66,7 @@ export const Assignations = () => {
                                     getAllTeachersByDivision={gettAllTeacherByDivisionId} />);
                                 setModal(true);
                             }}>
-                            <span className="material-symbols-outlined">add_circle</span>Asignar docente a la materia
+                            <span className="material-symbols-outlined">add_circle</span>Asignar docente al espacio curricular
                         </button> : undefined}
                 </div>
                 <Table columns={[

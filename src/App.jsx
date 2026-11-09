@@ -40,6 +40,7 @@ import { UserContext } from './context/UserProvider'
 import { injectAuthFunctions } from './services/api'
 import { Toaster } from 'react-hot-toast'
 import { News } from './pages/news/News'
+import { FilterProvider } from './context/FilterProvider'
 
 function App() {
   const { getToken, refreshToken } = useContext(UserContext);
@@ -50,9 +51,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Toaster position='bottom-right' reverseOrder={false} toastOptions={{ duration: 5000, style: { fontFamily: "Teachers" } }} />
+      <FilterProvider>
+        <Toaster position='bottom-right' reverseOrder={false} toastOptions={{ duration: 5000, style: { fontFamily: "Teachers" } }} />
 
-      <Routes>
+        <Routes>
 
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute />}>
@@ -105,7 +107,8 @@ function App() {
         <Route path='/asistencias-cursos' element={<Attendance />} />
         <Route path='/asistencias-cursos/:id/asistencia' element={<CourseAttendance />} />
         <Route path='/asistencias-cursos/:id/asistencia/:fecha' element={<DailyAttendance />} />
-      </Routes>
+        </Routes>
+      </FilterProvider>
     </BrowserRouter>
   )
 }

@@ -1,10 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/Table.css';
-import { InputControl } from "./InputControl";
-import { ComboControl } from "./ComboControl";
+import { FilterContext } from "../context/FilterProvider";
+
+const normalizeSearchText = (value) => String(value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("es");
+
+const searchableText = (value) => {
+    if (value == null || typeof value === "boolean") return "";
+    if (Array.isArray(value)) return value.map(searchableText).join(" ");
+    if (typeof value === "object") {
+        return Object.entries(value)
+            .filter(([key]) => key !== "check" && key !== "id" && key !== "state")
+            .map(([, nestedValue]) => searchableText(nestedValue))
+            .join(" ");
+    }
+    return String(value);
+};
 
 export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxChange, hiddenColumns = [] }) => {
+    const { searchTerm } = useContext(FilterContext);
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -73,6 +90,11 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
         document.body.style.userSelect = '';
     };
 
+    const normalizedSearchTerm = normalizeSearchText(searchTerm.trim());
+    const filteredData = Array.isArray(data) && normalizedSearchTerm
+        ? data.filter(row => normalizeSearchText(searchableText(row)).includes(normalizedSearchTerm))
+        : data;
+
     useEffect(() => {
         if (isResizing) {
             document.addEventListener('mousemove', handleMouseMove);
@@ -86,6 +108,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
     }, [isResizing, resizingColumn]);
 
     return (
+        <div className="tableScrollContainer">
         <table className="table">
             <thead>
                 <tr>
@@ -135,8 +158,8 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
             </thead>
             <tbody>
                 {
-                    Array.isArray(data) && data.length > 0 ?
-                        data.map((obj, i) =>
+                    Array.isArray(filteredData) && filteredData.length > 0 ?
+                        filteredData.map((obj, i) =>
                             <tr key={i}>
                                 {
                                     checkboxs ?
@@ -331,10 +354,11 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                             </tr>)
                         :
                         <tr>
-                            <td colSpan={columns.length + 1}>¡No hay datos a mostrar aún!</td>
+                            <td colSpan={columns.length + 1}>{Array.isArray(data) && data.length > 0 && normalizedSearchTerm ? "No se encontraron resultados para la búsqueda." : "¡No hay datos a mostrar aún!"}</td>
                         </tr>
                 }
             </tbody>
         </table >
+        </div>
     );
 }

@@ -1,7 +1,41 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 210px;
+    width: 210px;
     min-height: 100vh;
     min-width: 210px;
     background-color: #6f2c7e;
+    transition: width .2s ease, min-width .2s ease, flex-basis .2s ease;
+}
+
+.sidebarToggle {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 12px 10px 0;
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, .12);
+    color: white;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.sidebarToggle:hover {
+    background: white;
+    color: #6f2c7e;
+}
+
+.sidebarToggle .material-symbols-outlined {
+    font-size: 21px;
+}
+
+.sidebarToggleLabel {
+    font-size: .78rem;
 }
 
 .sidebar ul {
@@ -14,6 +48,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
 }
 
 .sidebar a {
@@ -51,4 +86,261 @@
 
 .sidebar .logOut:hover{
     color: red;
+}
+
+.sidebarAccount {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: calc(100% - 20px);
+    margin: auto 10px 16px;
+    padding-top: 16px;
+}
+
+.sidebarUserCard,
+.sidebarLogout {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .12);
+    color: white;
+}
+
+.sidebarUserCard > .material-symbols-outlined,
+.sidebarLogout > .material-symbols-outlined {
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: 23px;
+}
+
+.sidebarUserText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 3px;
+    text-align: left;
+}
+
+.sidebarUserText strong,
+.sidebarUserText small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebarUserText strong {
+    font-size: .9rem;
+}
+
+.sidebarUserText small {
+    color: rgba(255, 255, 255, .78);
+    font-size: .76rem;
+}
+
+.sidebarLogout {
+    justify-content: flex-start;
+    cursor: pointer;
+    font-size: .9rem;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.sidebarLogout:hover {
+    background: #c62828;
+    border-color: #c62828;
+    color: white;
+}
+
+.sidebar.collapsed {
+    flex-basis: 76px;
+    width: 76px;
+    min-width: 76px;
+}
+
+.sidebar.collapsed .sidebarToggle {
+    width: 42px;
+    height: 38px;
+    margin: 12px auto 0;
+    padding: 5px;
+}
+
+.sidebar.collapsed .sidebarToggleLabel,
+.sidebar.collapsed .sidebarUserText,
+.sidebar.collapsed .sidebarLogout > span:last-child {
+    display: none;
+}
+
+.sidebar.collapsed a {
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.sidebar.collapsed a li {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sidebar.collapsed a span {
+    margin: 0;
+}
+
+.sidebar.collapsed .sidebarAccount {
+    align-items: center;
+}
+
+.sidebar.collapsed .sidebarUserCard,
+.sidebar.collapsed .sidebarLogout {
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        position: relative;
+        z-index: 2;
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .sidebar ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+        gap: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 8px;
+    }
+
+    .sidebar a {
+        align-items: center;
+        justify-content: flex-start;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 9px;
+        border-radius: 9px;
+        font-size: .86rem;
+    }
+
+    .sidebar a span {
+        flex: 0 0 auto;
+        margin-right: 6px;
+    }
+
+    .sidebarAccount {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        margin: 5px 0 0;
+        padding-top: 5px;
+    }
+
+    .sidebarUserCard,
+    .sidebarLogout {
+        flex: 1 1 0;
+        width: auto;
+    }
+
+    .sidebarToggle,
+    .sidebar.collapsed .sidebarToggle {
+        display: flex;
+        align-self: flex-start;
+        margin: 8px 10px;
+    }
+
+    .sidebar.collapsed {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-basis: auto;
+        width: 100%;
+        min-width: 0;
+        min-height: 52px;
+    }
+
+    .sidebar.collapsed ul {
+        display: none;
+    }
+
+    .sidebar.collapsed .sidebarToggle {
+        width: auto;
+        height: auto;
+        margin: 8px 10px;
+        padding: 7px 10px;
+    }
+
+    .sidebar.collapsed .sidebarToggleLabel {
+        display: inline;
+    }
+
+    .sidebar.collapsed a {
+        align-items: center;
+        justify-content: flex-start;
+        padding: 9px;
+    }
+
+    .sidebar.collapsed a li {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: initial;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+    }
+
+    .sidebar.collapsed a span {
+        margin-right: 6px;
+    }
+
+    .sidebar.collapsed .sidebarUserText,
+    .sidebar.collapsed .sidebarLogout > span:last-child {
+        display: flex;
+    }
+
+    .sidebar.collapsed .sidebarAccount {
+        align-items: stretch;
+    }
+
+    .sidebar.collapsed .sidebarUserCard,
+    .sidebar.collapsed .sidebarLogout {
+        justify-content: flex-start;
+        width: auto;
+        height: auto;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .sidebar ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sidebarUserText strong {
+        font-size: .8rem;
+    }
+
+    .sidebarUserText small,
+    .sidebarLogout {
+        font-size: .72rem;
+    }
 }

@@ -1,15 +1,40 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import '../styles/components/Sidebar.css'
-import { NavLink, useLocation } from 'react-router'
+import { NavLink, useLocation, useNavigate } from 'react-router'
 import { UserContext } from '../context/UserProvider';
 
 export const Sidebar = () => {
 
     const url = useLocation();
+    const navigate = useNavigate();
     const { user, logout } = useContext(UserContext);
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const roleLabels = {
+        Directivo: "Administrador",
+        Preceptor_Auxiliar: "Preceptor auxiliar",
+    };
+    const displayName = user?.username || user?.fullname || "Usuario";
+    const displayRoles = user?.roles?.map(role => roleLabels[role] || role).join(", ") || "Sin rol";
+
+    const handleLogout = () => {
+        logout();
+        navigate("/", { replace: true });
+    };
 
     return (
-        <div className='sidebar'>
+        <div className={`sidebar${isCollapsed ? ' collapsed' : ''}`}>
+            <button
+                type="button"
+                className="sidebarToggle"
+                onClick={() => setIsCollapsed(value => !value)}
+                aria-label={isCollapsed ? "Expandir menú" : "Minimizar menú"}
+                title={isCollapsed ? "Expandir menú" : "Minimizar menú"}
+            >
+                <span className="material-symbols-outlined" aria-hidden="true">
+                    {isCollapsed ? "chevron_right" : "chevron_left"}
+                </span>
+                <span className="sidebarToggleLabel">{isCollapsed ? "Expandir" : "Minimizar"}</span>
+            </button>
             <ul>
                 {
                     user ?
@@ -110,9 +135,19 @@ export const Sidebar = () => {
                             </> : undefined
                         : undefined
                 }
-                <a href="/" onClick={() => logout()} className={"logOut"}>
-                    <span className="material-symbols-outlined">power_settings_circle</span><li>Cerrar Sesión</li>
-                </a>
+                {user ? <div className="sidebarAccount">
+                    <div className="sidebarUserCard" title={`${displayName} · ${displayRoles}`}>
+                        <span className="material-symbols-outlined">person</span>
+                        <span className="sidebarUserText">
+                            <strong>{displayName}</strong>
+                            <small>{displayRoles}</small>
+                        </span>
+                    </div>
+                    <button type="button" className="sidebarLogout" onClick={handleLogout}>
+                        <span className="material-symbols-outlined">door_open</span>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </div> : null}
             </ul>
         </div>
     )

@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import '../styles/components/InputControl.css';
+import { FilterContext } from "../context/FilterProvider";
 
 export const InputControl = ({ children, type, icon, register,
     data, error, setValue, watch, typeCheckbox, className, readonly, checked, onclick }) => {
+    const { searchTerm, setSearchTerm } = useContext(FilterContext);
 
     if (type == "search") {
         const input = useRef();
@@ -13,7 +15,14 @@ export const InputControl = ({ children, type, icon, register,
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
-                        <input type={"text"} placeholder="Buscar..." ref={input} {...typeof register == "function" ? register(data) : {}} />
+                        <input
+                            type="search"
+                            placeholder="Buscar..."
+                            ref={input}
+                            value={searchTerm}
+                            onChange={(event) => setSearchTerm(event.target.value)}
+                            {...typeof register == "function" ? register(data) : {}}
+                        />
                     </div>
                 </div>
             </>
