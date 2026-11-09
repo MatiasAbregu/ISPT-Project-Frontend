@@ -17,7 +17,7 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
 
     const { idCommission } = useParams();
 
-    const { data, register, handleSubmit, formState: { errors }, reset, setValue, getValues} = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch } = useForm({
         resolver: yupResolver(ScheduleTemplateYUP)
     })
 
@@ -38,7 +38,7 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
                     updatedById: user.id || user.ID,
                     Id: scheduleTemplateId
                 }
-                /*res = await ScheduleTemplateService.update(scheduleTemplateId, finalData)*/
+                res = await ScheduleTemplateService.update(scheduleTemplateId, finalData)
             }
             toast.success(res.data?.object || "¡Operación éxitosa!")
             setModal(false)
@@ -99,15 +99,15 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
             <h4>{typeModal === "add" ? "Crear plantilla de horario" : "Editar plantilla de horario"}</h4>
             <div className="scheduleTemplateFormContainer">
                 <form className="scheduleTemplateForm" onSubmit={handleSubmit(onSubmit, (errors) => console.log(errors))}>
-                    <ComboControl key={1} options={daysOfWeek} icon={"history_edu"} data={"Day"} getValues={getValues} setOption={(value) => {
+                    <ComboControl key={1} options={daysOfWeek} icon={"history_edu"} data={"Day"} getValues={getValues} value={watch("Day")} setOption={(value) => {
                         setValue("Day", value);
                     }}>
                         Seleccione un día
                     </ComboControl>
-                    <TimeControl key={2} icon={"schedule"} setValue={setValue} register={register} errors={errors.StartTime} getValues={getValues} data="StartTime">
+                    <TimeControl key={2} icon={"schedule"} setValue={setValue} register={register} errors={errors.StartTime} getValues={getValues} value={watch("StartTime")} data="StartTime">
                         Hora de inicio
                     </TimeControl>
-                    <TimeControl key={3} icon={"schedule"} setValue={setValue} register={register} errors={errors.EndTime} getValues={getValues} data="EndTime">
+                    <TimeControl key={3} icon={"schedule"} setValue={setValue} register={register} errors={errors.EndTime} getValues={getValues} value={watch("EndTime")} data="EndTime">
                         Hora de fin
                     </TimeControl>
                     <button type="submit" className="add-button">

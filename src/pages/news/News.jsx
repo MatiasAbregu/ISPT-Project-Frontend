@@ -54,7 +54,7 @@ export const News = () => {
     const filteredNews = useMemo(() => {
         const term = search.trim().toLocaleLowerCase('es')
         if (!term) return news
-        return news.filter(item => `${item.title} ${item.content}`.toLocaleLowerCase('es').includes(term))
+        return news.filter(item => `${item.title} ${item.content} ${item.authorName ?? ''}`.toLocaleLowerCase('es').includes(term))
     }, [news, search])
 
     const closeForm = () => {
@@ -142,6 +142,7 @@ export const News = () => {
                                 <div className="newsCardBody">
                                     <div className="newsCardMeta">
                                         <time dateTime={item.createdAt}>{new Date(item.createdAt).toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' })}</time>
+                                        <span className="newsAuthor">Publicado por {item.authorName || 'Autor no disponible'}</span>
                                         {canCreate && <button type="button" className="newsDeleteButton" aria-label={`Eliminar ${item.title}`} title="Eliminar novedad" onClick={() => setConfirmDeleteId(item.id)}>
                                             <span className="material-symbols-outlined">delete</span>
                                         </button>}

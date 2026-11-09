@@ -103,6 +103,13 @@
     font-family: 'Teachers', cursive;
 }
 
+.newsAuthor {
+    color: #76577b;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
 .newsDeleteButton {
     display: inline-flex;
     align-items: center;

@@ -14,6 +14,9 @@ class ScheduleTemplateService {
         return api.post(`schedule-templates/${divisionTemplateId}`, data);
     }
     //PUT
+    async update(id, data) {
+        return api.put(`schedule-templates/${id}`, data);
+    }
 
 
     //DELETE

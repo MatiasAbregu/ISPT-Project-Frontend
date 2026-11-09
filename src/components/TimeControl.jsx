@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import '../styles/components/TimeControl.css';
 import { ComboControl } from './ComboControl';
 
-export const TimeControl = ({ icon, children, setValue, data, getValues, readOnly }) => {
+export const TimeControl = ({ icon, children, setValue, data, getValues, readOnly, value }) => {
     const [isOpen, setIsOpen] = useState(false);
     const timeRef = useRef(null);
 
@@ -20,6 +20,16 @@ export const TimeControl = ({ icon, children, setValue, data, getValues, readOnl
         document.addEventListener("mousedown", handleCursorOut);
         return () => document.removeEventListener("mousedown", handleCursorOut);
     }, []);
+
+    useEffect(() => {
+        if (typeof value !== "string" || !value) return;
+
+        const [incomingHours, incomingMinutes] = value.split(":");
+        if (incomingHours && incomingMinutes) {
+            setHours(incomingHours);
+            setMinutes(incomingMinutes);
+        }
+    }, [value]);
 
     useEffect(() => {
         const formattedTime = `${hours}:${minutes}`;
