@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/Table.css';
 import { FilterContext } from "../context/FilterProvider";
+import { InputControl } from "./InputControl";
+import { ComboControl } from "./ComboControl";
 
 const normalizeSearchText = (value) => String(value ?? "")
     .normalize("NFD")
