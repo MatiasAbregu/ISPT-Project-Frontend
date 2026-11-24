@@ -77,7 +77,7 @@ export const Courses = () => {
                             width: 100
                         },
                         {
-                            name: "Materia",
+                            name: "Espacio curricular",
                             width: 120
                         },
                         {
@@ -100,7 +100,8 @@ export const Courses = () => {
                             }
                         },
                         { value: "exams", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/evaluaciones`) } },
-                        { value: "attendance", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/asistencia`) } }
+                        { value: "attendance", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/asistencia`) } },
+                        { value: "iefi", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/iefi`) } }
                     ]}
                     data={data}
                     hiddenColumns={["divisionId"]}

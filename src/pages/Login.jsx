@@ -3,16 +3,17 @@ import '../styles/pages/Login.css';
 import { useForm } from "react-hook-form";
 import LoginYUP from "../schemas/LoginYUP";
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { InputControl } from "../components/InputControl";
 import { UserContext } from '../context/UserProvider';
 import AuthService from '../services/auth/AuthService';
+import toast from 'react-hot-toast';
 
 export const Login = () => {
 
     const navigate = useNavigate();
-    const { user, login } = useContext(UserContext);
+    const { user, authReady, login } = useContext(UserContext);
 
     useEffect(() => {
         document.title = "ISPT - Iniciar Sesión"
@@ -24,11 +25,17 @@ export const Login = () => {
         const res = (await AuthService.login(e)).data;
 
         if (res.statusCode >= 200 && res.statusCode < 300) {
-            login(res.object);
+            login(res.object, e.rememberMe);
             navigate("/inicio");
         } else {
             toast.error("No se pudo conectar con el servidor.");
         }
+    }
+
+    if (!authReady) return null;
+    if (user) {
+        const homePath = user.roles.includes("Preceptor_Auxiliar") ? "/asistencias-cursos" : "/inicio";
+        return <Navigate to={homePath} replace />;
     }
 
     return (

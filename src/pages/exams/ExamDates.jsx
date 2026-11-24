@@ -77,7 +77,7 @@ export const ExamDates = () => {
                 <Table
                     columns={[
                         {
-                            name: "Materia",
+                            name: "Espacio curricular",
                             width: 160
                         },
                         {

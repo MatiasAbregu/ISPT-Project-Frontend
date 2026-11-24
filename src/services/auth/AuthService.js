@@ -12,6 +12,10 @@ class AuthService {
     refresh(data) {
         return axios.post(`${API_URL}/refresh`, data);
     }
+
+    logout(data) {
+        return axios.post(`${API_URL}/logout`, data);
+    }
 }
 
 export default new AuthService();

@@ -85,7 +85,7 @@ export const Careers = () => {
                                 }
                             }]
                             :
-                            ["curriculum"]}
+                            [{ value: "curriculum", onclick: (obj) => { navigate(`/carreras:${obj.name}/${obj.id}/plan-de-estudio`) } }]}
                     data={data}
                 />
                 <Footer />

@@ -86,8 +86,7 @@ export const EvaluationsModal = ({ setModal, divisionId, getAllEvaluations }) =>
                         options={[
                             { key: 1, value: "Práctico" },
                             { key: 2, value: "Parcial" },
-                            { key: 4, value: "Recuperatorio" },
-                            { key: 3, value: "Final" }
+                            { key: 3, value: "Recuperatorio" }
                         ]}
                     >
                         Ingrese el tipo *

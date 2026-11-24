@@ -105,8 +105,8 @@ export const Subjects = () => {
                                         setModal(true);
                                     }
                                 },
-                                { value: "commission" },
-                                { value: "correlatives" }
+                                { value: "commission", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/espacios-curriculares:${obj.name}/${obj.id}/divisiones`) },
+                                { value: "correlatives", onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/espacios-curriculares:${obj.name}/${obj.id}/correlativas`) }
                             ]}
 
                             showId={false}

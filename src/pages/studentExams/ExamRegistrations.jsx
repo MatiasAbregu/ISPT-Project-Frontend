@@ -56,7 +56,7 @@ export const ExamRegistrations = () => {
                 <Table
                     columns={[
                         {
-                            name: "Materia",
+                            name: "Espacio curricular",
                             width: 120
                         },
                         {
@@ -74,7 +74,7 @@ export const ExamRegistrations = () => {
                     ]}
                     data={[
                         {
-                            materia: "Materia 1",
+                            espacioCurricular: "Espacio curricular 1",
                             estadoEstudiante: "Regular",
                             estadoInscripcion: <span className="registered">Inscripto | 18 Jun - 09:00hs</span>,
                             opciones: (
@@ -84,7 +84,7 @@ export const ExamRegistrations = () => {
                             )
                         },
                         {
-                            materia: "Materia 2",
+                            espacioCurricular: "Espacio curricular 2",
                             estadoEstudiante: "Regular",
                             estadoInscripcion: <span className="available">Disponible</span>,
                             opciones: (
@@ -94,7 +94,7 @@ export const ExamRegistrations = () => {
                             )
                         },
                         {
-                            materia: "Materia 3",
+                            espacioCurricular: "Espacio curricular 3",
                             estadoEstudiante: "Regular",
                             estadoInscripcion:
                                 <div>

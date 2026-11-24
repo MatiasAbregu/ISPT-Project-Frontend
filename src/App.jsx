@@ -18,6 +18,7 @@ import { DailyAttendance } from './pages/courses/DailyAttendance'
 import { Positions } from './pages/positions/Positions'
 import { ExamDates } from './pages/exams/ExamDates'
 import { ExamGrades } from './pages/exams/ExamGrades'
+import { IEFIDivision } from './pages/exams/IEFIDivision'
 import { Enrollments } from './pages/enrollments/Enrollments'
 import { StudentSubjects } from './pages/studentSubjects/StudentSubjects'
 import { StudentEvaluations } from './pages/studentSubjects/StudentEvaluations'
@@ -30,6 +31,8 @@ import { Attendance } from './pages/attendance/Attendance'
 import { SchoolYear } from './pages/schoolYear/SchoolYear'
 import { SchoolYearSubjects } from './pages/schoolYear/SchoolYearSubjects'
 import { SchoolYearSections } from './pages/schoolYear/SchoolYearSections'
+import { InscriptionRequests } from './pages/schoolYear/InscriptionRequests'
+import { InscriptionRequestDetail } from './pages/schoolYear/InscriptionRequestDetail'
 import { SectionStudents } from './pages/schoolYear/SectionStudents'
 import { Commissions } from './pages/careers/Commissions'
 import { ScheduleTemplates } from './pages/careers/ScheduleTemplates'
@@ -69,6 +72,7 @@ function App() {
         <Route path='/inscripciones-carreras/:curriculumId/espacios-curriculares/:schoolYearNumber' element={<EnrollmentSubjects />} />
         <Route path='/mis-materias' element={<StudentSubjects />} />
         <Route path='/mis-materias/:id/evaluaciones' element={<StudentEvaluations />} />
+        <Route path='/mis-materias/:id/iefi' element={<IEFIDivision />} />
 
         <Route path='/inscripciones-examenes' element={<ExamRegistrations />} />
         <Route path='/inscripciones-examenes/:id/fechas' element={<StudentExamDate />} />
@@ -76,10 +80,13 @@ function App() {
         <Route path='/cargos' element={<Positions />} />
 
         <Route path='/ciclos-lectivos' element={<SchoolYear />} />
+        <Route path='/:ciclosLectivosSlug/:id/solicitudes-inscripcion' element={<InscriptionRequests />} />
+        <Route path='/:ciclosLectivosSlug/:id/solicitudes-inscripcion/estudiante/:fileCurriculumId' element={<InscriptionRequestDetail />} />
         <Route path='/:ciclosLectivosSlug/:id/espacios-curriculares' element={<SchoolYearSubjects />} />
         <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/divisiones' element={<SchoolYearSections />} />
         <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/estudiantes' element={<SectionStudents />} />
         <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/horarios' element={<SectionSchedules />} />
+        <Route path='/:ciclosLectivosSlug/:id/:espaciosCurricularesSlug/:idSubject/:divisionesSlug/:idSection/iefi' element={<IEFIDivision />} />
 
         <Route path='/alumnos-riesgo' element={<StudentsInDanger />} />
 
@@ -103,6 +110,7 @@ function App() {
 
         <Route path='/mesas-examen' element={<ExamDates />} />
         <Route path='/mesas-examen/:id/notas' element={<ExamGrades />} />
+        <Route path='/cursos/:id/iefi' element={<IEFIDivision />} />
 
         <Route path='/asistencias-cursos' element={<Attendance />} />
         <Route path='/asistencias-cursos/:id/asistencia' element={<CourseAttendance />} />

@@ -11,6 +11,7 @@ export const Enrollments = () => {
     const navigate = useNavigate()
 
     const [careers, setCareers] = useState([]);
+    const [emptyMessage, setEmptyMessage] = useState("No hay inscripciones disponibles para los legajos activos.");
 
     useEffect(() => {
         document.title = "ISPT - Inscripciones";
@@ -21,14 +22,18 @@ export const Enrollments = () => {
         try {
             const res = await EnrollmentService.getAllCareersForInscription();
             if (res.data.statusCode >= 200 && res.data.statusCode < 300) {
-                setCareers(res.data.object);
+                const availableCareers = res.data.object ?? [];
+                setCareers(availableCareers);
+                if (availableCareers.length === 0 && res.data.message) setEmptyMessage(res.data.message);
             }
         } catch (error) {
             console.log(error);
             if (error.response && error.response.data) {
                 const backendResponse = error.response.data;
+                setEmptyMessage(backendResponse.message ?? "No se pudieron cargar las inscripciones.");
                 toast.error(backendResponse.message);
             } else {
+                setEmptyMessage("No se pudo conectar con el servidor.");
                 toast.error("No se pudo conectar con el servidor.");
             }
         }
@@ -46,7 +51,7 @@ export const Enrollments = () => {
                                 onClick={() => { navigate(`/inscripciones-carreras/${career.curriculumId}/espacios-curriculares/${career.schoolYearNumber}`) }} />
                         ))
                         :
-                        <h3>¡No hay carreras disponibles para su inscripción en este momento!</h3>
+                        <h3>{emptyMessage}</h3>
                     }
                 </div>
                 <Footer />

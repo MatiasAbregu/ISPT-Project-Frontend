@@ -3,7 +3,9 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 
 export const ProtectedRoute = () => {
-    const { user } = useContext(UserContext);
+    const { user, authReady } = useContext(UserContext);
+
+    if (!authReady) return null;
 
     if (!user) {
         return <Navigate to="/" replace />;

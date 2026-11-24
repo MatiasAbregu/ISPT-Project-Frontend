@@ -1,10 +1,16 @@
 .sidebar {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
     flex: 0 0 210px;
     width: 210px;
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
+    min-height: 0;
     min-width: 210px;
+    overflow-y: auto;
     background-color: #6f2c7e;
     transition: width .2s ease, min-width .2s ease, flex-basis .2s ease;
 }
@@ -215,8 +221,11 @@
         z-index: 2;
         flex: 0 0 auto;
         width: 100%;
+        height: auto;
+        max-height: none;
         min-width: 0;
         min-height: 0;
+        overflow-y: visible;
     }
 
     .sidebar ul {

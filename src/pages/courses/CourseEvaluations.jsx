@@ -19,10 +19,9 @@ export const CourseEvaluations = () => {
     const navigate = useNavigate();
 
     const typeLabels = {
-        Practical: "Práctico",
-        Midterm: "Parcial",
-        Recovery: "Recuperatorio",
-        Final: "Final"
+        Practico: "Práctico",
+        Parcial: "Parcial",
+        Recuperatorio: "Recuperatorio",
     };
 
     useEffect(() => {

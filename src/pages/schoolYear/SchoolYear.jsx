@@ -62,9 +62,14 @@ export const SchoolYear = () => {
                         }
                     ]}
                     options={[
-                        { value: "eye", onclick: (obj) => { 
+                        { value: "eye", onclick: (obj) => {
                             const safeName = `${obj.careerName}, ${obj.resolution.replace("/", "_")}, ${obj.schoolYearNumber}`;
-                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/espacios-curriculares`) } }
+                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/espacios-curriculares`);
+                        } },
+                        ...(user?.roles?.includes("Preceptor") ? [{ value: "inscriptionRequests", onclick: (obj) => {
+                            const safeName = `${obj.careerName}, ${obj.resolution.replace("/", "_")}, ${obj.schoolYearNumber}`;
+                            navigate(`/ciclos-lectivos:${safeName}/${obj.id}/solicitudes-inscripcion`);
+                        } }] : [])
                     ]}
                     data={data}
                     showId={false}

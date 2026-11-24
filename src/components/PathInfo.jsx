@@ -14,7 +14,7 @@ export const PathInfo = ({}) => {
         notas: "Notas",
         alumnos: "Alumnos",
         asistencia: "Asistencia",
-        "mis-materias": "Materias",
+        "mis-materias": "Espacios curriculares",
         carreras: "Carreras",
         "plan-de-estudio": "Plan de estudio",
         "ciclo-academico": "Ciclo académico",
@@ -25,9 +25,13 @@ export const PathInfo = ({}) => {
         "asistencias-cursos": "Cursos",
         "dias": "Días",
         "mesas-examen": "Mesas de Examen",
+        iefis: "IEFI",
+        iefi: "IEFI",
         "comisiones": "Comisiones",
         "ciclos-lectivos": "Ciclos lectivos",
+        "solicitudes-inscripcion": "Solicitudes de inscripción",
         estudiantes: "Estudiantes",
+        estudiante: "Estudiante",
         divisiones: "Divisiones",
         horarios: "Horarios"
     };

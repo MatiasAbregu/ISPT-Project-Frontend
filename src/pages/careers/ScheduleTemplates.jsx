@@ -62,13 +62,13 @@ export const ScheduleTemplates = () => {
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button type="button" className="add-button"
+                    {user?.roles.includes("Directivo") ? <button type="button" className="add-button"
                         onClick={() => {
                            setTypeModal(<ScheduleTemplateModal setModal={setModal} typeModal={"add"} getAll={getScheduleTemplates}/>);
                            setModal(true);
                         }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir módulo
-                    </button>
+                    </button> : undefined}
                 </div>
                 <Table
                     columns={[

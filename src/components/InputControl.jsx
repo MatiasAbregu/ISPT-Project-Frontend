@@ -92,7 +92,7 @@ export const InputControl = ({ children, type, icon, register,
             const [check, setCheck] = useState(checked ?? false);
 
             return (
-                <div className="checkControl" onClick={() => {
+                <div className="checkControl" onClick={readonly ? undefined : () => {
                     const newValue = !check; setCheck(newValue);
                     if (typeof onclick === "function") onclick(newValue);
                 }}>

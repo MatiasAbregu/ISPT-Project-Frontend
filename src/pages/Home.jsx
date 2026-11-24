@@ -28,7 +28,7 @@ export const Home = () => {
                 {/* Componente para docente */}
                 {user.roles.includes("Docente") &&
                     <ComboControl options={[{ key: 1, value: "Matemática I" }, { key: 2, value: "Inglés" }]} notShowLabel={true}>
-                        Materia
+                        Espacio curricular
                     </ComboControl>}
 
                 <div className="chartsContainer">
@@ -57,10 +57,10 @@ export const Home = () => {
                     }
                     {user.roles.includes("Estudiante") && (
                         <>
-                            <BarChart fields={["Materia 1", "Materia 2", "Materia 3"]} values={[8, 9, 7]} label={"Notas"}
-                                text={"Notas promedio de las materias"} stepSize={1} minY={1} maxY={10} />
-                            <PieChart title={"Estado de mis materias"}
-                                text={"Materias"} labels={["Aprobadas", "Pendientes"]} values={[2, 1]}
+                            <BarChart fields={["Espacio curricular 1", "Espacio curricular 2", "Espacio curricular 3"]} values={[8, 9, 7]} label={"Notas"}
+                                text={"Notas promedio de los espacios curriculares"} stepSize={1} minY={1} maxY={10} />
+                            <PieChart title={"Estado de mis espacios curriculares"}
+                                text={"Espacios curriculares"} labels={["Aprobados", "Pendientes"]} values={[2, 1]}
                                 colors={['rgba(0, 230, 118, 0.5)',
                                     'rgba(255, 82, 82, 0.5)']} />
                             <div className="enrollmentContainer">

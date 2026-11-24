@@ -1,21 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../../styles/pages/enrollments/CorrelativesModal.css'
 
-export const CorrelativesModal = ({ setModal }) => {
+export const CorrelativesModal = ({ setModal, missingSubjects = [] }) => {
 
   return (
     <article className="correlativesModal">
       <span className="material-symbols-outlined close" onClick={() => setModal(false)}>cancel</span>
-      <h4>Correlativas del espacio curricular</h4>
+      <h4>Correlativas pendientes</h4>
       <div className="correlativesContainer">
-        <p>Correlativas faltantes:</p>
+        <p>Necesitás acreditar los siguientes espacios curriculares para inscribirte:</p>
         <ul>
-          <li className='missing-item'>Materia 1</li>
-          <li className='missing-item'>Materia 2</li>
-        </ul>
-        <p>Correlativas aprobadas:</p>
-        <ul>
-          <li className='approved-item'>Materia 3</li>
+          {missingSubjects.map((subject, index) => <li className='missing-item' key={`${subject}-${index}`}>{subject}</li>)}
         </ul>
       </div>
     </article >

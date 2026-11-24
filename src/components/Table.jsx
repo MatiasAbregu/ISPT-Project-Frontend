@@ -22,7 +22,7 @@ const searchableText = (value) => {
     return String(value);
 };
 
-export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxChange, hiddenColumns = [] }) => {
+export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = false, showId, onCheckboxChange, hiddenColumns = [] }) => {
     const { searchTerm } = useContext(FilterContext);
 
     const [columnsWidth, setColumnsWidth] = useState([]);
@@ -180,6 +180,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                                             {formatIfDateTime(labelText)}
                                                             <InputControl type={"checkbox"} typeCheckbox={2}
                                                                 checked={value.check}
+                                                                readonly={checkboxReadOnly}
                                                                 onclick={(checked) => onCheckboxChange?.(obj, key, checked)} />
                                                         </div>
                                                     </td>);
@@ -198,6 +199,7 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                             <div className="optionsContainer">
                                                 {
                                                     options.map((v, i) => {
+                                                        if (typeof v.show === "function" && !v.show(obj)) return null;
                                                         if (v.value == "eye")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnLightBlue"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>visibility</span>);
@@ -209,6 +211,11 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                                             return (<span key={i} className="material-symbols-outlined tableBtnRed"
                                                                 onClick={() => v.onclick && v.onclick(obj)}>
                                                                 delete
+                                                            </span>);
+                                                        else if (v.value == "cancel")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed" title="Quitar selección"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                cancel
                                                             </span>);
                                                         else if (v.value == "switch") {
                                                             const isEnabled = Boolean(obj.state);
@@ -278,20 +285,35 @@ export const Table = ({ columns, data, options, checkboxs, showId, onCheckboxCha
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 calendar_add_on
                                                             </span>)
+                                                        else if (v.value == "iefi")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnLightPurple" title="IEFI"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                fact_check
+                                                            </span>)
+                                                        else if (v.value == "inscriptionRequests")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnOrange" title="Solicitudes de inscripción"
+                                                                onClick={() => v.onclick && v.onclick(obj)}>
+                                                                how_to_reg
+                                                            </span>)
                                                         else if (v.value == "attendance")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnLightBlue"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 list_alt_check
                                                             </span>)
                                                         else if (v.value == "present")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnGreen"
+                                                            return (<span key={i} title={v.title} className="material-symbols-outlined tableBtnGreen"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 check
                                                             </span>)
                                                         else if (v.value == "absent")
-                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed"
+                                                            return (<span key={i} title={v.title} className="material-symbols-outlined tableBtnRed"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 close
+                                                            </span>)
+                                                        else if (v.value == "resetDecision")
+                                                            return (<span key={i} title={v.title} className="material-symbols-outlined tableBtnRed"
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                undo
                                                             </span>)
                                                         else if (v.value == "justified")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnOrange"

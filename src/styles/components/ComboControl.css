@@ -104,3 +104,67 @@
 .comboControl.errorInput label{
     color: red;
 }
+
+.comboControl.comboControlLabelAbove {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    color: inherit;
+}
+
+.comboControl.comboControlLabelAbove .labelAbove {
+    position: static;
+    display: block;
+    margin: 0;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.25;
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 42px 0 12px;
+    background: white;
+    border-radius: 24px;
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer .selectedOptionLabel {
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 0;
+    color: #6f2c7e;
+    font-size: clamp(.9rem, 2vw, 1.1rem);
+    line-height: 1.2;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer .dropdown {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    flex: 0 0 auto;
+    margin: 0;
+    transform: translateY(-50%);
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer .dropdown.open {
+    transform: translateY(-50%) rotateZ(180deg);
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer .optionsOverflow {
+    top: calc(100% + 6px);
+    left: 0;
+}

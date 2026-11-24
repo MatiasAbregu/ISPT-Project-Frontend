@@ -160,7 +160,7 @@ export const ExamModal = ({ setModal, getAll, examId, readOnly = false }) => {
                                                 error={errors.subjectId}
                                                 readOnly={readOnly}
                                             >
-                                                Seleccione la materia *
+                                                Seleccione el espacio curricular *
                                             </ComboControl>
 
                                             <button className='tribunal-btn' type='button' onClick={() => setTribunalModal(true)}>

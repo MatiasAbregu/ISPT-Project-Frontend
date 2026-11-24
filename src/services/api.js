@@ -7,6 +7,7 @@ const api = axios.create({
 
 let refreshTokenFunction = null;
 let getTokenFunction = null;
+let refreshInFlight = null;
 
 export const injectAuthFunctions = (getFn, refreshFn) => {
     getTokenFunction = getFn;
@@ -31,14 +32,20 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
       originalRequest._retry = true;
 
       if (refreshTokenFunction) {
         try {
-          const nuevoAccessToken = await refreshTokenFunction();
+          if (!refreshInFlight) {
+            refreshInFlight = Promise.resolve(refreshTokenFunction()).finally(() => {
+              refreshInFlight = null;
+            });
+          }
+          const nuevoAccessToken = await refreshInFlight;
 
           if (nuevoAccessToken) {
+            originalRequest.headers = originalRequest.headers ?? {};
             originalRequest.headers["Authorization"] = `Bearer ${nuevoAccessToken}`;
             return api(originalRequest);
           }

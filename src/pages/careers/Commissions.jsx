@@ -86,12 +86,12 @@ export const Commissions = () => {
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button type="button" className="add-button"
+                    {user?.roles.includes("Directivo") ? <button type="button" className="add-button"
                         onClick={() => {
                             handleAddDivision();
                         }}>
                         <span className="material-symbols-outlined">add_circle</span>Añadir división
-                    </button>
+                    </button> : undefined}
                 </div>
                 <Table
                     columns={[
@@ -108,12 +108,12 @@ export const Commissions = () => {
                         value: "schedule",
                         onclick: (obj) => navigate(`/${carreraSlug}/${id}/${planDeEstudioSlug}/${idCurriculum}/${espacioCurricularSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`)
                     },
-                    {
+                    ...(user?.roles.includes("Directivo") ? [{
                         value: "switch", onclick: async (obj) => {
                             await changeStatus(obj.id);
                             await getDivisionTemplates();
                         }
-                    }
+                    }] : [])
                     ]}
                     data={data}
                     showId={false}

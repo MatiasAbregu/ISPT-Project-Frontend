@@ -70,7 +70,8 @@ export const SchoolYearSections = () => {
                     ]}
                     options={[
                         { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/estudiantes`) } },
-                        { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }}
+                        { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }},
+                        { value: "iefi", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/iefi`) } }
                     ]}
                     data={data}
                     showId={false}

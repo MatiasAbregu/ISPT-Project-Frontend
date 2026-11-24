@@ -96,7 +96,13 @@ export const Curriculum = () => {
                 setModal(true);
               }
             }]
-            : ["academicYear"]
+            : [{
+              value: "academicYear",
+              onclick: (obj) => {
+                const safeNombre = obj.resolution.replace("/", "_");
+                navigate(`/${carreraSlug}/${id}/plan-de-estudio:${safeNombre}/${obj.id}/espacios-curriculares`)
+              }
+            }]
           }
           showId={false}
           data={data}

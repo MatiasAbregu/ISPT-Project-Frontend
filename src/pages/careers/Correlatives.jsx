@@ -34,7 +34,7 @@ export const Correlatives = () => {
   useEffect(() => {
     console.log('Pending changes: ', pendingChanges);
   }, [pendingChanges]);
-  
+
   const getPossibleCorrelatives = async () => {
     try {
       const res = await SubjectsService.getPossibleCorrelatives(idCurriculum, idSubject);
@@ -129,20 +129,13 @@ export const Correlatives = () => {
           { name: "Nombre", width: 150 },
           { name: "Formato", width: 150 },
           { name: "Correlativa", width: 100 },
-          {name: "Obligatoriedad", width: 100}]}
-          options={[
-            {
-              value: "eye", onclick: () => {
-                setTypeModal(<SubjectModal typeModal={2} setModal={setModal} />);
-                setModal(true);
-              }
-            }
-          ]}
+          { name: "Obligatoriedad", width: 100 }]}
           showId={false}
           checkboxs={true}
+          checkboxReadOnly={!user?.roles.includes("Directivo")}
           data={tableData}
           onCheckboxChange={(row, columnKey, checked) => {
-            
+
             const fieldToUpdate = columnKey === 'c' ? 'isCorrelative' : 'isMandatory';
 
             const currentItem = data.find(x => x.id === row.id) || {};
@@ -161,11 +154,13 @@ export const Correlatives = () => {
                 );
               }
 
-              return [...prev, { subjectCorrelativeId: row.id,
-                 isCorrelative: currentItem.isCorrelative ?? false,
-                 isMandatory: currentItem.isMandatory ?? false,
-                 [fieldToUpdate]: checked,
-                 createdById: user.id || user.ID }];
+              return [...prev, {
+                subjectCorrelativeId: row.id,
+                isCorrelative: currentItem.isCorrelative ?? false,
+                isMandatory: currentItem.isMandatory ?? false,
+                [fieldToUpdate]: checked,
+                createdById: user.id || user.ID
+              }];
             });
           }}
         />

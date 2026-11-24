@@ -1,0 +1,67 @@
+.inscriptionRequestsPage {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.inscriptionRequestsPageContainer {
+    flex: 1;
+    min-width: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.inscriptionRequestsFilter {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1% 1% 0;
+}
+
+.inscriptionRequestsFilter .comboControl {
+    width: min(360px, 100%);
+}
+
+.inscriptionRequestStudentTitle {
+    margin: 24px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.inscriptionRequestsControls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+    margin: 24px 0 30px;
+}
+
+.inscriptionRequestStudent {
+    margin: 20px 0 28px;
+}
+
+.inscriptionRequestStudent h3 {
+    margin-bottom: 12px;
+}
+
+.inscriptionRequestStudent select {
+    min-width: 150px;
+    padding: 8px;
+}
+
+.inscriptionRequestsPage .rejectAllButton:hover:not(:disabled) {
+    background-color: #bb2525 !important;
+    color: white !important;
+}
+
+.inscriptionRequestsPage .acceptAllButton:hover:not(:disabled),
+.inscriptionRequestsPage .saveInscriptionDecisionsButton:hover:not(:disabled) {
+    background-color: #2dca2d !important;
+    color: white !important;
+}
+
+.emptyInscriptionRequests {
+    margin: 32px 0;
+    text-align: center;
+}

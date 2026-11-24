@@ -15,6 +15,10 @@ class EnrollmentService {
     getSchedules(divisionsIds) {
         return api.post(`/student-courses/get-subjects/schedules`, divisionsIds);
     }
+
+    submitInscription(divisionIds) {
+        return api.post(`/student-courses/inscriptions`, { divisionIds });
+    }
 }
 
 export default new EnrollmentService();

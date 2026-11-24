@@ -47,6 +47,15 @@
     background-color: #10b723;
 }
 
+.enrollmentSubjectsPage .mainContent .requested {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #f0c64b;
+    color: #392d0d;
+    font-weight: 700;
+}
+
 .enrollmentSubjectsPage .mainContent .not-available, .available, .approved {
     display: inline-block;
     padding: 15px;
@@ -96,3 +105,4 @@
     margin-top: 20px;
     margin-bottom: 30px;
 }
+

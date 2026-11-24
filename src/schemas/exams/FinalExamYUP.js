@@ -12,7 +12,7 @@ export default Yup.object().shape({
     Id: Yup.number().optional(),
     createdById: Yup.string().nullable(),
     updatedById: Yup.string().nullable(),
-    subjectId: Yup.number().required('El ID de la materia es requerido'),
+    subjectId: Yup.number().required('El ID del espacio curricular es requerido'),
     Date: Yup.date().required('La fecha es requerida'),
     Time: Yup.string().required('La hora es requerida'),
     RecordBook: Yup.number().nullable().default(0),

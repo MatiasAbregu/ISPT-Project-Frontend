@@ -18,13 +18,14 @@ export const StudentSubjects = () => {
     const [typeModal, setTypeModal] = useState();
 
     useEffect(() => {
-        document.title = "ISPT - Mis Materias";
+        document.title = "ISPT - Mis espacios curriculares";
         const loadSubjects = async () => {
             try {
                 const response = await StudentService.getMySubjects();
                 const rows = response.data?.object ?? [];
                 setSubjects(rows.map((row) => ({
-                    materia: row.subject,
+                    espacioCurricular: row.subject,
+                    divisionId: row.divisionId,
                     anio: row.schoolYear,
                     division: row.division,
                     promedio: row.average == null ? "Sin datos" : row.average,
@@ -89,8 +90,9 @@ export const StudentSubjects = () => {
                     ]} options={[{ value: "degrees", onclick: () => { navigate("/mis-materias/1/evaluaciones") } },
                     { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
                     { value: "finalExams", onclick: () => { setTypeModal(<StudentExamModal setModal={setModal} />); setModal(true); } },
-                    { value: "attendance", onclick: () => { setTypeModal(<StudentAttendanceModal setModal={setModal} />); setModal(true); } }]}
-                    data={subjects} />
+                    { value: "attendance", onclick: () => { setTypeModal(<StudentAttendanceModal setModal={setModal} />); setModal(true); } },
+                    { value: "iefi", onclick: (obj) => { navigate(`/mis-materias/${obj.divisionId}/iefi`) } }]}
+                    data={subjects} hiddenColumns={["divisionId"]} />
                 <Footer />
             </div>
         </article>

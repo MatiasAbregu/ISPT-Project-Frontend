@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import '../styles/components/ComboControl.css';
 
-export const ComboControl = ({ icon, children, options = [], setOption, setValue, data,
-    getValues, readOnly, notShowLabel, value, error, clearErrors, returnKey }) => {
+export const ComboControl = ({ icon, children, options = [], setOption, optionContext, setValue, data,
+    getValues, readOnly, notShowLabel, value, error, clearErrors, returnKey, labelPlacement = "informative" }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const findOption = (val) => {
@@ -55,22 +55,25 @@ export const ComboControl = ({ icon, children, options = [], setOption, setValue
             }
 
             if (typeof setOption === "function") {
-                setOption(returnKey ? selectedOption.key : selectedOption.value);
+                setOption(returnKey ? selectedOption.key : selectedOption.value, optionContext);
             }
         }
-    }, [selectedOption, data, setValue, getValues, clearErrors, setOption, returnKey]);
+    }, [selectedOption, data, setValue, getValues, clearErrors, setOption, returnKey, optionContext]);
 
     return (
         <div>
-            <div className={`comboControl ${error?.message ? "errorInput" : ""}`} ref={selectRef}
+            <div className={`comboControl ${labelPlacement === "above" ? "comboControlLabelAbove" : ""} ${error?.message ? "errorInput" : ""}`} ref={selectRef}
                 onClick={!readOnly ? () => setIsOpen(prev => !prev) : undefined}>
                 {icon ? <span className="material-symbols-outlined icon">{icon}</span> : <></>}
-                {selectedOption != null && (selectedOption.value != undefined || selectedOption.value != null) ?
+                {labelPlacement === "above" && !notShowLabel ? <label className="labelAbove">{children}</label> : undefined}
+                {labelPlacement !== "above" && selectedOption != null && (selectedOption.value != undefined || selectedOption.value != null) ?
                     notShowLabel ? <></> :
                         <label className="labelInformative">{children}</label> : undefined}
                 <div className="optionsContainer">
                     {
-                        selectedOption ? <label>{selectedOption.value}</label> : <label>{children}</label>
+                        selectedOption
+                            ? <label className={labelPlacement === "above" ? "selectedOptionLabel" : undefined}>{selectedOption.value}</label>
+                            : <label className={labelPlacement === "above" ? "selectedOptionLabel" : undefined}>{labelPlacement === "above" ? "Seleccione una opción" : children}</label>
                     }
                     <span className={`material-symbols-outlined dropdown ${isOpen ? "open" : ""}`}>expand_circle_down</span>
                     {

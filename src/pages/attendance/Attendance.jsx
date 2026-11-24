@@ -39,7 +39,7 @@ export const Attendance = () => {
                 <Table
                     columns={[
                         {
-                            name: "Materia",
+                            name: "Espacio curricular",
                             width: 120
                         },
                         {
@@ -59,19 +59,19 @@ export const Attendance = () => {
                     ]}
                     data={[
                         {
-                            materia: "Materia 1",
+                            espacioCurricular: "Espacio curricular 1",
                             docente: "Juan Pérez",
                             anio: 2025,
                             comision: "Mañana - A"
                         },
                         {
-                            materia: "Materia 2",
+                            espacioCurricular: "Espacio curricular 2",
                             docente: "María García",
                             anio: 2025,
                             comision: "Mañana - B"
                         },
                         {
-                            materia: "Materia 3",
+                            espacioCurricular: "Espacio curricular 3",
                             docente: "Carlos López",
                             anio: 2025,
                             comision: "Tarde - A"
