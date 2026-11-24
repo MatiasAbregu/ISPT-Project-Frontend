@@ -22,7 +22,7 @@ const searchableText = (value) => {
     return String(value);
 };
 
-export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = false, showId, onCheckboxChange, hiddenColumns = [] }) => {
+export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = false, showId, onCheckboxChange, hiddenColumns = [], renderCell }) => {
     const { searchTerm } = useContext(FilterContext);
 
     const [columnsWidth, setColumnsWidth] = useState([]);
@@ -83,6 +83,11 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
         }
 
         return value;
+    };
+
+    const renderCellValue = (row, key, value) => {
+        const customValue = renderCell?.(row, key, value);
+        return customValue !== undefined ? customValue : formatIfDateTime(value);
     };
 
     const handleMouseUp = () => {
@@ -191,7 +196,7 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
                                             if ((showId === false && key === 'id') || key === 'state' || hiddenColumns.includes(key)) {
                                                 return null;
                                             }
-                                            return (<td key={i2}>{formatIfDateTime(value)}</td>);
+                                            return (<td key={i2}>{renderCellValue(obj, key, value)}</td>);
                                         })
                                 }{
                                     options ?

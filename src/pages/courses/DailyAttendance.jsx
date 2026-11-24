@@ -1,97 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { InputControl } from '../../components/InputControl';
-import { DateControl } from '../../components/DateControl';
 import { Table } from '../../components/Table';
 import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/DailyAttendance.css';
-import { PathInfo } from '../../components/PathInfo';  
+import { PathInfo } from '../../components/PathInfo';
+import { useParams } from 'react-router-dom';
+import TeacherCourses from '../../services/courses/TeacherCourses';
+import toast from 'react-hot-toast';
 
 export const DailyAttendance = () => {
-    useEffect(() => {
-        document.title = "ISPT - Asistencia Diaria";
-    }, []);
-    
-    const [data, setData] = useState([
-        {
-            legajo: "12345",
-            alumno: "Juan Pérez",
-            asistencia: "Pendiente",
-        },
-        {
-            legajo: "67890",
-            alumno: "María García",
-            asistencia: "Pendiente",
-        },
-        {
-            legajo: "11111",
-            alumno: "Pedro López",
-            asistencia: "Pendiente",
-        }
-    ]);
+    const { fecha } = useParams();
+    const [data, setData] = useState([]);
+    useEffect(() => { document.title = "ISPT - Asistencia Diaria"; }, []);
+    useEffect(() => { loadAttendance(); }, [fecha]);
 
-    const cambiarAsistencia = (legajo, nuevoEstado) => {
-        setData(prev =>
-            prev.map(row =>
-                row.legajo === legajo
-                    ? { ...row, asistencia: nuevoEstado }
-                    : row
-            )
-        );
+    const loadAttendance = async () => {
+        try {
+            const response = await TeacherCourses.getDailyAttendance(fecha);
+            setData(response.data.object ?? []);
+        } catch (error) {
+            toast.error(error.response?.data?.message ?? "No se pudo cargar la asistencia diaria.");
+        }
     };
 
-    const getAsistencia = (estado) => (
-        <span className={estado.toLowerCase()}>
-            {estado}
-        </span>
-    );
+    const changeStatus = async (row, status) => {
+        try {
+            await TeacherCourses.updateDailyAttendance(fecha, [{ fileDivisionId: row.fileDivisionId, status }]);
+            setData(prev => prev.map(item => item.fileDivisionId === row.fileDivisionId ? { ...item, status } : item));
+        } catch (error) {
+            toast.error(error.response?.data?.message ?? "No se pudo guardar la asistencia.");
+        }
+    };
 
-    const marcarFeriado = () => {
-    setData(prev =>
-        prev.map(row => ({
-            ...row,
-            asistencia: "Justificado"
-        }))
-    );
-};
+    const markHoliday = async () => {
+        try {
+            await TeacherCourses.updateDailyAttendance(fecha, data.map(row => ({ fileDivisionId: row.fileDivisionId, status: "Justificado" })));
+            setData(prev => prev.map(row => ({ ...row, status: "Justificado" })));
+            toast.success("Día marcado como feriado.");
+        } catch (error) {
+            toast.error(error.response?.data?.message ?? "No se pudo marcar el día como feriado.");
+        }
+    };
 
-    const dataRender = data.map(row => ({
-        ...row,
-        asistencia: getAsistencia(row.asistencia)
-    }));
-
+    const renderStatus = status => <span className={status.toLowerCase()}>{status}</span>;
     return (
-
         <article className="dailyAttendancePage">
             <Sidebar />
             <div className="dailyAttendancePageContainer">
                 <PathInfo />
                 <div className="controls">
                     <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button className="add-button" onClick={marcarFeriado}>
-                        Marcar día como feriado
-                    </button>
+                    <button className="add-button" onClick={markHoliday}>Marcar día como feriado</button>
                 </div>
-                <Table
-                    columns={[
-                        {
-                            name: "Legajo",
-                            width: 100
-                        },
-                        {
-                            name: "Alumno",
-                            width: 160
-                        },
-                        {
-                            name: "Asistencia",
-                            width: 120
-                        }
-                    ]} options={[
-                        { value: "present", onclick: (row) => cambiarAsistencia(row.legajo, "Presente") },
-                        { value: "absent", onclick: (row) => cambiarAsistencia(row.legajo, "Ausente") },
-                        { value: "justified", onclick: (row) => cambiarAsistencia(row.legajo, "Justificado") }
+                <Table columns={[{ name: "Legajo", width: 100 }, { name: "Alumno", width: 160 }, { name: "Asistencia", width: 120 }]}
+                    options={[
+                        { value: "present", onclick: row => changeStatus(row, "Presente") },
+                        { value: "absent", onclick: row => changeStatus(row, "Ausente") },
+                        { value: "justified", onclick: row => changeStatus(row, "Justificado") }
                     ]}
-                    data={dataRender} />
+                    data={data.map(row => ({ ...row, legajo: row.fileCode, alumno: row.studentName, asistencia: renderStatus(row.status) }))}
+                    hiddenColumns={["fileDivisionId", "fileCode", "studentName", "status"]} />
                 <Footer />
             </div>
         </article>

@@ -3,7 +3,8 @@ import '../styles/components/InputControl.css';
 import { FilterContext } from "../context/FilterProvider";
 
 export const InputControl = ({ children, type, icon, register,
-    data, error, setValue, watch, typeCheckbox, className, readonly, checked, onclick }) => {
+    data, error, setValue, watch, typeCheckbox, className, readonly, checked, onclick,
+    value, onChange, min, max, step, ariaLabel }) => {
     const { searchTerm, setSearchTerm } = useContext(FilterContext);
 
     if (type == "search") {
@@ -69,7 +70,17 @@ export const InputControl = ({ children, type, icon, register,
                     <label>{children}</label>
                     <div>
                         <span className="material-symbols-outlined">{icon}</span>
-                        <input type={type} readOnly={readonly} {...typeof register == "function" ? register(data) : {}} />
+                        <input
+                            type={type}
+                            readOnly={readonly}
+                            min={min}
+                            max={max}
+                            step={step}
+                            aria-label={ariaLabel}
+                            value={value}
+                            onChange={onChange}
+                            {...typeof register == "function" ? register(data) : {}}
+                        />
                     </div>
                 </div>
             );

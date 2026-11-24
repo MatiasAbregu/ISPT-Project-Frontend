@@ -5,67 +5,99 @@ import { Footer } from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import '../../styles/pages/courses/CourseGrades.css';
 import { PathInfo } from '../../components/PathInfo';
+import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import EvaluationsCourse from '../../services/courses/EvaluationsCourse';
 
 export const CourseGrades = () => {
+    const { evaluationId } = useParams();
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
-        document.title = "ISPT - Detalle de Curso";
-    }, []);
+        document.title = "ISPT - Notas de instancia evaluativa";
+        if (evaluationId) getGrades();
+    }, [evaluationId]);
 
-    const [data, setData] = useState([
-        {
-            legajo: "12345",
-            alumno: "Juan Pérez",
-            nota: 8
-        },
-        {
-            legajo: "12346",
-            alumno: "María García",
-            nota: 9
-        },
-        {
-            legajo: "12347",
-            alumno: "Pedro López",
-            nota: 7
-        },
-        {
-            legajo: "12348",
-            alumno: "Ana Martínez",
-            nota: 10
+    const getGrades = async () => {
+        setLoading(true);
+        try {
+            const response = await EvaluationsCourse.getGrades(evaluationId);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                setData((response.data.object ?? []).map(item => ({
+                    fileDivisionId: item.fileDivisionId,
+                    legajo: item.fileCode,
+                    alumno: item.studentName,
+                    nota: item.grade ?? ""
+                })));
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message || "No se pudieron cargar los alumnos.");
+        } finally {
+            setLoading(false);
         }
-    ]);
+    };
 
-    const [gradesDraft, setGradesDraft] = useState({});
+    const updateGrade = (student, value) => {
+        if (value !== "" && (!Number.isInteger(Number(value)) || Number(value) < 1 || Number(value) > 10)) return;
+        setData(current => current.map(item => item.fileDivisionId === student.fileDivisionId
+            ? { ...item, nota: value === "" ? "" : Number(value) }
+            : item));
+    };
+
+    const saveGrades = async () => {
+        setSaving(true);
+        try {
+            const grades = data.map(item => ({
+                fileDivisionId: item.fileDivisionId,
+                grade: item.nota === "" ? null : Number(item.nota)
+            }));
+            const response = await EvaluationsCourse.saveGrades(evaluationId, grades);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                toast.success(response.data.message || "Notas guardadas correctamente.");
+                await getGrades();
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message || "No se pudieron guardar las notas.");
+        } finally {
+            setSaving(false);
+        }
+    };
 
     return (
-
         <article className="courseGradesPage">
             <Sidebar />
             <div className="courseGradesPageContainer">
                 <PathInfo />
                 <div className="controls">
-                    <InputControl icon={"search"} type={"search"}></InputControl>
-                    <button type="button" className="add-button"
-                        onClick={() => { }}>
-                        <span className="material-symbols-outlined">save</span>Guardar cambios
+                    <InputControl icon={"search"} type={"search"} />
+                    <button type="button" className="add-button" onClick={saveGrades} disabled={saving || loading}>
+                        <span className="material-symbols-outlined">save</span>{saving ? "Guardando..." : "Guardar cambios"}
                     </button>
                 </div>
-                <Table
-                    columns={[
-                        {
-                            name: "Legajo",
-                            width: 120
-                        },
-                        {
-                            name: "Alumno",
-                            width: 160
-                        },
-                        {
-                            name: "Nota",
-                            width: 40
-                        }
-                    ]} options={[{ value: "newGrade" }]}
-                    data={data} />
+                {loading ? <p className="courseGradesStatus">Cargando alumnos...</p> : (
+                    <Table
+                        columns={[{ name: "Legajo", width: 120 }, { name: "Alumno", width: 260 }, { name: "Nota", width: 100 }]}
+                        data={data}
+                        showId={false}
+                        hiddenColumns={["fileDivisionId"]}
+                        renderCell={(student, key) => key === "nota" ? (
+                            <InputControl
+                                className="gradeInputControl"
+                                type="number"
+                                min="1"
+                                max="10"
+                                step="1"
+                                value={student.nota}
+                                ariaLabel={`Nota de ${student.alumno}`}
+                                onChange={(event) => updateGrade(student, event.target.value)}
+                            />
+                        ) : undefined}
+                    />
+                )}
                 <Footer />
             </div>
         </article>

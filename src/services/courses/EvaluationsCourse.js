@@ -16,6 +16,15 @@ class EvaluationsCourse {
     deleteEvaluation(evaluationId) {
         return api.delete(`/teacher-courses/evaluations/${evaluationId}`);
     }
+
+    // GRADES
+    getGrades(evaluationId) {
+        return api.get(`/teacher-courses/evaluations/${evaluationId}/grades`);
+    }
+
+    saveGrades(evaluationId, grades) {
+        return api.put(`/teacher-courses/evaluations/${evaluationId}/grades`, grades);
+    }
 }
 
 export default new EvaluationsCourse();

@@ -104,7 +104,7 @@ function App() {
         <Route path='/cursos' element={<Courses />} />
         <Route path='/cursos/:id/alumnos' element={<CourseDetail />} />
         <Route path='/cursos/:id/evaluaciones' element={<CourseEvaluations />} />
-        <Route path='/cursos/:id/evaluaciones/:id/notas' element={<CourseGrades />} />
+        <Route path='/cursos/:id/evaluaciones/:evaluationId/notas' element={<CourseGrades />} />
         <Route path='/cursos/:id/asistencia' element={<CourseAttendance />} />
         <Route path='/cursos/:cursoId/asistencia/:fecha' element={<DailyAttendance />} />
 

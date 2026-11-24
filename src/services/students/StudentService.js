@@ -15,6 +15,14 @@ class StudentService {
         return api.get("/students/my-subjects");
     }
 
+    getMySubjectEvaluations(fileDivisionId) {
+        return api.get(`/students/my-subjects/${fileDivisionId}/evaluations`);
+    }
+
+    getMySubjectAttendance(fileDivisionId) {
+        return api.get(`/students/my-subjects/${fileDivisionId}/attendance`);
+    }
+
     getStudentsBySchoolYearId(schoolYearId) {
         return api.get(`/students/school-year/${schoolYearId}`)
     }

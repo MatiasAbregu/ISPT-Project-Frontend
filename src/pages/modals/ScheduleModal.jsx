@@ -1,76 +1,70 @@
 import React from 'react'
 import '../../styles/pages/modals/ScheduleModal.css'
 
-export const ScheduleModal = ({ setModal, schedules }) => {
+const dayOrder = ['lunes', 'martes', 'miércoles', 'miercoles', 'jueves', 'viernes', 'sábado', 'sabado', 'domingo']
 
-  const formatDateTime = (value) => {
-    if (value == null) return "----";
+export const ScheduleModal = ({ setModal, schedules = [] }) => {
+  const scheduleList = Array.isArray(schedules) ? schedules : []
+  const hasDivisions = scheduleList.some(item => item && item.division)
 
-    if (typeof value === 'string') {
-      const timeRegex = /^\d{2}:\d{2}(:\d{2})?$/;
-      if (timeRegex.test(value)) {
-        return value.substring(0, 5);
-      }
-    }
+  const formatTime = (value) => {
+    if (value == null || value === '') return '--:--'
+    const timeMatch = String(value).match(/^(\d{1,2}:\d{2})(?::\d{2})?$/)
+    if (timeMatch) return timeMatch[1].padStart(5, '0')
 
-    const date = new Date(value);
-    if (!isNaN(date.getTime())) {
-      return date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-    }
+    const date = new Date(value)
+    return Number.isNaN(date.getTime())
+      ? String(value)
+      : date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false })
+  }
 
-    return value;
-  };
+  const sortSchedules = (items) => [...items].sort((a, b) => {
+    const aDay = dayOrder.indexOf(String(a?.day ?? '').toLocaleLowerCase())
+    const bDay = dayOrder.indexOf(String(b?.day ?? '').toLocaleLowerCase())
+    return (aDay < 0 ? dayOrder.length : aDay) - (bDay < 0 ? dayOrder.length : bDay)
+      || formatTime(a?.startTime).localeCompare(formatTime(b?.startTime))
+  })
 
-  const hasDivisions = Array.isArray(schedules) && schedules.some(item => item && 'division' in item);
+  const renderSchedules = (items, keyPrefix = '') => sortSchedules(items).map((schedule, index) => (
+    <div className="scheduleBlock" key={`${keyPrefix}${schedule?.id ?? index}`}>
+      <h5>{schedule?.day || 'Día no especificado'}</h5>
+      <p>{formatTime(schedule?.startTime)} - {formatTime(schedule?.endTime)}</p>
+    </div>
+  ))
+
+  const divisions = hasDivisions
+    ? scheduleList.reduce((groups, item) => {
+      const name = item?.division || 'División sin nombre'
+      groups[name] = [...(groups[name] || []), item]
+      return groups
+    }, {})
+    : null
 
   return (
-    <article className="scheduleModal">
-      <span
+    <article className="scheduleModal" role="dialog" aria-modal="true" aria-labelledby="scheduleModalTitle">
+      <button
+        type="button"
         className="material-symbols-outlined close"
         onClick={() => setModal(false)}
+        aria-label="Cerrar horarios"
       >
         cancel
-      </span>
+      </button>
 
-      <h4>Horarios</h4>
+      <h4 id="scheduleModalTitle">Horarios del curso</h4>
 
       <div className="scheduleContainer">
-        {hasDivisions ? (
-          Object.entries(
-            schedules.reduce((acc, item) => {
-              const division = item?.division;
-              if (!acc[division]) {
-                acc[division] = [];
-              }
-              acc[division].push(item);
-              return acc;
-            }, {})
-          ).map(([divisionName, divisionItems]) => (
-            <div className="divisionGroup" key={divisionName}>
+        {scheduleList.length === 0 ? (
+          <p className="scheduleEmpty">Este curso todavía no tiene horarios asignados.</p>
+        ) : divisions ? (
+          Object.entries(divisions).map(([divisionName, divisionSchedules]) => (
+            <section className="divisionGroup" key={divisionName}>
               <h3>División: {divisionName}</h3>
-
-              {divisionItems.map((schedule, i) => (
-                <div className="scheduleBlock" key={i}>
-                  <h5>{schedule.day}</h5>
-                  <ul>
-                    <p>{formatDateTime(schedule.startTime)}h - {formatDateTime(schedule.endTime)}h</p>
-                  </ul>
-                </div>
-              ))}
-            </div>
+              <div className="divisionSchedules">{renderSchedules(divisionSchedules, `${divisionName}-`)}</div>
+            </section>
           ))
-        ) : (
-          schedules.map((schedule, i) => (
-            <div className="scheduleBlock" key={i}>
-              <h5>{schedule.day}</h5>
-
-              <ul>
-                <p>{formatDateTime(schedule.startTime)}h - {formatDateTime(schedule.endTime)}h</p>
-              </ul>
-            </div>
-          ))
-        )}
+        ) : renderSchedules(scheduleList)}
       </div>
     </article>
-  );
-};
+  )
+}

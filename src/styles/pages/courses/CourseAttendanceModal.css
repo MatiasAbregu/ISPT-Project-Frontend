@@ -1,0 +1,155 @@
+.courseAttendanceModal {
+    position: relative;
+    display: flex;
+    width: min(900px, 100%);
+    flex-direction: column;
+    align-items: center;
+}
+
+.courseAttendanceModal h4 {
+    margin: 0 0 20px;
+    color: #fff;
+    text-align: center;
+}
+
+.courseAttendanceModalCloseArea {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    overflow: hidden;
+    contain: paint;
+}
+
+.courseAttendanceModal button.close {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    padding: 0;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.courseAttendanceModal button.close:hover:not(:disabled) {
+    color: #cb2b2b;
+    transform: scale(1.3) rotateZ(180deg);
+}
+.courseAttendanceModal button.close:disabled { cursor: wait; opacity: .65; }
+
+.courseAttendanceModalContainer {
+    box-sizing: border-box;
+    display: flex;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    padding: 34px 0 30px;
+    background: #fff;
+    border: 2px solid #6f2c7e;
+    border-radius: 20px;
+}
+
+.courseAttendanceModalContainer form {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+}
+
+.courseAttendanceDateField {
+    width: 100%;
+    margin-top: 25px;
+}
+
+.courseAttendanceDateField .dateControl {
+    box-sizing: border-box;
+    min-height: 48px;
+    align-items: center;
+    border: 3px solid #6f2c7e;
+    border-radius: 5vh;
+}
+
+.courseAttendanceDateField .dateControl > span:first-child { flex: 0 0 auto; }
+
+.courseAttendanceDateField .dateControl > label:not(.labelInformative) {
+    min-height: 42px;
+    padding-right: 42px;
+}
+
+.courseAttendanceDateField .dateControl .labelInformative {
+    top: -35px;
+    left: 40px;
+    z-index: 1;
+    width: max-content;
+    padding: 0 6px;
+    color: #6f2c7e;
+    background: #fff;
+}
+
+.courseAttendanceDateField .dateControl .calendarPicker {
+    left: 0;
+    right: auto;
+    width: min(400px, calc(100vw - 80px));
+}
+
+.courseAttendanceDateField .dateControl .calendarPicker .dates button:not(.active) {
+    color: #6f2c7e;
+    background-color: transparent;
+}
+
+.courseAttendanceDateField .dateControl .calendarPicker .dates button:not(.active):hover {
+    color: #fff;
+    background-color: #6f2c7e;
+}
+
+.courseAttendanceModalActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 36px;
+}
+
+.courseAttendanceModalActions .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 44px;
+    padding: 10px 18px;
+    color: #6f2c7e;
+    background: #fff;
+    border: 2px solid #6f2c7e;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.courseAttendanceModalActions .add-button:hover:not(:disabled) {
+    color: #fff;
+    background: #2dca2d;
+    border-color: #2dca2d;
+}
+
+.courseAttendanceModalActions .add-button:disabled { cursor: wait; opacity: .65; }
+.courseAttendanceModalActions .add-button span { margin: 0; }
+
+.courseAttendanceModalActions .currentDayButton {
+    color: #fff;
+    background: #6f2c7e;
+}
+
+@media (max-width: 600px) {
+    .courseAttendanceModalCloseArea { right: 4px; }
+    .courseAttendanceModalContainer { width: 100%; padding: 30px 0 26px; }
+    .courseAttendanceModalContainer form { width: 86%; }
+    .courseAttendanceDateField { margin-top: 25px; }
+    .courseAttendanceModalActions { flex-direction: column; gap: 12px; padding-top: 30px; }
+    .courseAttendanceModalActions .add-button { width: 100%; }
+}

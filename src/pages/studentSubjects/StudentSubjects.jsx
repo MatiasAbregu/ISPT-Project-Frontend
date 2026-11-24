@@ -9,6 +9,8 @@ import { ScheduleModal } from '../modals/ScheduleModal';
 import { StudentExamModal } from './StudentExamModal';
 import { StudentAttendanceModal } from './StudentAttendanceModal';
 import StudentService from '../../services/students/StudentService';
+import EnrollmentService from '../../services/courses/EnrollmentService';
+import toast from 'react-hot-toast';
 
 export const StudentSubjects = () => {
 
@@ -24,8 +26,9 @@ export const StudentSubjects = () => {
                 const response = await StudentService.getMySubjects();
                 const rows = response.data?.object ?? [];
                 setSubjects(rows.map((row) => ({
-                    espacioCurricular: row.subject,
-                    divisionId: row.divisionId,
+                    fileDivisionId: row.fileDivisionId ?? row.FileDivisionId,
+                    divisionId: row.divisionId ?? row.DivisionId,
+                    materia: row.subject,
                     anio: row.schoolYear,
                     division: row.division,
                     promedio: row.average == null ? "Sin datos" : row.average,
@@ -42,15 +45,17 @@ export const StudentSubjects = () => {
 
     const navigate = useNavigate();
 
-    const schedules = [
-        {
-            division: "Turno Mañana A",
-            horarios: [
-                { dia: "Lunes", desde: "08:00", hasta: "10:00" },
-                { dia: "Miércoles", desde: "08:00", hasta: "10:00" },
-            ]
+    const showSchedules = async (row) => {
+        try {
+            const response = await EnrollmentService.getSchedules([row.divisionId]);
+            const schedules = response.data?.object ?? [];
+            setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />);
+            setModal(true);
+        } catch (error) {
+            console.error("Error al cargar los horarios de la materia:", error);
+            toast.error(error.response?.data?.message || "No se pudieron cargar los horarios.");
         }
-    ]
+    };
 
     return (
 
@@ -87,12 +92,13 @@ export const StudentSubjects = () => {
                             name: "Estado",
                             width: 130
                         }
-                    ]} options={[{ value: "degrees", onclick: () => { navigate("/mis-materias/1/evaluaciones") } },
-                    { value: "schedule", onclick: () => { setTypeModal(<ScheduleModal setModal={setModal} schedules={schedules} />); setModal(true); } },
+                ]} options={[{ value: "degrees", onclick: (row) => { navigate(`/mis-materias/${row.fileDivisionId}/evaluaciones`) } },
+                    { value: "schedule", onclick: showSchedules },
                     { value: "finalExams", onclick: () => { setTypeModal(<StudentExamModal setModal={setModal} />); setModal(true); } },
-                    { value: "attendance", onclick: () => { setTypeModal(<StudentAttendanceModal setModal={setModal} />); setModal(true); } },
+                    { value: "attendance", onclick: (row) => { setTypeModal(<StudentAttendanceModal setModal={setModal} fileDivisionId={row.fileDivisionId} subject={row.materia} />); setModal(true); } },
                     { value: "iefi", onclick: (obj) => { navigate(`/mis-materias/${obj.divisionId}/iefi`) } }]}
-                    data={subjects} hiddenColumns={["divisionId"]} />
+                    data={subjects}
+                    hiddenColumns={["fileDivisionId", "divisionId"]}/>
                 <Footer />
             </div>
         </article>
