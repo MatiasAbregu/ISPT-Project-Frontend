@@ -12,6 +12,14 @@ import StudentService from '../../services/students/StudentService';
 import EnrollmentService from '../../services/courses/EnrollmentService';
 import toast from 'react-hot-toast';
 
+const getSubjectStatusLabel = (status) => ({
+    SinCursar: "Sin cursar",
+    Regular: "Regular",
+    Aprobado: "Promocional",
+    Libre: "Libre",
+    Recursando: "Recursando"
+}[status] || status || "Sin datos");
+
 export const StudentSubjects = () => {
 
 
@@ -33,7 +41,7 @@ export const StudentSubjects = () => {
                     division: row.division,
                     promedio: row.average == null ? "Sin datos" : row.average,
                     asistencia: row.attendancePercentage == null ? "Sin datos" : `${row.attendancePercentage}%`,
-                    estado: "Sin datos"
+                    estado: getSubjectStatusLabel(row.status ?? row.Status)
                 })));
             } catch (error) {
                 console.error("Error al cargar los espacios curriculares del estudiante:", error);

@@ -11,6 +11,10 @@ class TeacherCoursesService {
         return api.get(`/teacher-courses/schedules/${divisionId}`);
     }
 
+    closeDivision(divisionId) {
+        return api.post(`/teacher-courses/${divisionId}/close`);
+    }
+
     getAttendanceDays(divisionId) {
         return api.get(`/teacher-courses/attendance/${divisionId}`);
     }

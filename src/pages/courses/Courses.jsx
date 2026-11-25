@@ -61,6 +61,19 @@ export const Courses = () => {
         }
     }
 
+    const closeDivision = async (course) => {
+        if (!window.confirm(`¿Cerrar definitivamente ${course.subject} (${course.division})? Se calculará la regularidad de los estudiantes y no podrás deshacerlo.`)) return;
+        try {
+            const response = await TeacherCourses.closeDivision(course.divisionId);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                toast.success(response.data.object || "Curso cerrado.");
+                getCourses();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "No se pudo cerrar el curso.");
+        }
+    }
+
     return (
 
         <article className="coursesPage">
@@ -101,10 +114,11 @@ export const Courses = () => {
                         },
                         { value: "exams", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/evaluaciones`) } },
                         { value: "attendance", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/asistencia`) } },
-                        { value: "iefi", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/iefi`) } }
+                        { value: "iefi", onclick: (obj) => { navigate(`/cursos/${obj.divisionId}/iefi`) } },
+                        { value: "lock", onclick: (obj) => closeDivision(obj), title: "Cerrar curso" }
                     ]}
                     data={data}
-                    hiddenColumns={["divisionId"]}
+                    hiddenColumns={["divisionId", "isClosed"]}
                     showId={false} />
                 <Footer />
             </div>

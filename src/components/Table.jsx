@@ -336,6 +336,12 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
                                                                 calendar_add_on
                                                             </span>)
+                                                        else if (v.value == "lock")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnRed" title={v.title || "Cerrar curso"}
+                                                                onClick={() => !obj.isClosed && v.onclick && v.onclick(obj, i)}
+                                                                style={{ opacity: obj.isClosed ? 0.45 : 1, cursor: obj.isClosed ? "default" : "pointer" }}>
+                                                                {obj.isClosed ? "lock" : "lock_open"}
+                                                            </span>);
                                                         else if (v.value == "iefi")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnLightPurple" title="IEFI"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
