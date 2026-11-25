@@ -16,7 +16,7 @@ import { ExamTribunalModal } from './ExamTribunalModal'
 
 export const ExamModal = ({ setModal, getAll, examId, readOnly = false }) => {
 
-    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch } =
+    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch, clearErrors } =
         useForm({
             resolver: yupResolver(FinalExamYUP),
             defaultValues: {
@@ -196,6 +196,7 @@ export const ExamModal = ({ setModal, getAll, examId, readOnly = false }) => {
                                                 key={4}
                                                 setValue={setValue}
                                                 getValues={getValues}
+                                                clearErrors={clearErrors}
                                                 value={currentTime}
                                                 readOnly={readOnly}
                                             >

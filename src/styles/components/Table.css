@@ -133,3 +133,72 @@
     vertical-align: top;
     font-size: 16px;
 }
+
+.tablePagination {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    margin: 0 auto 16px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #6f2c7e;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 12%);
+}
+
+.tablePaginationControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.tablePaginationControls button {
+    min-width: 34px;
+    min-height: 34px;
+    border: 1px solid #6f2c7e;
+    border-radius: 8px;
+    background: white;
+    color: #6f2c7e;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform .3s ease, color .3s ease, background-color .3s ease, box-shadow .3s ease;
+}
+
+.tablePaginationControls button:hover:not(:disabled) {
+    background: #6f2c7e;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgb(111 44 126 / 25%);
+}
+
+.tablePaginationControls button:active:not(:disabled) {
+    transform: translateY(0) scale(.96);
+}
+
+.tablePaginationControls button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.tablePaginationControls span {
+    padding: 0 6px;
+    white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+    .tablePagination {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .tablePaginationControls {
+        width: auto;
+    }
+}

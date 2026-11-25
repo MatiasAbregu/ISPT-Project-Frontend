@@ -1,24 +1,56 @@
 .dateControl {
-    display: flex;
-    width: 100%;
-    background-color: white;
-    color: white;
-    border-radius: 6vh;
-    cursor: pointer;
-    position: relative;
-}
-
-.dateControl label {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
-    transition: all .5s ease;
-    font-size: 1.2rem;
+    gap: 0;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0;
+    background-color: white;
+    border-radius: 5vh;
     cursor: pointer;
-    color: #6f2c7e;
+    position: relative;
+    border: 3px solid #6f2c7e;
 }
 
-.dateControl span {
+.dateControl .dateValueLabel {
     display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-width: 0;
+    margin: 0;
+}
+
+.dateControl .dateValueLabel input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #6f2c7e;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
+}
+
+.dateControl .dateValueLabel input::placeholder {
+    color: #6f2c7e;
+    opacity: 1;
+}
+
+.dateControl .dateValueLabel input:focus::placeholder {
+    opacity: .65;
+}
+
+.dateControl .dateValueLabel input[readonly] {
+    cursor: default;
+}
+
+.dateControl>.dateControlIcon {
+    display: flex;
+    flex: 0 0 auto;
     justify-content: center;
     align-items: center;
     background-color: #6f2c7e;
@@ -26,32 +58,55 @@
     margin: 1%;
     padding: 1%;
     border-radius: 100%;
+    color: white;
 }
 
 .dateControl .calendar {
-    position: absolute;
-    background-color: white;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+    padding: 1%;
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
     color: #6f2c7e;
-    transition: transform .2s ease;
-    right: 0;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
 }
 
 .dateControl .labelInformative {
     position: absolute;
     top: -35px;
     left: 40px;
+    z-index: 1;
+    max-width: calc(100% - 60px);
+    color: #6f2c7e;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dateControl .calendarPicker {
     position: absolute;
-    width: 400px;
-    right: 0;
-    overflow: hidden;
+    z-index: 20;
+    top: calc(100% + 8px);
+    width: min(400px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+    left: 0;
+    overflow: visible;
     background-color: white;
     border-radius: 2vh;
-    z-index: 5;
     box-shadow: 0 0 8px gray;
     cursor: default;
+}
+
+.dateControl .calendarPicker.opensAbove {
+    top: auto;
+    bottom: calc(100% + 8px);
 }
 
 .dateControl .calendarPicker .calendarPickerHeader {
@@ -89,6 +144,10 @@
 }
 
 .dateControl .calendarPicker .calendarPickerContainer .datesName span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     background-color: transparent;
     color: #6f2c7e;
     font-size: 1.1rem;
@@ -109,10 +168,14 @@
     color: #6f2c7e;
 }
 
+.dateControl .calendarPicker .calendarPickerContainer .dates button.outsideMonth {
+    color: #999;
+}
+
 .dateControl .calendarPicker .calendarPickerContainer .dates button.active {
     background-color: #6f2c7e;
     color: white;
-} 
+}
 
 .dateControl .calendarPicker .calendarPickerContainer .dates button:hover {
     background-color: #6f2c7e;
@@ -121,9 +184,26 @@
 
 .dateControl.errorInput {
     border: 3px solid red !important;
-    border-radius: 7vh;
+    border-radius: 5vh;
 }
 
-.dateControl.errorInput label{
+.dateControl.errorInput .dateValueLabel input,
+.dateControl.errorInput .labelInformative {
     color: red;
+}
+
+.dateControlContainer>.errorInputMsg {
+    margin: 6px 0 0;
+}
+
+@media (max-width: 520px) {
+    .dateControl .dateValueLabel input {
+        font-size: 1rem;
+    }
+
+    .dateControl .calendarPicker {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
 }

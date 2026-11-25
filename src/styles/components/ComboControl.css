@@ -168,3 +168,13 @@
     top: calc(100% + 6px);
     left: 0;
 }
+
+.comboControl .optionsContainer .optionsOverflow.opensUpward {
+    top: auto;
+    bottom: 110%;
+}
+
+.comboControl.comboControlLabelAbove .optionsContainer .optionsOverflow.opensUpward {
+    top: auto;
+    bottom: calc(100% + 6px);
+}

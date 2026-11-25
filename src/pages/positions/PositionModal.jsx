@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import '../../styles/pages/positions/PositionModal.css'
 import { InputControl } from '../../components/InputControl'
 import { ComboControl } from '../../components/ComboControl'
@@ -27,6 +27,7 @@ const provinces = {
 export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersonal }) => {
     const [step, setStep] = useState(0);
     const [countrySelected, setCountrySelected] = useState("");
+    const countryInitialized = useRef(false);
     const { user } = useContext(UserContext);
 
     const { register, handleSubmit, formState: { errors }, setValue, getValues, clearErrors, reset, watch } = useForm({
@@ -34,9 +35,14 @@ export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersona
         shouldUnregister: false
     });
 
-    useEffect(() => {
-        if (typeModal != 1) setCountrySelected(getValues("nativeCountry"));
-    }, [typeModal])
+    const handleCountryChange = (country) => {
+        if (countryInitialized.current && countrySelected !== country) {
+            setValue("locationDTO.province", null, { shouldValidate: true, shouldDirty: true });
+            clearErrors("locationDTO.province");
+        }
+        countryInitialized.current = true;
+        setCountrySelected(country);
+    };
 
     useEffect(() => {
         if (personId != 0) getPositionById(personId);
@@ -110,6 +116,8 @@ export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersona
                     practicePlace: data.practicePlace,
                     observations: data.observations
                 })
+                countryInitialized.current = true;
+                setCountrySelected(data.locationDTO.country);
             }
         } catch (error) {
             if (error.response && error.response.data) {
@@ -175,12 +183,12 @@ export const PositionModal = ({ setModal, typeModal, personId = 0, getAllPersona
                                 </> :
                                 step == 2 ?
                                     <>
-                                        <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={setCountrySelected} key={9}
+                                        <ComboControl icon={"flag"} options={[{ key: 1, value: "Argentina" }, { key: 2, value: "Chile" }, { key: 3, value: "Perú" }, { key: 4, value: "Bolivia" }, { key: 5, value: "Paraguay" }, { key: 6, value: "Uruguay" }, { key: 7, value: "Brasil" }, { key: 8, value: "Ecuador" }, { key: 9, value: "Colombia" }, { key: 10, value: "Venezuela" }]} setOption={handleCountryChange} key={9}
                                             data={"locationDTO.country"} getValues={getValues} setValue={setValue}
                                             value={watch("locationDTO.country")} error={errors.locationDTO?.country} readOnly={typeModal == 2 ? true : false}>
                                             Seleccione país de origen *
                                         </ComboControl>
-                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={10} setValue={setValue}
+                                        <ComboControl icon={"flag_2"} options={provinces[countrySelected]} key={10} setValue={setValue} clearErrors={clearErrors}
                                             data={"locationDTO.province"} getValues={getValues} error={errors.locationDTO?.province} value={watch("locationDTO.province")} readOnly={typeModal == 2 ? true : false}>
                                             Seleccione provincia de origen *
                                         </ComboControl>

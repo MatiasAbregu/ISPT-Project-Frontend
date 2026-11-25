@@ -15,7 +15,7 @@ import { UserContext } from '../../context/UserProvider'
 import { useContext } from 'react'
 
 export const IEFIModal = ({ setModal, getAll, iefiId, readOnly = false }) => {
-    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch, clearErrors } = useForm({
         resolver: yupResolver(IEFISchema),
         defaultValues: {
             RecordBook: 0,
@@ -142,6 +142,7 @@ export const IEFIModal = ({ setModal, getAll, iefiId, readOnly = false }) => {
                             key={4}
                             setValue={setValue}
                             getValues={getValues}
+                            clearErrors={clearErrors}
                             value={currentTime}
                             readOnly={readOnly}
                         >

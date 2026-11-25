@@ -234,6 +234,7 @@ export const EnrollmentSubjects = () => {
                                             ]}
                                             data={tableData}
                                             hiddenColumns={["subjectId", "selectedDivisionId"]}
+                                            paginate={false}
                                         />
                                     </Fragment>
                                 );

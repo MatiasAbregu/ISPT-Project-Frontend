@@ -51,7 +51,7 @@ button {
     z-index: 3;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     box-sizing: border-box;
     padding: 12px;
@@ -60,9 +60,11 @@ button {
 }
 
 .modalBackground > article {
-    max-height: calc(100dvh - 24px);
-    overflow-y: auto;
     box-sizing: border-box;
+    flex: 0 0 auto;
+    max-height: none;
+    margin: auto;
+    overflow: visible;
 }
 
 .controls {
@@ -160,7 +162,32 @@ button {
         width: min(100%, 640px) !important;
         min-width: 0 !important;
         min-height: 0 !important;
-        max-height: calc(100dvh - 24px);
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .modalBackground form,
+    .modalBackground [class*="FormContainer"] {
+        box-sizing: border-box;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .modalBackground [class*="FormContainer"] {
+        flex-wrap: wrap;
+    }
+
+    .modalBackground .inputControl,
+    .modalBackground .dateControl,
+    .modalBackground .timeControl,
+    .modalBackground .comboControl,
+    .modalBackground .searchComboControl,
+    .modalBackground .textareaControl {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        flex: 1 1 100%;
     }
 
     .dateControl .calendarPicker,
@@ -212,7 +239,8 @@ button {
     }
 
     .modalBackground > article {
-        max-height: calc(100dvh - 16px);
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     .comboControl .optionsOverflow,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/components/Table.css';
 import { FilterContext } from "../context/FilterProvider";
@@ -22,8 +22,10 @@ const searchableText = (value) => {
     return String(value);
 };
 
-export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = false, showId, onCheckboxChange, hiddenColumns = [], renderCell }) => {
+export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = false, showId, onCheckboxChange, hiddenColumns = [], renderCell, paginate = true }) => {
     const { searchTerm } = useContext(FilterContext);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     const [columnsWidth, setColumnsWidth] = useState([]);
     const [isResizing, setIsResizing] = useState(false);
@@ -31,6 +33,7 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
 
     const startX = useRef(0);
     const startWidth = useRef(0);
+    const tableRef = useRef(null);
 
     useEffect(() => {
         setColumnsWidth(columns.map((c, i) => c.width));
@@ -101,6 +104,49 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
     const filteredData = Array.isArray(data) && normalizedSearchTerm
         ? data.filter(row => normalizeSearchText(searchableText(row)).includes(normalizedSearchTerm))
         : data;
+    const totalRows = Array.isArray(filteredData) ? filteredData.length : 0;
+    const totalPages = Math.max(1, Math.ceil(totalRows / pageSize));
+    const visiblePage = Math.min(currentPage, totalPages);
+    const paginatedData = paginate && Array.isArray(filteredData)
+        ? filteredData.slice((visiblePage - 1) * pageSize, visiblePage * pageSize)
+        : filteredData;
+
+    useLayoutEffect(() => {
+        const updatePageSize = () => {
+            const table = tableRef.current;
+            if (!paginate || !table || !Array.isArray(data) || data.length === 0) return;
+
+            const tableTop = table.getBoundingClientRect().top;
+            const headerHeight = table.querySelector("thead")?.getBoundingClientRect().height ?? 0;
+            const rowHeight = table.querySelector("tbody tr")?.getBoundingClientRect().height ?? 0;
+            if (rowHeight <= 0) return;
+
+            // Reservar espacio para la paginación, el margen inferior y el footer.
+            const availableHeight = window.innerHeight - tableTop - headerHeight - 90;
+            const rowsThatFit = Math.max(1, Math.floor(availableHeight / rowHeight));
+            setPageSize(previous => previous === rowsThatFit ? previous : rowsThatFit);
+        };
+
+        updatePageSize();
+        window.addEventListener("resize", updatePageSize);
+        const observer = typeof ResizeObserver !== "undefined"
+            ? new ResizeObserver(updatePageSize)
+            : null;
+        if (tableRef.current && observer) observer.observe(tableRef.current);
+
+        return () => {
+            window.removeEventListener("resize", updatePageSize);
+            observer?.disconnect();
+        };
+    }, [columns, data, normalizedSearchTerm, paginate]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [normalizedSearchTerm]);
+
+    useEffect(() => {
+        if (visiblePage !== currentPage) setCurrentPage(visiblePage);
+    }, [currentPage, visiblePage]);
 
     useEffect(() => {
         if (isResizing) {
@@ -116,7 +162,7 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
 
     return (
         <div className="tableScrollContainer">
-        <table className="table">
+        <table className="table" ref={tableRef}>
             <thead>
                 <tr>
                     {
@@ -165,8 +211,8 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
             </thead>
             <tbody>
                 {
-                    Array.isArray(filteredData) && filteredData.length > 0 ?
-                        filteredData.map((obj, i) =>
+                    Array.isArray(paginatedData) && paginatedData.length > 0 ?
+                        paginatedData.map((obj, i) =>
                             <tr key={i}>
                                 {
                                     checkboxs ?
@@ -388,6 +434,20 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
                 }
             </tbody>
         </table >
+        {paginate && totalRows > pageSize && (
+            <div className="tablePagination" aria-label="Paginación de tabla">
+                <span className="tablePaginationSummary">
+                    {((visiblePage - 1) * pageSize) + 1}–{Math.min(visiblePage * pageSize, totalRows)} de {totalRows}
+                </span>
+                <div className="tablePaginationControls">
+                    <button type="button" onClick={() => setCurrentPage(1)} disabled={visiblePage === 1} aria-label="Primera página">«</button>
+                    <button type="button" onClick={() => setCurrentPage(page => Math.max(1, page - 1))} disabled={visiblePage === 1} aria-label="Página anterior">‹</button>
+                    <span>Página {visiblePage} de {totalPages}</span>
+                    <button type="button" onClick={() => setCurrentPage(page => Math.min(totalPages, page + 1))} disabled={visiblePage === totalPages} aria-label="Página siguiente">›</button>
+                    <button type="button" onClick={() => setCurrentPage(totalPages)} disabled={visiblePage === totalPages} aria-label="Última página">»</button>
+                </div>
+            </div>
+        )}
         </div>
     );
 }

@@ -17,7 +17,7 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
 
     const { idCommission } = useParams();
 
-    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch } = useForm({
+    const { register, handleSubmit, formState: { errors }, reset, setValue, getValues, watch, clearErrors } = useForm({
         resolver: yupResolver(ScheduleTemplateYUP)
     })
 
@@ -104,10 +104,10 @@ export const ScheduleTemplateModal = ({ setModal, typeModal, scheduleTemplateId,
                     }}>
                         Seleccione un día
                     </ComboControl>
-                    <TimeControl key={2} icon={"schedule"} setValue={setValue} register={register} errors={errors.StartTime} getValues={getValues} value={watch("StartTime")} data="StartTime">
+                    <TimeControl key={2} icon={"schedule"} setValue={setValue} clearErrors={clearErrors} error={errors.StartTime} getValues={getValues} value={watch("StartTime")} data="StartTime">
                         Hora de inicio
                     </TimeControl>
-                    <TimeControl key={3} icon={"schedule"} setValue={setValue} register={register} errors={errors.EndTime} getValues={getValues} value={watch("EndTime")} data="EndTime">
+                    <TimeControl key={3} icon={"schedule"} setValue={setValue} clearErrors={clearErrors} error={errors.EndTime} getValues={getValues} value={watch("EndTime")} data="EndTime">
                         Hora de fin
                     </TimeControl>
                     <button type="submit" className="add-button">
