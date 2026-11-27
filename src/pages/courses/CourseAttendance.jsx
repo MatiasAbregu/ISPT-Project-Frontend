@@ -40,6 +40,18 @@ export const CourseAttendance = () => {
         }
     };
 
+    const deleteAttendanceDay = async (row) => {
+        const dateLabel = new Intl.DateTimeFormat('es-AR').format(new Date(`${String(row.fecha).slice(0, 10)}T12:00:00`));
+        if (!window.confirm(`¿Eliminar la asistencia del ${dateLabel}? Se quitarán también las marcas de todos los alumnos.`)) return;
+        try {
+            const response = await TeacherCourses.deleteAttendanceDay(row.id);
+            toast.success(response.data.message);
+            await loadDays();
+        } catch (error) {
+            toast.error(error.response?.data?.message ?? "No se pudo eliminar el día de asistencia.");
+        }
+    };
+
     return (
         <article className="courseAttendancePage">
             <Sidebar />
@@ -53,7 +65,10 @@ export const CourseAttendance = () => {
                     <button className="add-button" onClick={() => setIsModalOpen(true)}>Añadir día</button>
                 </div>
                 <Table columns={[{ name: "Fecha", width: 100 }, { name: "Asistencia Total", width: 120 }, { name: "Estado", width: 120 }]}
-                    options={[{ value: "edit", onclick: (row) => navigate(`/cursos/${id}/asistencia/${row.id}`) }]}
+                    options={[
+                        { value: "edit", onclick: (row) => navigate(`/cursos/${id}/asistencia/${row.id}`) },
+                        { value: "delete", onclick: deleteAttendanceDay }
+                    ]}
                     data={data.map(row => ({ id: row.id, fecha: row.date, asistencia: `${row.present}/${row.total}`, estado: row.state }))}
                     hiddenColumns={["id"]} />
                 <Footer />

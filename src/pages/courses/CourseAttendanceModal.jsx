@@ -3,11 +3,6 @@ import { useForm } from 'react-hook-form';
 import { DateControl } from '../../components/DateControl';
 import '../../styles/pages/courses/CourseAttendanceModal.css';
 
-const getLocalToday = () => {
-    const today = new Date();
-    return [today.getFullYear(), String(today.getMonth() + 1).padStart(2, '0'), String(today.getDate()).padStart(2, '0')].join('-');
-};
-
 export const CourseAttendanceModal = ({ setModal, onCreate }) => {
     const [saving, setSaving] = useState(false);
     const { handleSubmit, setValue, getValues, watch } = useForm({
@@ -57,10 +52,6 @@ export const CourseAttendanceModal = ({ setModal, onCreate }) => {
                         <button className="add-button" type="submit" disabled={saving}>
                             <span className="material-symbols-outlined">event</span>
                             {saving ? 'Cargando...' : 'Cargar fecha seleccionada'}
-                        </button>
-                        <button className="add-button currentDayButton" type="button" onClick={() => createForDate(getLocalToday())} disabled={saving}>
-                            <span className="material-symbols-outlined">today</span>
-                            Cargar día actual
                         </button>
                     </div>
                 </form>

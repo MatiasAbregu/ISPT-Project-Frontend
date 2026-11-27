@@ -23,6 +23,10 @@ class TeacherCoursesService {
         return api.post(`/teacher-courses/attendance/${divisionId}/today`, null, { params: { date } });
     }
 
+    deleteAttendanceDay(dayId) {
+        return api.delete(`/teacher-courses/attendance/day/${dayId}`);
+    }
+
     getDailyAttendance(dayId) {
         return api.get(`/teacher-courses/attendance/day/${dayId}`);
     }

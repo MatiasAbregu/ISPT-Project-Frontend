@@ -9,6 +9,7 @@ import { PathInfo } from '../../components/PathInfo';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import DivisionService from '../../services/careers/DivisionService';
+import toast from 'react-hot-toast';
 
 export const SchoolYearSections = () => {
 
@@ -44,6 +45,19 @@ export const SchoolYearSections = () => {
         }
     };
 
+    const unlockDivision = async (division) => {
+        if (!window.confirm(`¿Desbloquear el cursado ${division.name}? El docente podrá volver a modificar sus notas y asistencias.`)) return;
+        try {
+            const response = await DivisionService.unlock(division.id);
+            if (response.data.statusCode >= 200 && response.data.statusCode < 300) {
+                toast.success(response.data.object || response.data.message || "Cursado desbloqueado.");
+                await getBySchoolYearSubject();
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "No se pudo desbloquear el cursado.");
+        }
+    };
+
     return (
         <article className='schoolYearSectionsPage'>
             <Sidebar />
@@ -71,9 +85,16 @@ export const SchoolYearSections = () => {
                     options={[
                         { value: "eye", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/estudiantes`) } },
                         { value: "schedule", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/horarios`) }},
-                        { value: "iefi", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/iefi`) } }
+                        { value: "iefi", onclick: (obj) => { navigate(`/${ciclosLectivosSlug}/${id}/${espaciosCurricularesSlug}/${idSubject}/divisiones:${obj.name}/${obj.id}/iefi`) } },
+                        ...(user?.roles?.includes("Directivo") ? [{
+                            value: "unlock",
+                            title: "Desbloquear cursado",
+                            show: (obj) => obj.isClosed,
+                            onclick: unlockDivision
+                        }] : [])
                     ]}
                     data={data}
+                    hiddenColumns={["isClosed"]}
                     showId={false}
                 />
                 <Footer />

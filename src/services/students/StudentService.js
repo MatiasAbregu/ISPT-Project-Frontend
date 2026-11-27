@@ -11,6 +11,10 @@ class StudentService {
         return api.get(`/students/${id}`)
     }
 
+    getCoursesByFileId(fileId) {
+        return api.get(`/student-courses/student-files/${fileId}/courses`);
+    }
+
     getMySubjects() {
         return api.get("/students/my-subjects");
     }

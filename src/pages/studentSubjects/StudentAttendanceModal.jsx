@@ -67,18 +67,14 @@ export const StudentAttendanceModal = ({ setModal, fileDivisionId, subject }) =>
 
     return (
         <article className="studentAttendanceModal" role="dialog" aria-modal="true" aria-labelledby="studentAttendanceTitle">
-            <header className="studentAttendanceHeader">
-                <div>
-                    <span className="studentAttendanceEyebrow">Detalle del cursado</span>
-                    <h4 id="studentAttendanceTitle">Asistencia</h4>
-                    {subject && <p>{subject}</p>}
-                </div>
-                <button className="studentAttendanceClose" type="button" aria-label="Cerrar" onClick={() => setModal(false)}>
-                    <span className="material-symbols-outlined">close</span>
-                </button>
-            </header>
+            <button className="material-symbols-outlined close" type="button" aria-label="Cerrar asistencias" onClick={() => setModal(false)}>
+                cancel
+            </button>
+            <h4 id="studentAttendanceTitle">Asistencia</h4>
 
-            <div className="studentAttendanceContent">
+            <div className="studentAttendanceCard">
+                {subject && <h5 className="studentAttendanceSubject">{subject}</h5>}
+                <div className="studentAttendanceContent">
                 {loading ? <p className="studentAttendanceMessage">Cargando asistencias…</p> : null}
                 {!loading && error ? <p className="studentAttendanceMessage studentAttendanceError">{error}</p> : null}
                 {!loading && !error && attendance.length === 0 ? (
@@ -116,6 +112,7 @@ export const StudentAttendanceModal = ({ setModal, fileDivisionId, subject }) =>
                         </ul>
                     </>
                 )}
+                </div>
             </div>
         </article>
     );

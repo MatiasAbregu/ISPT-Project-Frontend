@@ -6,6 +6,10 @@ class DivisionService {
         return api.get(`divisions/school-year/${schoolYearId}/subject/${subjectId}`);
     }
 
+    async unlock(divisionId) {
+        return api.put(`divisions/${divisionId}/unlock`);
+    }
+
     //POST
 
     //PUT

@@ -342,6 +342,11 @@ export const Table = ({ columns, data, options, checkboxs, checkboxReadOnly = fa
                                                                 style={{ opacity: obj.isClosed ? 0.45 : 1, cursor: obj.isClosed ? "default" : "pointer" }}>
                                                                 {obj.isClosed ? "lock" : "lock_open"}
                                                             </span>);
+                                                        else if (v.value == "unlock")
+                                                            return (<span key={i} className="material-symbols-outlined tableBtnGreen" title={v.title || "Desbloquear cursado"}
+                                                                onClick={() => v.onclick && v.onclick(obj, i)}>
+                                                                lock_open
+                                                            </span>);
                                                         else if (v.value == "iefi")
                                                             return (<span key={i} className="material-symbols-outlined tableBtnLightPurple" title="IEFI"
                                                                 onClick={() => v.onclick && v.onclick(obj, i)}>
